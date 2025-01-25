@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css"; // Import external CSS
-import customRates from './custom-rates.json'; // Import your custom rates
+import customRates from './assets/custom-rates.json'; // Import your custom rates
+import { pokeballs } from "./assets/pokeballs";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("Pikachu");
@@ -9,18 +10,43 @@ const App = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
   const [isAlpha, setIsAlpha] = useState(false);  // Manage the checkbox state
-  const [hpPercent, setHpPercent] = useState<number | null>(100); // Initially set to 100
+  const [hpPercent, setHpPercent] = useState<string | null>('100'); // Initially set to '100' as a string
   const [isExactHp, setIsExactHp] = useState(false);
   const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
-
+  const [level, setLevel] = useState<string | null>('70'); // Start with level 70
+  const alphaStateRef = useRef(isAlpha);
+  const [pokeballImages, setPokeballImages] = useState<{ [key: string]: string }>({});
+  const [selectedPokeball, setSelectedPokeball] = useState<string>('');
 
   useEffect(() => {
     // Fetch all Pokémon from Gen 1–5 on initial load
     fetchAllPokemon();
     fetchPokemonData("Pikachu");
+    fetchPokeballImages();
   }, []);
+
+  const fetchPokeballImages = async () => {
+    const images: { [key: string]: string } = {};
+
+    for (const ballName of Object.keys(pokeballs)) {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/item/${ballName}`);
+        const data = await response.json();
+        images[ballName] = data.sprites.default || '';
+      } catch (error) {
+        console.error(`Failed to fetch image for ${ballName}`, error);
+      }
+    }
+
+    setPokeballImages(images);
+  };
+
+  const handlePokeballChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPokeball(event.target.value);
+  };
+
 
   const fetchAllPokemon = async () => {
     try {
@@ -69,7 +95,7 @@ const App = () => {
       let catchRateToUse: number | null = null; // Explicitly state this can be a number or null
       let speciesData: any = null; // Declare speciesData
       // First, check if the Pokémon is an Alpha Pokémon and handle the catch rate
-      if (isAlpha) {
+      if (alphaStateRef.current) {
         // Special case for Tyranitar
         if (apiName === 'tyranitar') {
           catchRateToUse = 5;
@@ -115,7 +141,6 @@ const App = () => {
     }
   };
   
-
   const formatPokemonName = (name: string) => {
     return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   };
@@ -154,25 +179,31 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    // Keep the ref value in sync with the state
+    alphaStateRef.current = isAlpha;
+  }, [isAlpha]);
+
   const handleClickOutside = (e: MouseEvent) => {
+    console.log("entrou");
     if (
       inputRef.current &&
       suggestionBoxRef.current &&
       !inputRef.current.contains(e.target as Node) &&
       !suggestionBoxRef.current.contains(e.target as Node)
     ) {
+      console.log("entrou2");
       // Check if the input matches any valid Pokémon name
       const isValidPokemon = allPokemon.some(
         (pokemon) => pokemon.name.toLowerCase() === inputValue.trim().toLowerCase()
       );
-
-      // Reset to Pikachu if the input is invalid
+      console.log("entrou3");
       if (!isValidPokemon) {
+        console.log("entrou4");
         setInputValue("Pikachu");
         fetchPokemonData("Pikachu");
       }
-
-      // Always hide suggestions
+  
       setSuggestions([]);
     }
   };
@@ -183,7 +214,6 @@ const App = () => {
       const isValidPokemon = allPokemon.some(
         (pokemon) => pokemon.name.toLowerCase() === inputValue.trim().toLowerCase()
       );
-      
       if (!isValidPokemon) {
         setInputValue("Pikachu");
         fetchPokemonData("Pikachu");
@@ -203,6 +233,31 @@ const App = () => {
     setHasInteractedWithCheckbox(true); // Mark as interacted with checkbox
   };
 
+  const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    // Allow clearing the field
+    if (value === "") {
+      setLevel(null); // Set to null when input is empty
+      return;
+    }
+
+    // Ensure the value is a valid integer between 1 and 100
+    if (/^\d*$/.test(value)) { // Allow only digits (no decimals)
+      const numValue = parseInt(value, 10);
+      if (numValue >= 1 && numValue <= 100) {
+        setLevel(numValue.toString()); // Update the level
+      }
+    }
+  };
+
+  const handleLevelBlur = () => {
+    // If the input is empty or out of range, set level to 100
+    if (level === '' || level === null) {
+      setLevel('70');
+    }
+  };
+
   const handleExactHpToggle = () => {
     setIsExactHp(true);
   };
@@ -216,45 +271,73 @@ const App = () => {
       return;
     }
   
+    // Replace commas with dots for decimal numbers (if applicable)
+    value = value.replace(',', '.');
+  
     // Remove leading zeros but keep 0 as a valid number
     if (/^0+/.test(value) && value.length > 1) {
-      value = value.replace(/^0+/, ''); // Remove leading zeros
+      // If the value is 0. or 0.something, don't remove the leading zero
+      if (value === "0." || value.startsWith("0.") && value.length > 2) {
+        // Keep it as is
+      } else {
+        value = value.replace(/^0+/, "");
+      }
     }
   
-    // Check if the input matches the pattern for up to 1 decimal place
+    // Check if the input matches the pattern for up to 1 decimal place (including trailing dot)
     if (/^\d{1,3}(\.\d{0,1})?$/.test(value)) {
-      let numericValue = parseFloat(value);
+      // If the value ends with a dot (e.g., "4."), keep it in the string form
+      if (value.endsWith('.')) {
+        // Update state with the current value (still a string)
+        setHpPercent(value); // Keep it as a string
+        return;
+      } else {
+        // Convert to a number if the input is valid
+        let numericValue = parseFloat(value);
+        if (!isNaN(numericValue)) {
+          // Clamp the value between 0 and 100
+          numericValue = Math.max(0, Math.min(100, numericValue));
   
-      // Ensure the value is a valid number
-      if (!isNaN(numericValue)) {
-        // Clamp the value between 0 and 100
-        numericValue = Math.max(0, Math.min(100, numericValue));
+          // Ensure only 1 decimal place
+          numericValue = parseFloat(numericValue.toFixed(1));
   
-        // Ensure only 1 decimal place
-        numericValue = parseFloat(numericValue.toFixed(1));
-  
-        // Update the state with the valid value
-        setHpPercent(numericValue);
+          // Update the state with the valid value
+          setHpPercent(numericValue.toString()); // Convert back to string
+        }
       }
     }
   };
-  
+
   const handleHpBlur = () => {
-    // If hpPercent is null or 0, set it to 0.1
-    let correctedValue = hpPercent === 0 || hpPercent === null ? 0.1 : hpPercent;
+    // If hpPercent is null or empty, set it to 0.1
+    let correctedValue: number = hpPercent === null || hpPercent === "" ? 0.1 : parseFloat(hpPercent);
   
-    correctedValue = Math.max(0, Math.min(100, correctedValue)); // Clamp between 0 and 100
-    correctedValue = parseFloat(correctedValue.toFixed(1)); // Ensure only 1 decimal place
-    setHpPercent(correctedValue); // Update with corrected value
+    // If the value is NaN (invalid input), fallback to 0.1
+    if (isNaN(correctedValue) || correctedValue == 0) {
+      correctedValue = 0.1;
+    }
+  
+    // Clamp the value between 0 and 100
+    correctedValue = Math.max(0, Math.min(100, correctedValue));
+  
+    // Ensure only 1 decimal place
+    correctedValue = parseFloat(correctedValue.toFixed(1));
+  
+    // Update the state with the corrected value, converted back to a string
+    setHpPercent(correctedValue.toString());
   };
   
+  useEffect(() => {
+    console.log("State updated to:", hpPercent);
+  }, [hpPercent]);
+
   useEffect(() => {
     // Only fetch data if the checkbox has been interacted with
     if (hasInteractedWithCheckbox) {
       fetchPokemonData(inputValue);
     }
   }, [isAlpha, hasInteractedWithCheckbox]); // This effect will run when 'isAlpha' or 'hasInteractedWithCheckbox' changes
-
+  
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -340,25 +423,38 @@ const App = () => {
               </p>
             </div>
           </div>
-  
-          {/* Pokémon Image */}
-          {/* Pokémon Image */}
-          <div className={`input-and-image ${isAlpha ? 'alpha-active' : ''}`}>
-            {isAlpha && <div className="alpha-background"></div>} {/* Smoke background */}
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={inputValue}
-                className="pokemon-image"
-              />
-            ) : (
-              <div className="pokemon-image"></div>
-            )}
-          </div>
             
+          <div className="input-and-level-container">
+          {/* Pokémon Image */}
+            <div className={`input-and-image ${isAlpha ? 'alpha-active' : ''}`}>
+              {isAlpha && <div className="alpha-background"></div>} {/* Smoke background */}
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={inputValue}
+                  className="pokemon-image"
+                />
+              ) : (
+                <div className="pokemon-image"></div>
+              )}
+            </div>
+            <div className="level-input-container">
+            <label className="level-label" htmlFor="level">Level</label>
+            <input
+              id="level"
+              type="text"
+              className="level-input"
+              value={level !== null ? level : ""}
+              onChange={handleLevelChange}
+              onBlur={handleLevelBlur} // Trigger level reset on blur if out of range or empty
+              onFocus={(e) => e.target.select()}
+            />
+          </div>
+          </div>
+     
           {/* HP Section */}
           <div className="hp-section">
-            <label className="hp-label">Current HP :</label>
+            <label className="hp-label">Current HP</label>
             <div className="hp-options">
               <div className="hp-toggle">
                 <label>
@@ -369,13 +465,14 @@ const App = () => {
                     onChange={() => setIsExactHp(false)}
                   />
                   <input
-                    type="number"
+                    type="text"
                     value={hpPercent !== null ? hpPercent : ""}  // Fallback to empty string when null
-                    onInput={handleHpPercentChange}  // Use onInput to capture and format input immediately
+                    onChange={handleHpPercentChange}  // Use onChange to capture and format input immediately
                     onBlur={handleHpBlur}
                     disabled={isExactHp}
+                    onFocus={(e) => e.target.select()}
                   />
-                  % HP left:
+                  <span> % HP left</span>
                 </label>
               </div>
               <div className="hp-toggle">
@@ -388,6 +485,33 @@ const App = () => {
                   />
                   Exactly 1 HP (using False Swipe)
                 </label>
+              </div>
+
+               {/* Pokéball Section - Move this below HP Section */}
+              <div className="pokeball-section">
+                <label htmlFor="pokeball-select" className="pokeball-label">
+                  Ball
+                </label>
+                <select
+                  id="pokeball-select"
+                  value={selectedPokeball}
+                  onChange={handlePokeballChange}
+                  className="pokeball-dropdown"
+                >
+                  <option value="" disabled>Select a Pokéball</option>
+                  {Object.keys(pokeballs).map((ballName) => (
+                    <option key={ballName} value={ballName}>
+                      {pokeballImages[ballName] && (
+                        <img 
+                          src={pokeballImages[ballName]} 
+                          alt={ballName} 
+                          className="pokeball-icon" 
+                        />
+                      )}
+                      {ballName}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>

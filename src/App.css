@@ -68,6 +68,7 @@ body {
 }
 
 .checkbox {
+  cursor: pointer;
   margin-right: 10px;
   width: 16px;
   height: 16px;
@@ -154,7 +155,7 @@ body {
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.3);
   overflow: hidden; /* Ensures rounded corners affect all content */
-  transform: translate(-30px, -50px);
+  transform: translate(-27px, -50px);
 }
 
 /* Background animation for smoke */
@@ -227,6 +228,54 @@ body {
   border-radius: 8px;
 }
 
+/* Ensure the container for both image and level input stacks them vertically */
+.input-and-level-container {
+  display: flex;
+  flex-direction: column;  /* Stack image and level input vertically */
+  align-items: center;     /* Align content in the center */
+  gap: 10px;               /* Add space between image and level input */
+}
+
+/* Level Input container */
+.level-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  transform: translate(-26px, -55px);;
+}
+
+/* Level label */
+.level-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 5px;
+}
+
+/* Level Input field */
+.level-input {
+  width: 50px;
+  padding: 7px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #444c56;
+  color: #fff;
+  transition: border-color 0.3s ease;
+  outline: none;
+  text-align: center;
+}
+
+.level-input:focus {
+  border-color: #6d6d6d;
+}
+
+.level-input:disabled {
+  background-color: #555;
+  color: #999;
+}
+
 /* HP Section */
 .hp-section {
   color: rgba(255, 255, 255, 0.9);
@@ -254,12 +303,17 @@ body {
   gap: 10px;
 }
 
-.hp-toggle input[type="radio"] {
-  margin-right: 10px;
+.hp-toggle label{
+  cursor: pointer;
 }
 
-.hp-toggle input[type="number"] {
-  width: 50px;
+.hp-toggle input[type="radio"] {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.hp-toggle input[type="text"] {
+  width: 47px;
   padding: 7px;
   font-size: 1rem;
   border-radius: 8px;
@@ -268,27 +322,65 @@ body {
   color: #fff;
   transition: border-color 0.3s ease; /* Add transition */
   outline: none; /* Ensure no default focus outline */
+  text-align: center;
 }
 
-.hp-toggle input[type="number"]:focus {
+.hp-toggle input[type="text"]:focus {
   border-color: #6d6d6d; /* Match the input container focus border color */
 }
 
-.hp-toggle input[type="number"]:disabled {
+.hp-toggle input[type="text"]:disabled {
   background-color: #555;
   color: #999;
 }
 
 /* Remove spinner for Chrome, Edge, and Safari */
-input[type="number"]::-webkit-inner-spin-button, 
-input[type="number"]::-webkit-outer-spin-button {
+.hp-toggle input[type="text"]::-webkit-inner-spin-button, 
+.hp-toggle input[type="text"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Remove spinner for Firefox */
-input[type="number"] {
+.hp-toggle input[type="text"] {
   -moz-appearance: textfield;
+}
+
+/* Pokéball Section */
+.pokeball-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px; /* Adjust for space */
+}
+
+/* New row below input section */
+.input-and-pokeball-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px; /* Position below the input section */
+}
+
+.pokeball-label {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.pokeball-dropdown {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pokeball-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 /* Ensuring flex wrapping on small screens */
