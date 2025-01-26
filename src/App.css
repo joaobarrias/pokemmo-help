@@ -34,6 +34,14 @@ body {
   font-size: 2rem;
 }
 
+.input-section {
+  display: flex;
+  flex-direction: column;  /* Aligns children vertically */
+  justify-content: center; /* Centering along main axis */
+  align-items: center;     /* Centers along cross axis */
+  width: 100%;
+}
+
 /* Main container to hold everything horizontally */
 .main-container {
   display: flex;
@@ -44,7 +52,7 @@ body {
   gap: 20px;
   width: 100%;
   margin: auto;
-  padding: 20px;
+  padding: 5px;
 }
 
 /* Checkbox container styling */
@@ -56,12 +64,12 @@ body {
   order: 0; /* Default order */
   width: 100%;
   justify-content: center;
-  transform: translate(-235px, 15px);
+  transform: translate(-228px, 15px);
 }
 
 .checkbox-label {
-  font-size: 16px;
-  color: #fff;
+  font-size: 1rem;
+  color:  rgba(255, 255, 255, 0.9);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -108,7 +116,7 @@ body {
 
 /* Catch rate styles */
 .catch-rate {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
   text-align: left;
@@ -123,7 +131,7 @@ body {
   margin: 0;
   padding: 0;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: #333;
   z-index: 1000;
   max-height: 250px;
@@ -167,46 +175,72 @@ body {
   height: 200%;
   background: radial-gradient(
     circle,
-    rgba(145, 41, 41, 0.596) 20%,
-    rgba(131, 14, 14, 0.63) 90%,
+    rgba(153, 21, 21, 0.747) 10%,
+    rgba(158, 1, 1, 0.685) 90%,
     transparent 100%
   );
   z-index: 1; /* Behind the Pokémon image */
-  animation: smoke 6s infinite, glow 2s infinite alternate;
+  animation: smoke 8s infinite, glow 2s infinite alternate;
   filter: blur(15px); /* Adds the smoky, diffused look */
   pointer-events: none; /* Prevents interaction */
 }
 
 /* Glowing border effect for alpha Pokémon */
 .input-and-image.alpha-active {
-  background-color: rgba(20, 20, 20, 0.3); /* Darker when alpha */
-  box-shadow: 0 0 10px 5px rgba(160, 30, 30, 0.2),
-    0 0 20px 10px rgba(160, 30, 30, 0.1);
+  background-color: rgba(20, 20, 20, 0.315); /* Darker when alpha */
+  box-shadow: 0 0 10px 5px rgba(59, 2, 2, 0.174),
+    0 0 20px 10px rgba(146, 3, 3, 0.363);
 }
 
 /* Chaotic smoke animation */
 @keyframes smoke {
   0% {
-    transform: translate(-30%, -30%) scale(1);
+    transform: translate(-8%, -18%) scale(1);
+    opacity: 0.8;
+  }
+  10% {
+    transform: translate(-15%, -12%) scale(1.05);
+    opacity: 0.75;
+  }
+  20% {
+    transform: translate(-20%, -22%) scale(1.1);
     opacity: 0.7;
   }
-  25% {
-    transform: translate(-25%, -35%) scale(1.2);
-    opacity: 0.5;
+  30% {
+    transform: translate(-25%, -18%) scale(1.12);
+    opacity: 0.65;
+  }
+  40% {
+    transform: translate(-28%, -30%) scale(1.15);
+    opacity: 0.6;
   }
   50% {
-    transform: translate(-35%, -25%) scale(1.5);
-    opacity: 0.3;
+    transform: translate(-32%, -32%) scale(1.2);
+    opacity: 0.55;
   }
-  75% {
-    transform: translate(-30%, -30%) scale(1.2);
+  60% {
+    transform: translate(-28%, -28%) scale(1.25);
     opacity: 0.5;
   }
-  100% {
-    transform: translate(-30%, -30%) scale(1);
+  70% {
+    transform: translate(-22%, -25%) scale(1.18);
+    opacity: 0.55;
+  }
+  80% {
+    transform: translate(-18%, -22%) scale(1.12);
+    opacity: 0.65;
+  }
+  90% {
+    transform: translate(-12%, -18%) scale(1.1);
     opacity: 0.7;
   }
+  100% {
+    transform: translate(-8%, -18%) scale(1);
+    opacity: 0.8;
+  }
 }
+
+
 
 /* Glow animation for additional effect */
 @keyframes glow {
@@ -295,6 +329,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-size: 0.9rem;
 }
 
 .hp-toggle {
@@ -346,41 +381,113 @@ body {
   -moz-appearance: textfield;
 }
 
-/* Pokéball Section */
+/* Container for Second Container */
+.second-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  margin: auto;
+  padding: 5px;
+}
+
 .pokeball-section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column;  /* Align elements vertically */
+  align-items: center;     /* Center horizontally */
+  justify-content: center; /* Center vertically */
   width: 100%;
-  margin-top: 20px; /* Adjust for space */
 }
 
-/* New row below input section */
-.input-and-pokeball-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 20px; /* Position below the input section */
-}
-
+/* Pokéball label styling */
 .pokeball-label {
   font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 10px;
+  text-align: left;
+  width: 180px;
+  margin-left: 0;
 }
 
-.pokeball-dropdown {
-  width: 200px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Style the entire react-select component */
+.react-select__control {
+  background-color: #444c56 !important; 
+  border: 1px solid #ccc !important;  
+  color: #fff !important;             
+  border-radius: 8px;                 
+  width: 180px !important;           
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  transition: border-color 0.3s ease !important;
+  position: relative !important;
+  cursor: pointer !important;
+  height: 40px !important; 
 }
 
-.pokeball-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  vertical-align: middle;
+.react-select__control input {
+  caret-color: transparent !important;
+  color: #fff !important;
+  height: 100%;
+}
+
+.react-select__control--is-focused {
+  border-color: #6d6d6d !important; 
+  box-shadow: none !important;          
+}
+
+/* For the entire dropdown menu */
+.react-select__menu {
+  background-color: #333 !important; 
+  border-radius: 4px !important;    
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  width: 180px !important;    
+  border: 1px solid #ccc !important;    
+  top: calc(100% + 5px) !important; 
+  cursor: pointer !important;      
+}
+
+/* For each option inside the dropdown */
+.react-select__option {
+  background-color: #333 !important; 
+  color: #fff !important;   
+  cursor: pointer !important;    
+  padding: 2px 10px !important;  /* Reduce padding for each option */
+  margin: 0 !important;          /* Remove margin between options */                                
+}
+
+.react-select__option:hover {
+  background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+.react-select__single-value {
+  display: inline-block !important;
+  color: #fff !important;
+  transform: translateY(-6px) !important;
+}
+
+.react-select__single-value img{
+  transform: translateY(8px) !important;
+  margin-right: 4px !important; /* Add spacing between image and text */
+}
+ 
+.react-select__option span{
+  display: inline-block !important;
+  transform: translateY(-8px) !important;
+  margin-right: 5px !important; /* Add spacing between image and text */
+}
+
+.react-select__option img{
+  display: inline-block !important;
+  transform: translateY(1px) !important;
+  margin-right: 5px !important; /* Add spacing between image and text */
+}
+
+.react-select__menu-notice--no-options {
+  text-align: left !important;
+  margin-left: 6px;
 }
 
 /* Ensuring flex wrapping on small screens */

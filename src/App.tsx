@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Select from 'react-select';  // Import react-select
 import "./App.css"; // Import external CSS
 import customRates from './assets/custom-rates.json'; // Import your custom rates
 import { pokeballs } from "./assets/pokeballs";
@@ -17,36 +18,39 @@ const App = () => {
   const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
   const [level, setLevel] = useState<string | null>('70'); // Start with level 70
   const alphaStateRef = useRef(isAlpha);
-  const [pokeballImages, setPokeballImages] = useState<{ [key: string]: string }>({});
+  const [ballImages, setBallImages] = useState<{ [key: string]: string }>({});
   const [selectedPokeball, setSelectedPokeball] = useState<string>('');
 
   useEffect(() => {
     // Fetch all Pokémon from Gen 1–5 on initial load
     fetchAllPokemon();
     fetchPokemonData("Pikachu");
-    fetchPokeballImages();
+    fetchImages();
   }, []);
 
-  const fetchPokeballImages = async () => {
+  const fetchImages = async () => {
     const images: { [key: string]: string } = {};
 
-    for (const ballName of Object.keys(pokeballs)) {
+    for (const ball of pokeballs) {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/item/${ballName}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/item/${ball.apiName}`);
         const data = await response.json();
-        images[ballName] = data.sprites.default || '';
+        images[ball.name] = data.sprites.default; // Assuming `sprites.default` contains the image URL
       } catch (error) {
-        console.error(`Failed to fetch image for ${ballName}`, error);
+        console.error(`Failed to fetch image for ${ball.name}:`, error);
       }
     }
 
-    setPokeballImages(images);
+    setBallImages(images);
   };
 
-  const handlePokeballChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPokeball(event.target.value);
+  const handlePokeballChange = (
+      selectedOption: { value: string; label: JSX.Element } | null
+    ) => {
+      if (selectedOption) {
+        setSelectedPokeball(selectedOption.value);
+      }
   };
-
 
   const fetchAllPokemon = async () => {
     try {
@@ -371,7 +375,7 @@ const App = () => {
   
       {/* Main Section with Input and Pokémon Info */}
       <div className="input-section">
-        {/* Main Container for Input, Pokémon Image, and Pokéball */}
+        {/* Main Container for Input, Pokémon Image, and HP Section */}
         <div className="main-container">
           {/* Checkbox Section */}
           <div className="checkbox-container">
@@ -485,35 +489,73 @@ const App = () => {
                   />
                   Exactly 1 HP (using False Swipe)
                 </label>
-              </div>
-
-               {/* Pokéball Section - Move this below HP Section */}
-              <div className="pokeball-section">
-                <label htmlFor="pokeball-select" className="pokeball-label">
-                  Ball
-                </label>
-                <select
-                  id="pokeball-select"
-                  value={selectedPokeball}
-                  onChange={handlePokeballChange}
-                  className="pokeball-dropdown"
-                >
-                  <option value="" disabled>Select a Pokéball</option>
-                  {Object.keys(pokeballs).map((ballName) => (
-                    <option key={ballName} value={ballName}>
-                      {pokeballImages[ballName] && (
-                        <img 
-                          src={pokeballImages[ballName]} 
-                          alt={ballName} 
-                          className="pokeball-icon" 
-                        />
-                      )}
-                      {ballName}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              </div>  
             </div>
+          </div> 
+        </div>
+        
+        {/* Main Container for Input, Pokémon Image, and HP Section */}
+        <div className="second-container"></div>
+          {/* Status Section */}
+          
+          {/* Pokéball Section */}
+          <div className="pokeball-section">
+            <label htmlFor="pokeball-select" className="pokeball-label">
+              Ball
+            </label>
+            <div className="pokeball-select-container">
+            <Select
+              id="pokeball-select"
+              options={pokeballs.map((ball) => ({
+                value: ball.name,  // Ensure the value is a string
+                label: (
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={ballImages[ball.name]}
+                      alt={`${ball.name} image`}
+                      className="w-6 h-6"
+                    />
+                    <span>{ball.name}</span>
+                  </div>
+                ),
+              }))}
+              // The default value is the first item in the list (pokeballs[0])
+              value={selectedPokeball ? {
+                value: selectedPokeball, 
+                label: (
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={ballImages[selectedPokeball]}
+                      alt={`${selectedPokeball} image`}
+                      className="w-6 h-6"
+                    />
+                    <span>{selectedPokeball}</span>
+                  </div>
+                ),
+              } : {
+                value: pokeballs[0].name,  // Default to the first Pokéball name
+                label: (
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={ballImages[pokeballs[0].name]}
+                      alt={`${pokeballs[0].name} image`}
+                      className="w-6 h-6"
+                    />
+                    {pokeballs[0].name}
+                  </div>
+                ),
+              }}
+              onChange={(selectedOption) => {
+                if (selectedOption) {
+                  setSelectedPokeball(selectedOption.value);
+                }
+              }}
+              className="pokeball-select"
+              classNamePrefix="react-select"
+              filterOption={(option, inputValue) => {
+                return option.data.value.toLowerCase().includes(inputValue.toLowerCase());
+              }}
+            />
           </div>
         </div>
       </div>
