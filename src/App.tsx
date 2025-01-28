@@ -18,6 +18,9 @@ const App = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
   const [level, setLevel] = useState<string | null>('70'); // Start with level 70
+  const [baseHP, setBaseHP] = useState<number | null>(null);
+  const [currentHp, setCurrentHp] = useState<number | null>(null); // For the HP bar
+  const [averageHp, setAverageHp] = useState<number | null>(null);
   const alphaStateRef = useRef(isAlpha);
   const [selectedPokeball, setSelectedPokeball] = useState(pokeballs[0].name);
   const [selectedStatus, setSelectedStatus] = useState<string>("None");
@@ -33,23 +36,28 @@ const App = () => {
     })), 
     []
   );
+  const preloadedImages = useRef<Set<string>>(new Set());
+  const [hpBarPercentage, setHpBarPercentage] = useState<number>(100); // Tracks HP bar fill
+
 
   useEffect(() => {
     // Fetch all Pokémon from Gen 1–5 on initial load
     fetchAllPokemon();
     fetchPokemonData("Pikachu");
-    preloadImages();
+    if (preloadedImages.current.size === 0) {
+      preloadImages();
+    }
   }, []);
   
-  const preloadImages = () => {
-    // Keep track of already preloaded images
-    const preloadedImages = new Set();
-  
+  const preloadImages = async () => {
     pokeballs.forEach((ball) => {
-      if (!preloadedImages.has(ball.imagePath)) {
+      if (!preloadedImages.current.has(ball.imagePath)) {
         const img = new Image();
         img.src = ball.imagePath; // Preload the image
-        preloadedImages.add(ball.imagePath); // Mark this image as preloaded
+        img.onload = () => {
+          // Ensure image is fully loaded and then mark it as preloaded
+          preloadedImages.current.add(ball.imagePath);
+        };
       }
     });
   };
@@ -116,7 +124,6 @@ const App = () => {
           `https://pokeapi.co/api/v2/pokemon-species/${apiName}`
         );
         if (!response.ok) throw new Error("Pokémon not found in species endpoint");
-
         speciesData = await response.json(); // Get species data from the API
 
         // Use the custom catch rate if available, otherwise use the PokeAPI one
@@ -135,14 +142,23 @@ const App = () => {
       }
 
       // Now fetch the Pokémon's data (e.g., image)
-      const imageResponse = await fetch(
+      const pokemonResponse = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${apiName}`
       );
-      if (!imageResponse.ok) throw new Error("Image not found");
+      if (!pokemonResponse.ok) throw new Error("Pokemon not found");
 
-      const imageData = await imageResponse.json();
-      setImageUrl(imageData.sprites.front_default);
+      const pokemonData = await pokemonResponse.json();
+      const hpStat = pokemonData.stats.find((stat: any) => stat.stat.name === 'hp')?.base_stat;
+      if (hpStat) {
+        setBaseHP(hpStat);
+      }
+      const newImageUrl = pokemonData.sprites.front_default;
+      if (newImageUrl !== imageUrl) {
+        setImageUrl(newImageUrl);
+      }
+
     } catch (err) {
+      setBaseHP(null);
       setCatchRate(null);
       setImageUrl(null);
     }
@@ -169,9 +185,9 @@ const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 
 const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  setInputValue(value);
 
     if (value.trim() === "") {
       setSuggestions(allPokemon.map(pokemon => pokemon.name));
@@ -257,12 +273,43 @@ const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
 
     // Ensure the value is a valid integer between 1 and 100
     if (/^\d*$/.test(value)) { // Allow only digits (no decimals)
-      const numValue = parseInt(value, 10);
+      let numValue = parseInt(value, 10);
       if (numValue >= 1 && numValue <= 100) {
         setLevel(numValue.toString()); // Update the level
+        console.log(numValue);
       }
     }
   };
+
+  useEffect(() => {
+    if (!baseHP || !level) return;
+  
+    const levelValue = parseFloat(level);
+    const avgHp = ((2 * baseHP + 15.5 * levelValue) / levelValue) + levelValue + 10;
+    setAverageHp(avgHp);
+    console.log("Base HP:", baseHP, "Level:", levelValue, "Average HP:", avgHp);
+  }, [baseHP, level]);
+
+  useEffect(() => {
+    if (!averageHp) return;
+  
+    let current = 0;
+    let percentage = 0;
+  
+    if (isExactHp) {
+      current = 1; // Exactly 1 HP
+      percentage = (current / averageHp) * 100; // Calculate percentage only for exact HP
+    } else if (hpPercent) {
+      const hpPercentValue = parseFloat(hpPercent);
+      current = (averageHp * hpPercentValue) / 100; // Calculate current HP based on %
+      percentage = hpPercentValue; // Percentage is directly the input
+    }
+  
+    setCurrentHp(current);
+    setHpBarPercentage(percentage);
+    console.log("Current HP:", current, "Percentage HP:", percentage);
+  }, [ averageHp, hpPercent, isExactHp]); // Dependencies
+  
 
   const handleLevelBlur = () => {
     // If the input is empty or out of range, set level to 100
@@ -345,11 +392,27 @@ const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
   }, [hpPercent]);
 
   useEffect(() => {
-    // Only fetch data if the checkbox has been interacted with
-    if (hasInteractedWithCheckbox) {
+    // If the 'isAlpha' checkbox has been checked, directly set catchRate to 10 without fetching data
+    if (isAlpha) {
+      let catchRateToUse: number | null = null;
+      // Special case for Tyranitar
+      if (inputValue.toLowerCase() === 'tyranitar') {
+        catchRateToUse = 5;
+      } else if (
+        ['suicune', 'moltres', 'raikou', 'articuno', 'zapdos', 'entei'].includes(inputValue.toLowerCase())
+      ) {
+        catchRateToUse = 0;
+      } else {
+        catchRateToUse = 10;
+      }
+      setCatchRate(catchRateToUse);
+    }
+    // Only fetch data if the checkbox hasn't been checked (alpha state is false)
+    else if (hasInteractedWithCheckbox) {
       fetchPokemonData(inputValue);
     }
-  }, [isAlpha, hasInteractedWithCheckbox]); // This effect will run when 'isAlpha' or 'hasInteractedWithCheckbox' changes
+  }, [isAlpha, hasInteractedWithCheckbox]); // Run when 'isAlpha' or 'hasInteractedWithCheckbox' changes
+  
   
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -500,8 +563,6 @@ const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
             </div>
           </div>
 
-
-
           {/* HP Section */}
           <div className="hp-section">
             <label className="hp-label">Current HP</label>
@@ -537,6 +598,15 @@ const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
                 </label>
               </div>  
             </div>
+            <div className="hp-bar-container">
+              <div
+                className="hp-bar"
+                style={{
+                  width: `${hpBarPercentage}%`,
+                  backgroundColor: hpBarPercentage > 50 ? 'green' : hpBarPercentage > 20 ? 'yellow' : 'red',
+                }}
+              />
+            </div>
           </div> 
           
         </div>
@@ -566,11 +636,17 @@ const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
               className="pokeball-select"
               classNamePrefix="react-select"
             />
+            <div className="pokeball-description-container">
+              <p className="pokeball-description">{selectedPokeballDescription}</p>
             </div>
           </div>
+              
+
         </div>
+
       </div>
     </div>
+  </div>
   );
 };
 
