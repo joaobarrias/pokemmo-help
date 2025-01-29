@@ -17,7 +17,7 @@ const App = () => {
   const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
-  const [level, setLevel] = useState<string | null>('70'); // Start with level 70
+  const [level, setLevel] = useState<string | null>('50'); // Start with level 50
   const [baseHP, setBaseHP] = useState<number | null>(null);
   const [currentHp, setCurrentHp] = useState<number | null>(null); // For the HP bar
   const [averageHp, setAverageHp] = useState<number | null>(null);
@@ -39,7 +39,6 @@ const App = () => {
   const preloadedImages = useRef<Set<string>>(new Set());
   const [hpBarPercentage, setHpBarPercentage] = useState<number>(100); // Tracks HP bar fill
 
-
   useEffect(() => {
     // Fetch all Pokémon from Gen 1–5 on initial load
     fetchAllPokemon();
@@ -48,7 +47,14 @@ const App = () => {
       preloadImages();
     }
   }, []);
-  
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const preloadImages = async () => {
     pokeballs.forEach((ball) => {
       if (!preloadedImages.current.has(ball.imagePath)) {
@@ -168,24 +174,23 @@ const App = () => {
     return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   };
 
-  
-const handlePokeballChange = (
-    selectedOption: { value: string; label: JSX.Element } | null
-  ) => {
-    if (selectedOption) {
-      setSelectedPokeball(selectedOption.value);
-    }
-};
-
-const selectedPokeballDescription = pokeballs.find((ball) => ball.name === selectedPokeball)?.description || "";
-
-const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedStatus(event.target.value);
+  const handlePokeballChange = (
+      selectedOption: { value: string; label: JSX.Element } | null
+    ) => {
+      if (selectedOption) {
+        setSelectedPokeball(selectedOption.value);
+      }
   };
 
-const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
+  const selectedPokeballDescription = pokeballs.find((ball) => ball.name === selectedPokeball)?.description || "";
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedStatus(event.target.value);
+    };
+
+  const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value;
   setInputValue(value);
 
@@ -218,11 +223,6 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       }
     }
   };
-
-  useEffect(() => {
-    // Keep the ref value in sync with the state
-    alphaStateRef.current = isAlpha;
-  }, [isAlpha]);
 
   const handleClickOutside = (e: MouseEvent) => {
     if (
@@ -281,40 +281,10 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
-  useEffect(() => {
-    if (!baseHP || !level) return;
-  
-    const levelValue = parseFloat(level);
-    const avgHp = ((2 * baseHP + 15.5 * levelValue) / levelValue) + levelValue + 10;
-    setAverageHp(avgHp);
-    console.log("Base HP:", baseHP, "Level:", levelValue, "Average HP:", avgHp);
-  }, [baseHP, level]);
-
-  useEffect(() => {
-    if (!averageHp) return;
-  
-    let current = 0;
-    let percentage = 0;
-  
-    if (isExactHp) {
-      current = 1; // Exactly 1 HP
-      percentage = (current / averageHp) * 100; // Calculate percentage only for exact HP
-    } else if (hpPercent) {
-      const hpPercentValue = parseFloat(hpPercent);
-      current = (averageHp * hpPercentValue) / 100; // Calculate current HP based on %
-      percentage = hpPercentValue; // Percentage is directly the input
-    }
-  
-    setCurrentHp(current);
-    setHpBarPercentage(percentage);
-    console.log("Current HP:", current, "Percentage HP:", percentage);
-  }, [ averageHp, hpPercent, isExactHp]); // Dependencies
-  
-
   const handleLevelBlur = () => {
     // If the input is empty or out of range, set level to 100
     if (level === '' || level === null) {
-      setLevel('70');
+      setLevel('50');
     }
   };
 
@@ -386,10 +356,38 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Update the state with the corrected value, converted back to a string
     setHpPercent(correctedValue.toString());
   };
-  
+
+  const highlightMatch = (name: string, match: string) => {
+    const index = name.toLowerCase().indexOf(match.toLowerCase());
+    if (index === -1) return name;
+
+    const before = name.slice(0, index);
+    const bold = name.slice(index, index + match.length);
+    const after = name.slice(index + match.length);
+
+    return (
+      <>
+        {before}
+        <b>{bold}</b>
+        {after}
+      </>
+    );
+  };
+
+  const getHpBarClass = (hpBarPercentage: number) => {
+    if (hpBarPercentage <= 20) {
+      return 'critical-health';  // Red/critical health
+    } else if (hpBarPercentage <= 50) {
+      return 'low-health';  // Yellow/low health
+    } else {
+      return '';  // Default (green) health
+    }
+  };
+
   useEffect(() => {
-    console.log("State updated to:", hpPercent);
-  }, [hpPercent]);
+    // Keep the ref value in sync with the state
+    alphaStateRef.current = isAlpha;
+  }, [isAlpha]);
 
   useEffect(() => {
     // If the 'isAlpha' checkbox has been checked, directly set catchRate to 10 without fetching data
@@ -412,31 +410,35 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       fetchPokemonData(inputValue);
     }
   }, [isAlpha, hasInteractedWithCheckbox]); // Run when 'isAlpha' or 'hasInteractedWithCheckbox' changes
-  
-  
+
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+    if (!baseHP || !level) return;
+  
+    const levelValue = parseFloat(level);
+    const avgHp = (((2 * baseHP + 15) * levelValue) / 100) + levelValue + 10;
+    setAverageHp(avgHp);
+    console.log("Base HP:", baseHP, "Level:", levelValue, "Average HP:", avgHp);
+  }, [baseHP, level]);
 
-    const highlightMatch = (name: string, match: string) => {
-    const index = name.toLowerCase().indexOf(match.toLowerCase());
-    if (index === -1) return name;
-
-    const before = name.slice(0, index);
-    const bold = name.slice(index, index + match.length);
-    const after = name.slice(index + match.length);
-
-    return (
-      <>
-        {before}
-        <b>{bold}</b>
-        {after}
-      </>
-    );
-  };
+  useEffect(() => {
+    if (!averageHp || !hpPercent) return;
+  
+    let current = 0;
+    let percentage = 0;
+  
+    if (isExactHp) {
+      current = 1; // Exactly 1 HP
+      percentage = (current / averageHp) * 100; // Calculate percentage only for exact HP
+    } else if (hpPercent) {
+      const hpPercentValue = parseFloat(hpPercent);
+      current = (averageHp * hpPercentValue) / 100; // Calculate current HP based on %
+      percentage = hpPercentValue; // Percentage is directly the input
+    }
+  
+    setCurrentHp(current);
+    setHpBarPercentage(percentage);
+    console.log("Current HP:", current, "Percentage HP:", percentage);
+  }, [ averageHp, hpPercent, isExactHp]); // Dependencies
 
   return (
     <div className="app">
@@ -599,13 +601,22 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               </div>  
             </div>
             <div className="hp-bar-container">
-              <div
-                className="hp-bar"
-                style={{
-                  width: `${hpBarPercentage}%`,
-                  backgroundColor: hpBarPercentage > 50 ? 'green' : hpBarPercentage > 20 ? 'yellow' : 'red',
-                }}
-              />
+              <div className="hp-bar-border">
+                <div
+                  className={`hp-bar ${getHpBarClass(hpBarPercentage)}`}
+                  style={{
+                    width: `${hpBarPercentage}%`,
+                    backgroundColor: hpBarPercentage > 50 ? 'green' : hpBarPercentage > 20 ? 'yellow' : 'red',
+                  }}
+                />
+              </div>
+              <div className="hp-bar-template">
+                <img
+                  src="./status/hpbar.png" // Replace with the actual URL of your template image
+                  alt="HP Bar Template"
+                  className="hp-bar-template-img"
+                />
+              </div>
             </div>
           </div> 
           

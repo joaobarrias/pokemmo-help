@@ -420,17 +420,51 @@ body {
 }
 
 .hp-bar-container {
+  position: relative;
   width: 100%;
-  height: 20px;
-  background-color: #ddd;
-  border: 1px solid #999;
-  border-radius: 5px;
-  overflow: hidden;
+  height: 20px; /* Adjust based on the desired height of your HP bar */
 }
 
+.hp-bar-border{
+  border-radius: 3.5px;
+  border: 1px solid rgb(97, 97, 97);
+  height: 42%;
+  width: 100%;
+  transform: translate(15px, 7px);
+}
 .hp-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-  transition: width 0.3s ease, background-color 0.3s ease;
+  width: 100%; /* This width will change dynamically based on the HP percentage */
+  background: linear-gradient(to bottom, rgb(132, 209, 142) 50%, rgb(57, 134, 67) 50%); /* Default: green on top, dark green on bottom */
+  transition: width 0.5s ease; /* Smooth transition for width and background color */
+}
+
+.hp-bar.low-health {
+  background: linear-gradient(to bottom, rgb(233, 181, 1) 50%, rgb(135, 105, 1) 50%); /* Yellow on top, dark orange on bottom */
+}
+
+.hp-bar.critical-health {
+  background: linear-gradient(to bottom, rgb(236, 151, 151) 50%, rgb(162, 77, 77) 50%); /* Red on top, dark red on bottom */
+}
+
+.hp-bar-template {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transform: translate(-23px);
+  z-index: -1; /* Ensure the image is behind the actual HP bar */
+}
+
+.hp-bar-template-img {
+  width: 130%;
+  height: 130%;
+  object-fit: cover; /* Adjusts the image to cover the area without distorting it */
 }
 
 /* Container for Second Container */
