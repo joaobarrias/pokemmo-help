@@ -146,7 +146,7 @@ body {
 }
 
 /* Input and image container */
-.input-and-image {
+.level-and-image {
   position: relative;
   width: 80px;
   height: 80px;
@@ -174,7 +174,7 @@ body {
 }
 
 /* Glowing border effect for alpha Pokémon */
-.input-and-image.alpha-active {
+.level-and-image.alpha-active {
   background-color: rgba(20, 20, 20, 0.8); /* Darker when alpha */
   box-shadow: 0 0 10px 5px rgba(59, 2, 2, 0.174),
     0 0 20px 10px rgba(146, 3, 3, 0.363);
@@ -251,7 +251,7 @@ body {
 }
 
 /* Ensure the container for both image and level input stacks them vertically */
-.input-and-level-container {
+.level-and-image-container {
   display: flex;
   flex-direction: column;  /* Stack image and level input vertically */
   align-items: center;     /* Align content in the center */
@@ -644,7 +644,7 @@ body {
     top: calc(100%);
   }
 
-  .input-and-image {
+  .level-and-image {
     left: 0;
     top: 0px;
     width: 100px;
@@ -686,7 +686,7 @@ body {
     font-size: 14px;
   }
 
-  .input-and-image {
+  .level-and-image {
     width: 70px;
     height: 70px;
   }
