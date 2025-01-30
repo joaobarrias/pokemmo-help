@@ -1,17 +1,15 @@
-/* Reset margin, padding, and set box-sizing */
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Set height for html and body to avoid extra space */
 html, body {
   height: 100%;
   width: 100%;
 }
 
-/* Body setup */
 body {
   font-family: 'Roboto', Arial, sans-serif;
   background-color: #2c2f38;
@@ -24,7 +22,6 @@ body {
   min-height: 100vh;
 }
 
-/* Title Styles (Centered at the top) */
 .header {
   text-align: center;
   margin-bottom: 70px;
@@ -36,13 +33,12 @@ body {
 
 .body {
   display: flex;
-  flex-direction: column;  /* Aligns children vertically */
-  justify-content: center; /* Centering along main axis */
-  align-items: center;     /* Centers along cross axis */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-/* Main container to hold everything horizontally */
 .main-container {
   display: flex;
   flex-direction: row;
@@ -55,419 +51,6 @@ body {
   padding: 20px;
 }
 
-
-.checkbox-label {
-  font-size: 1rem;
-  color:  rgba(255, 255, 255, 0.9);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.checkbox {
-  cursor: pointer;
-  margin-right: 10px;
-  width: 16px;
-  height: 16px;
-  margin-top: -1px;
-}
-
-/* Input container */
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  width: 250px;
-  margin: 0;
-  gap: 0;
-  z-index: 6;
-}
-
-/* Input field */
-.input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-  background-color: #444c56;
-  color: #fff;
-  box-sizing: border-box;
-  margin: 0;
-  transition: border-color 0.3s ease;
-}
-
-.input:focus {
-  border: 1px solid #6d6d6d;
-}
-
-/* Catch rate styles */
-.catch-rate {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  text-align: left;
-}
-
-/* Suggestion box */
-.suggestion-box {
-  position: absolute;
-  top: calc(100% - 20px);
-  left: 0;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #333;
-  z-index: 10;
-  max-height: 250px;
-  overflow-y: auto;
-  list-style: none;
-}
-
-.suggestion-box li {
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.suggestion-box li:hover {
-  background-color: rgba(0, 123, 255, 0.1);
-}
-
-/* Pokemon Info container */
-.pokemon-info {
-  margin-top: 10px;
-}
-
-/* Input and image container */
-.level-and-image {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.3);
-  overflow: hidden; /* Ensures rounded corners affect all content */
-}
-
-/* Background animation for smoke */
-.alpha-background {
-  position: absolute;
-  top: -50%; /* Start further out to ensure the animation is visible */
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(173, 4, 4, 0.795) 10%,
-    rgba(126, 2, 2, 0.719) 90%,
-    transparent 100%
-  );
-  animation: smoke 8s infinite, glow 1s infinite alternate;
-  filter: blur(15px); /* Adds the smoky, diffused look */
-  pointer-events: none; /* Prevents interaction */
-}
-
-/* Glowing border effect for alpha Pokémon */
-.level-and-image.alpha-active {
-  background-color: rgba(20, 20, 20, 0.8); /* Darker when alpha */
-  box-shadow: 0 0 10px 5px rgba(59, 2, 2, 0.174),
-    0 0 20px 10px rgba(146, 3, 3, 0.363);
-}
-
-/* Chaotic smoke animation */
-@keyframes smoke {
-  0% {
-    transform: translate(-8%, -18%) scale(1);
-    opacity: 0.8;
-  }
-  10% {
-    transform: translate(-15%, -12%) scale(1.05);
-    opacity: 0.75;
-  }
-  20% {
-    transform: translate(-20%, -22%) scale(1.1);
-    opacity: 0.7;
-  }
-  30% {
-    transform: translate(-25%, -18%) scale(1.12);
-    opacity: 0.65;
-  }
-  40% {
-    transform: translate(-28%, -30%) scale(1.15);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-32%, -32%) scale(1.2);
-    opacity: 0.55;
-  }
-  60% {
-    transform: translate(-28%, -28%) scale(1.25);
-    opacity: 0.5;
-  }
-  70% {
-    transform: translate(-22%, -25%) scale(1.18);
-    opacity: 0.55;
-  }
-  80% {
-    transform: translate(-18%, -22%) scale(1.12);
-    opacity: 0.65;
-  }
-  90% {
-    transform: translate(-12%, -18%) scale(1.1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translate(-8%, -18%) scale(1);
-    opacity: 0.8;
-  }
-}
-
-
-
-/* Glow animation for additional effect */
-@keyframes glow {
-  from {
-    box-shadow: 0 0 25px 10px rgba(107, 36, 36, 0.6);
-  }
-  to {
-    box-shadow: 0 0 35px 15px rgba(216, 34, 34, 0.9);
-  }
-}
-
-/* Pokémon image */
-.pokemon-image {
-  position: relative; /* Stays above the smoke and glowing effect */
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* Ensure the container for both image and level input stacks them vertically */
-.level-and-image-container {
-  display: flex;
-  flex-direction: column;  /* Stack image and level input vertically */
-  align-items: center;     /* Align content in the center */
-  gap: 10px;               /* Add space between image and level input */
-  transform: translate(-27px, -15px);
-}
-
-/* Level Input container */
-.level-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-  margin-left: 1px;
-}
-
-/* Level label */
-.level-label {
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  margin-left: 5px;
-}
-
-/* Level Input field */
-.level-input {
-  width: 50px;
-  padding: 8px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #444c56;
-  color: #fff;
-  transition: border-color 0.3s ease;
-  outline: none;
-  text-align: center;
-}
-
-.level-input:focus {
-  border-color: #6d6d6d;
-}
-
-.level-input:disabled {
-  background-color: #555;
-  color: #999;
-}
-
-/* Status Section */
-.status-section {
-  color: rgba(255, 255, 255, 0.9);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 5;
-}
-
-.status-label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.status-value{
-  font-size: 0.9rem;
-}
-
-.status-icon {
-  z-index: 3;
-  transform: translate(-68px, -122px);
-}
-
-.status-image{
-  width: 17px;
-  height: 17px;
-}
-
-.status-section .react-select__option{
-  padding: 10px 10px !important;
-  display: inline-block !important;
-  margin-right: 0px !important;
-}
-
-.status-section .react-select__control{
-  width: 130px !important;
-}
-
-.status-section .react-select__menu{
-  width:130px !important;
-}
-
-.status-section .react-select__single-value {
-  display: inline-block !important;
-  color: #fff !important;
-  transform: translateY(0px) !important;
-}
-
-/* HP Section */
-.hp-section {
-  color: rgba(255, 255, 255, 0.9);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-left: 25px;
-}
-
-.hp-label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.hp-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 0.9rem;
-}
-
-.hp-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.hp-toggle label{
-  cursor: pointer;
-}
-
-.hp-toggle input[type="radio"] {
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.hp-toggle input[type="text"] {
-  width: 47px;
-  padding: 7px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #444c56;
-  color: #fff;
-  transition: border-color 0.3s ease; /* Add transition */
-  outline: none; /* Ensure no default focus outline */
-  text-align: center;
-}
-
-.hp-toggle input[type="text"]:focus {
-  border-color: #6d6d6d; /* Match the input container focus border color */
-}
-
-.hp-toggle input[type="text"]:disabled {
-  background-color: #555;
-  color: #999;
-}
-
-/* Remove spinner for Chrome, Edge, and Safari */
-.hp-toggle input[type="text"]::-webkit-inner-spin-button, 
-.hp-toggle input[type="text"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Remove spinner for Firefox */
-.hp-toggle input[type="text"] {
-  -moz-appearance: textfield;
-}
-
-.hp-bar-container {
-  position: relative;
-  width: 100%;
-  height: 20px; /* Adjust based on the desired height of your HP bar */
-}
-
-.hp-bar-border{
-  border-radius: 3.5px;
-  border: 1px solid rgb(97, 97, 97);
-  height: 42%;
-  width: 100%;
-  transform: translate(15px, 7px);
-}
-.hp-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%; /* This width will change dynamically based on the HP percentage */
-  background: linear-gradient(to bottom, rgb(132, 209, 142) 50%, rgb(57, 134, 67) 50%); /* Default: green on top, dark green on bottom */
-  transition: width 0.5s ease; /* Smooth transition for width and background color */
-}
-
-.hp-bar.low-health {
-  background: linear-gradient(to bottom, rgb(233, 181, 1) 50%, rgb(135, 105, 1) 50%); /* Yellow on top, dark orange on bottom */
-}
-
-.hp-bar.critical-health {
-  background: linear-gradient(to bottom, rgb(236, 151, 151) 50%, rgb(162, 77, 77) 50%); /* Red on top, dark red on bottom */
-}
-
-.hp-bar-template {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  transform: translate(-23px);
-  z-index: -1; /* Ensure the image is behind the actual HP bar */
-}
-
-.hp-bar-template-img {
-  width: 130%;
-  height: 130%;
-  object-fit: cover; /* Adjusts the image to cover the area without distorting it */
-}
-
-/* Container for Second Container */
 .second-container {
   display: flex;
   flex-direction: row;
@@ -478,58 +61,6 @@ body {
   width: 100%;
   margin: auto;
   padding: 20px;
-}
-
-.pokeball-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  max-width: 250px;
-  position: relative;
-}
-
-/* Pokéball label styling */
-.pokeball-label {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 10px;
-  text-align: left;
-  width: 100%;
-  margin-left: 0;
-}
-
-/* React Select styling */
-.pokeball-select {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 6px;
-}
-
-/* Container for description */
-.pokeball-description-container {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  display: block;
-  text-align: center;
-  overflow: hidden;
-  max-width: 100%;
-}
-
-/* Styling for the Pokéball description */
-.pokeball-description {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.3;
-  word-wrap: break-word;
-  white-space: normal;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 
@@ -560,7 +91,6 @@ body {
   box-shadow: none !important;          
 }
 
-/* For the entire dropdown menu */
 .react-select__menu {
   background-color: #333 !important; 
   border-radius: 4px !important;    
@@ -572,17 +102,16 @@ body {
 }
 
 .react-select__menu-list {
-  max-height: 250px !important; /* Ensures the list of options has a limit */
+  max-height: 250px !important;
   overflow-y: auto !important;
 }
 
-/* For each option inside the dropdown */
 .react-select__option {
   background-color: #333 !important; 
   color: #fff !important;   
   cursor: pointer !important;    
-  padding: 3px 10px !important;  /* Reduce padding for each option */
-  margin: 0 !important;          /* Remove margin between options */                                
+  padding: 3px 10px !important;
+  margin: 0 !important;
 }
 
 .react-select__option:hover {
@@ -597,7 +126,7 @@ body {
 
 .react-select__single-value img{
   transform: translateY(8px) !important;
-  margin-right: 4px !important; /* Add spacing between image and text */
+  margin-right: 4px !important;
 }
  
 .react-select__option span{
@@ -608,7 +137,7 @@ body {
 .react-select__option img{
   display: inline-block !important;
   transform: translateY(1px) !important;
-  margin-right: 5px !important; /* Add spacing between image and text */
+  margin-right: 5px !important;
 }
 
 .react-select__menu-notice--no-options {
@@ -616,7 +145,7 @@ body {
   margin-left: 6px;
 }
 
-/* Ensuring flex wrapping on small screens */
+/* For small screens */
 @media (max-width: 810px) {
   .header {
     text-align: center;
@@ -624,45 +153,11 @@ body {
   }
 
   .main-container {
-    flex-direction: column; /* Stack elements vertically on small screens */
+    flex-direction: column;
     align-items: center;
     gap: 10px;
   }
 
-  .checkbox-container {
-    transform: none;
-    margin-bottom: 10px;
-    order: 1; /* Set order so the checkbox appears below the image but above Pokéball */
-  }
-
-  .input-container {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .suggestion-box {
-    top: calc(100%);
-  }
-
-  .level-and-image {
-    left: 0;
-    top: 0px;
-    width: 100px;
-    height: 100px;
-    transform: none;
-  }
-
-  .pokeball-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .pokeball {
-    width: 40px;
-    height: 40px;
-  }
 }
 
 /* For very small screens */
@@ -670,24 +165,5 @@ body {
   .header h1 {
     font-size: 1.5rem;
   }
-
-  .checkbox-container {
-    order: 1;
-    align-self: center;
-    margin: 10px 0;
-  }
-
-  .input-container {
-    width: 100%;
-    max-width: 250px;
-  }
-
-  .input {
-    font-size: 14px;
-  }
-
-  .level-and-image {
-    width: 70px;
-    height: 70px;
-  }
+  
 }

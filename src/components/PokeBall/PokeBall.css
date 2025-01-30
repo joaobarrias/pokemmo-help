@@ -1,0 +1,60 @@
+/* PokeBall Section */
+.pokeball-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: 250px;
+    position: relative;
+}
+
+.pokeball-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
+    margin-left: 0;
+}
+
+.pokeball-select {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 6px;
+}
+
+.pokeball-description-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.pokeball-description {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.3;
+    word-wrap: break-word;
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* For small screens */
+@media (max-width: 810px) {
+
+
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+
+
+}

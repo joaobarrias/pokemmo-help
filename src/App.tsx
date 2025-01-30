@@ -50,7 +50,7 @@ const App = () => {
         {/* Main Container for Pokemon Input, Pokémon Image/Level, Status Condition and HP Section */}
         <div className="main-container">
 
-          {/* Pokemon Selector Section & Checkbox Section */}
+          {/* Pokemon Section*/}
           <PokemonSelector
           setHasInteractedWithCheckbox={setHasInteractedWithCheckbox}
           pokemonImageUrl={pokemonImageUrl}

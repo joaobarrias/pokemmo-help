@@ -1,6 +1,6 @@
 // PokeBall.tsx
 import React, { useEffect } from "react";
-//import "./PokeBall.css";
+import "./PokeBall.css";
 import Select from 'react-select'; // Import react-select
 import { pokeballs } from "../../data/pokeballs"; // Import pokeballs
 

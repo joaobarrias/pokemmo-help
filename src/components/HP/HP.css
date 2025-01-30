@@ -1,0 +1,129 @@
+/* HP Section */
+.hp-section {
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 25px;
+}
+  
+.hp-label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+  
+.hp-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+  
+.hp-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+  
+.hp-toggle label{
+    cursor: pointer;
+}
+  
+.hp-toggle input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+  
+.hp-toggle input[type="text"] {
+    width: 47px;
+    padding: 7px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #444c56;
+    color: #fff;
+    transition: border-color 0.3s ease;
+    outline: none;
+    text-align: center;
+}
+  
+.hp-toggle input[type="text"]:focus {
+    border-color: #6d6d6d;
+}
+  
+.hp-toggle input[type="text"]:disabled {
+    background-color: #555;
+    color: #999;
+}
+  
+.hp-toggle input[type="text"]::-webkit-inner-spin-button, 
+.hp-toggle input[type="text"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+  
+.hp-toggle input[type="text"] {
+    -moz-appearance: textfield;
+}
+  
+.hp-bar-container {
+    position: relative;
+    width: 100%;
+    height: 20px;
+}
+  
+.hp-bar-border{
+    border-radius: 3.5px;
+    border: 1px solid rgb(97, 97, 97);
+    height: 42%;
+    width: 100%;
+    transform: translate(15px, 7px);
+}
+
+.hp-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, rgb(132, 209, 142) 50%, rgb(57, 134, 67) 50%);
+    transition: width 0.5s ease;
+}
+  
+.hp-bar.low-health {
+    background: linear-gradient(to bottom, rgb(233, 181, 1) 50%, rgb(135, 105, 1) 50%);
+}
+  
+.hp-bar.critical-health {
+    background: linear-gradient(to bottom, rgb(236, 151, 151) 50%, rgb(162, 77, 77) 50%);
+}
+  
+.hp-bar-template {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    transform: translate(-23px);
+    z-index: -1;
+}
+  
+.hp-bar-template-img {
+    width: 130%;
+    height: 130%;
+    object-fit: cover;
+}
+
+/* For small screens */
+@media (max-width: 810px) {
+
+
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+
+
+}

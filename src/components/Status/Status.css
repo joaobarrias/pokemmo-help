@@ -1,0 +1,60 @@
+/* Status Section */
+.status-section {
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 5;
+}
+
+.status-label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.status-value{
+    font-size: 0.9rem;
+}
+
+.status-icon {
+    z-index: 3;
+    transform: translate(-68px, -122px);
+}
+
+.status-image{
+    width: 17px;
+    height: 17px;
+}
+
+.status-section .react-select__option{
+    padding: 10px 10px !important;
+    display: inline-block !important;
+    margin-right: 0px !important;
+}
+
+.status-section .react-select__control{
+    width: 130px !important;
+}
+
+.status-section .react-select__menu{
+    width:130px !important;
+}
+
+.status-section .react-select__single-value {
+    display: inline-block !important;
+    color: #fff !important;
+    transform: translateY(0px) !important;
+}
+
+/* For small screens */
+@media (max-width: 810px) {
+
+
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+
+
+}

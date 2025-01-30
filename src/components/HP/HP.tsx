@@ -1,6 +1,6 @@
 // HP.tsx
 import React, { useEffect } from "react";
-//import "./HP.css";
+import "./HP.css";
 
 type HPProps = {
     averageHp: number | null;

@@ -1,6 +1,6 @@
 // Status.tsx
 import React from 'react';
-//import "./Status.css";
+import "./Status.css";
 import Select from 'react-select'; // Import react-select
 import { status } from "../../data/status"; // Import status conditions
 

@@ -1,6 +1,6 @@
 // Level.tsx
 import React from 'react';
-//import "./Level.css";
+import "./Level.css";
 
 interface LevelProps {
   level: string | null;

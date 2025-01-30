@@ -1,6 +1,6 @@
 // PokemonSelector.tsx
 import React, { useEffect, useRef } from "react";
-//import "./PokemonSelector.css";
+import "./PokemonSelector.css";
 import customRates from "../../data/custom-rates.json"; // Import custom rates for PokeMMO
 
 interface PokemonSelectorProps {
@@ -265,7 +265,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithC
     };
         
   return (
-    <div className="input-container">
+    <div className="pokemon-container">
             {/* Alpha Checkbox */}
             <label className="checkbox-label">
             <input
@@ -283,7 +283,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithC
               value={pokemonInputValue}
               onChange={handleInputChange}
               placeholder="Enter Pokémon name"
-              className="input"
+              className="pokemon-name"
               onBlur={handleInputBlur}
               onFocus={() => {
                 setPokemonInputValue("");
