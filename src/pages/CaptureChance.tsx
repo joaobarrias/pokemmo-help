@@ -1,7 +1,8 @@
+// Page: CaptureChance.tsx
 import { useState, useEffect, useRef } from "react";
 import "../App.css"; // Import external CSS
 import PokemonSelector from "../components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
-import Level from "../components/Level/Level";  // Import the Level component
+import Level from "../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
 import Status from "../components/Status/Status";  // Import the PokemonSelector component
 import HP from "../components/HP/HP";  // Import the HP component
 import PokeBall from "../components/PokeBall/PokeBall";  // Import the PokeBall component
@@ -20,12 +21,15 @@ const App = () => {
   const [baseHP, setBaseHP] = useState<number | null>(null);
   const [currentHp, setCurrentHp] = useState<number | null>(null);
   const [averageHp, setAverageHp] = useState<number | null>(null);
-  const [selectedPokeball, setSelectedPokeball] =  useState<string>("");
-  const [selectedStatus, setSelectedStatus] = useState<string>("None");
+  const [selectedPokeball, setSelectedPokeball] =  useState<any>(null);
+  const [selectedStatus, setSelectedStatus] = useState<any>(null);
   const [hpBarPercentage, setHpBarPercentage] = useState<number>(100); 
   const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
   const inputPokemonRef = useRef<HTMLInputElement | null>(null);
   const preloadedImages = useRef<Set<string>>(new Set());
+  const [types, setTypes] = useState<string[]>([]);
+  const [weight, setWeight] =  useState<number | null>(null);
+  const [baseSpeed, setBaseSpeed] =  useState<number | null>(null);
   
 
   useEffect(() => { 
@@ -41,7 +45,7 @@ const App = () => {
     <div className="app">
       {/* Header */}
       <div className="header">
-        <h1>PokeMMO Capture Chance Calculator</h1>
+        <h1>Capture Chance Calculator</h1>
       </div>
   
       {/* Body */}
@@ -68,11 +72,14 @@ const App = () => {
           catchRate={catchRate}
           suggestionBoxRef={suggestionBoxRef}
           inputPokemonRef={inputPokemonRef}
+          setBaseSpeed={setBaseSpeed}
+          setWeight={setWeight}
+          setTypes={setTypes}
         />
 
           
           {/* Pokémon Image and Level Section*/}
-          <Level level={level} setLevel={setLevel} pokemonImageUrl={pokemonImageUrl} pokemonInputValue={pokemonInputValue} isAlpha={isAlpha}/>
+          <Level types={types} level={level} setLevel={setLevel} pokemonImageUrl={pokemonImageUrl} pokemonInputValue={pokemonInputValue} isAlpha={isAlpha}/>
      
           {/* Status Section */}
           <Status selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus}/>

@@ -1,4 +1,4 @@
-/* Level Section */
+/* Image And Level Section */
 .level-and-image-container {
     display: flex;
     flex-direction: column;
@@ -94,6 +94,16 @@
     to {
       box-shadow: 0 0 35px 15px rgba(216, 34, 34, 0.9);
     }
+}
+
+/* Display the type icons in a horizontal line */
+.types-container {
+  position: absolute;
+  top: calc(50% - 60%);
+  z-index: 5;
+  display: flex; /* Flexbox to display icons in a row */
+  align-items: center;
+  justify-content: center;
 }
 
 .pokemon-image {

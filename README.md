@@ -42,12 +42,12 @@ To get started with this project, follow the steps below:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/pokemmo-capture-chance-calculator.git
+    git clone https://github.com/yourusername/pokemmo-tools.git
     ```
 
 2. **Navigate into the project folder:**
     ```bash
-    cd pokemmo-capture-chance-calculator
+    cd pokemmo-tools
     ```
 
 3. **Install dependencies:**

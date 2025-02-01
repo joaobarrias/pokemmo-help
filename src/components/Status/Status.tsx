@@ -1,57 +1,60 @@
 // Status.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Status.css";
 import Select from 'react-select'; // Import react-select
 import { status } from "../../data/status"; // Import status conditions
 
 interface StatusProps {
-    selectedStatus: string;
-    setSelectedStatus: React.Dispatch<React.SetStateAction<string>>;
+    selectedStatus: any;
+    setSelectedStatus: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const Status: React.FC<StatusProps> = ({selectedStatus, setSelectedStatus}) => {
-    
-const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedStatus(event.target.value);
-    };
 
-const selectedIcon = status.find((s) => s.name === selectedStatus)?.icon || "";
+    // Set default status if not selected
+  useEffect(() => {
+    if (!selectedStatus) {
+      setSelectedStatus(status[0]);  // Default to first status object
+    }
+  }, [selectedStatus, setSelectedStatus]);
+
+  const handleStatusChange = (selectedOption: { value: string; label: string } | null) => {
+    if (selectedOption) {
+      const statusObj = status.find((s) => s.name === selectedOption.value);
+      setSelectedStatus(statusObj || status[0]);  // Default to first status if not found
+    }
+  };
   
-
   return (
     <div className="status-section">
-        <label className="status-label">
-            Status
-        </label>
-        <Select
-            id="status"
-            value={{
-            value: selectedStatus,
-            label: selectedStatus,
-            }}
-            onChange={(option) => {
-            if (option) setSelectedStatus(option.value);
-            }}
-            options={status.map((s) => ({
-            value: s.name,
-            label: s.name,
-            }))}
-            className="status-select"
-            classNamePrefix="react-select"
-            isSearchable={false}
-        />
-        <p className="status-value">
-            Multiplier: {status.find((s) => s.name === selectedStatus)?.multiplier || 1}x
-        </p>
-        <div className="status-icon">
-            {selectedStatus && status.find((s) => s.name === selectedStatus)?.icon && (
-            <img
-                src={status.find((s) => s.name === selectedStatus)?.icon || ""}
-                alt={`${selectedStatus} icon`}
-                className="status-image"
-            />
-            )}
-        </div>
+      <label className="status-label">Status</label>
+      <Select
+        id="status"
+        value={{
+          value: selectedStatus?.name || '', // Use the name from the object
+          label: selectedStatus?.name || 'Status', // Label is the name as well
+        }}
+        onChange={handleStatusChange}
+        options={status.map((s) => ({
+          value: s.name, // The value is the name of the status
+          label: s.name, // The label is also the name
+        }))}
+        className="status-select"
+        classNamePrefix="react-select"
+        isSearchable={false}
+      />
+      <p className="status-value">
+        Multiplier: {selectedStatus?.multiplier || 1}x
+      </p>
+      <div className="status-icon">
+        {selectedStatus?.icon && (
+          <img
+            src={selectedStatus.icon}
+            alt={`${selectedStatus.name} icon`}
+            className="status-image"
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -2,10 +2,13 @@
 import React, { useEffect, useRef } from "react";
 import "./PokemonSelector.css";
 import customRates from "../../data/custom-rates.json"; // Import custom rates for PokeMMO
+import excludedPokemonData from "../../data/excluded-pokemons.json"; // Import pokemons name that don't exist in PokeMMO
 
 interface PokemonSelectorProps {
     pokemonInputValue: string;
     setBaseHP: React.Dispatch<React.SetStateAction<number | null>>;
+    setWeight: React.Dispatch<React.SetStateAction<number | null>>;
+    setBaseSpeed: React.Dispatch<React.SetStateAction<number | null>>;
     setPokemonInputValue: React.Dispatch<React.SetStateAction<string>>;
     suggestions: string[];
     setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
@@ -21,9 +24,10 @@ interface PokemonSelectorProps {
     inputPokemonRef: React.RefObject<HTMLInputElement>;
     allPokemon: { name: string; id: number }[];
     setAllPokemon: (allPokemon: { name: string; id: number }[]) => void; 
+    setTypes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithCheckbox, pokemonImageUrl, setBaseHP, setPokemonInputValue, allPokemon, setAllPokemon, pokemonInputValue, suggestions, setCatchRate, setSuggestions, isAlpha, setIsAlpha, hasInteractedWithCheckbox, setImageUrl, catchRate, suggestionBoxRef, inputPokemonRef}) => {
+const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, setBaseSpeed, setHasInteractedWithCheckbox, pokemonImageUrl, setBaseHP, setPokemonInputValue, allPokemon, setAllPokemon, pokemonInputValue, suggestions, setCatchRate, setSuggestions, isAlpha, setIsAlpha, hasInteractedWithCheckbox, setImageUrl, catchRate, suggestionBoxRef, inputPokemonRef}) => {
     const alphaStateRef = useRef(isAlpha);
     useEffect(() => {
         // Fetch all Pokémon from Gen 1–5 on initial load and grab Pikachu data
@@ -86,17 +90,10 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithC
             })
         );
     
-        const excludePokemon = [
-            "heatran", "deoxys", "mewtwo", "mew", "lugia", "ho-oh", "celebi", "regirock", "regice", "registeel",
-            "latias", "latios", "kyogre", "groudon", "rayquaza", "jirachi", "uxie", "mesprit", "azelf", "dialga",
-            "palkia", "regigigas", "giratina", "cresselia", "phione", "manaphy", "darkrai", "shaymin", "arceus", "victini",
-            "cobalion", "terrakion", "virizion", "tornadus", "thundurus", "reshiram", "zekrom", "landorus", "kyurem", "keldeo",
-            "meloetta", "genesect", ""
-        ];
-    
         // Filter out excluded Pokémon
+        const excludePokemon = excludedPokemonData.excludePokemon;
         const filteredPokemonList = pokemonList.filter(
-            (pokemon) => !excludePokemon.includes(pokemon.name.toLowerCase())
+          (pokemon) => !excludePokemon.includes(pokemon.name.toLowerCase())
         );
     
         setAllPokemon(filteredPokemonList.sort((a, b) => a.id - b.id));
@@ -154,16 +151,31 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithC
         if (!pokemonResponse.ok) throw new Error("Pokemon not found");
     
         const pokemonData = await pokemonResponse.json();
-        const hpStat = pokemonData.stats.find((stat: any) => stat.stat.name === 'hp')?.base_stat;
-        if (hpStat) {
-            setBaseHP(hpStat);
-        }
-        const newImageUrl = pokemonData.sprites.front_default;
-        if (newImageUrl !== pokemonImageUrl) {
-            setImageUrl(newImageUrl);
-        }
-    
+
+        // Map through the types and handle the "fairy" type conversion.
+        const transformedTypes = pokemonData.types.map((type: { type: { name: string } }, index: number) => {
+          const typeName = type.type.name;
+          if (typeName === 'fairy') {
+            // If the type is fairy and it's the only type, replace it with "normal".
+            // If it's the first type (index === 0), replace it with "normal".
+            if (pokemonData.types.length === 1 || index === 0) {
+              return 'normal';
+            }
+            // If it's the second type (index === 1), remove it (return null to filter it out later).
+            return null;
+          }
+          return typeName;
+        }).filter(Boolean);
+
+        setTypes(transformedTypes);
+        setWeight(pokemonData.weight);
+        setBaseSpeed(pokemonData.stats.find((stat: { stat: { name: string } }) => stat.stat.name === 'speed')?.base_stat);
+        setBaseHP(pokemonData.stats.find((stat: any) => stat.stat.name === 'hp')?.base_stat);
+        setImageUrl(pokemonData.sprites.front_default);
         } catch (err) {
+        setTypes([]);
+        setWeight(null);
+        setBaseSpeed(null);
         setBaseHP(null);
         setCatchRate(null);
         setImageUrl(null);
@@ -185,62 +197,60 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithC
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setPokemonInputValue(value);
-    
-        if (value.trim() === "") {
-          setSuggestions(allPokemon.map(pokemon => pokemon.name));
+        const filtered = allPokemon.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(value.toLowerCase())
+        );
+  
+        // Check if there's an exact match
+        const exactMatch = filtered.some(
+          (pokemon) => pokemon.name.toLowerCase() === value.toLowerCase()
+        );
+  
+        if (exactMatch) {
+          // If there's an exact match, clear suggestions and fetch data
+          setSuggestions([]);
+          const formattedName = formatPokemonName(value);
+          setPokemonInputValue(formattedName);
+          fetchPokemonData(value);
+          inputPokemonRef.current?.blur(); // Unfocus the input text
+        } else {
+          // Otherwise, show filtered suggestions
+          setSuggestions(filtered.map(pokemon => pokemon.name));
+          setTypes([]);
+          setWeight(null);
+          setBaseSpeed(null);
+          setBaseHP(null);
           setCatchRate(null);
           setImageUrl(null);
-        } else {
-          const filtered = allPokemon.filter((pokemon) =>
-            pokemon.name.toLowerCase().includes(value.toLowerCase())
-          );
-    
-          // Check if there's an exact match
-          const exactMatch = filtered.some(
-            (pokemon) => pokemon.name.toLowerCase() === value.toLowerCase()
-          );
-    
-          if (exactMatch) {
-            // If there's an exact match, clear suggestions and fetch data
-            setSuggestions([]);
-            const formattedName = formatPokemonName(value);
-            setPokemonInputValue(formattedName);
-            fetchPokemonData(value);
-            inputPokemonRef.current?.blur(); // Unfocus the input text
-          } else {
-            // Otherwise, show filtered suggestions
-            setSuggestions(filtered.map(pokemon => pokemon.name));
-            setCatchRate(null);
-            setImageUrl(null);
-          }
         }
+
     };
     
     const handleClickOutside = (e: MouseEvent) => {
-    // Reset to Pikachu if the user has clicked out of the input text
-    if (
-        inputPokemonRef.current &&
-        suggestionBoxRef.current &&
-        !inputPokemonRef.current.contains(e.target as Node) &&
-        !suggestionBoxRef.current.contains(e.target as Node)
-    ) {
-        setPokemonInputValue("Pikachu");
-        fetchPokemonData("Pikachu");
-        setSuggestions([]);
-    }
+      // Reset to Pikachu if the user has clicked out of the input text
+      if (
+          inputPokemonRef.current &&
+          suggestionBoxRef.current &&
+          !inputPokemonRef.current.contains(e.target as Node) &&
+          !suggestionBoxRef.current.contains(e.target as Node)
+      ) {
+          setPokemonInputValue("Pikachu");
+          fetchPokemonData("Pikachu");
+          setSuggestions([]);
+      }
     };
     
     const handleInputBlur = () => {
-    // Only reset to Pikachu if the user has not written a valid suggestion
-    if (pokemonInputValue.trim() && !suggestions.length) {
-        const isValidPokemon = allPokemon.some(
-        (pokemon) => pokemon.name.toLowerCase() === pokemonInputValue.trim().toLowerCase()
-        );
-        if (!isValidPokemon) {
-        setPokemonInputValue("Pikachu");
-        fetchPokemonData("Pikachu");
-        }
-    }
+      // Only reset to Pikachu if the user has not written a valid suggestion
+      if (pokemonInputValue.trim() && !suggestions.length) {
+          const isValidPokemon = allPokemon.some(
+          (pokemon) => pokemon.name.toLowerCase() === pokemonInputValue.trim().toLowerCase()
+          );
+          if (!isValidPokemon) {
+          setPokemonInputValue("Pikachu");
+          fetchPokemonData("Pikachu");
+          }
+      }
     };
 
     const highlightMatch = (name: string, match: string) => {
@@ -287,8 +297,12 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setHasInteractedWithC
               onBlur={handleInputBlur}
               onFocus={() => {
                 setPokemonInputValue("");
-                setImageUrl(null);
+                setTypes([]);
+                setWeight(null);
+                setBaseSpeed(null);
+                setBaseHP(null);
                 setCatchRate(null);
+                setImageUrl(null);
                 setSuggestions(allPokemon.map(pokemon => pokemon.name));
               }}
             />
