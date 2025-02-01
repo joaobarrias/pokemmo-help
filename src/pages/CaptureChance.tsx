@@ -2,44 +2,51 @@
 import { useState, useEffect, useRef } from "react";
 import "../App.css"; // Import external CSS
 import PokemonSelector from "../components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
-import Level from "../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
+import ImageAndLevel from "../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
 import Status from "../components/Status/Status";  // Import the PokemonSelector component
 import HP from "../components/HP/HP";  // Import the HP component
 import PokeBall from "../components/PokeBall/PokeBall";  // Import the PokeBall component
 
-const App = () => {
-  const [pokemonInputValue, setPokemonInputValue] = useState("Pikachu");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [catchRate, setCatchRate] = useState<number | null>(null);
-  const [pokemonImageUrl, setImageUrl] = useState<string | null>(null);
-  const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
-  const [isAlpha, setIsAlpha] = useState(false);
-  const [hpPercent, setHpPercent] = useState<string | null>('100');
-  const [isExactHp, setIsExactHp] = useState(false);
-  const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
+// Define types for the state
+export interface PokemonStats {
+  hp: number | null;
+  speed: number | null;
+  weight: number | null;
+}
+
+export interface PokemonState {
+  name: string;
+  id: number | null;
+  stats: PokemonStats;
+  imageUrl: string | null;
+  catchRate: number | null;
+  types: string[];
+}
+
+const CaptureChance = () => {
+  const [pokemonState, setPokemonState] = useState<PokemonState>({
+    name: "Pikachu",
+    id: null,
+    stats: { hp: null, speed: null, weight: null },
+    imageUrl: null,
+    catchRate: null,
+    types: [],
+  });
   const [level, setLevel] = useState<string | null>('50');
-  const [baseHP, setBaseHP] = useState<number | null>(null);
   const [currentHp, setCurrentHp] = useState<number | null>(null);
   const [averageHp, setAverageHp] = useState<number | null>(null);
   const [selectedPokeball, setSelectedPokeball] =  useState<any>(null);
   const [selectedStatus, setSelectedStatus] = useState<any>(null);
-  const [hpBarPercentage, setHpBarPercentage] = useState<number>(100); 
-  const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
-  const inputPokemonRef = useRef<HTMLInputElement | null>(null);
-  const preloadedImages = useRef<Set<string>>(new Set());
-  const [types, setTypes] = useState<string[]>([]);
-  const [weight, setWeight] =  useState<number | null>(null);
-  const [baseSpeed, setBaseSpeed] =  useState<number | null>(null);
-  
+  const [isAlpha, setIsAlpha] = useState(false);
 
   useEffect(() => { 
-          if (!baseHP || !level) return;
+          if (!pokemonState.stats.hp || !level) return;
           
           const levelValue = parseFloat(level);
-          const avgHp = (((2 * baseHP + 15.5) * levelValue) / 100) + levelValue + 10;
+          const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10);
           setAverageHp(avgHp);
-          console.log("Base HP:", baseHP, "Level:", levelValue, "Average HP:", avgHp);
-      }, [baseHP, level]);
+          console.log("Base HP:", pokemonState.stats.hp, "Level:", levelValue, "Average HP:", avgHp);
+      }, [pokemonState.stats.hp, level]);
 
   return (
     <div className="app">
@@ -54,32 +61,16 @@ const App = () => {
         <div className="main-container">
 
           {/* Pokemon Section*/}
-          <PokemonSelector
-          setHasInteractedWithCheckbox={setHasInteractedWithCheckbox}
-          pokemonImageUrl={pokemonImageUrl}
-          setBaseHP={setBaseHP}
-          setPokemonInputValue={setPokemonInputValue}
-          allPokemon={allPokemon}
-          setAllPokemon={setAllPokemon}
-          pokemonInputValue={pokemonInputValue}
-          suggestions={suggestions}
-          setCatchRate={setCatchRate}
-          setSuggestions={setSuggestions}
+          <PokemonSelector    
+          pokemonState={pokemonState}
+          setPokemonState={setPokemonState}
           isAlpha={isAlpha}
           setIsAlpha={setIsAlpha}
-          hasInteractedWithCheckbox={hasInteractedWithCheckbox}
-          setImageUrl={setImageUrl}
-          catchRate={catchRate}
-          suggestionBoxRef={suggestionBoxRef}
-          inputPokemonRef={inputPokemonRef}
-          setBaseSpeed={setBaseSpeed}
-          setWeight={setWeight}
-          setTypes={setTypes}
         />
 
           
           {/* Pokémon Image and Level Section*/}
-          <Level types={types} level={level} setLevel={setLevel} pokemonImageUrl={pokemonImageUrl} pokemonInputValue={pokemonInputValue} isAlpha={isAlpha}/>
+          <ImageAndLevel pokemonState={pokemonState} level={level} setLevel={setLevel}  isAlpha={isAlpha}/>
      
           {/* Status Section */}
           <Status selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus}/>
@@ -87,13 +78,7 @@ const App = () => {
           {/* HP Section */}
           <HP
             averageHp={averageHp}
-            hpPercent={hpPercent}
-            isExactHp={isExactHp}
-            setHpPercent={setHpPercent}
-            setIsExactHp={setIsExactHp}
-            hpBarPercentage={hpBarPercentage}
             setCurrentHp={setCurrentHp}
-            setHpBarPercentage={setHpBarPercentage}
           />
                     
         </div>
@@ -102,7 +87,7 @@ const App = () => {
         <div className="second-container">
            
           {/* Pokéball Section */}
-          <PokeBall preloadedImages={preloadedImages} selectedPokeball={selectedPokeball} setSelectedPokeball={setSelectedPokeball} />
+          <PokeBall selectedPokeball={selectedPokeball} setSelectedPokeball={setSelectedPokeball} />
 
         </div>
       </div>
@@ -110,4 +95,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default CaptureChance;

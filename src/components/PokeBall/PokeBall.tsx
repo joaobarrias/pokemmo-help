@@ -1,5 +1,5 @@
 // PokeBall.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./PokeBall.css";
 import Select from 'react-select'; // Import react-select
 import { pokeballs } from "../../data/pokeballs"; // Import pokeballs
@@ -7,11 +7,11 @@ import { pokeballs } from "../../data/pokeballs"; // Import pokeballs
 interface PokeBallProps {
   selectedPokeball: any;
   setSelectedPokeball: React.Dispatch<React.SetStateAction<any>>;
-  preloadedImages: React.MutableRefObject<Set<string>>;
 }
 
-const PokeBall: React.FC<PokeBallProps> = ({ preloadedImages, selectedPokeball, setSelectedPokeball }) => {
-  
+const PokeBall: React.FC<PokeBallProps> = ({  selectedPokeball, setSelectedPokeball }) => {
+  const preloadedImages = useRef<Set<string>>(new Set());
+
   useEffect(() => {
     if (!selectedPokeball) {
       setSelectedPokeball(pokeballs[0]);  // Set the default Poké Ball object

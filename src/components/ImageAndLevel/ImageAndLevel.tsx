@@ -1,17 +1,23 @@
 // ImageAndLevel.tsx
 import React from 'react';
 import "./ImageAndLevel.css";
+import { PokemonState } from '../../pages/CaptureChance';
 
 interface ImageAndLevelProps {
+  pokemonState: PokemonState; 
   level: string | null;
   setLevel: (level: string | null) => void;
-  pokemonImageUrl: string | null;
-  pokemonInputValue: string;
   isAlpha: boolean;  
-  types: string[];
 }
 
-const ImageAndLevel: React.FC<ImageAndLevelProps> = ({ types, level, setLevel, pokemonImageUrl, pokemonInputValue, isAlpha }) => {
+const ImageAndLevel: React.FC<ImageAndLevelProps> = ({ 
+  pokemonState, 
+  level, 
+  setLevel, 
+  isAlpha }) => {
+    
+  const { imageUrl, types, name } = pokemonState;
+
   const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -42,10 +48,10 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({ types, level, setLevel, p
     <div className="level-and-image-container">
       <div className={`level-and-image ${isAlpha ? 'alpha-active' : ''}`}>
         {isAlpha && <div className="alpha-background"></div>} {/* Smoke background */}
-        {pokemonImageUrl ? (
+        {imageUrl  ? (
           <img
-            src={pokemonImageUrl}
-            alt={pokemonInputValue}
+            src={imageUrl }
+            alt={name}
             className="pokemon-image"
           />
         ) : (

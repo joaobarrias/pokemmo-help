@@ -1,34 +1,31 @@
 // PokemonSelector.tsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./PokemonSelector.css";
 import customRates from "../../data/custom-rates.json"; // Import custom rates for PokeMMO
 import excludedPokemonData from "../../data/excluded-pokemons.json"; // Import pokemons name that don't exist in PokeMMO
+import { PokemonState } from '../../pages/CaptureChance';
 
 interface PokemonSelectorProps {
-    pokemonInputValue: string;
-    setBaseHP: React.Dispatch<React.SetStateAction<number | null>>;
-    setWeight: React.Dispatch<React.SetStateAction<number | null>>;
-    setBaseSpeed: React.Dispatch<React.SetStateAction<number | null>>;
-    setPokemonInputValue: React.Dispatch<React.SetStateAction<string>>;
-    suggestions: string[];
-    setSuggestions: React.Dispatch<React.SetStateAction<string[]>>;
+    pokemonState: PokemonState;
+    setPokemonState: React.Dispatch<React.SetStateAction<PokemonState>>;
     isAlpha: boolean;
-    setImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
-    setCatchRate:  React.Dispatch<React.SetStateAction<number | null>>;
-    hasInteractedWithCheckbox:  boolean;
-    setHasInteractedWithCheckbox: React.Dispatch<React.SetStateAction<boolean>>;
     setIsAlpha: React.Dispatch<React.SetStateAction<boolean>>;
-    catchRate: number | null;
-    pokemonImageUrl: string | null;
-    suggestionBoxRef: React.RefObject<HTMLUListElement>
-    inputPokemonRef: React.RefObject<HTMLInputElement>;
-    allPokemon: { name: string; id: number }[];
-    setAllPokemon: (allPokemon: { name: string; id: number }[]) => void; 
-    setTypes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, setBaseSpeed, setHasInteractedWithCheckbox, pokemonImageUrl, setBaseHP, setPokemonInputValue, allPokemon, setAllPokemon, pokemonInputValue, suggestions, setCatchRate, setSuggestions, isAlpha, setIsAlpha, hasInteractedWithCheckbox, setImageUrl, catchRate, suggestionBoxRef, inputPokemonRef}) => {
+const PokemonSelector: React.FC<PokemonSelectorProps> = ({ 
+  pokemonState, 
+  setPokemonState, 
+  isAlpha, 
+  setIsAlpha
+  }) => {
+
+    const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
+    const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
+    const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
+    const inputPokemonRef = useRef<HTMLInputElement | null>(null);
     const alphaStateRef = useRef(isAlpha);
+
     useEffect(() => {
         // Fetch all Pokémon from Gen 1–5 on initial load and grab Pikachu data
         fetchAllPokemon();
@@ -45,20 +42,20 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
         if (isAlpha) {
           let catchRateToUse: number | null = null;
           // Special case for Tyranitar
-          if (pokemonInputValue.toLowerCase() === 'tyranitar') {
+          if (pokemonState.name.toLowerCase() === 'tyranitar') {
             catchRateToUse = 5;
           } else if ( // Special case for Roaming Legendaries, that are raid exclusive
-            ['suicune', 'moltres', 'raikou', 'articuno', 'zapdos', 'entei'].includes(pokemonInputValue.toLowerCase())
+            ['suicune', 'moltres', 'raikou', 'articuno', 'zapdos', 'entei'].includes(pokemonState.name.toLowerCase())
           ) {
             catchRateToUse = 0;
           } else {
             catchRateToUse = 10;
           }
-          setCatchRate(catchRateToUse);
+          setPokemonState((prevState) => ({ ...prevState, catchRate: catchRateToUse }));
         }
         // Only fetch data if the checkbox hasn't been checked (alpha state is false)
         else if (hasInteractedWithCheckbox) {
-          fetchPokemonData(pokemonInputValue);
+          fetchPokemonData(pokemonState.name);
         }
       }, [isAlpha, hasInteractedWithCheckbox]); // Run when 'isAlpha' or 'hasInteractedWithCheckbox' changes
 
@@ -133,7 +130,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
             catchRateToUse = customCatchRate !== undefined ? customCatchRate : speciesData.capture_rate;
         }
     
-        setCatchRate(catchRateToUse);
+        setPokemonState((prevState) => ({ ...prevState, catchRate: catchRateToUse }));
     
         // Fetch the Pokémon's data (e.g., image) using the correct variant
         const forms = speciesData?.varieties.map((variety: { pokemon: { name: string } }) => variety.pokemon.name);
@@ -167,36 +164,44 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
           return typeName;
         }).filter(Boolean);
 
-        setTypes(transformedTypes);
-        setWeight(pokemonData.weight);
-        setBaseSpeed(pokemonData.stats.find((stat: { stat: { name: string } }) => stat.stat.name === 'speed')?.base_stat);
-        setBaseHP(pokemonData.stats.find((stat: any) => stat.stat.name === 'hp')?.base_stat);
-        setImageUrl(pokemonData.sprites.front_default);
+        setPokemonState({
+          name: pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1),
+          id: pokemonData.id,
+          stats: {
+            hp: pokemonData.stats.find((stat: any) => stat.stat.name === "hp")?.base_stat || null,
+            speed: pokemonData.stats.find((stat: any) => stat.stat.name === "speed")?.base_stat || null,
+            weight: pokemonData.weight || null,
+          },
+          imageUrl: pokemonData.sprites.front_default,
+          catchRate: catchRateToUse,
+          types: transformedTypes,
+        });
         } catch (err) {
-        setTypes([]);
-        setWeight(null);
-        setBaseSpeed(null);
-        setBaseHP(null);
-        setCatchRate(null);
-        setImageUrl(null);
+          setPokemonState({
+            name: "",
+            id: null,
+            stats: { hp: null, speed: null, weight: null },
+            imageUrl: null,
+            catchRate: null,
+            types: [],
+          });
         }
     };
-
     const handleCheckboxChange = () => {
         setIsAlpha(!isAlpha); // Toggle the checkbox state
         setHasInteractedWithCheckbox(true); // Mark as interacted with checkbox
     };
 
     const handleSuggestionClick = (name: string) => {
-        setPokemonInputValue(name); // Set the input value to the clicked suggestion
+        setPokemonState((prevState) => ({ ...prevState, name })); // Set the input value to the clicked suggestion
         setSuggestions([]); // Clear suggestions
         fetchPokemonData(name); // Fetch the Pokémon data for the clicked suggestion
         inputPokemonRef.current?.blur();
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setPokemonInputValue(value);
+      const value = e.target.value.trim().toLowerCase();
+        setPokemonState((prevState) => ({ ...prevState, name: value }));
         const filtered = allPokemon.filter((pokemon) =>
           pokemon.name.toLowerCase().includes(value.toLowerCase())
         );
@@ -210,20 +215,13 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
           // If there's an exact match, clear suggestions and fetch data
           setSuggestions([]);
           const formattedName = formatPokemonName(value);
-          setPokemonInputValue(formattedName);
+          setPokemonState((prevState) => ({ ...prevState, name: formattedName }));
           fetchPokemonData(value);
           inputPokemonRef.current?.blur(); // Unfocus the input text
         } else {
           // Otherwise, show filtered suggestions
           setSuggestions(filtered.map(pokemon => pokemon.name));
-          setTypes([]);
-          setWeight(null);
-          setBaseSpeed(null);
-          setBaseHP(null);
-          setCatchRate(null);
-          setImageUrl(null);
         }
-
     };
     
     const handleClickOutside = (e: MouseEvent) => {
@@ -234,7 +232,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
           !inputPokemonRef.current.contains(e.target as Node) &&
           !suggestionBoxRef.current.contains(e.target as Node)
       ) {
-          setPokemonInputValue("Pikachu");
+          setPokemonState((prevState) => ({ ...prevState, name: "Pikachu" }))
           fetchPokemonData("Pikachu");
           setSuggestions([]);
       }
@@ -242,12 +240,12 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
     
     const handleInputBlur = () => {
       // Only reset to Pikachu if the user has not written a valid suggestion
-      if (pokemonInputValue.trim() && !suggestions.length) {
+      if (pokemonState.name.trim() && !suggestions.length) {
           const isValidPokemon = allPokemon.some(
-          (pokemon) => pokemon.name.toLowerCase() === pokemonInputValue.trim().toLowerCase()
+          (pokemon) => pokemon.name.toLowerCase() === pokemonState.name.trim().toLowerCase()
           );
           if (!isValidPokemon) {
-          setPokemonInputValue("Pikachu");
+          setPokemonState((prevState) => ({ ...prevState, name: "Pikachu" }))
           fetchPokemonData("Pikachu");
           }
       }
@@ -290,19 +288,20 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
             <input
               ref={inputPokemonRef}
               type="text"
-              value={pokemonInputValue}
+              value={pokemonState.name}
               onChange={handleInputChange}
               placeholder="Enter Pokémon name"
               className="pokemon-name"
               onBlur={handleInputBlur}
               onFocus={() => {
-                setPokemonInputValue("");
-                setTypes([]);
-                setWeight(null);
-                setBaseSpeed(null);
-                setBaseHP(null);
-                setCatchRate(null);
-                setImageUrl(null);
+                setPokemonState({
+                  name: "",
+                  id: null,
+                  stats: { hp: null, speed: null, weight: null },
+                  imageUrl: null,
+                  catchRate: null,
+                  types: [],
+                });
                 setSuggestions(allPokemon.map(pokemon => pokemon.name));
               }}
             />
@@ -315,7 +314,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
                     className="suggestion"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
-                    {highlightMatch(suggestion, pokemonInputValue)}
+                    {highlightMatch(suggestion, pokemonState.name)}
                   </li>
                 ))}
               </ul>
@@ -323,7 +322,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({ setTypes, setWeight, 
             {/* Pokémon Catch Rate */}
             <div className="pokemon-info">
               <p className="catch-rate">
-                Catch Rate: {catchRate !== null ? catchRate : ""}
+                Catch Rate: {pokemonState.catchRate !== null ? pokemonState.catchRate : ""}
               </p>
             </div>
           </div>

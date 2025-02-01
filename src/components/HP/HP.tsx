@@ -1,29 +1,21 @@
 // HP.tsx
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./HP.css";
 
 type HPProps = {
     averageHp: number | null;
-    hpPercent: string | null;
-    isExactHp: boolean;
-    setHpPercent: React.Dispatch<React.SetStateAction<string | null>>;
-    setIsExactHp: React.Dispatch<React.SetStateAction<boolean>>;
-    hpBarPercentage: number;
     setCurrentHp: React.Dispatch<React.SetStateAction<number | null>>;
-    setHpBarPercentage: React.Dispatch<React.SetStateAction<number>>;
   };
   
   const HP: React.FC<HPProps> = ({
     averageHp,
-    hpPercent,
-    isExactHp,
-    setHpPercent,
-    setIsExactHp,
-    hpBarPercentage,
-    setCurrentHp,
-    setHpBarPercentage,
+    setCurrentHp
   }) => {
   
+    const [hpPercent, setHpPercent] = useState<string | null>('100');
+    const [isExactHp, setIsExactHp] = useState(false);
+    const [hpBarPercentage, setHpBarPercentage] = useState<number>(100);
+
     const handleExactHpToggle = () => {
         setIsExactHp(true);
     };
@@ -118,6 +110,10 @@ type HPProps = {
             percentage = hpPercentValue; // Percentage is directly the input
         }
         
+        // Round the values to 1 decimal place
+        current = parseFloat(current.toFixed(1));
+        percentage = parseFloat(percentage.toFixed(1));
+
         setCurrentHp(current);
         setHpBarPercentage(percentage);
         console.log("Current HP:", current, "Percentage HP:", percentage);
