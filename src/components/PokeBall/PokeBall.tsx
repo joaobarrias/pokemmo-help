@@ -77,6 +77,14 @@ const PokeBall: React.FC<PokeBallProps> = ({  selectedPokeball, setSelectedPokeb
             placeholder="Select Ball"
             className="pokeball-select"
             classNamePrefix="react-select"
+            getOptionLabel={(option) => option.value.name}  // Search by name for filtering
+            getOptionValue={(option) => option.value.name} // Ensure the selected option uses the name
+            formatOptionLabel={(data) => (
+              <div className="pokeball-option">
+                <img src={data.value.imagePath} alt={data.value.name} className="pokeball-icon" loading="lazy" />
+                <span>{data.value.name}</span>
+              </div>
+            )}
           />
           <div className="pokeball-description-container">
             <p className="pokeball-description">{selectedPokeballDescription}</p>

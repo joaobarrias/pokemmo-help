@@ -26,10 +26,10 @@ const NavBar: React.FC = () => {
         </li>
         <li>
           <NavLink
-            to="/stats-calculator"
+            to="/pokemon-search"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
-            Stats Calculator
+            Pokemon Search
           </NavLink>
         </li>
         <li>

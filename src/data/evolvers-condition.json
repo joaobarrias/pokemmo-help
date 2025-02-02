@@ -1,27 +1,27 @@
 {
     "happinessEvolvers": [
-      "pichu",
-      "cleffa",
-      "igglybuff",
-      "golbat",
-      "chansey",
-      "eevee",
-      "munchlax",
-      "togepi",
-      "azurill",
-      "budew",
-      "chingling",
-      "buneary",
-      "riolu",
-      "woobat",
-      "swadloon"
+      "Pichu",
+      "Cleffa",
+      "Igglybuff",
+      "Golbat",
+      "Chansey",
+      "Eevee",
+      "Munchlax",
+      "Togepi",
+      "Azurill",
+      "Budew",
+      "Chingling",
+      "Buneary",
+      "Riolu",
+      "Woobat",
+      "Swadloon"
     ],
     "moonStoneEvolvers": [
-      "nidorina",
-      "nidorino",
-      "clefairy",
-      "jigglypuff",
-      "skitty",
-      "munna"
+      "Nidorina",
+      "Nidorino",
+      "Clefairy",
+      "Jigglypuff",
+      "Skitty",
+      "Munna"
     ]
 }

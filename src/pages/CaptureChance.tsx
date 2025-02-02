@@ -6,6 +6,8 @@ import ImageAndLevel from "../components/ImageAndLevel/ImageAndLevel";  // Impor
 import Status from "../components/Status/Status";  // Import the PokemonSelector component
 import HP from "../components/HP/HP";  // Import the HP component
 import PokeBall from "../components/PokeBall/PokeBall";  // Import the PokeBall component
+import CaptureCalc from "../components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
+
 
 // Define types for the state
 export interface PokemonStats {
@@ -46,7 +48,7 @@ const CaptureChance = () => {
           const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10);
           setAverageHp(avgHp);
           console.log("Base HP:", pokemonState.stats.hp, "Level:", levelValue, "Average HP:", avgHp);
-      }, [pokemonState.stats.hp, level]);
+      }, [pokemonState, level]);
 
   return (
     <div className="app">
@@ -89,6 +91,8 @@ const CaptureChance = () => {
           {/* Pokéball Section */}
           <PokeBall selectedPokeball={selectedPokeball} setSelectedPokeball={setSelectedPokeball} />
 
+          {/* Capture Chance Section */}
+          <CaptureCalc pokemonState={pokemonState} level={level} currentHp={currentHp} averageHp={averageHp} selectedPokeball={selectedPokeball} selectedStatus={selectedStatus}/>
         </div>
       </div>
     </div>

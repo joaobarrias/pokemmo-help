@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import CaptureChance from "./pages/CaptureChance";
-//import StatsCalculator from "./pages/StatsCalculator";
+//import PokemonSearch from "./pages/PokemonSearch";
 //import TypeEffectiveness from "./pages/TypeEffectiveness";
 
 const App: React.FC = () => {
@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/capture-chance" />} />
         <Route path="/capture-chance" element={<CaptureChance />} />
-        <Route path="/stats-calculator" element="" />
+        <Route path="/pokemon-search" element="" />
         <Route path="/type-chart" element="" />
       </Routes>
     </Router>
