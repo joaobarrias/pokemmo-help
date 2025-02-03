@@ -1,0 +1,102 @@
+/* Footer Styles */
+.footer {
+    width: 100vw;
+    max-width: 100%;
+    background: #23262f;
+    color: #fff;
+    padding: 20px 40px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.6);
+    position: relative;
+    left: 0;
+    bottom: 0;
+}
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  .footer-logo .poke {
+    color: #fff;
+  }
+  
+  .footer-logo .mmo {
+    color: #ef1c1f;
+  }
+  
+  .footer-logo .tools {
+    color: #fff;
+    margin-left: 5px;
+  }
+  
+  /* Footer Menu */
+  .footer-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  .footer-menu li {
+    display: inline;
+  }
+  
+  .footer-menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-menu a:hover {
+    color: #ef1c1f;
+  }
+  
+  /* Social Icons */
+  .footer-socials {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .footer-socials a {
+    color: #fff;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .footer-socials a:hover {
+    color: #ef1c1f;
+    transform: scale(1.1);
+  }
+  
+  /* Footer Bottom */
+  .footer-bottom {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+  
+  /* Responsive Footer */
+  @media (max-width: 810px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer-menu {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

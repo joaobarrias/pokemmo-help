@@ -5,7 +5,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  max-width: 400px;  /* Limit the width for better readability */
+  max-width: 380px;  /* Limit the width for better readability */
   height: auto;  /* Allow the height to grow as necessary */
   padding: 30px;
   background-color: #444c56;  /* Darker background for the section */
@@ -24,25 +24,63 @@
 }
 
 .capture-calc-section .input-field label {
+  padding-right: 10px;
   color: rgba(255, 255, 255, 0.9);
+  user-select: none;
 }
 
-.capture-calc-section .input-field input {
+.capture-calc-section .input-field input{
+  width: 50px;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1rem;
   border: 1px solid #555;
   background-color: #2c2f38;
   color: #fff;
+  transition: border-color 0.3s ease;
+  text-align: center;
+  outline: none;
+}
+
+.capture-calc-section input[type="text"]:focus {
+  border-color: #6d6d6d;
+}
+
+.input-field:has(input[type="checkbox"]) label {
+  cursor: pointer;
+}
+
+.input-field:has(input[type="checkbox"]) {
+  cursor: pointer;
+}
+
+.capture-calc-section .input-field input[type="checkbox"] {
+    transform: translateY(2px);
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #fff; 
 }
 
 .capture-calc-section .capture-chance {
   margin-top: 20px;
   padding: 10px;
-  font-size: 18px;
+  font-size: 20px;
   color: #4CAF50;
   background-color: #2c2f38;
   border-radius: 6px;
   text-align: center;
   font-weight: bold;
 }
+/* Colors based on chance value */
+.low-chance {
+  color: #e74c3c;  /* red-ish */
+}
 
+.medium-chance {
+  color: #f39c12;  /* orange-ish */
+}
+
+.high-chance {
+  color: #27ae60;  /* green-ish */
+}

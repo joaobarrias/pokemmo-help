@@ -13,7 +13,9 @@ const NavBar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="logo">
-        Poke<span>MMO</span> Tools
+      <img src="/icons/icon5.png" alt="Logo" />
+      <span className="poke">Poke</span><span className="mmo">MMO</span> 
+      <span className="tools">Tools</span>
       </div>
       <ul className={`menu ${isMenuOpen ? 'open' : ''}`}>
         <li>

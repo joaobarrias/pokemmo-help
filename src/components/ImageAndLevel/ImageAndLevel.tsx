@@ -1,7 +1,7 @@
 // ImageAndLevel.tsx
 import React from 'react';
 import "./ImageAndLevel.css";
-import { PokemonState } from '../../pages/CaptureChance';
+import { PokemonState } from '../../pages/CaptureChance/CaptureChance';
 
 interface ImageAndLevelProps {
   pokemonState: PokemonState; 
@@ -33,7 +33,6 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
       // Clamp the value to be between 1 and 100
       numValue = Math.max(1, Math.min(100, numValue));
       setLevel(numValue.toString()); // Update the level
-      console.log(numValue);
     }
   };
 
@@ -75,7 +74,7 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
             id="level"
             type="text"
             className="level-input"
-            value={level !== null ? level : ""}
+            value={level || ""}
             onChange={handleLevelChange}
             onBlur={handleLevelBlur} 
             onFocus={(e) => e.target.select()}

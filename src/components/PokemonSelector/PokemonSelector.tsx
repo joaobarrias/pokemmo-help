@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./PokemonSelector.css";
 import customRates from "../../data/custom-rates.json"; // Import custom rates for PokeMMO
 import excludedPokemonData from "../../data/excluded-pokemons.json"; // Import pokemons name that don't exist in PokeMMO
-import { PokemonState } from '../../pages/CaptureChance';
+import { PokemonState } from '../../pages/CaptureChance/CaptureChance';
 
 interface PokemonSelectorProps {
     pokemonState: PokemonState;
@@ -40,17 +40,10 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     useEffect(() => {
         // Check if 'isAlpha' checkbox is being checker/unchecked
         if (isAlpha) {
-          let catchRateToUse: number | null = null;
-          // Special case for Tyranitar
-          if (pokemonState.name.toLowerCase() === 'tyranitar') {
-            catchRateToUse = 5;
-          } else if ( // Special case for Roaming Legendaries, that are raid exclusive
-            ['suicune', 'moltres', 'raikou', 'articuno', 'zapdos', 'entei'].includes(pokemonState.name.toLowerCase())
-          ) {
-            catchRateToUse = 0;
-          } else {
-            catchRateToUse = 10;
-          }
+          const pokemonName = pokemonState.name.toLowerCase();
+          const alphaCatchRates = excludedPokemonData.alpha as Record<string, number>;
+          const catchRateToUse = alphaCatchRates[pokemonName] ?? alphaCatchRates.default;
+        
           setPokemonState((prevState) => ({ ...prevState, catchRate: catchRateToUse }));
         }
         // Only fetch data if the checkbox hasn't been checked (alpha state is false)
@@ -94,8 +87,8 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         );
     
         setAllPokemon(filteredPokemonList.sort((a, b) => a.id - b.id));
-            } catch (err) {
-            console.error("Failed to fetch Pokémon list:", err);
+        } catch (err) {
+          console.error("Failed to fetch Pokémon list:", err);
         }
     };
     
@@ -108,15 +101,8 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         let speciesData: any = null;
         // First, check if the Pokémon is an Alpha Pokémon and handle the catch rate
         if (alphaStateRef.current) {
-            // Special case for Tyranitar
-            if (apiName === 'tyranitar') {
-            catchRateToUse = 5; 
-            } else if // Special case for Roaming Legendaries, that are raid exclusive
-            (apiName === 'suicune' || apiName === 'moltres' || apiName === 'raikou' || apiName === 'articuno' || apiName === 'zapdos' || apiName === 'entei') {
-            catchRateToUse = 0;
-            } else {
-            catchRateToUse = 10;
-            }
+          const alphaCatchRates = excludedPokemonData.alpha as Record<string, number>;
+          catchRateToUse = alphaCatchRates[apiName] ?? alphaCatchRates.default;
         } else {
             // If not an Alpha Pokémon, use the normal fetch
             const customCatchRate = customRates[apiName as keyof typeof customRates]?.catchRate;
@@ -290,8 +276,8 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
               type="text"
               value={pokemonState.name}
               onChange={handleInputChange}
-              placeholder="Enter Pokémon name"
               className="pokemon-name"
+              placeholder="Enter Pokémon name"
               onBlur={handleInputBlur}
               onFocus={() => {
                 setPokemonState({

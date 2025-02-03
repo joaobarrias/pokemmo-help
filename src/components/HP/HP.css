@@ -57,20 +57,11 @@
     color: #999;
 }
   
-.hp-toggle input[type="text"]::-webkit-inner-spin-button, 
-.hp-toggle input[type="text"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-  
-.hp-toggle input[type="text"] {
-    -moz-appearance: textfield;
-}
-  
 .hp-bar-container {
     position: relative;
     width: 100%;
     height: 20px;
+    z-index: 3;
 }
   
 .hp-bar-border{

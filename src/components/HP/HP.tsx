@@ -144,7 +144,7 @@ type HPProps = {
                 />
                 <input
                 type="text"
-                value={hpPercent !== null ? hpPercent : ""}
+                value={hpPercent || ""}
                 onChange={handleHpPercentChange}
                 onBlur={handleHpBlur}
                 disabled={isExactHp}

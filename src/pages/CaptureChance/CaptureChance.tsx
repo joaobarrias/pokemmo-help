@@ -1,12 +1,12 @@
 // Page: CaptureChance.tsx
 import { useState, useEffect, useRef } from "react";
-import "../App.css"; // Import external CSS
-import PokemonSelector from "../components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
-import ImageAndLevel from "../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
-import Status from "../components/Status/Status";  // Import the PokemonSelector component
-import HP from "../components/HP/HP";  // Import the HP component
-import PokeBall from "../components/PokeBall/PokeBall";  // Import the PokeBall component
-import CaptureCalc from "../components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
+import "./CaptureChance.css";
+import PokemonSelector from "../../components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
+import ImageAndLevel from "../../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
+import Status from "../../components/Status/Status";  // Import the PokemonSelector component
+import HP from "../../components/HP/HP";  // Import the HP component
+import PokeBall from "../../components/PokeBall/PokeBall";  // Import the PokeBall component
+import CaptureCalc from "../../components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
 
 
 // Define types for the state

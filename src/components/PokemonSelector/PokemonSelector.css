@@ -25,6 +25,7 @@
     width: 16px;
     height: 16px;
     margin-top: -1px;
+    accent-color: #fff; 
 }
 
 .pokemon-name {
@@ -43,6 +44,11 @@
 
 .pokemon-name:focus {
     border: 1px solid #6d6d6d;
+}
+
+.pokemon-name::placeholder {
+    color: rgb(134, 134, 134) !important;
+    opacity: 1; 
 }
 
 .suggestion-box {

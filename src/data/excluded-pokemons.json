@@ -42,6 +42,16 @@
       "keldeo",
       "meloetta",
       "genesect"
-    ]
+    ],
+    "alpha": {
+    "default": 10,
+    "tyranitar": 5,
+    "suicune": 5,
+    "moltres": 5,
+    "raikou": 5,
+    "articuno": 5,
+    "zapdos": 5,
+    "entei": 5
+  }
 }
   
