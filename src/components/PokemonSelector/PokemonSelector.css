@@ -1,5 +1,5 @@
 /* Pokemon Section */
-.pokemon-container {
+.pokemon-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -85,7 +85,7 @@
 
 /* For small screens */
 @media (max-width: 810px) {
-    .pokemon-container {
+    .pokemon-section {
         width: 100%;
         max-width: 300px;
     }
@@ -103,7 +103,7 @@
 
 /* For very small screens */
 @media (max-width: 480px) {
-    .pokemon-container {
+    .pokemon-section {
         width: 100%;
         max-width: 250px;
     }

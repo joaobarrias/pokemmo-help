@@ -56,14 +56,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
   width: 100%;
   margin: auto;
   padding: 20px;
 }
-
 
 /* Style the entire react-select component */
 .react-select__control {

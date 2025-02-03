@@ -12,6 +12,7 @@ interface CaptureCalcProps {
     averageHp:number | null;
     selectedPokeball: any;
     selectedStatus: any;
+    captureControl : boolean;
   }
   
   const CaptureCalc: React.FC<CaptureCalcProps> = ({
@@ -20,9 +21,11 @@ interface CaptureCalcProps {
     currentHp,
     selectedPokeball,
     selectedStatus,
-    averageHp
+    averageHp,
+    captureControl
   }) => {
     const [captureChance, setCaptureChance] = useState<number | null>(null);
+    const [currentBallMultiplier, setCurrentBallMultiplier] = useState<number | null>(1);
     const [isCaveOrNight, setIsCaveOrNight] = useState(true);
     const [isMoonStoneEvolution, setIsMoonStoneEvolution] = useState(true);
     const [isHappinessEvolution, setIsHappinessEvolution] = useState(true);
@@ -54,6 +57,7 @@ interface CaptureCalcProps {
         if (!selectedPokeball) return 1;
 
         let multiplier = selectedPokeball.multiplier;
+
         const levelNumber = level ? parseInt(level) : 1; 
 
         // Handle balls with conditions
@@ -75,10 +79,12 @@ interface CaptureCalcProps {
             } else if (selectedPokeball.apiName === "dream-ball") {
             multiplier = multiplier(sleepTurns);
             } else if (selectedPokeball.apiName === "fast-ball") {
+              console.log("speed: " +  pokemonState.stats.speed);
             multiplier = multiplier(pokemonState.stats.speed);
             } else if (selectedPokeball.apiName === "friend-ball") {
             multiplier = multiplier(isHappinessEvolution);
             } else if (selectedPokeball.apiName === "heavy-ball") {
+              console.log("peso: " +  pokemonState.stats.weight);
             multiplier = multiplier(pokemonState.stats.weight);
             } else if (selectedPokeball.apiName === "level-ball") {
             multiplier = multiplier(myLevel, levelNumber);
@@ -90,22 +96,24 @@ interface CaptureCalcProps {
             multiplier = multiplier(isMoonStoneEvolution);
             }
         }
+        if (typeof multiplier === 'number') {
+          multiplier = parseFloat(multiplier.toFixed(1));
+       }
+        setCurrentBallMultiplier(multiplier);
         return multiplier;
     };
 
     useEffect(() => {
       // Ensure valid inputs before calculating
-      if (!currentHp || !averageHp || !pokemonState.catchRate || !selectedPokeball || !selectedStatus) return;
+      if (!currentHp || !averageHp || !pokemonState.catchRate || !selectedPokeball || !selectedStatus || !level) return;
 
       const ballMultiplier = getMultiplier();
       const captureRate = calculateCaptureChance(ballMultiplier);
       setCaptureChance(captureRate);
     }, [
       selectedPokeball,
-      currentHp,
       selectedStatus,
-      pokemonState,
-      level,
+      captureControl,
       caughtCount,
       turns,
       isWaterDwelling,
@@ -118,10 +126,10 @@ interface CaptureCalcProps {
     ]);
 
     const calculateCaptureChance = (ballMultiplier: number) => {
-      if (!pokemonState.catchRate || !currentHp || !averageHp) {
+      if (!pokemonState.catchRate || !currentHp || !averageHp || !level) {
         return 0; // Return 0 if necessary data is missing
       }
-      console.log("Current HP:", currentHp, "Max HP(IV 15.5):", averageHp, "Pokemon Catch Rate:", pokemonState.catchRate, "Ball Multiplier:", ballMultiplier, "Status Condition Multiplier:", selectedStatus.multiplier);
+      
       // Step 1: Calculate X
       let X = ((3 * averageHp - 2 * currentHp) * (pokemonState.catchRate * ballMultiplier)) / (3 * averageHp) * selectedStatus.multiplier;
   
@@ -139,7 +147,7 @@ interface CaptureCalcProps {
       if (chance >= 0.9999) {
         return 100;
       }
-    
+      console.log("level:", level, "averageHp:", averageHp, "currenthp",  currentHp, "pokemonState.catchRate", pokemonState.catchRate, "ballMultiplier", ballMultiplier, "selectedStatus.multiplier", selectedStatus.multiplier);
       // Return the capture chance as a percentage
       return Math.round(chance * 10000) / 100; // Rounded to two decimal places
     }
@@ -148,6 +156,8 @@ interface CaptureCalcProps {
     return (
       <div className="capture-calc-section">
         <div className="input-container">
+
+          <p>Ball Multiplier: {currentBallMultiplier}x</p>
           {selectedPokeball && selectedPokeball.apiName === "repeat-ball" && (
             <div className="input-field">
               <label htmlFor="caughtCount">Caught Count:</label>
@@ -243,7 +253,7 @@ interface CaptureCalcProps {
           {selectedPokeball && selectedPokeball.apiName === "love-ball" && (
             <div className="input-field">
               <label htmlFor="isSameEvolutionLineAndOppositeGender">
-                Same Evolution Line & Opposite Gender:
+                Same Evolution Line & Opposite Gender?
               </label>
               <input
                 type="checkbox"
@@ -256,7 +266,7 @@ interface CaptureCalcProps {
 
           {selectedPokeball && selectedPokeball.apiName === "lure-ball" && (
             <div className="input-field">
-              <label htmlFor="isFishingRodCatch">Currently Fishing:</label>
+              <label htmlFor="isFishingRodCatch">Currently Fishing?</label>
               <input
                 type="checkbox"
                 id="isFishingRodCatch"
@@ -269,15 +279,13 @@ interface CaptureCalcProps {
           {/* Handle special Poké Balls based on evolution logic */}
           {selectedPokeball && selectedPokeball.apiName === "moon-ball" && (
             <div className="input-field">
-              <label>Moon Stone Evolution (Based on Pokémon's evolution):</label>
-              <p>{pokemonState && evolversPokemonData.moonStoneEvolvers.includes(pokemonState.name) ? "Yes" : "No"}</p>
+              <label>Does it evolve with a moon stone? {pokemonState && evolversPokemonData.moonStoneEvolvers.includes(pokemonState.name) ? "Yes" : "No"}</label>
             </div>
           )}
 
           {selectedPokeball && selectedPokeball.apiName === "friend-ball" && (
             <div className="input-field">
-              <label>Happiness Evolution (Based on Pokémon's evolution):</label>
-              <p>{pokemonState && evolversPokemonData.happinessEvolvers.includes(pokemonState.name) ? "Yes" : "No"}</p>
+              <label>Does it evolve from happiness? {pokemonState && evolversPokemonData.happinessEvolvers.includes(pokemonState.name) ? "Yes" : "No"}</label>
             </div>
           )}
         </div>

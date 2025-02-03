@@ -9,5 +9,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      try {
+        console.info = new Proxy(console.info, {
+          apply: (target, thisArg, args) => {
+            if (args?.[0]?.includes?.("React DevTools")) return;
+            return Reflect.apply(target, thisArg, args);
+          },
+        });
+      } catch {}
+    </script>
   </body>
 </html>

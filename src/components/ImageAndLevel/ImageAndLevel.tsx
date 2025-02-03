@@ -30,10 +30,10 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
     // Ensure the value is a valid integer between 1 and 100
     if (/^\d*$/.test(value)) { // Allow only digits (no decimals)
       let numValue = parseInt(value, 10);
-      if (numValue >= 1 && numValue <= 100) {
-        setLevel(numValue.toString()); // Update the level
-        console.log(numValue);
-      }
+      // Clamp the value to be between 1 and 100
+      numValue = Math.max(1, Math.min(100, numValue));
+      setLevel(numValue.toString()); // Update the level
+      console.log(numValue);
     }
   };
 
@@ -45,7 +45,7 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
   };
 
   return (
-    <div className="level-and-image-container">
+    <div className="level-and-image-section">
       <div className={`level-and-image ${isAlpha ? 'alpha-active' : ''}`}>
         {isAlpha && <div className="alpha-background"></div>} {/* Smoke background */}
         {imageUrl  ? (

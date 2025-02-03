@@ -273,7 +273,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     };
         
   return (
-    <div className="pokemon-container">
+    <div className="pokemon-section">
             {/* Alpha Checkbox */}
             <label className="checkbox-label">
             <input

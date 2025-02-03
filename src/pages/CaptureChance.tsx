@@ -40,15 +40,24 @@ const CaptureChance = () => {
   const [selectedPokeball, setSelectedPokeball] =  useState<any>(null);
   const [selectedStatus, setSelectedStatus] = useState<any>(null);
   const [isAlpha, setIsAlpha] = useState(false);
+  const [captureControl, setCaptureControl] = useState<boolean>(false);
+  const [hpControl, setHpControl] = useState<boolean>(false);
+
 
   useEffect(() => { 
-          if (!pokemonState.stats.hp || !level) return;
-          
-          const levelValue = parseFloat(level);
-          const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10);
-          setAverageHp(avgHp);
-          console.log("Base HP:", pokemonState.stats.hp, "Level:", levelValue, "Average HP:", avgHp);
-      }, [pokemonState, level]);
+          if (!pokemonState.stats.hp || level === null) return;
+
+          if (pokemonState.name === "Shedinja") {
+            setAverageHp(1);
+          }
+          else  {
+            const levelValue = parseFloat(level);
+            const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10)
+            setAverageHp(avgHp);
+          }
+
+          setHpControl(!hpControl);
+      }, [pokemonState.id, pokemonState.catchRate, level]);
 
   return (
     <div className="app">
@@ -79,6 +88,9 @@ const CaptureChance = () => {
 
           {/* HP Section */}
           <HP
+            captureControl={captureControl}
+            setCaptureControl={setCaptureControl}
+            hpControl={hpControl}
             averageHp={averageHp}
             setCurrentHp={setCurrentHp}
           />
@@ -92,7 +104,7 @@ const CaptureChance = () => {
           <PokeBall selectedPokeball={selectedPokeball} setSelectedPokeball={setSelectedPokeball} />
 
           {/* Capture Chance Section */}
-          <CaptureCalc pokemonState={pokemonState} level={level} currentHp={currentHp} averageHp={averageHp} selectedPokeball={selectedPokeball} selectedStatus={selectedStatus}/>
+          <CaptureCalc captureControl={captureControl} pokemonState={pokemonState} level={level} currentHp={currentHp} averageHp={averageHp} selectedPokeball={selectedPokeball} selectedStatus={selectedStatus}/>
         </div>
       </div>
     </div>

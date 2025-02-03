@@ -5,11 +5,17 @@ import "./HP.css";
 type HPProps = {
     averageHp: number | null;
     setCurrentHp: React.Dispatch<React.SetStateAction<number | null>>;
+    captureControl: boolean;
+    setCaptureControl: React.Dispatch<React.SetStateAction<boolean>>;
+    hpControl: boolean;
   };
   
   const HP: React.FC<HPProps> = ({
     averageHp,
-    setCurrentHp
+    setCurrentHp,
+    captureControl,
+    setCaptureControl,
+    hpControl
   }) => {
   
     const [hpPercent, setHpPercent] = useState<string | null>('100');
@@ -21,16 +27,17 @@ type HPProps = {
     };
 
     const handleHpPercentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let value = e.target.value;
         
+        let value = e.target.value;
+
+        // Replace commas with dots for decimal numbers (if applicable)
+        value = value.replace(',', '.');
+
         // Allow clearing the field
         if (value === "") {
             setHpPercent(null); // Set to null when input is empty
             return;
         }
-        
-        // Replace commas with dots for decimal numbers (if applicable)
-        value = value.replace(',', '.');
         
         // Remove leading zeros but keep 0 as a valid number
         if (/^0+/.test(value) && value.length > 1) {
@@ -101,23 +108,26 @@ type HPProps = {
         let current = 0;
         let percentage = 0;
         
-        if (isExactHp) {
-            current = 1; // Exactly 1 HP
+        // Check if the Pokémon is Shedinja
+        if (averageHp == 1) {
+            current = 1; // Shedinja always has 1 HP
+            percentage = 100; // 1 HP, so percentage is 100
+        } else if (isExactHp) {
+            current = 1; // Exactly 1 HP (False Swipe)
             percentage = (current / averageHp) * 100; // Calculate percentage only for exact HP
         } else if (hpPercent) {
             const hpPercentValue = parseFloat(hpPercent);
             current = (averageHp * hpPercentValue) / 100; // Calculate current HP based on %
             percentage = hpPercentValue; // Percentage is directly the input
         }
-        
         // Round the values to 1 decimal place
         current = parseFloat(current.toFixed(1));
         percentage = parseFloat(percentage.toFixed(1));
 
         setCurrentHp(current);
         setHpBarPercentage(percentage);
-        console.log("Current HP:", current, "Percentage HP:", percentage);
-    }, [ averageHp, hpPercent, isExactHp]); // Dependencies
+        setCaptureControl(!captureControl);
+    }, [ hpControl, hpPercent, isExactHp]); // Dependencies
 
 
   return (
