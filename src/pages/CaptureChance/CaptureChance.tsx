@@ -8,8 +8,10 @@ import HP from "../../components/HP/HP";  // Import the HP component
 import PokeBall from "../../components/PokeBall/PokeBall";  // Import the PokeBall component
 import CaptureCalc from "../../components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
 
+interface CaptureChanceProps {
+  allPokemon: { name: string; id: number }[];
+}
 
-// Define types for the state
 export interface PokemonStats {
   hp: number | null;
   speed: number | null;
@@ -25,14 +27,14 @@ export interface PokemonState {
   types: string[];
 }
 
-const CaptureChance = () => {
+const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
   const [pokemonState, setPokemonState] = useState<PokemonState>({
     name: "Pikachu",
-    id: null,
-    stats: { hp: null, speed: null, weight: null },
-    imageUrl: null,
-    catchRate: null,
-    types: [],
+    id: 25,
+    stats: { hp: 35, speed: 90, weight: 60 },
+    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+    catchRate: 190,
+    types: ['electric'],
   });
   const [level, setLevel] = useState<string | null>('50');
   const [currentHp, setCurrentHp] = useState<number | null>(null);
@@ -42,11 +44,10 @@ const CaptureChance = () => {
   const [isAlpha, setIsAlpha] = useState(false);
   const [captureControl, setCaptureControl] = useState<boolean>(false);
   const [hpControl, setHpControl] = useState<boolean>(false);
-
+  
 
   useEffect(() => { 
           if (!pokemonState.stats.hp || level === null) return;
-
           if (pokemonState.name === "Shedinja") {
             setAverageHp(1);
           }
@@ -60,7 +61,7 @@ const CaptureChance = () => {
       }, [pokemonState.id, pokemonState.catchRate, level]);
 
   return (
-    <div className="app">
+    <div className="page">
       {/* Header */}
       <div className="header">
         <h1>Capture Chance Calculator</h1>
@@ -77,6 +78,7 @@ const CaptureChance = () => {
           setPokemonState={setPokemonState}
           isAlpha={isAlpha}
           setIsAlpha={setIsAlpha}
+          allPokemon={allPokemon}
         />
 
           

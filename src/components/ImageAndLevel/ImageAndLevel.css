@@ -13,6 +13,7 @@
     height: 80px;
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #6d6d6d;
     overflow: hidden;
 }
   
@@ -28,7 +29,7 @@
       rgba(126, 2, 2, 0.719) 90%,
       transparent 100%
     );
-    animation: smoke 8s infinite, glow 1s infinite alternate;
+    animation: smoke 3s infinite, glow 1s infinite alternate;
     filter: blur(15px);
     pointer-events: none;
 }
@@ -38,6 +39,7 @@
     background-color: rgba(20, 20, 20, 0.8);
     box-shadow: 0 0 10px 5px rgba(59, 2, 2, 0.174),
       0 0 20px 10px rgba(146, 3, 3, 0.363);
+    border: none;
 }
   
 @keyframes smoke {
@@ -136,7 +138,7 @@
     padding: 8px;
     font-size: 1rem;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #6d6d6d;
     background-color: #444c56;
     color: #fff;
     transition: border-color 0.3s ease;
@@ -145,7 +147,7 @@
 }
   
 .level-input:focus {
-    border-color: #6d6d6d;
+    border-color: #ccc;
 }
   
 .level-input:disabled {

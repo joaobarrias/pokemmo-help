@@ -8,20 +8,24 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 110vh;
   width: 100%;
-  background-image: url('/example.jpg');
+
+}
+
+.content {
+  flex: 1;
+  padding-top: 50px;
+  width: 100%;
+}
+
+.content-with-bg {
+  background-image: url('background-images/pikachu.jpg');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
 }
 
-.content {
-  flex: 1;
-  padding-bottom: 30vh; /* Ensures space between content and footer */
-  padding-top: 50px;
-  width: 100%;
-}
 
 html, body {
   height: 100%;

@@ -33,7 +33,7 @@
     padding: 12px;
     font-size: 16px;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #6d6d6d;
     outline: none;
     background-color: #444c56;
     color: #fff;
@@ -43,7 +43,7 @@
 }
 
 .pokemon-name:focus {
-    border: 1px solid #6d6d6d;
+    border: 1px solid #ccc;
 }
 
 .pokemon-name::placeholder {

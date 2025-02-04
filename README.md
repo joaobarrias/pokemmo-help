@@ -1,6 +1,6 @@
-# PokeMMO Tools
+# PokeMMO Help
 
-Welcome to **PokeMMO Tools**! 🎮✨ This project provides various tools designed to help you calculate important in-game statistics for **PokeMMO**, an online multiplayer Pokémon game. Currently, the tool includes a **Capture Chance**, along with future features like the **Stats Preview** and **Type Effectiveness** (coming soon!).
+Welcome to **PokeMMO Help**! 🎮✨ This project provides various tools designed to help you calculate important in-game statistics for **PokeMMO**, an online multiplayer Pokémon game. Currently, the tool includes a **Capture Chance**, along with future features like the **Stats Preview** and **Type Effectiveness** (coming soon!).
 
 ## 🚀 Features
 
@@ -42,12 +42,12 @@ To get started with this project, follow the steps below:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/pokemmo-tools.git
+    git clone https://github.com/yourusername/pokemmo-help.git
     ```
 
 2. **Navigate into the project folder:**
     ```bash
-    cd pokemmo-tools
+    cd pokemmo-help
     ```
 
 3. **Install dependencies:**

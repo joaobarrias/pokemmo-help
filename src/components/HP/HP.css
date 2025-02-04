@@ -40,7 +40,7 @@
     padding: 7px;
     font-size: 1rem;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #6d6d6d;
     background-color: #444c56;
     color: #fff;
     transition: border-color 0.3s ease;
@@ -49,7 +49,7 @@
 }
   
 .hp-toggle input[type="text"]:focus {
-    border-color: #6d6d6d;
+    border-color: #ccc;
 }
   
 .hp-toggle input[type="text"]:disabled {

@@ -5,7 +5,7 @@
 
 .header h1 {
     font-size: 2rem;
-    text-shadow: 1px 1px 2px rgb(0, 0, 0, 0.5), -1px -1px 2px rgb(0, 0, 0, 0.5), 1px -1px 2px rgb(0, 0, 0, 0.5), -1px 1px 2px rgb(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgb(0, 0, 0, 1), -1px -1px 2px rgb(0, 0, 0, 1), 1px -1px 2px rgb(0, 0, 0, 1), -2px 2px 2px rgb(0, 0, 0, 1);
 }
   
 .body {
@@ -16,6 +16,10 @@
     width: 100%;
 }
   
+.body label, body p{
+    text-shadow: 2px 2px 2px rgb(0, 0, 0, 1), -1px -1px 2px rgb(0, 0, 0, 1), 1px -1px 2px rgb(0, 0, 0, 1), -2px 2px 2px rgb(0, 0, 0, 1);
+}
+
 .main-container {
     display: flex;
     flex-direction: row;
@@ -43,7 +47,7 @@
 /* Style the entire react-select component */
 .react-select__control {
     background-color: #444c56 !important; 
-    border: 1px solid #ccc !important;  
+    border: 1px solid #6d6d6d !important;  
     color: #fff !important;             
     border-radius: 8px;                 
     width: 180px !important;           
@@ -63,7 +67,7 @@
 }
 
 .react-select__control--is-focused {
-    border-color: #6d6d6d !important; 
+    border-color: #ccc !important; 
     box-shadow: none !important;          
 }
 

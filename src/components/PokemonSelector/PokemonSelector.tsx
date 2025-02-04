@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./PokemonSelector.css";
 import customRates from "../../data/custom-rates.json"; // Import custom rates for PokeMMO
-import excludedPokemonData from "../../data/excluded-pokemons.json"; // Import pokemons name that don't exist in PokeMMO
+import exclusivePokemonData from "../../data/pokemmo-condition.json"; // Import exclusive alpha catch rates
 import { PokemonState } from '../../pages/CaptureChance/CaptureChance';
 
 interface PokemonSelectorProps {
@@ -10,27 +10,22 @@ interface PokemonSelectorProps {
     setPokemonState: React.Dispatch<React.SetStateAction<PokemonState>>;
     isAlpha: boolean;
     setIsAlpha: React.Dispatch<React.SetStateAction<boolean>>;
+    allPokemon: { name: string; id: number }[];
 }
 
 const PokemonSelector: React.FC<PokemonSelectorProps> = ({ 
   pokemonState, 
   setPokemonState, 
   isAlpha, 
-  setIsAlpha
+  setIsAlpha,
+  allPokemon
   }) => {
 
     const [suggestions, setSuggestions] = useState<string[]>([]);
-    const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
     const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
     const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
     const inputPokemonRef = useRef<HTMLInputElement | null>(null);
     const alphaStateRef = useRef(isAlpha);
-
-    useEffect(() => {
-        // Fetch all Pokémon from Gen 1–5 on initial load and grab Pikachu data
-        fetchAllPokemon();
-        fetchPokemonData("Pikachu");
-    }, []);
 
     useEffect(() => {
         // Keep the ref value in sync with the state
@@ -41,7 +36,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         // Check if 'isAlpha' checkbox is being checker/unchecked
         if (isAlpha) {
           const pokemonName = pokemonState.name.toLowerCase();
-          const alphaCatchRates = excludedPokemonData.alpha as Record<string, number>;
+          const alphaCatchRates = exclusivePokemonData.alpha as Record<string, number>;
           const catchRateToUse = alphaCatchRates[pokemonName] ?? alphaCatchRates.default;
         
           setPokemonState((prevState) => ({ ...prevState, catchRate: catchRateToUse }));
@@ -59,38 +54,6 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         };
     }, []);
 
-    // Fetch required pokemon data from gen 1 to gen 5
-    const fetchAllPokemon = async () => {
-        try {
-        const urls = [
-            "https://pokeapi.co/api/v2/generation/1",
-            "https://pokeapi.co/api/v2/generation/2",
-            "https://pokeapi.co/api/v2/generation/3",
-            "https://pokeapi.co/api/v2/generation/4",
-            "https://pokeapi.co/api/v2/generation/5",
-        ];
-    
-        const responses = await Promise.all(urls.map((url) => fetch(url)));
-        const generations = await Promise.all(responses.map((res) => res.json()));
-    
-        const pokemonList = generations.flatMap((gen) =>
-            gen.pokemon_species.map((species: { name: string; url: string }) => {
-            const id = parseInt(species.url.split("/")[6]); // Extract ID from the URL
-            return { name: species.name.charAt(0).toUpperCase() + species.name.slice(1), id };
-            })
-        );
-    
-        // Filter out excluded Pokémon
-        const excludePokemon = excludedPokemonData.excludePokemon;
-        const filteredPokemonList = pokemonList.filter(
-          (pokemon) => !excludePokemon.includes(pokemon.name.toLowerCase())
-        );
-    
-        setAllPokemon(filteredPokemonList.sort((a, b) => a.id - b.id));
-        } catch (err) {
-          console.error("Failed to fetch Pokémon list:", err);
-        }
-    };
     
     // Fetch selected pokemon data
     const fetchPokemonData = async (name: string) => {
@@ -101,7 +64,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         let speciesData: any = null;
         // First, check if the Pokémon is an Alpha Pokémon and handle the catch rate
         if (alphaStateRef.current) {
-          const alphaCatchRates = excludedPokemonData.alpha as Record<string, number>;
+          const alphaCatchRates = exclusivePokemonData.alpha as Record<string, number>;
           catchRateToUse = alphaCatchRates[apiName] ?? alphaCatchRates.default;
         } else {
             // If not an Alpha Pokémon, use the normal fetch

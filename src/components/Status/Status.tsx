@@ -22,6 +22,9 @@ const Status: React.FC<StatusProps> = ({selectedStatus, setSelectedStatus}) => {
     if (selectedOption) {
       const statusObj = status.find((s) => s.name === selectedOption.value);
       setSelectedStatus(statusObj || status[0]);  // Default to first status if not found
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
     }
   };
   

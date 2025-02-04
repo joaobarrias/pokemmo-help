@@ -26,6 +26,7 @@
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0;
+  text-decoration: none; /* Removes underline */
   cursor: pointer;
   transition: transform 0.5s ease; /* Smooth transition */
 }
@@ -48,11 +49,16 @@
 
 .mmo {
   color: #ef1c1f;
+
 }
 
-.tools {
+.help {
   color: #fff;
   margin-left: 10px;
+}
+
+.poke, .mmo, .help {
+  font-family: 'Orbitron', sans-serif;
 }
 
 .logo:hover {

@@ -56,6 +56,9 @@ const PokeBall: React.FC<PokeBallProps> = ({  selectedPokeball, setSelectedPokeb
     if (selectedOption) {
       setSelectedPokeball(selectedOption.value);  // Set full object
     }
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   const selectedPokeballDescription = selectedPokeball?.description || "";

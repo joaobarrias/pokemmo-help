@@ -12,11 +12,11 @@ const NavBar: React.FC = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">
+      <NavLink to="/" className="logo">
       <img src="/icons/icon5.png" alt="Logo" />
       <span className="poke">Poke</span><span className="mmo">MMO</span> 
-      <span className="tools">Tools</span>
-      </div>
+      <span className="help">Help</span>
+      </NavLink>
       <ul className={`menu ${isMenuOpen ? 'open' : ''}`}>
         <li>
           <NavLink
