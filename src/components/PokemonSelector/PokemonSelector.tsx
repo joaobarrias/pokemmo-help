@@ -1,9 +1,9 @@
 // PokemonSelector.tsx
 import React, { useEffect, useRef, useState } from "react";
-import "./PokemonSelector.css";
+import "./PokemonSelector.css"; // Import CSS
 import customRates from "../../data/custom-rates.json"; // Import custom rates for PokeMMO
 import exclusivePokemonData from "../../data/pokemmo-condition.json"; // Import exclusive alpha catch rates
-import { PokemonState } from '../../pages/CaptureChance/CaptureChance';
+import { PokemonState } from '../../pages/CaptureChance/CaptureChance'; // Import current pokemon object
 
 interface PokemonSelectorProps {
     pokemonState: PokemonState;
@@ -55,7 +55,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     }, []);
 
     
-    // Fetch selected pokemon data
+    // Fetch chosen pokemon data
     const fetchPokemonData = async (name: string) => {
         if (!name.trim()) return; // Don't fetch if the name is empty
         try {
@@ -81,7 +81,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     
         setPokemonState((prevState) => ({ ...prevState, catchRate: catchRateToUse }));
     
-        // Fetch the Pokémon's data (e.g., image) using the correct variant
+        // Fetch the Pokémon's data using the correct variant
         const forms = speciesData?.varieties.map((variety: { pokemon: { name: string } }) => variety.pokemon.name);
     
         if (forms?.includes(`${apiName}-standard`)) {

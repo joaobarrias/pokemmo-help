@@ -1,6 +1,6 @@
-// Status.tsx
+// Component: Status.tsx
 import React, { useEffect } from 'react';
-import "./Status.css";
+import "./Status.css"; // Import CSS
 import Select from 'react-select'; // Import react-select
 import { status } from "../../data/status"; // Import status conditions
 
@@ -11,7 +11,7 @@ interface StatusProps {
 
 const Status: React.FC<StatusProps> = ({selectedStatus, setSelectedStatus}) => {
 
-    // Set default status if not selected
+  // Set default status if not selected
   useEffect(() => {
     if (!selectedStatus) {
       setSelectedStatus(status[0]);  // Default to first status object
@@ -34,13 +34,13 @@ const Status: React.FC<StatusProps> = ({selectedStatus, setSelectedStatus}) => {
       <Select
         id="status"
         value={{
-          value: selectedStatus?.name || '', // Use the name from the object
+          value: selectedStatus?.name || '', // The name from the object
           label: selectedStatus?.name || 'Status', // Label is the name as well
         }}
         onChange={handleStatusChange}
         options={status.map((s) => ({
-          value: s.name, // The value is the name of the status
-          label: s.name, // The label is also the name
+          value: s.name,
+          label: s.name,
         }))}
         className="status-select"
         classNamePrefix="react-select"

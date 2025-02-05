@@ -37,7 +37,5 @@
     "raikou": { "name": "Raikou", "catchRate": 5 },
     "moltres": { "name": "Moltres", "catchRate": 5 },
     "zapdos": { "name": "Zapdos", "catchRate": 5 },
-    "articuno": { "name": "Articuno", "catchRate": 5 },
-    "alpha": { "catchRate": 10 },
-    "alpha_tyranitar": { "name": "Alpha Tyranitar", "catchRate": 5 }
+    "articuno": { "name": "Articuno", "catchRate": 5 }
   }

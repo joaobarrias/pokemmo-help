@@ -1,6 +1,6 @@
 // Page: CaptureChance.tsx
-import { useState, useEffect, useRef } from "react";
-import "./CaptureChance.css";
+import { useState, useEffect } from "react";
+import "./CaptureChance.css"; // Import CSS
 import PokemonSelector from "../../components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
 import ImageAndLevel from "../../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
 import Status from "../../components/Status/Status";  // Import the PokemonSelector component
@@ -79,7 +79,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
           isAlpha={isAlpha}
           setIsAlpha={setIsAlpha}
           allPokemon={allPokemon}
-        />
+          />
 
           
           {/* Pokémon Image and Level Section*/}
@@ -107,6 +107,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
 
           {/* Capture Chance Section */}
           <CaptureCalc captureControl={captureControl} pokemonState={pokemonState} level={level} currentHp={currentHp} averageHp={averageHp} selectedPokeball={selectedPokeball} selectedStatus={selectedStatus}/>
+        
         </div>
       </div>
     </div>

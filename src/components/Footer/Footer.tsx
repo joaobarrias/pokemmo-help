@@ -21,20 +21,30 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
       </div>
       <div className="footer-row">
         {/* Theme Selector  */}
-        <div className="theme-selector">
-          <label htmlFor="theme">Theme:</label>
-          <select id="theme" onChange={handleThemeChange}>
-            <option value="background-images/Pikachu.jpg">Pikachu</option>
-            <option value="background-images/Ash.jpg">Ash</option>
-            <option value="background-images/Jirachi.png">Jirachi</option>
-            <option value="background-images/Eevee.jpg">Eevee</option>
-            <option value="background-images/OldChateau.jpg">Old Chateau</option>
-            <option value="background-images/Battle.jpg">Battle</option>
-            <option value="background-images/Haunter.jpg">Haunter</option>
-            <option value="/">No Theme</option>
-          </select>
+        <div className="theme-submit-container">
+          <div className="theme-selector">
+            <label htmlFor="theme">Theme:</label>
+            <select id="theme" onChange={handleThemeChange}>
+              <option value="background-images/Pikachu.jpg">Pikachu</option>
+              <option value="background-images/Ash.jpg">Ash</option>
+              <option value="background-images/Jirachi.png">Jirachi</option>
+              <option value="background-images/Eevee.jpg">Eevee</option>
+              <option value="background-images/OldChateau.jpg">Old Chateau</option>
+              <option value="background-images/Reshiram.png">Reshiram</option>
+              <option value="background-images/Celebi.jpg">Celebi</option>
+              <option value="background-images/Darkrai.jpg">Darkrai</option>
+              <option value="background-images/Regice.png">Regice</option>
+              <option value="background-images/CharizardX.jpg">Charizard X</option>
+              <option value="background-images/Chandelure.jpg">Chandelure</option>
+              <option value="background-images/Halloween.jpg">Halloween</option>
+              <option value="background-images/Kyogre.jpg">Kyogre</option>
+              <option value="background-images/BlackRayquaza.jpg">Black Rayquaza</option>
+              <option value="background-images/Banette.jpg">Banette</option>
+              <option value="/">No Theme</option>
+            </select>
+          </div>
+          <p className="submit-art">🎨 Submit your art on Discord</p>
         </div>
-
         {/* Footer Menu */}
         <ul className="footer-menu">
           <li><a href="https://github.com/joaobarrias/pokemmo-help" target="_blank" rel="noopener noreferrer">

@@ -71,6 +71,8 @@
   align-items: center;
   gap: 30px;
   margin: 0;
+  margin-left: 20px; /* Adjust this value as needed */
+
   padding: 0;
 }
 
@@ -136,7 +138,21 @@
   transition: all 0.3s ease;
 }
 
-/* Mobile Menu Styles */
+/* Hamburger Icon Transformation When Open */
+.hamburger.open div:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.hamburger.open div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open div:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+}
+
+
+/* For small screens */
 @media (max-width: 810px) {
   .menu {
     position: fixed;
@@ -165,15 +181,7 @@
   }
 }
 
-/* Hamburger Icon Transformation When Open */
-.hamburger.open div:nth-child(1) {
-  transform: rotate(45deg) translate(4px, 4px);
-}
+/* For very small screens */
+@media (max-width: 480px) {
 
-.hamburger.open div:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.open div:nth-child(3) {
-  transform: rotate(-45deg) translate(4px, -4px);
 }

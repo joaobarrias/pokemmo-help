@@ -1,13 +1,13 @@
 // Main: App.tsx
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import "./App.css";
+import "./App.css"; // Import CSS
 import excludedPokemonData from "./data/pokemmo-condition.json"; // Import pokemons name that don't exist in PokeMMO
-import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
-import CaptureChance from "./pages/CaptureChance/CaptureChance"
-import PokemonSearch from "./pages/PokemonSearch/PokemonSearch";
-import TypeEffectiveness from "./pages/TypeEffectiveness/TypeEffectiveness";
+import NavBar from "./components/NavBar/NavBar"; // Import Navegation Bar Menu
+import Footer from "./components/Footer/Footer"; // Import Footer
+import CaptureChance from "./pages/CaptureChance/CaptureChance"  // Import Capture Chance page
+import PokemonSearch from "./pages/PokemonSearch/PokemonSearch";  // Import Pokemon Search page
+import TypeEffectiveness from "./pages/TypeEffectiveness/TypeEffectiveness";  // Import Type Effectiveness page
 
 
 const App: React.FC = () => {

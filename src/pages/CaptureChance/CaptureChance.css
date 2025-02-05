@@ -1,3 +1,4 @@
+/* Capture Chance Page */
 .header {
     text-align: center;
     margin-bottom: 50px;
@@ -16,7 +17,7 @@
     width: 100%;
 }
   
-.body label, body p{
+.body label, .body p{
     text-shadow: 2px 2px 2px rgb(0, 0, 0, 1), -1px -1px 2px rgb(0, 0, 0, 1), 1px -1px 2px rgb(0, 0, 0, 1), -2px 2px 2px rgb(0, 0, 0, 1);
 }
 
@@ -44,87 +45,6 @@
     padding: 20px;
 }
   
-/* Style the entire react-select component */
-.react-select__control {
-    background-color: #444c56 !important; 
-    border: 1px solid #6d6d6d !important;  
-    color: #fff !important;             
-    border-radius: 8px;                 
-    width: 180px !important;           
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    transition: border-color 0.3s ease !important;
-    position: relative !important;
-    cursor: pointer !important;
-    height: 40px !important; 
-    z-index: 4 !important;
-}
-  
-.react-select__control input {
-    caret-color: transparent !important;
-    color: #fff !important;
-    height: 100%;
-}
-
-.react-select__control--is-focused {
-    border-color: #ccc !important; 
-    box-shadow: none !important;          
-}
-
-.react-select__menu {
-    background-color: #333 !important; 
-    border-radius: 4px !important;    
-    width: 180px !important;    
-    border: 1px solid #ccc !important;    
-    top: calc(100% + 5px) !important; 
-    cursor: pointer !important;
-    z-index: 4 !important;
-}
-
-.react-select__menu-list {
-    max-height: 250px !important;
-    overflow-y: auto !important;
-}
-
-.react-select__option {
-    background-color: #333 !important; 
-    color: #fff !important;   
-    cursor: pointer !important;    
-    padding: 3px 10px !important;
-    margin: 0 !important;
-}
-
-.react-select__option:hover {
-    background-color: rgba(0, 123, 255, 0.1) !important;
-}
-
-.react-select__single-value {
-    display: inline-block !important;
-    color: #fff !important;
-    transform: translateY(-6px) !important;
-}
-
-.react-select__single-value img{
-    transform: translateY(8px) !important;
-    margin-right: 4px !important;
-}
-
-.react-select__option span{
-    display: inline-block !important;
-    transform: translateY(-8px) !important;
-}
-
-.react-select__option img{
-    display: inline-block !important;
-    transform: translateY(1px) !important;
-    margin-right: 5px !important;
-}
-
-.react-select__menu-notice--no-options {
-    text-align: left !important;
-    margin-left: 6px;
-}
-  
 /* For small screens */
 @media (max-width: 810px) {
     .header {
@@ -137,7 +57,6 @@
       align-items: center;
       gap: 10px;
     }
-  
 }
 
 /* For very small screens */
@@ -145,5 +64,4 @@
     .header h1 {
         font-size: 1.5rem;
     }
-
 }

@@ -45,9 +45,8 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 10px auto;
-  padding: 0 20px;
 }
 
 /* Footer Menu (Centered) */
@@ -60,6 +59,7 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  margin-left: -30px;
 }
 
 .footer-menu li {
@@ -87,6 +87,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  z-index: 2;
 }
 
 .theme-selector label,
@@ -105,13 +106,47 @@
   outline: none;
 }
 
+/* Footer Bottom Row (Third Row) */
+.footer-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 10px auto;
+  padding: 0 20px;
+}
+
+.theme-submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Adjust as needed (or center) */
+  gap: 5px; /* Space between the selector and the text */
+}
+
+
+/* Submit Art Section */
+.submit-art {
+  position: absolute;
+  transform: translateY(90%);
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #fff;
+  background: rgba(239, 28, 31, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  border-left: 3px solid #ef1c1f;
+}
+
+/* Grouping Container for Theme Selector & Submit Art */
+
 /* Footer Bottom (Centered) */
 .footer-bottom {
-  max-width: 600px;  /* Adjust width as needed */
-  margin: 10px auto; /* Centers it horizontally */
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px; /* or whatever width you prefer */
   font-size: 0.8rem;
   opacity: 0.8;
-  text-align: center;
 }
 
 .footer-bottom p{
@@ -126,11 +161,6 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 10px;
-  }
-
-  .footer-menu {
-      flex-direction: column;
       gap: 10px;
   }
 }
