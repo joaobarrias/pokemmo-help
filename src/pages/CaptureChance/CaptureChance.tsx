@@ -47,18 +47,18 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
   
 
   useEffect(() => { 
-          if (!pokemonState.stats.hp || level === null) return;
-          if (pokemonState.name === "Shedinja") {
-            setAverageHp(1);
-          }
-          else  {
-            const levelValue = parseFloat(level);
-            const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10)
-            setAverageHp(avgHp);
-          }
+    if (!pokemonState.stats.hp || level === null) return;
+    if (pokemonState.name === "Shedinja") {
+      setAverageHp(1);
+    }
+    else  {
+      const levelValue = parseFloat(level);
+      const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10)
+      setAverageHp(avgHp);
+    }
 
-          setHpControl(!hpControl);
-      }, [pokemonState.id, pokemonState.catchRate, level]);
+    setHpControl(!hpControl);
+  }, [pokemonState.id, pokemonState.catchRate, level]); // Dependencies
 
   return (
     <div className="page">

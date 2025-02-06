@@ -45,23 +45,16 @@
     padding: 20px;
 }
   
-/* For small screens */
-@media (max-width: 810px) {
+/* For screens smaller than 920px */
+@media (max-width: 920px) {
     .header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  
-    .main-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+        margin-bottom: 30px;
     }
 }
 
-/* For very small screens */
-@media (max-width: 480px) {
+/* For very small screens under 600px */
+@media (max-width: 600px) {
     .header h1 {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 }

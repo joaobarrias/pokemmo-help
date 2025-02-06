@@ -43,6 +43,9 @@
       "meloetta",
       "genesect"
     ],
+    "standardVariants":[
+      "darmanitan"
+    ],
     "alpha": {
     "default": 10,
     "tyranitar": 5,

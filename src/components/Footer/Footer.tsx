@@ -1,7 +1,7 @@
-// Footer.tsx
+// Component: Footer.tsx
 import { FaDiscord, FaGithub } from "react-icons/fa"; // Import icons
 import React from "react";
-import "./Footer.css";
+import "./Footer.css"; // Import CSS
 
 interface FooterProps {
   setBackgroundImage: (image: string) => void;
@@ -68,7 +68,9 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
       {/* Footer Bottom */}
       <div className="footer-bottom">
         <p>&copy; 2025 PokeMMO Help. All Rights Reserved.</p>
-        <p className="footer-disclaimer">Disclaimer: This is a fan-made website for PokeMMO and is not affiliated with, endorsed, or sponsored by PokeMMO. All Pokémon-related assets and trademarks belong to Nintendo, Game Freak, and The Pokémon Company. This project is ongoing, and I welcome feedback and feature suggestions!</p>
+        <p className="footer-disclaimer">Disclaimer: This is a fan-made website for PokeMMO and is not affiliated with, endorsed, or sponsored by PokeMMO. 
+          All Pokémon-related assets and trademarks belong to Nintendo, Game Freak, and The Pokémon Company. 
+          This project is ongoing, and I welcome feedback and feature suggestions!</p>
       </div>
     </footer>
   );

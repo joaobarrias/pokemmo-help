@@ -1,7 +1,7 @@
-// NavBar.tsx
+// Component: NavBar.tsx
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import './NavBar.css';
+import './NavBar.css'; // Import CSS
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
 
   return (
      <nav className="navbar">
-      <NavLink to="/" className="logo">
+      <NavLink to="/capture-chance" className="logo">
         <img src="/icons/icon5.png" alt="Logo" />
         <span className="poke">Poke</span>
         <span className="mmo">MMO</span>
@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
           <NavLink
             to="/capture-chance"
             className={({ isActive }) => (isActive ? 'active' : '')}
-            onClick={closeMenu} // Close the menu on click
+            onClick={closeMenu}
           >
             Capture Chance
           </NavLink>
@@ -36,7 +36,7 @@ const NavBar: React.FC = () => {
           <NavLink
             to="/pokemon-search"
             className={({ isActive }) => (isActive ? 'active' : '')}
-            onClick={closeMenu} // Close the menu on click
+            onClick={closeMenu}
           >
             Pokemon Search
           </NavLink>
@@ -45,7 +45,7 @@ const NavBar: React.FC = () => {
           <NavLink
             to="/type-chart"
             className={({ isActive }) => (isActive ? 'active' : '')}
-            onClick={closeMenu} // Close the menu on click
+            onClick={closeMenu}
           >
             Type Chart
           </NavLink>

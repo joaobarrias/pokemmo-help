@@ -1,6 +1,6 @@
-// PokeBall.tsx
+// Component: PokeBall.tsx
 import React, { useEffect, useRef } from "react";
-import "./PokeBall.css";
+import "./PokeBall.css"; // Import CSS
 import Select from 'react-select'; // Import react-select
 import { pokeballs } from "../../data/pokeballs"; // Import pokeballs
 
@@ -9,12 +9,13 @@ interface PokeBallProps {
   setSelectedPokeball: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const PokeBall: React.FC<PokeBallProps> = ({  selectedPokeball, setSelectedPokeball }) => {
+const PokeBall: React.FC<PokeBallProps> = ({ selectedPokeball, setSelectedPokeball }) => {
   const preloadedImages = useRef<Set<string>>(new Set());
 
   useEffect(() => {
+    // Set the default Poké Ball if none is selected
     if (!selectedPokeball) {
-      setSelectedPokeball(pokeballs[0]);  // Set the default Poké Ball object
+      setSelectedPokeball(pokeballs[0]); // Default to the first Poké Ball
     }
   }, [selectedPokeball, setSelectedPokeball]);
 
@@ -27,14 +28,14 @@ const PokeBall: React.FC<PokeBallProps> = ({  selectedPokeball, setSelectedPokeb
           <span>{ball.name}</span>
         </div>
       ),
-    })),
-    []
+    })), []
   );
+
   // Preload images when component mounts
   useEffect(() => {
-      if (preloadedImages.current.size === 0) {
-        preloadImages();
-      }
+    if (preloadedImages.current.size === 0) {
+      preloadImages();
+    }
   }, []);
 
   const preloadImages = async () => {
@@ -65,34 +66,34 @@ const PokeBall: React.FC<PokeBallProps> = ({  selectedPokeball, setSelectedPokeb
 
   return (
     <div className="pokeball-section">
-        <label htmlFor="pokeball-select" className="pokeball-label">
-            Ball
-        </label>
-        <div className="pokeball-select-container">
-          <Select
-            options={pokeballOptions}
-            value={
-              selectedPokeball
-                ? pokeballOptions.find((option) => option.value.name === selectedPokeball.name) // Find by object name
-                : pokeballOptions[0]
-            }
-            onChange={handlePokeballChange}
-            placeholder="Select Ball"
-            className="pokeball-select"
-            classNamePrefix="react-select"
-            getOptionLabel={(option) => option.value.name}  // Search by name for filtering
-            getOptionValue={(option) => option.value.name} // Ensure the selected option uses the name
-            formatOptionLabel={(data) => (
-              <div className="pokeball-option">
-                <img src={data.value.imagePath} alt={data.value.name} className="pokeball-icon" loading="lazy" />
-                <span>{data.value.name}</span>
-              </div>
-            )}
-          />
-          <div className="pokeball-description-container">
-            <p className="pokeball-description">{selectedPokeballDescription}</p>
-          </div>
+      <label htmlFor="pokeball-select" className="pokeball-label">
+        Ball
+      </label>
+      <div className="pokeball-select-container">
+        <Select
+          options={pokeballOptions}
+          value={
+            selectedPokeball
+              ? pokeballOptions.find((option) => option.value.name === selectedPokeball.name) // Find by object name
+              : pokeballOptions[0]
+          }
+          onChange={handlePokeballChange}
+          placeholder="Select Ball"
+          className="pokeball-select"
+          classNamePrefix="react-select"
+          getOptionLabel={(option) => option.value.name} // Search by name for filtering
+          getOptionValue={(option) => option.value.name} // Ensure the selected option uses the name
+          formatOptionLabel={(data) => (
+            <div className="pokeball-option">
+              <img src={data.value.imagePath} alt={data.value.name} className="pokeball-icon" />
+              <span>{data.value.name}</span>
+            </div>
+          )}
+        />
+        <div className="pokeball-description-container">
+          <p className="pokeball-description">{selectedPokeballDescription}</p>
         </div>
+      </div>
     </div>
   );
 };

@@ -5,8 +5,8 @@ import Select from 'react-select'; // Import react-select
 import { status } from "../../data/status"; // Import status conditions
 
 interface StatusProps {
-    selectedStatus: any;
-    setSelectedStatus: React.Dispatch<React.SetStateAction<any>>;
+  selectedStatus: any;
+  setSelectedStatus: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const Status: React.FC<StatusProps> = ({selectedStatus, setSelectedStatus}) => {
@@ -30,7 +30,7 @@ const Status: React.FC<StatusProps> = ({selectedStatus, setSelectedStatus}) => {
   
   return (
     <div className="status-section">
-      <label className="status-label">Status</label>
+      <label htmlFor="status-select" className="status-label">Status</label>
       <Select
         id="status"
         value={{

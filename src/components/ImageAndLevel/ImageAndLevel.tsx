@@ -1,7 +1,7 @@
-// ImageAndLevel.tsx
+// Component: ImageAndLevel.tsx
 import React from 'react';
-import "./ImageAndLevel.css";
-import { PokemonState } from '../../pages/CaptureChance/CaptureChance';
+import "./ImageAndLevel.css"; // Import CSS
+import { PokemonState } from '../../pages/CaptureChance/CaptureChance'; // Import current pokemon object
 
 interface ImageAndLevelProps {
   pokemonState: PokemonState; 
@@ -46,7 +46,7 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
   return (
     <div className="level-and-image-section">
       <div className={`level-and-image ${isAlpha ? 'alpha-active' : ''}`}>
-        {isAlpha && <div className="alpha-background"></div>} {/* Smoke background */}
+        {isAlpha && <div className="alpha-background"></div>}
         {imageUrl  ? (
           <img
             src={imageUrl }
@@ -62,7 +62,7 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
         {types.map((type, index) => (
           <img
             key={index}
-            src={`/types/${type}.png`}  // Assuming the icons are in public/types folder
+            src={`/types/${type}.png`}
             alt={type}
             className="type-icon"
           />

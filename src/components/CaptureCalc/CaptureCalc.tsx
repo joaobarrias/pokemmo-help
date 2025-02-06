@@ -1,8 +1,8 @@
-// CaptureCalc.tsx
+// Component: CaptureCalc.tsx
 import React, { useState, useEffect } from "react";
-import "./CaptureCalc.css";
+import "./CaptureCalc.css"; // Import CSS
 import evolversPokemonData from "../../data/evolvers-condition.json"; // Import evolvers conditions
-import { PokemonState } from '../../pages/CaptureChance/CaptureChance';
+import { PokemonState } from '../../pages/CaptureChance/CaptureChance'; // Import current pokemon object
 
 interface CaptureCalcProps {
     pokemonState: PokemonState;
@@ -53,55 +53,55 @@ interface CaptureCalcProps {
 
 
     const getMultiplier = () => {
-        if (!selectedPokeball) return 1;
+      if (!selectedPokeball) return 1;
 
-        let multiplier = selectedPokeball.multiplier;
+      let multiplier = selectedPokeball.multiplier;
 
-        const levelNumber = level ? parseInt(level) : 50; 
+      const levelNumber = level ? parseInt(level) : 50; 
 
-        // Handle balls with conditions
-        if (typeof multiplier === 'function') {
-            if (selectedPokeball.apiName === "net-ball") {
-            multiplier = multiplier(pokemonState.types);
-            } else if (selectedPokeball.apiName === "nest-ball") {
-            multiplier = multiplier(levelNumber);
-            } else if (selectedPokeball.apiName === "repeat-ball") {
-            const caughtCountNumber = caughtCount ? parseInt(caughtCount) : 0; 
-            multiplier = multiplier(caughtCountNumber);
-            } else if (selectedPokeball.apiName === "timer-ball") {
-            const turnsNumber = turns ? parseInt(turns) : 1; 
-            multiplier = multiplier(turnsNumber);
-            } else if (selectedPokeball.apiName === "dive-ball") {
-            multiplier = multiplier(isWaterDwelling);
-            } else if (selectedPokeball.apiName === "dusk-ball") {
-            multiplier = multiplier(isCaveOrNight);
-            } else if (selectedPokeball.apiName === "quick-ball") {
-            multiplier = multiplier(isFirstTurn);
-            } else if (selectedPokeball.apiName === "dream-ball") {
-            const sleepTurnsNumber = sleepTurns ? parseInt(sleepTurns) : 0; 
-            multiplier = multiplier(sleepTurnsNumber);
-            } else if (selectedPokeball.apiName === "fast-ball") {
-            multiplier = multiplier(pokemonState.stats.speed);
-            } else if (selectedPokeball.apiName === "friend-ball") {
-            multiplier = multiplier(isHappinessEvolution);
-            } else if (selectedPokeball.apiName === "heavy-ball") {
-            multiplier = multiplier(pokemonState.stats.weight);
-            } else if (selectedPokeball.apiName === "level-ball") {
-            const myLevelNumber = myLevel ? parseInt(myLevel) : 1; 
-            multiplier = multiplier(myLevelNumber, levelNumber);
-            } else if (selectedPokeball.apiName === "love-ball") {
-            multiplier = multiplier(isSameEvolutionLineAndOppositeGender);
-            } else if (selectedPokeball.apiName === "lure-ball") {
-            multiplier = multiplier(isFishingRodCatch);
-            } else if (selectedPokeball.apiName === "moon-ball") {
-            multiplier = multiplier(isMoonStoneEvolution);
-            }
+      // Handle balls with conditions
+      if (typeof multiplier === 'function') {
+        if (selectedPokeball.apiName === "net-ball") {
+        multiplier = multiplier(pokemonState.types);
+        } else if (selectedPokeball.apiName === "nest-ball") {
+        multiplier = multiplier(levelNumber);
+        } else if (selectedPokeball.apiName === "repeat-ball") {
+        const caughtCountNumber = caughtCount ? parseInt(caughtCount) : 0; 
+        multiplier = multiplier(caughtCountNumber);
+        } else if (selectedPokeball.apiName === "timer-ball") {
+        const turnsNumber = turns ? parseInt(turns) : 1; 
+        multiplier = multiplier(turnsNumber);
+        } else if (selectedPokeball.apiName === "dive-ball") {
+        multiplier = multiplier(isWaterDwelling);
+        } else if (selectedPokeball.apiName === "dusk-ball") {
+        multiplier = multiplier(isCaveOrNight);
+        } else if (selectedPokeball.apiName === "quick-ball") {
+        multiplier = multiplier(isFirstTurn);
+        } else if (selectedPokeball.apiName === "dream-ball") {
+        const sleepTurnsNumber = sleepTurns ? parseInt(sleepTurns) : 0; 
+        multiplier = multiplier(sleepTurnsNumber);
+        } else if (selectedPokeball.apiName === "fast-ball") {
+        multiplier = multiplier(pokemonState.stats.speed);
+        } else if (selectedPokeball.apiName === "friend-ball") {
+        multiplier = multiplier(isHappinessEvolution);
+        } else if (selectedPokeball.apiName === "heavy-ball") {
+        multiplier = multiplier(pokemonState.stats.weight);
+        } else if (selectedPokeball.apiName === "level-ball") {
+        const myLevelNumber = myLevel ? parseInt(myLevel) : 1; 
+        multiplier = multiplier(myLevelNumber, levelNumber);
+        } else if (selectedPokeball.apiName === "love-ball") {
+        multiplier = multiplier(isSameEvolutionLineAndOppositeGender);
+        } else if (selectedPokeball.apiName === "lure-ball") {
+        multiplier = multiplier(isFishingRodCatch);
+        } else if (selectedPokeball.apiName === "moon-ball") {
+        multiplier = multiplier(isMoonStoneEvolution);
         }
-        if (typeof multiplier === 'number') {
-          multiplier = parseFloat(multiplier.toFixed(1));
-       }
-        setCurrentBallMultiplier(multiplier);
-        return multiplier;
+      }
+      if (typeof multiplier === 'number') {
+        multiplier = parseFloat(multiplier.toFixed(1));
+      }
+      setCurrentBallMultiplier(multiplier);
+      return multiplier;
     };
 
     useEffect(() => {
@@ -148,9 +148,8 @@ interface CaptureCalcProps {
       if (chance >= 0.9999) {
         return 100;
       }
-      console.log("level:", level, "averageHp:", averageHp, "currenthp",  currentHp, "pokemonState.catchRate", pokemonState.catchRate, "ballMultiplier", ballMultiplier, "selectedStatus.multiplier", selectedStatus.multiplier);
       // Return the capture chance as a percentage
-      return Math.round(chance * 10000) / 100; // Rounded to two decimal places
+      return Math.round(chance * 10000) / 100; // Rounded to two decimal numbers
     }
 
     // Single handler for all onChange events
@@ -353,7 +352,6 @@ interface CaptureCalcProps {
             </div>
           )}
 
-          {/* Handle special Poké Balls based on evolution logic */}
           {selectedPokeball && selectedPokeball.apiName === "moon-ball" && (
             <div className="input-field">
               <label>Does it evolve with a moon stone? {pokemonState && evolversPokemonData.moonStoneEvolvers.includes(pokemonState.name) ? "Yes" : "No"}</label>

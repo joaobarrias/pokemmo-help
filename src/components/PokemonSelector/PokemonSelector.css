@@ -78,6 +78,11 @@
     background-color: rgba(0, 123, 255, 0.1);
 }
 
+.bold{
+    font-weight: 900;
+    text-decoration: underline;
+}
+
 .pokemon-info {
     margin-top: 10px;
 }
@@ -88,40 +93,21 @@
     color: rgba(255, 255, 255, 1);
     text-align: left;
 }
-
-/* For small screens */
-@media (max-width: 810px) {
+/* For screens smaller than 920px */
+@media (max-width: 920px) {
     .pokemon-section {
-        width: 100%;
-        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 600px;
     }
-
-    .checkbox-container {
-        transform: none;
-        margin-bottom: 10px;
-    }
-
-    .suggestion-box {
-        top: calc(100%);
-    }
-
 }
 
-/* For very small screens */
-@media (max-width: 480px) {
+/* For very small screens under 600px */
+@media (max-width: 600px) {
     .pokemon-section {
-        width: 100%;
-        max-width: 250px;
+        max-width: 400px;       
     }
-
-    .checkbox-container {
-        order: 1;
-        align-self: center;
-        margin: 10px 0;
-    }
-
-    .pokemon-name {
-        font-size: 14px;
-    }
-
 }

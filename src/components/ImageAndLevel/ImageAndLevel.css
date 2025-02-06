@@ -25,85 +25,38 @@
     height: 200%;
     background: radial-gradient(
       circle,
-      rgba(173, 4, 4, 0.795) 10%,
-      rgba(126, 2, 2, 0.719) 90%,
+      rgba(199, 9, 9, 0.795) 10%,
+      rgba(104, 1, 1, 0.719) 90%,
       transparent 100%
     );
-    animation: smoke 3s infinite, glow 1s infinite alternate;
-    filter: blur(15px);
+    animation: pulse 3s ease-in-out infinite alternate;
     pointer-events: none;
 }
-  
 
 .level-and-image.alpha-active {
     background-color: rgba(20, 20, 20, 0.8);
-    box-shadow: 0 0 10px 5px rgba(59, 2, 2, 0.174),
-      0 0 20px 10px rgba(146, 3, 3, 0.363);
+    box-shadow: 0 0 8px 4px rgba(59, 2, 2, 0.174),
+      0 0 16px 8px rgba(146, 3, 3, 0.363);
     border: none;
 }
-  
-@keyframes smoke {
-    0% {
-      transform: translate(-8%, -18%) scale(1);
-      opacity: 0.8;
-    }
-    10% {
-      transform: translate(-15%, -12%) scale(1.05);
-      opacity: 0.75;
-    }
-    20% {
-      transform: translate(-20%, -22%) scale(1.1);
-      opacity: 0.7;
-    }
-    30% {
-      transform: translate(-25%, -18%) scale(1.12);
-      opacity: 0.65;
-    }
-    40% {
-      transform: translate(-28%, -30%) scale(1.15);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translate(-32%, -32%) scale(1.2);
-      opacity: 0.55;
-    }
-    60% {
-      transform: translate(-28%, -28%) scale(1.25);
-      opacity: 0.5;
-    }
-    70% {
-      transform: translate(-22%, -25%) scale(1.18);
-      opacity: 0.55;
-    }
-    80% {
-      transform: translate(-18%, -22%) scale(1.12);
-      opacity: 0.65;
-    }
-    90% {
-      transform: translate(-12%, -18%) scale(1.1);
-      opacity: 0.7;
-    }
-    100% {
-      transform: translate(-8%, -18%) scale(1);
-      opacity: 0.8;
-    }
-}
-  
-@keyframes glow {
-    from {
-      box-shadow: 0 0 25px 10px rgba(107, 36, 36, 0.6);
-    }
-    to {
-      box-shadow: 0 0 35px 15px rgba(216, 34, 34, 0.9);
-    }
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0.9;
+  }
 }
 
-/* Display the type icons in a horizontal line */
 .types-container {
   position: absolute;
   top: calc(50% - 60%);
   z-index: 5;
-  display: flex; /* Flexbox to display icons in a row */
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -116,7 +69,16 @@
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
+    transition: all 0.5s ease;
 }
+
+.level-and-image.alpha-active .pokemon-image{
+  top: -1.5px;
+  left: -1.5px;
+  width: 105%;
+  height: 105%;
+  transition: all 0.5s ease;
+} 
 
 .level-input-container {
     display: flex;
@@ -127,10 +89,10 @@
 }
   
 .level-label {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
-    margin-left: 5px;
+    margin-left: 4px;
 }
   
 .level-input {
@@ -155,23 +117,24 @@
     color: #999;
 }
 
-/* For small screens */
-@media (max-width: 810px) {
-    .level-and-image {
-        left: 0;
-        top: 0px;
-        width: 100px;
-        height: 100px;
-        transform: none;
-    }
-
+/* For screens below 920px */
+@media (max-width: 920px) {
+  .level-and-image-section {
+    margin-top: 30px;
+    transform: translate(0px, 0px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+  }
 }
 
-/* For very small screens */
-@media (max-width: 480px) {
-    .level-and-image {
-        width: 70px;
-        height: 70px;
-    }
-
+/* For screens below 600px */
+@media (max-width: 600px) {
+  .level-and-image-section {
+    max-width: 400px;   
+  }
 }

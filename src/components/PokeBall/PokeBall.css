@@ -11,7 +11,7 @@
 }
 
 .pokeball-label {
-    font-size: 16px;
+    font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 10px;
     text-align: left;
@@ -48,14 +48,26 @@
     text-overflow: ellipsis;
 }
 
-/* For small screens */
-@media (max-width: 810px) {
-
-
+/* For screens below 920px */
+@media (max-width: 920px) {
+    .pokeball-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        margin-left: 0px; /* Reduce margin for smaller screens */
+    }
+    .pokeball-label {
+        text-align: center;
+    }
 }
 
-/* For very small screens */
-@media (max-width: 480px) {
-
-
+/* For screens below 600px */
+@media (max-width: 600px) {
+    .pokeball-section {
+        max-width: 400px;       
+    }
 }

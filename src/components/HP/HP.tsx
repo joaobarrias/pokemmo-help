@@ -1,6 +1,6 @@
-// HP.tsx
+// Component: HP.tsx
 import React, { useState, useEffect } from "react";
-import "./HP.css";
+import "./HP.css"; // Import CSS
 
 type HPProps = {
     averageHp: number | null;
@@ -8,7 +8,7 @@ type HPProps = {
     captureControl: boolean;
     setCaptureControl: React.Dispatch<React.SetStateAction<boolean>>;
     hpControl: boolean;
-  };
+};
   
   const HP: React.FC<HPProps> = ({
     averageHp,
@@ -27,7 +27,6 @@ type HPProps = {
     };
 
     const handleHpPercentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        
         let value = e.target.value;
 
         // Replace commas with dots for decimal numbers (if applicable)
@@ -45,30 +44,30 @@ type HPProps = {
             if (value === "0." || value.startsWith("0.") && value.length > 2) {
             // Keep it as is
             } else {
-            value = value.replace(/^0+/, "");
+                value = value.replace(/^0+/, "");
             }
         }
         
         // Check if the input matches the pattern for up to 1 decimal place (including trailing dot)
         if (/^\d{1,3}(\.\d{0,1})?$/.test(value)) {
-            // If the value ends with a dot (e.g., "4."), keep it in the string form
+            // If the value ends with a dot (e.g., "4.")
             if (value.endsWith('.')) {
-            // Update state with the current value (still a string)
-            setHpPercent(value); // Keep it as a string
-            return;
+                // Update state with the current value
+                setHpPercent(value);
+                return;
             } else {
-            // Convert to a number if the input is valid
-            let numericValue = parseFloat(value);
-            if (!isNaN(numericValue)) {
-                // Clamp the value between 0 and 100
-                numericValue = Math.max(0, Math.min(100, numericValue));
-        
-                // Ensure only 1 decimal place
-                numericValue = parseFloat(numericValue.toFixed(1));
-        
-                // Update the state with the valid value
-                setHpPercent(numericValue.toString()); // Convert back to string
-            }
+                // Convert to a number if the input is valid
+                let numericValue = parseFloat(value);
+                if (!isNaN(numericValue)) {
+                    // Clamp the value between 0 and 100
+                    numericValue = Math.max(0, Math.min(100, numericValue));
+            
+                    // Ensure only 1 decimal place
+                    numericValue = parseFloat(numericValue.toFixed(1));
+            
+                    // Update the state with the valid value
+                    setHpPercent(numericValue.toString());
+                }
             }
         }
     };
@@ -88,7 +87,7 @@ type HPProps = {
         // Ensure only 1 decimal place
         correctedValue = parseFloat(correctedValue.toFixed(1));
         
-        // Update the state with the corrected value, converted back to a string
+        // Update the state with the corrected value
         setHpPercent(correctedValue.toString());
     };
 
@@ -135,34 +134,37 @@ type HPProps = {
         <label className="hp-label">Current HP</label>
         <div className="hp-options">
             <div className="hp-toggle">
-            <label>
-                <input
-                type="radio"
-                name="hp-option"
-                checked={!isExactHp}
-                onChange={() => setIsExactHp(false)}
-                />
-                <input
-                type="text"
-                value={hpPercent || ""}
-                onChange={handleHpPercentChange}
-                onBlur={handleHpBlur}
-                disabled={isExactHp}
-                onFocus={(e) => e.target.select()}
-                />
-                <span> % HP left</span>
-            </label>
+                <label htmlFor="hp-radio">
+                    <input
+                    type="radio"
+                    id="hp-radio"
+                    name="hp-option"
+                    checked={!isExactHp}
+                    onChange={() => setIsExactHp(false)}
+                    />
+                </label>
+                <div>
+                    <input
+                    type="text"
+                    value={hpPercent || ""}
+                    onChange={handleHpPercentChange}
+                    onBlur={handleHpBlur}
+                    disabled={isExactHp}
+                    onFocus={(e) => e.target.select()}
+                    />
+                    <label className="hp-left" onClick={() => setIsExactHp(false)}>% HP left</label>
+                </div>
             </div>
             <div className="hp-toggle">
-            <label>
-                <input
-                type="radio"
-                name="hp-option"
-                checked={isExactHp}
-                onChange={handleExactHpToggle}
-                />
-                Exactly 1 HP (using False Swipe)
-            </label>
+                <label>
+                    <input
+                    type="radio"
+                    name="hp-option"
+                    checked={isExactHp}
+                    onChange={handleExactHpToggle}
+                    />
+                </label>
+                <label onClick={() => setIsExactHp(true)}>Exactly 1 HP (using False Swipe)</label>
             </div>  
         </div>
         <div className="hp-bar-container">

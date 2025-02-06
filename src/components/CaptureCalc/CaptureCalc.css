@@ -1,24 +1,23 @@
 /* CaptureCalc Section */
 .capture-calc-section {
   display: flex;
-  flex-direction: column;  /* Stack the inputs vertically */
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  max-width: 380px;  /* Limit the width for better readability */
-  height: 180px;  /* Allow the height to grow as necessary */
+  max-width: 380px;
+  height: 180px;
   padding: 30px;
   border-radius: 8px;
   overflow: hidden;
   margin-left: 25px;
 }
 
-/* Input Container inside CaptureCalc */
 .capture-calc-section .input-container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;  /* Space out the fields */
+  gap: 10px;
 }
 
 .capture-calc-section .input-field label {
@@ -48,10 +47,6 @@
   cursor: pointer;
 }
 
-.input-field:has(input[type="checkbox"]) {
-  cursor: pointer;
-}
-
 .capture-calc-section .input-field input[type="checkbox"] {
     transform: translateY(2px);
     cursor: pointer;
@@ -68,7 +63,7 @@
   text-align: center;
   font-weight: bold;
 }
-/* Colors based on chance value */
+
 .low-chance {
   color: #e74c3c;  /* red-ish */
 }
@@ -79,4 +74,24 @@
 
 .high-chance {
   color: #27ae60;  /* green-ish */
+}
+
+/* For screens below 920px */
+@media (max-width: 920px) {
+  .capture-calc-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    margin-left: 0px;
+  }
+}
+/* For very small screens under 600px */
+@media (max-width: 600px) {
+  .capture-calc-section {
+    max-width: 400px;       
+  }
 }

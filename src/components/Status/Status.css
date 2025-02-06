@@ -8,7 +8,7 @@
 }
 
 .status-label {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 5px;
 }
@@ -47,14 +47,26 @@
     transform: translateY(0px) !important;
 }
 
-/* For small screens */
-@media (max-width: 810px) {
-
-
+/* For screens below 920px */
+@media (max-width: 920px) {
+    .status-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+    }
+    
+    .status-icon {
+        transform: translate(27px, -281px);
+    }
 }
 
-/* For very small screens */
-@media (max-width: 480px) {
-
-
+/* For very small screens under 600px */
+@media (max-width: 600px) {
+    .status-section {
+        max-width: 400px;     
+    }
 }

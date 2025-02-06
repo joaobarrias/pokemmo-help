@@ -1,4 +1,4 @@
-/* Footer Container */
+/* Footer Styles */
 .footer {
   width: 100vw;
   max-width: 100%;
@@ -39,7 +39,6 @@
   margin-left: 5px;
 }
 
-/* Footer Row (Second Line) */
 .footer-row {
   display: flex;
   justify-content: space-between;
@@ -49,7 +48,6 @@
   margin: 10px auto;
 }
 
-/* Footer Menu (Centered) */
 .footer-menu {
   list-style: none;
   display: flex;
@@ -59,7 +57,7 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-  margin-left: -30px;
+  margin-left: -35px;
 }
 
 .footer-menu li {
@@ -106,7 +104,6 @@
   outline: none;
 }
 
-/* Footer Bottom Row (Third Row) */
 .footer-bottom-container {
   display: flex;
   justify-content: space-between;
@@ -120,15 +117,13 @@
 .theme-submit-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Adjust as needed (or center) */
-  gap: 5px; /* Space between the selector and the text */
+  align-items: flex-start;
+  gap: 5px;
 }
 
-
-/* Submit Art Section */
 .submit-art {
   position: absolute;
-  transform: translateY(90%);
+  transform: translate(-2%,100%);
   font-size: 0.8rem;
   font-weight: normal;
   color: #fff;
@@ -138,13 +133,10 @@
   border-left: 3px solid #ef1c1f;
 }
 
-/* Grouping Container for Theme Selector & Submit Art */
-
-/* Footer Bottom (Centered) */
 .footer-bottom {
   text-align: center;
   margin: 0 auto;
-  max-width: 600px; /* or whatever width you prefer */
+  max-width: 600px;
   font-size: 0.8rem;
   opacity: 0.8;
 }
@@ -155,12 +147,36 @@
 .footer-disclaimer{
   margin-top: 10px;
 }
-/* Responsive Design */
+
+/* For small screens */
 @media (max-width: 810px) {
   .footer-row {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .footer-menu {
+    margin-top: 30px;
+    margin-left: 5px;
+  }
+  .theme-submit-container {
+    margin-top: 10px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .footer-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+}
+
+/* For extra small screens */
+@media (max-width: 350px) {
+  .footer-logo {
+    font-size: 0.9rem;
+    font-weight: 700;
   }
 }

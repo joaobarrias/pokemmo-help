@@ -10,7 +10,6 @@
   flex-direction: column;
   min-height: 110vh;
   width: 100%;
-
 }
 
 .content {
@@ -122,14 +121,4 @@ body {
 .react-select__menu-notice--no-options {
   text-align: left !important;
   margin-left: 6px;
-}
-
-/* For small screens */
-@media (max-width: 810px) {
-
-}
-
-/* For very small screens */
-@media (max-width: 480px) {
-
 }

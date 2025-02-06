@@ -26,9 +26,9 @@
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0;
-  text-decoration: none; /* Removes underline */
+  text-decoration: none;
   cursor: pointer;
-  transition: transform 0.5s ease; /* Smooth transition */
+  transition: transform 0.5s ease;
 }
 
 .logo img {
@@ -36,11 +36,11 @@
   width: auto;
   display: block;
   margin-right: 10px;
-  transition: transform 0.5s ease-in-out; /* Smooth rotation */
+  transition: transform 0.5s ease-in-out;
 }
 .logo:hover img,
 .logo:focus img {
-  transform: rotate(360deg); /* Full rotation */
+  transform: rotate(360deg);
 }
 
 .poke {
@@ -71,7 +71,7 @@
   align-items: center;
   gap: 30px;
   margin: 0;
-  margin-left: 20px; /* Adjust this value as needed */
+  margin-left: 20px;
 
   padding: 0;
 }
@@ -153,7 +153,7 @@
 
 
 /* For small screens */
-@media (max-width: 810px) {
+@media (max-width: 900px) {
   .menu {
     position: fixed;
     top: 70px;
@@ -183,5 +183,24 @@
 
 /* For very small screens */
 @media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .logo img {
+    height: 35px;
+    width: auto;
+  }
+}
 
+/* For extra small screens */
+@media (max-width: 350px) {
+  .logo {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .logo img {
+    height: 30px;
+    width: auto;
+  }
 }
