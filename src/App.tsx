@@ -5,6 +5,7 @@ import "./App.css"; // Import CSS
 import excludedPokemonData from "./data/pokemmo-condition.json"; // Import pokemons name that don't exist in PokeMMO
 import NavBar from "./components/NavBar/NavBar"; // Import Navegation Bar Menu
 import Footer from "./components/Footer/Footer"; // Import Footer
+import Home from "./pages/Home/Home";  // Import Type Effectiveness page
 import CaptureChance from "./pages/CaptureChance/CaptureChance"  // Import Capture Chance page
 import PokemonSearch from "./pages/PokemonSearch/PokemonSearch";  // Import Pokemon Search page
 import TypeEffectiveness from "./pages/TypeEffectiveness/TypeEffectiveness";  // Import Type Effectiveness page
@@ -60,7 +61,7 @@ const App: React.FC = () => {
 
 const AppWithRouter: React.FC<{ allPokemon: { name: string; id: number }[] }> = ({ allPokemon }) => {
   const location = useLocation();
-  const isCaptureChancePage = location.pathname === "/capture-chance";
+  const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/";
   const [backgroundImage, setBackgroundImage] = useState("background-images/Pikachu.jpg");
 
   return (
@@ -71,7 +72,7 @@ const AppWithRouter: React.FC<{ allPokemon: { name: string; id: number }[] }> = 
         style={isCaptureChancePage ? { backgroundImage: `url(${backgroundImage})` } : {}}
       >
         <Routes>
-          <Route path="/" element={<Navigate to="/capture-chance" />} />
+          <Route path="/" element={<Home  />} />
           <Route path="/capture-chance" element={<CaptureChance allPokemon={allPokemon}  />} />
           <Route path="/pokemon-search" element={<PokemonSearch  />} />
           <Route path="/type-chart" element={<TypeEffectiveness  />} />

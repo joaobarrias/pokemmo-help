@@ -1,0 +1,160 @@
+/* Home Container: Semi-transparent overlay to let the background image show through */
+.home-container {
+  margin: 90px auto 40px;  
+  max-width: 1200px;
+  padding: 20px;
+  text-align: center;
+  color: #fff;  /* Default text becomes white */
+  /* Using a subtle gradient with reduced opacity so the underlying background image remains visible */
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Home Page Header */
+.home-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  /* Matching text-shadow effect as in your Capture Chance header */
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+  margin-bottom: 20px;
+}
+
+/* Intro Paragraph */
+.home-container p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.home-description {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+/* Feature List Grid */
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+}
+
+/* Feature Cards: Dark background with a subtle border */
+.feature-card {
+  background-color: #444c567e;  /* Dark gray matching your navbar style */
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Feature Card Headings */
+.feature-card h2 {
+  font-size: 1.6rem;
+  color: #ef1c1f;  /* Red accent for emphasis */
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+/* Feature Card Paragraphs */
+.feature-card p {
+  font-size: 1rem;
+  color: #ddd;  /* Light text for readability */
+  margin-bottom: 20px;
+}
+
+/* Feature Button (for "Try Now") */
+.feature-button {
+  display: inline-block;
+  background-color: #23262f;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.feature-button:hover {
+  background-color: #ef1c1f;
+  transform: translateY(-2px);
+}
+
+/* Discord Link */
+.discord-link {
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+  margin-top: 40px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.discord-link a {
+  color: #ef1c1f;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .home-container h1 {
+    font-size: 2rem;
+  }
+  .home-container p {
+    font-size: 1rem;
+  }
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    margin: 30px auto 20px;  
+    padding: 10px;
+  }
+  .feature-card {
+    padding: 15px;
+  }
+  .feature-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  .home-container h1 {
+    font-size: 1.5rem;
+  }
+  .home-container p {
+    font-size: 0.9rem;
+  }
+  .feature-card h2{
+    font-size: 1.2rem;
+
+  }
+  
+}

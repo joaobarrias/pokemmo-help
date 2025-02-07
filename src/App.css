@@ -14,8 +14,8 @@
 
 .content {
   flex: 1;
-  padding-top: 50px;
   width: 100%;
+  overflow: hidden;
 }
 
 .content-with-bg {
@@ -126,3 +126,8 @@ body {
   margin-left: 6px;
 }
 
+@media (max-width: 768px) {
+  .content-with-bg {
+    background-attachment: scroll;
+  }
+}
