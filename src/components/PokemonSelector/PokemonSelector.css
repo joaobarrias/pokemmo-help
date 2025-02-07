@@ -93,21 +93,17 @@
     color: rgba(255, 255, 255, 1);
     text-align: left;
 }
-/* For screens smaller than 920px */
-@media (max-width: 920px) {
+
+@media (max-width: 590px) {
+    .pokemon-name {
+     text-align: center;
+    }
     .pokemon-section {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        max-width: 600px;
-    }
-}
-
-/* For very small screens under 600px */
-@media (max-width: 600px) {
-    .pokemon-section {
-        max-width: 400px;       
+        max-width: 300px;
     }
 }

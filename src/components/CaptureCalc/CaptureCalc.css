@@ -76,8 +76,7 @@
   color: #27ae60;  /* green-ish */
 }
 
-/* For screens below 920px */
-@media (max-width: 920px) {
+@media (max-width: 818px) {
   .capture-calc-section {
     display: flex;
     flex-direction: column;
@@ -85,13 +84,26 @@
     justify-content: center;
     text-align: center;
     width: 100%;
-    max-width: 600px;
+    max-width: 400px;
     margin-left: 0px;
   }
 }
-/* For very small screens under 600px */
+
 @media (max-width: 600px) {
   .capture-calc-section {
-    max-width: 400px;       
+    margin-top: 10px;
+    max-width: 300px;
+  }
+}
+
+@media (max-width:390px) {
+  .capture-calc-section {
+    margin-top:25px;
+  }
+}
+
+@media (max-width:300px) {
+  .capture-calc-section {
+    margin-top:50px;
   }
 }

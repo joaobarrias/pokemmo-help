@@ -31,7 +31,6 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
               <option value="background-images/Eevee.jpg">Eevee</option>
               <option value="background-images/OldChateau.jpg">Old Chateau</option>
               <option value="background-images/Reshiram.png">Reshiram</option>
-              <option value="background-images/Celebi.jpg">Celebi</option>
               <option value="background-images/Darkrai.jpg">Darkrai</option>
               <option value="background-images/Regice.png">Regice</option>
               <option value="background-images/CharizardX.jpg">Charizard X</option>

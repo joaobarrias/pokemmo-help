@@ -133,7 +133,7 @@
 .hamburger div {
   width: 24px;
   height: 3px;
-  background: #fff;
+  background: #fff !important;
   border-radius: 2px;
   transition: all 0.3s ease;
 }

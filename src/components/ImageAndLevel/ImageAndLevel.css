@@ -117,8 +117,7 @@
     color: #999;
 }
 
-/* For screens below 920px */
-@media (max-width: 920px) {
+@media (max-width: 390px) {
   .level-and-image-section {
     margin-top: 30px;
     transform: translate(0px, 0px);
@@ -128,13 +127,6 @@
     justify-content: center;
     text-align: center;
     width: 100%;
-    max-width: 600px;
-  }
-}
-
-/* For screens below 600px */
-@media (max-width: 600px) {
-  .level-and-image-section {
-    max-width: 400px;   
+    max-width: 300px;
   }
 }

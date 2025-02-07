@@ -47,8 +47,7 @@
     transform: translateY(0px) !important;
 }
 
-/* For screens below 920px */
-@media (max-width: 920px) {
+@media (max-width: 590px) {
     .status-section {
         display: flex;
         flex-direction: column;
@@ -56,17 +55,15 @@
         justify-content: center;
         text-align: center;
         width: 100%;
-        max-width: 600px;
+        max-width: 300px;
     }
-    
     .status-icon {
-        transform: translate(27px, -281px);
+        transform: translate(135px, -295px);
     }
 }
 
-/* For very small screens under 600px */
-@media (max-width: 600px) {
-    .status-section {
-        max-width: 400px;     
+@media (max-width: 390px) {
+    .status-icon {
+        transform: translate(27px, -281px);
     }
 }

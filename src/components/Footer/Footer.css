@@ -1,6 +1,5 @@
 /* Footer Styles */
 .footer {
-  width: 100vw;
   max-width: 100%;
   background: #23262f;
   color: #fff;
@@ -9,8 +8,10 @@
   border-top: 1px solid #ccc;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.6);
   position: relative;
+  width: 100%;
   left: 0;
   bottom: 0;
+  margin-top: auto;
 }
 
 .footer-container {
@@ -148,7 +149,6 @@
   margin-top: 10px;
 }
 
-/* For small screens */
 @media (max-width: 810px) {
   .footer-row {
     flex-direction: column;
@@ -165,7 +165,6 @@
   }
 }
 
-/* For very small screens */
 @media (max-width: 480px) {
   .footer-logo {
     font-size: 1.1rem;
@@ -173,7 +172,6 @@
   }
 }
 
-/* For extra small screens */
 @media (max-width: 350px) {
   .footer-logo {
     font-size: 0.9rem;

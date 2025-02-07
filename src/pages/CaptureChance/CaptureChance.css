@@ -15,6 +15,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: 50vh;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
   
 .body label, .body p{
@@ -45,15 +48,48 @@
     padding: 20px;
 }
   
-/* For screens smaller than 920px */
 @media (max-width: 920px) {
-    .header {
-        margin-bottom: 30px;
+    .capture-calc-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 16px;
+    }
+    .pokemon-selector,
+    .pokemon-image,
+    .level,
+    .status {
+        grid-column: 1;
+    }
+    .hp-section {
+        grid-column: 1;
+    }
+    .ball-section {
+        grid-column: 1;
+    }
+    .capture-chance {
+        grid-column: 1;
     }
 }
 
-/* For very small screens under 600px */
 @media (max-width: 600px) {
+    .capture-calc-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .pokemon-selector,
+    .pokemon-image,
+    .level,
+    .status,
+    .ball-section,
+    .capture-chance {
+        width: 100%;
+        max-width: 300px;
+    }
+    .hp-section{
+        max-width: 300px;
+    }
     .header h1 {
         font-size: 1.7rem;
     }
