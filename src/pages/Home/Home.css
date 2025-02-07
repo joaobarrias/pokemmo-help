@@ -1,11 +1,10 @@
-/* Home Container: Semi-transparent overlay to let the background image show through */
+/* Home Container */
 .home-container {
   margin: 90px auto 40px;  
   max-width: 1200px;
   padding: 20px;
   text-align: center;
-  color: #fff;  /* Default text becomes white */
-  /* Using a subtle gradient with reduced opacity so the underlying background image remains visible */
+  color: #fff;
   animation: fadeIn 0.5s ease-out;
 }
 
@@ -20,7 +19,6 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: #fff;
-  /* Matching text-shadow effect as in your Capture Chance header */
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
                -1px -1px 2px rgba(0, 0, 0, 1),
                1px -1px 2px rgba(0, 0, 0, 1),
@@ -53,7 +51,7 @@
 
 /* Feature Cards: Dark background with a subtle border */
 .feature-card {
-  background-color: #444c567e;  /* Dark gray matching your navbar style */
+  background-color: #444c567e;
   border-radius: 8px;
   padding: 25px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
@@ -71,7 +69,7 @@
 /* Feature Card Headings */
 .feature-card h2 {
   font-size: 1.6rem;
-  color: #ef1c1f;  /* Red accent for emphasis */
+  color: #ef1c1f;
   margin-bottom: 15px;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
                -1px -1px 2px rgba(0, 0, 0, 1),
@@ -82,11 +80,11 @@
 /* Feature Card Paragraphs */
 .feature-card p {
   font-size: 1rem;
-  color: #ddd;  /* Light text for readability */
+  color: #ddd;
   margin-bottom: 20px;
 }
 
-/* Feature Button (for "Try Now") */
+/* Feature Button */
 .feature-button {
   display: inline-block;
   background-color: #23262f;
