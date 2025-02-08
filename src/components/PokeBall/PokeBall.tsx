@@ -72,6 +72,7 @@ const PokeBall: React.FC<PokeBallProps> = ({ selectedPokeball, setSelectedPokeba
       <div className="pokeball-select-container">
         <Select
           options={pokeballOptions}
+          menuPortalTarget={document.body}
           value={
             selectedPokeball
               ? pokeballOptions.find((option) => option.value.name === selectedPokeball.name) // Find by object name

@@ -10,12 +10,13 @@
   flex-direction: column;
   min-height: 110vh;
   width: 100%;
+  position: relative; 
 }
 
 .content {
   flex: 1;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .content-with-bg {
@@ -79,7 +80,8 @@ body {
   border: 1px solid #ccc !important;    
   top: calc(100% + 5px) !important; 
   cursor: pointer !important;
-  z-index: 4 !important;
+  position: absolute !important;
+  z-index: 9999 !important;
 }
 
 .react-select__menu-list {

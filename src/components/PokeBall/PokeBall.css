@@ -8,6 +8,7 @@
     max-width: 250px;
     position: relative;
     margin-left: 150px;
+    z-index: 0;
 }
 
 .pokeball-label {

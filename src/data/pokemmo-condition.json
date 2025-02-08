@@ -43,18 +43,19 @@
       "meloetta",
       "genesect"
     ],
-    "standardVariants":[
-      "darmanitan"
-    ],
+    "variants":{
+      "darmanitan": "standard",
+      "wormadam": "plant"
+    },
     "alpha": {
-    "default": 10,
-    "tyranitar": 5,
-    "suicune": 5,
-    "moltres": 5,
-    "raikou": 5,
-    "articuno": 5,
-    "zapdos": 5,
-    "entei": 5
+      "default": 10,
+      "tyranitar": 5,
+      "suicune": 5,
+      "moltres": 5,
+      "raikou": 5,
+      "articuno": 5,
+      "zapdos": 5,
+      "entei": 5
   }
 }
   

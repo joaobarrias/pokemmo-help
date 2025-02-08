@@ -5,8 +5,11 @@ import './NavBar.css'; // Import CSS
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
   const hamburgerRef = useRef<HTMLDivElement | null>(null);
+  const lastScrollY = useRef(0);
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,7 +18,23 @@ const NavBar: React.FC = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+  
+  const handleScroll = () => {
+    if (window.scrollY > lastScrollY.current) {
+      setIsScrollingDown(true);
+    } else {
+      setIsScrollingDown(false);
+    }
 
+    // Close the menu when scrolling down
+    if (isScrollingDown) {
+      setIsMenuOpen(false);
+    }
+
+    // Update the last scroll position
+    lastScrollY.current = window.scrollY;
+  };
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -27,11 +46,16 @@ const NavBar: React.FC = () => {
         setIsMenuOpen(false);
       }
     };
+
+    // Add the scroll event listener
+    window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll); // Clean up scroll event
+      document.removeEventListener('mousedown', handleClickOutside); // Clean up click event
     };
-  }, []);
+  }, [isScrollingDown]);
 
   return (
     <nav className="navbar">

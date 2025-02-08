@@ -12,6 +12,7 @@
   left: 0;
   bottom: 0;
   margin-top: auto;
+  z-index: 1;
 }
 
 .footer-container {

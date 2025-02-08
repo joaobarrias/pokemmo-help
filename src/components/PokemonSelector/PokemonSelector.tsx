@@ -23,6 +23,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     const [previousCatchRate, setPreviousCatchRate] = useState<number | null>(null);
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
+    const [isCheckboxDisabled, setIsCheckboxDisabled] = useState<boolean>(false);
     const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
     const inputPokemonRef = useRef<HTMLInputElement | null>(null);
     const alphaStateRef = useRef(isAlpha);
@@ -54,6 +55,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       }
     }, [isAlpha, hasInteractedWithCheckbox]); // Dependencies
 
+    
     useEffect(() => {
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
@@ -86,10 +88,10 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         catchRateToUse = customCatchRate !== undefined ? customCatchRate : speciesData.capture_rate;
       }
 
-      // Get the correct variant
-      const standardVariants = exclusivePokemonData.standardVariants;
-      if (standardVariants.includes(apiName)) {
-        apiName = `${apiName}-standard`;
+      // Get the correct variant from the standardVariants
+      const variant = (exclusivePokemonData.variants as Record<string, string>)[apiName];
+      if (variant) {
+        apiName = `${apiName}-${variant}`;
       }
 
       // Now fetch the Pokémon's data (e.g., image)
@@ -115,11 +117,10 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         return typeName;
       }).filter(Boolean);
 
-      const formattedName = pokemonData.name.replace("-standard", ""); // Remove "-standard"
-      const capitalizedName = formattedName.charAt(0).toUpperCase() + formattedName.slice(1); // Capitalize
+      const formattedName = formatPokemonName(pokemonData.name);
 
       setPokemonState({
-        name: capitalizedName,
+        name: formattedName,
         id: pokemonData.id,
         stats: {
           hp: pokemonData.stats.find((stat: any) => stat.stat.name === "hp")?.base_stat || null,
@@ -142,10 +143,32 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       }
     };
     
-    const handleCheckboxChange = () => {
-      setIsAlpha(!isAlpha); // Toggle the checkbox state
-      setHasInteractedWithCheckbox(true); // Mark as interacted with checkbox
+    const formatPokemonName = (name: string) => {
+      // Get the list of variant suffixes from the JSON
+      const variantSuffixes = Object.values(exclusivePokemonData.variants);
+    
+      // Dynamically remove the suffix from the Pokémon name
+      const cleanedName = variantSuffixes.reduce((currentName, variant) => {
+        const variantPattern = `-${variant}`;
+        if (currentName.endsWith(variantPattern)) {
+          return currentName.slice(0, -variantPattern.length); // Remove the variant suffix
+        }
+        return currentName;
+      }, name);
+    
+      // Capitalize the cleaned name
+      return cleanedName.charAt(0).toUpperCase() + cleanedName.slice(1).toLowerCase();
     };
+
+    const handleCheckboxChange = () => {
+      setIsCheckboxDisabled(true);
+      setIsAlpha(!isAlpha);
+      setHasInteractedWithCheckbox(true);
+      setTimeout(() => {
+        setIsCheckboxDisabled(false);
+      }, 300);
+    };
+
 
     const handleSuggestionClick = (name: string) => {
       setPokemonState((prevState) => ({ ...prevState, name })); // Set the input value to the clicked suggestion
@@ -231,10 +254,6 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       );
     };
         
-    const formatPokemonName = (name: string) => {
-      return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-    };
-        
   return (
     <div className="pokemon-section">
       {/* Alpha Checkbox */}
@@ -244,7 +263,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
           className="checkbox"
           checked={isAlpha}
           onChange={handleCheckboxChange}
-          disabled={pokemonState.id === null} // Disable if catch rate is not set
+          disabled={isCheckboxDisabled || pokemonState.id === null}
         />
         Alpha Pokémon?
       </label>
@@ -268,6 +287,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
           });
           setSuggestions(allPokemon.map(pokemon => pokemon.name));
         }}
+        disabled={pokemonState.catchRate === null}
       />
       {/* Suggestions List */}
       {suggestions.length > 0 && (
