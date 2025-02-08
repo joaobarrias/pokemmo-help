@@ -1,6 +1,6 @@
 // Main: App.tsx
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css"; // Import CSS
 import excludedPokemonData from "./data/pokemmo-condition.json"; // Import pokemons name that don't exist in PokeMMO
 import NavBar from "./components/NavBar/NavBar"; // Import Navegation Bar Menu
