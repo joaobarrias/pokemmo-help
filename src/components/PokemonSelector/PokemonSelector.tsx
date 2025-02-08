@@ -244,7 +244,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
           className="checkbox"
           checked={isAlpha}
           onChange={handleCheckboxChange}
-          disabled={pokemonState.catchRate === null} // Disable if catch rate is not set
+          disabled={pokemonState.id === null} // Disable if catch rate is not set
         />
         Alpha Pokémon?
       </label>
