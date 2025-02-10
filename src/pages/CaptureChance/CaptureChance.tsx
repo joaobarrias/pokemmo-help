@@ -1,38 +1,36 @@
 // Page: CaptureChance.tsx
 import { useState, useEffect } from "react";
 import "./CaptureChance.css"; // Import CSS
-import PokemonSelector from "../../components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
-import ImageAndLevel from "../../components/ImageAndLevel/ImageAndLevel";  // Import the Level component
-import Status from "../../components/Status/Status";  // Import the PokemonSelector component
-import HP from "../../components/HP/HP";  // Import the HP component
-import PokeBall from "../../components/PokeBall/PokeBall";  // Import the PokeBall component
-import CaptureCalc from "../../components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
+import PokemonSelector from "./components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
+import ImageAndLevel from "./components/ImageAndLevel/ImageAndLevel";  // Import the Level component
+import Status from "./components/Status/Status";  // Import the PokemonSelector component
+import HP from "./components/HP/HP";  // Import the HP component
+import PokeBall from "./components/PokeBall/PokeBall";  // Import the PokeBall component
+import CaptureCalc from "./components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
 
 interface CaptureChanceProps {
-  allPokemon: { name: string; id: number }[];
-}
-
-export interface PokemonStats {
-  hp: number | null;
-  speed: number | null;
-  weight: number | null;
+  filteredPokemon: { name: string; id: number }[];
 }
 
 export interface PokemonState {
   name: string;
   id: number | null;
-  stats: PokemonStats;
+  stats: {
+    hp: number | null;
+    speed: number | null;
+    weight: number | null;
+  };
   imageUrl: string | null;
   catchRate: number | null;
   types: string[];
 }
 
-const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
+const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
   const [pokemonState, setPokemonState] = useState<PokemonState>({
     name: "Pikachu",
     id: 25,
-    stats: { hp: 35, speed: 90, weight: 60 },
-    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+    stats: { hp: 35, speed: 90, weight: 6 },
+    imageUrl: "../../sprites/pikachu.png",
     catchRate: 190,
     types: ['electric'],
   });
@@ -56,7 +54,6 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
       const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15.5) * levelValue) / 100) + levelValue + 10)
       setAverageHp(avgHp);
     }
-
     setHpControl(!hpControl);
   }, [pokemonState.id, pokemonState.catchRate, level]); // Dependencies
 
@@ -78,7 +75,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ allPokemon }) => {
           setPokemonState={setPokemonState}
           isAlpha={isAlpha}
           setIsAlpha={setIsAlpha}
-          allPokemon={allPokemon}
+          filteredPokemon={filteredPokemon}
           />
 
           

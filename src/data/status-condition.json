@@ -1,0 +1,9 @@
+{
+    "None": { "multiplier": 1, "icon": null },
+    "Asleep": { "multiplier": 2, "icon": "./status/asleep.png" },
+    "Burned": { "multiplier": 1.5, "icon": "./status/burned.png" },
+    "Frozen": { "multiplier": 2, "icon": "./status/frozen.png" },
+    "Paralyzed": { "multiplier": 1.5, "icon": "./status/paralyzed.png" },
+    "Poisoned": { "multiplier": 1.5, "icon": "./status/poisoned.png" }
+}
+  

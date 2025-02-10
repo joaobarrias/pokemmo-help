@@ -26,13 +26,10 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
             <label htmlFor="theme">Theme:</label>
             <select id="theme" onChange={handleThemeChange}>
               <option value="background-images/Pikachu.jpg">Pikachu</option>
-              <option value="background-images/Ash.jpg">Ash</option>
-              <option value="background-images/Jirachi.png">Jirachi</option>
-              <option value="background-images/Eevee.jpg">Eevee</option>
+              <option value="background-images/PokemonGo.jpg">Pokemon GO</option>
               <option value="background-images/OldChateau.jpg">Old Chateau</option>
-              <option value="background-images/Reshiram.png">Reshiram</option>
               <option value="background-images/Darkrai.jpg">Darkrai</option>
-              <option value="background-images/Regice.png">Regice</option>
+              <option value="background-images/Contest.jpg">Contest</option>
               <option value="background-images/CharizardX.jpg">Charizard X</option>
               <option value="background-images/Chandelure.jpg">Chandelure</option>
               <option value="background-images/Halloween.jpg">Halloween</option>

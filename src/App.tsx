@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css"; // Import CSS
-import excludedPokemonData from "./data/pokemmo-condition.json"; // Import pokemons name that don't exist in PokeMMO
+import pokemmoData from "./data/pokemmo-data.json"; // Import PokeMMO data
 import NavBar from "./components/NavBar/NavBar"; // Import Navegation Bar Menu
 import Footer from "./components/Footer/Footer"; // Import Footer
 import Home from "./pages/Home/Home";  // Import Type Effectiveness page
@@ -14,52 +14,41 @@ import TypeEffectiveness from "./pages/TypeEffectiveness/TypeEffectiveness";  //
 const App: React.FC = () => {
 
   const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
+  const [filteredPokemon, setFilteredPokemon] = useState<{ name: string; id: number }[]>([]);
 
   useEffect(() => {
-    const fetchAllPokemon = async () => {
+    const loadPokemonData  = () => {
       try {
-        // Exclude other gens except the ones bellow
-        const urls = [
-          "https://pokeapi.co/api/v2/generation/1",
-          "https://pokeapi.co/api/v2/generation/2",
-          "https://pokeapi.co/api/v2/generation/3",
-          "https://pokeapi.co/api/v2/generation/4",
-          "https://pokeapi.co/api/v2/generation/5",
-        ];
-
-        const responses = await Promise.all(urls.map((url) => fetch(url)));
-        const generations = await Promise.all(responses.map((res) => res.json()));
-
-        const pokemonList = generations.flatMap((gen) =>
-          gen.pokemon_species.map((species: { name: string; url: string }) => {
-            const id = parseInt(species.url.split("/")[6]); // Extract ID from the URL
-            return { name: species.name.charAt(0).toUpperCase() + species.name.slice(1), id };
-          })
-        );
-
-         // Filter out excluded Pokémon names
-        const filteredPokemonList = pokemonList.filter(
-          (pokemon) => !excludedPokemonData.excludePokemon.includes(pokemon.name.toLowerCase())
-        );
+        // Extract Pokémon names and IDs from JSON
+        const pokemonList = Object.entries(pokemmoData).map(([name, data]: [string, any]) => {
+          // Check if formattedName exists in the data
+          const pokemonName = data.formattedName ? data.formattedName : name.charAt(0).toUpperCase() + name.slice(1); // Use formattedName if available, otherwise apply default name formatting
   
-        setAllPokemon(filteredPokemonList.sort((a, b) => a.id - b.id));
+          return {
+            name: pokemonName, // Assign formattedName or original name
+            id: data.id,
+            originalName: name,
+          };
+        });
+
+        setAllPokemon(pokemonList);
+        const filtered = pokemonList.filter(pokemon => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0);
+        setFilteredPokemon(filtered);
       } catch (err) {
-        console.error("Failed to fetch Pokémon list:", err);
+        console.error("Failed to fetch Pokémon data:", err);
       }
     };
-
-    fetchAllPokemon();
-
+    loadPokemonData();
   }, []);
 
   return (
     <Router>
-      <AppWithRouter allPokemon={allPokemon}/>
+      <AppWithRouter filteredPokemon={filteredPokemon}/>
     </Router>
   );
 };
 
-const AppWithRouter: React.FC<{ allPokemon: { name: string; id: number }[] }> = ({ allPokemon }) => {
+const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[] }> = ({ filteredPokemon }) => {
   const location = useLocation();
   const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/";
   const [backgroundImage, setBackgroundImage] = useState("background-images/Pikachu.jpg");
@@ -73,7 +62,7 @@ const AppWithRouter: React.FC<{ allPokemon: { name: string; id: number }[] }> = 
       >
         <Routes>
           <Route path="/" element={<Home  />} />
-          <Route path="/capture-chance" element={<CaptureChance allPokemon={allPokemon}  />} />
+          <Route path="/capture-chance" element={<CaptureChance filteredPokemon={filteredPokemon}  />} />
           <Route path="/pokemon-search" element={<PokemonSearch  />} />
           <Route path="/type-chart" element={<TypeEffectiveness  />} />
         </Routes>
