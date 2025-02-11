@@ -120,9 +120,9 @@ type HPProps = {
             percentage = hpPercentValue; // Percentage is directly the input
         }
 
-        current = Math.floor(current); // Rounds down current HP to the nearest integer
+        current = current < 1 ? 1 : Math.floor(current); // Rounds down current HP to the nearest integer
         percentage = parseFloat(percentage.toFixed(1)); // Rounds percentage to 1 decimal place
-
+        
         setCurrentHp(current);
         setHpBarPercentage(percentage);
         setCaptureControl(!captureControl);

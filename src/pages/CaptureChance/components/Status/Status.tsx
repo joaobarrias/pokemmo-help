@@ -46,6 +46,7 @@ const Status: React.FC<StatusProps> = ({ selectedStatus, setSelectedStatus }) =>
         className="status-select"
         classNamePrefix="react-select"
         isSearchable={false}
+        menuShouldScrollIntoView={false}
       />
       <p className="status-value">
         Multiplier: {selectedStatus?.multiplier || 1}x

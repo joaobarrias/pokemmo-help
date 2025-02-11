@@ -53,6 +53,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
       const levelValue = parseFloat(level);
       const avgHp = Math.floor((((2 * pokemonState.stats.hp + 15) * levelValue) / 100) + levelValue + 10)
       setAverageHp(avgHp);
+      
     }
     setHpControl(!hpControl);
   }, [pokemonState.id, pokemonState.catchRate, level]); // Dependencies

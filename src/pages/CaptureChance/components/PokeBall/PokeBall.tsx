@@ -76,6 +76,7 @@ const PokeBall: React.FC<PokeBallProps> = ({ selectedPokeball, setSelectedPokeba
               <span>{data.value}</span>
             </div>
           )}
+          menuShouldScrollIntoView={false}
         />
         <div className="pokeball-description-container">
           <p className="pokeball-description">{selectedPokeball?.description || ""}</p>
