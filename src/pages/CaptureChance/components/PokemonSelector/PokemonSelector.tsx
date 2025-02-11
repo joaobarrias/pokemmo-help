@@ -185,8 +185,6 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       }
     };
     
-    
-    
     const handleInputBlur = () => {
       // Only reset to Pikachu if the user has not written a valid suggestion
       if (pokemonState.name.trim() && !suggestions.length) {

@@ -7,7 +7,7 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 ### **Capture Chance**
 
 - Allows users to calculate the probability of catching a Pokémon in **PokeMMO** using the official Pokémon formula.
-- Fetches Pokémon data (Gen 1-5) from **PokéAPI**, excluding specific Pokémon listed in a custom JSON file.
+- Fetches **Pokémon data** from **local JSON files**, which store the essential Pokémon information (Gen 1-5) and specific PokeMMO mechanics.
 - Live search with an autocomplete suggestion box that filters Pokémon names as the user types.
 - Fetches essential data such as **HP, Speed, Weight, Catch Rate, Type, and Image** when a Pokémon is selected.
 - Adjusts catch rates for **PokeMMO-specific Pokémon** using a separate JSON file.
@@ -17,7 +17,7 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 - Provides a **Poké Ball selector** with built-in conditions (e.g., fishing checks, type-based multipliers).
 - The capture chance updates **dynamically in real time**, ensuring a smooth user experience without the need for manual refreshes
 - **Theme selector** for background customization, allowing users to submit custom themes via Discord.
-- **Language selection** (Currently only English, with more planned).
+- **Language selection** (Currently only English, with more planned in the future).
 
 ### **Coming Soon**
 
@@ -28,7 +28,7 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 
 ### **Capture Chance**
 
-1. The app fetches **Pokémon data** from **PokéAPI**, filtering out ineligible Pokémon using a JSON file.
+1. The app fetches **Pokémon data** from **local JSON files**, filtering out ineligible Pokémon based on custom game-specific conditions.
 2. Users select a Pokémon through a **live search suggestion box**.
 3. Upon selection, the app retrieves **stats, image, and catch rate**, checking a separate JSON file for PokeMMO-specific rates.
 4. If the Pokémon has an **Alpha** variant, a checkbox allows switching to its custom catch rate with a red aura effect.
@@ -50,8 +50,7 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 - **Vite:** Lightning-fast development environment.
 - **TypeScript:** Ensures strong typing and better code maintainability.
 - **CSS:** Custom styles with a dark theme and responsive design.
-- **PokéAPI:** Provides Pokémon data (Gen 1-5) for calculations.
-- **JSON:** Stores custom game-specific data (catch rates, evolutions, Poké Ball multipliers, etc.).
+- **JSON:** Stores all Pokémon and game-specific data, including catch rates, evolutions, Poké Ball multipliers, etc.
 
 ## 💻 Installation
 

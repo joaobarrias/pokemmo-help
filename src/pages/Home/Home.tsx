@@ -31,6 +31,7 @@ const Home: React.FC = () => {
       
       <p className="discord-link">
         Join our <a href="https://discord.com/invite/syryMAF4Kr" target="_blank" rel="noopener noreferrer">Discord</a> for updates and community contributions!
+        <p>Since this is a new project, bugs are to be expected. Please report them in our discord. Thanks!</p>
       </p>
     </div>
   );
