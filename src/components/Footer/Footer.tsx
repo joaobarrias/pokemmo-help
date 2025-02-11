@@ -1,4 +1,3 @@
-// Component: Footer.tsx
 import { FaDiscord, FaGithub } from "react-icons/fa"; // Import icons
 import React from "react";
 import "./Footer.css"; // Import CSS
@@ -9,7 +8,11 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setBackgroundImage(event.target.value);
+    const selectedTheme = event.target.value;
+    setBackgroundImage(selectedTheme);
+    
+    // Store the selected theme in localStorage
+    localStorage.setItem('backgroundImage', selectedTheme);
   };
 
   return (
@@ -20,7 +23,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
         </div>
       </div>
       <div className="footer-row">
-        {/* Theme Selector  */}
+        {/* Theme Selector */}
         <div className="theme-submit-container">
           <div className="theme-selector">
             <label htmlFor="theme">Theme:</label>
@@ -40,6 +43,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
           </div>
           <p className="submit-art">🎨 Submit your art on Discord</p>
         </div>
+
         {/* Footer Menu */}
         <ul className="footer-menu">
           <li><a href="https://github.com/joaobarrias/pokemmo-help" target="_blank" rel="noopener noreferrer">
@@ -72,4 +76,3 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
 };
 
 export default Footer;
-

@@ -1,6 +1,6 @@
 # PokeMMO Help
 
-Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for Pokémon trainers in **PokeMMO**, helping them calculate capture chances, search for Pokémon, and analyze type effectiveness.
+Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for Pokémon trainers in **PokeMMO**, helping them calculate capture chances, search for Pokémon, and analyze type effectiveness. Available now at **https://www.pokemmo.help/**.
 
 ## 🚀 Features
 
