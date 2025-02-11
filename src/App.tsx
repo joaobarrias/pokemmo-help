@@ -32,8 +32,11 @@ const App: React.FC = () => {
         });
 
         //setAllPokemon(pokemonList);
-        const filtered = pokemonList.filter(pokemon => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0);
-        setFilteredPokemon(filtered);
+        const filtered = pokemonList
+        .filter(pokemon => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0)
+        .map(({ name, id }) => ({ name, id }));
+
+      setFilteredPokemon(filtered);
       } catch (err) {
         console.error("Failed to fetch Pokémon data:", err);
       }

@@ -21,6 +21,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
   filteredPokemon
   }) => {
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const isFetchingDataRef = useRef(false);
     const [hasInteractedWithCheckbox, setHasInteractedWithCheckbox] = useState(false);
     const suggestionBoxRef = useRef<HTMLUListElement | null>(null);
     const inputPokemonRef = useRef<HTMLInputElement | null>(null);
@@ -58,6 +59,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     const fetchPokemonData = async (name: string) => {
       if (!name.trim()) return; // Don't fetch if the name is empty
       try {
+        isFetchingDataRef.current = true;
         let pokemonName = name.toLowerCase().replace(' ', '-').replace('.', '');
         let catchRateToUse: number | null = null;
         let pokemon = (pokemmoData as any)[pokemonName];
@@ -119,50 +121,71 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       setSuggestions([]); // Clear suggestions
       fetchPokemonData(name); // Fetch the Pokémon data for the clicked suggestion
       inputPokemonRef.current?.blur();
+      isFetchingDataRef.current = false;
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const input = e.target.value.trim();
-      const value = input ? input.charAt(0).toUpperCase() + input.slice(1).toLowerCase() : ""; 
-      setPokemonState((prevState) => ({ ...prevState, name: value }));
-      if (!value) {
-        // If the input is empty, show the entire list of Pokémon
-        setSuggestions(filteredPokemon.map(pokemon => pokemon.name));
+      const rawValue = e.target.value;
+      setPokemonState((prevState) => ({ ...prevState, name: rawValue })); // Update input state
+    
+      if (!rawValue.trim()) {
+        setSuggestions(filteredPokemon.map((pokemon) => pokemon.name)); // Show all if empty
         return;
       }
-      
+    
+      const formattedValue = rawValue.toLowerCase().trim().replace(/ /g, "-"); // Convert spaces for lookup
+    
+      // Find Pokémon whose name **contains** the input (for searching)
       const matches = filteredPokemon
-      .filter(pokemon => pokemon.name.includes(value))
-      .map(pokemon => pokemon.name);
-
-      // Check if there's an exact match
-      const exactMatch = matches.some(
-        (pokemon) => pokemon === value
+        .filter((pokemon) => pokemon.name.toLowerCase().includes(rawValue.toLowerCase()))
+        .map((pokemon) => pokemon.name);
+    
+      // Find Pokémon whose name **starts** with the input (for auto-selection logic)
+      const prefixMatches = matches.filter((name) => name.toLowerCase().startsWith(rawValue.toLowerCase()));
+    
+      // Find an exact match using formattedValue
+      const exactMatch = filteredPokemon.find(
+        (pokemon) => pokemon.name.toLowerCase().replace(/ /g, "-") === formattedValue
       );
-
+    
       if (exactMatch) {
-        // If there's an exact match, clear suggestions and fetch data
-        setSuggestions([]);
-        fetchPokemonData(value);
-        inputPokemonRef.current?.blur(); // Unfocus the input text
+        // If there's an exact match and only one prefix match (meaning we can auto-select)
+        if (prefixMatches.length === 1) {
+          setSuggestions([]); // Clear suggestions if there's only one match
+          fetchPokemonData(exactMatch.name); // Fetch data for that Pokémon
+          inputPokemonRef.current?.blur(); // Unfocus input field
+          isFetchingDataRef.current = false;
+        } else {
+          setSuggestions(prefixMatches); // Keep suggestions open if there are multiple matches
+          fetchPokemonData(prefixMatches[0]); // Fetch data for the first match
+        }
       } else {
-        // Otherwise, show filtered suggestions
-        setSuggestions(matches);
+        setSuggestions(matches); // Show all matches if no exact match is found
       }
     };
     
     const handleClickOutside = (e: MouseEvent) => {
-      // Reset to Pikachu if the user has clicked out of the input text
+      // Check if the user clicked outside the input or the suggestion box
       if (
         inputPokemonRef.current &&
         suggestionBoxRef.current &&
         !inputPokemonRef.current.contains(e.target as Node) &&
         !suggestionBoxRef.current.contains(e.target as Node)
       ) {
-        fetchPokemonData("Pikachu");
-        setSuggestions([]);
+        // Only clear suggestions if there are any
+        setSuggestions([])
+        if (isFetchingDataRef.current){
+          isFetchingDataRef.current = false;
+          return;
+        }
+        else{
+          fetchPokemonData("Pikachu");
+          isFetchingDataRef.current = false
+        }
       }
     };
+    
+    
     
     const handleInputBlur = () => {
       // Only reset to Pikachu if the user has not written a valid suggestion
@@ -172,6 +195,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         );
         if (!isValidPokemon) {
           fetchPokemonData("Pikachu");
+          isFetchingDataRef.current = false
         }
       }
     };
