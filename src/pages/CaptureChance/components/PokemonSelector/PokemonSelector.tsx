@@ -116,38 +116,33 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
 
 
     const handleSuggestionClick = (name: string) => {
-      setPokemonState((prevState) => ({ ...prevState, name })); // Set the input value to the clicked suggestion
       setSuggestions([]); // Clear suggestions
       fetchPokemonData(name); // Fetch the Pokémon data for the clicked suggestion
       inputPokemonRef.current?.blur();
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value.trim().toLowerCase();
+      const input = e.target.value.trim();
+      const value = input ? input.charAt(0).toUpperCase() + input.slice(1).toLowerCase() : ""; 
       setPokemonState((prevState) => ({ ...prevState, name: value }));
-      
-      if (value === "") {
+      if (!value) {
         // If the input is empty, show the entire list of Pokémon
         setSuggestions(filteredPokemon.map(pokemon => pokemon.name));
         return;
       }
-      let matches: string[] = [];
-      for (const pokemon of filteredPokemon) {
-        if (pokemon.name.toLowerCase().includes(value.toLowerCase())) {
-          matches.push(pokemon.name);
-        }
-        if (matches.length === 30) break; // Stop once 30 matches are found
-      }
+      
+      const matches = filteredPokemon
+      .filter(pokemon => pokemon.name.includes(value))
+      .map(pokemon => pokemon.name);
 
       // Check if there's an exact match
       const exactMatch = matches.some(
-        (pokemon) => pokemon.toLowerCase() === value.toLowerCase()
+        (pokemon) => pokemon === value
       );
 
       if (exactMatch) {
         // If there's an exact match, clear suggestions and fetch data
         setSuggestions([]);
-        setPokemonState((prevState) => ({ ...prevState, name: value }));
         fetchPokemonData(value);
         inputPokemonRef.current?.blur(); // Unfocus the input text
       } else {

@@ -26,8 +26,6 @@ interface CaptureCalcProps {
     const [captureChance, setCaptureChance] = useState<number | null>(null);
     const [currentBallMultiplier, setCurrentBallMultiplier] = useState<number | null>(1);
     const [isCaveOrNight, setIsCaveOrNight] = useState(true);
-    const [isMoonStoneEvolution, setIsMoonStoneEvolution] = useState(true);
-    const [isHappinessEvolution, setIsHappinessEvolution] = useState(true);
     const [isSameEvolutionLineAndOppositeGender, setIsSameEvolutionLineAndOppositeGender] = useState(false);
     const [isFishingRodCatch, setIsFishingRodCatch] = useState(true);
     const [turns, setTurns] = useState<string | null>('11');
@@ -37,20 +35,17 @@ interface CaptureCalcProps {
     const [sleepTurns, setSleepTurns] =  useState<string | null>('3');
     const [caughtCount, setCaughtCount] =  useState<string | null>('15');
 
-    useEffect(() => {
-      if (!pokemonState) return;
+    const checkEvolutionType = () => {
       const pokemonName = pokemonState.name.toLowerCase().replace(' ', '-').replace('.', '');
       const pokemon = (pokemmoData as any)[pokemonName];
-      if (pokemon && selectedPokeball?.name === "Moon Ball") {
-        setIsMoonStoneEvolution(pokemon?.evolutionType === "moonStone");
+    
+      if (selectedPokeball?.name === "Moon Ball" && pokemonState) {
+        return pokemon?.evolutionType === "moonStone";
+      } else if (selectedPokeball?.name === "Friend Ball" && pokemonState) {
+        return pokemon?.evolutionType === "happiness";
       }
-  
-      if (pokemon && selectedPokeball?.name === "Friend Ball") {
-        setIsHappinessEvolution(pokemon?.evolutionType === "happiness");
-      }
-
-    }, [selectedPokeball, pokemonState.name]);
-
+      return false;
+    };
 
     const getMultiplier = () => {
       if (!selectedPokeball) return 1;
@@ -69,12 +64,12 @@ interface CaptureCalcProps {
         "Quick Ball": [isFirstTurn],
         "Dream Ball": [sleepTurns ? parseInt(sleepTurns, 10) : 0],
         "Fast Ball": [pokemonState?.stats?.speed || 0],
-        "Friend Ball": [isHappinessEvolution],
+        "Friend Ball": [checkEvolutionType()],
         "Heavy Ball": [pokemonState?.stats?.weight || 0],
-        "Level Ball": [myLevel ? parseInt(myLevel, 10) : 1, levelNumber],
+        "Level Ball": [myLevel ? parseInt(myLevel, 10) : 50, levelNumber],
         "Love Ball": [isSameEvolutionLineAndOppositeGender],
         "Lure Ball": [isFishingRodCatch],
-        "Moon Ball": [isMoonStoneEvolution],
+        "Moon Ball": [checkEvolutionType()],
       };
 
       // Check if multiplier is a function stored as a string
@@ -107,7 +102,7 @@ interface CaptureCalcProps {
 
     useEffect(() => {
       // Ensure valid inputs before calculating
-      if (!currentHp || !averageHp || !pokemonState.catchRate || !selectedPokeball || !selectedStatus || !level) return;
+      if (!currentHp || !averageHp || !selectedPokeball || !selectedStatus || !level) return;
 
       const ballMultiplier = getMultiplier();
       const captureRate = calculateCaptureChance(ballMultiplier);
@@ -353,17 +348,6 @@ interface CaptureCalcProps {
             </div>
           )}
 
-          {selectedPokeball?.name === "Moon Ball" && (
-            <div className="input-field">
-              <label>Does it evolve with a moon stone? {isMoonStoneEvolution ? "Yes" : "No"}</label>
-            </div>
-          )}
-
-          {selectedPokeball?.name === "Friend Ball" && (
-            <div className="input-field">
-              <label>Does it evolve from happiness? {isHappinessEvolution ? "Yes" : "No"}</label>
-            </div>
-          )}
         </div>
 
         {/* Display calculated capture chance */}

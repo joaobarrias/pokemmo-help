@@ -30,7 +30,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
     name: "Pikachu",
     id: 25,
     stats: { hp: 35, speed: 90, weight: 6 },
-    imageUrl: "../../sprites/pikachu.png",
+    imageUrl: "sprites/default/25.png",
     catchRate: 190,
     types: ['electric'],
   });

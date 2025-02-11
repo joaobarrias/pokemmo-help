@@ -30,7 +30,7 @@
     "imagePath": "./pokeballs/net-ball.png"
   },
   "Nest Ball": {
-    "multiplier": "level => Math.max(1, Math.min(4, (7 - (0.2 * (level - 1))))),",
+    "multiplier": "level => Math.max(1, Math.min(4, (7 - (0.2 * (level - 1)))))",
     "description": "The catch rate decreases as the target Pokémon's level increases, from 4x at level 1 to 1x at level 31 and beyond",
     "imagePath": "./pokeballs/nest-ball.png"
   },
@@ -100,7 +100,7 @@
     "imagePath": "./pokeballs/heavy-ball.png"
   },
   "Level Ball": {
-    "multiplier": "pokemonLevel, wildLevel => pokemonLevel === wildLevel ? 4 : 1",
+    "multiplier": "(pokemonLevel, wildLevel) => pokemonLevel === wildLevel ? 4 : 1",
     "description": "4x if used on Pokémon who are the same level as yours, 1x otherwise",
     "imagePath": "./pokeballs/level-ball.png"
   },
