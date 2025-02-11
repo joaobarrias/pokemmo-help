@@ -119,9 +119,9 @@ type HPProps = {
             current = (averageHp * hpPercentValue) / 100; // Calculate current HP based on %
             percentage = hpPercentValue; // Percentage is directly the input
         }
-        // Round the values to 1 decimal place
-        current = parseFloat(current.toFixed(1));
-        percentage = parseFloat(percentage.toFixed(1));
+
+        current = Math.floor(current); // Rounds down current HP to the nearest integer
+        percentage = parseFloat(percentage.toFixed(1)); // Rounds percentage to 1 decimal place
 
         setCurrentHp(current);
         setHpBarPercentage(percentage);

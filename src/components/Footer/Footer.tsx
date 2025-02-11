@@ -1,5 +1,5 @@
 import { FaDiscord, FaGithub } from "react-icons/fa"; // Import icons
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Footer.css"; // Import CSS
 
 interface FooterProps {
@@ -7,10 +7,22 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
+  const [selectedTheme, setSelectedTheme] = useState("background-images/Pikachu.jpg"); // Default to Pikachu
+
+  useEffect(() => {
+    // Retrieve the stored background image from localStorage (if any)
+    const savedTheme = localStorage.getItem('backgroundImage');
+    if (savedTheme) {
+      setBackgroundImage(savedTheme); // Set background image
+      setSelectedTheme(savedTheme); // Set selected option in the dropdown
+    }
+  }, [setBackgroundImage]);
+
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTheme = event.target.value;
-    setBackgroundImage(selectedTheme);
-    
+    setBackgroundImage(selectedTheme); // Update the background
+    setSelectedTheme(selectedTheme); // Update the dropdown selection
+
     // Store the selected theme in localStorage
     localStorage.setItem('backgroundImage', selectedTheme);
   };
@@ -27,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
         <div className="theme-submit-container">
           <div className="theme-selector">
             <label htmlFor="theme">Theme:</label>
-            <select id="theme" onChange={handleThemeChange}>
+            <select id="theme" value={selectedTheme} onChange={handleThemeChange}>
               <option value="background-images/Pikachu.jpg">Pikachu</option>
               <option value="background-images/PokemonGo.jpg">Pokemon GO</option>
               <option value="background-images/OldChateau.jpg">Old Chateau</option>
