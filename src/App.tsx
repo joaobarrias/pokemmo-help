@@ -13,7 +13,7 @@ import TypeEffectiveness from "./pages/TypeEffectiveness/TypeEffectiveness";  //
 
 const App: React.FC = () => {
 
-  const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
+  //const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<{ name: string; id: number }[]>([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const App: React.FC = () => {
           };
         });
 
-        setAllPokemon(pokemonList);
+        //setAllPokemon(pokemonList);
         const filtered = pokemonList.filter(pokemon => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0);
         setFilteredPokemon(filtered);
       } catch (err) {
