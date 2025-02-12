@@ -15,7 +15,7 @@ const App: React.FC = () => {
   // Load the theme from localStorage or set a default theme
   const [backgroundImage, setBackgroundImage] = useState(() => {
     const savedTheme = localStorage.getItem('backgroundImage');
-    return savedTheme || "background-images/Pikachu.jpg"; // Default to Pikachu if no saved theme
+    return savedTheme || "background-images/Darkrai.jpg"; // Default to Darkrai if no saved theme
   });
 
   useEffect(() => {

@@ -21,6 +21,10 @@ const Status: React.FC<StatusProps> = ({ selectedStatus, setSelectedStatus }) =>
     if (selectedOption) {
       const statusObj = statusData[selectedOption.value as keyof typeof statusData];
       setSelectedStatus(statusObj || statusData["None"]);  // Default to "None" if not found
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement) {
+        activeElement.blur();
+      }
     }
   };
 
