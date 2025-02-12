@@ -7,9 +7,10 @@ import Footer from "./components/Footer/Footer"; // Import Footer
 import Home from "./pages/Home/Home"; // Import Home page
 import CaptureChance from "./pages/CaptureChance/CaptureChance"; // Import Capture Chance page
 import PokemonSearch from "./pages/PokemonSearch/PokemonSearch"; // Import Pokemon Search page
-import TypeEffectiveness from "./pages/TypeEffectiveness/TypeEffectiveness"; // Import Type Effectiveness page
+import TypeChart from "./pages/TypeChart/TypeChart"; // Import Type Effectiveness page
 
 const App: React.FC = () => {
+  const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<{ name: string; id: number }[]>([]);
 
   // Load the theme from localStorage or set a default theme
@@ -33,6 +34,7 @@ const App: React.FC = () => {
           };
         });
 
+        setAllPokemon(pokemonList);
         const filtered = pokemonList
           .filter(pokemon => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0)
           .map(({ name, id }) => ({ name, id }));
@@ -56,6 +58,7 @@ const App: React.FC = () => {
     <Router>
       <AppWithRouter
         filteredPokemon={filteredPokemon}
+        allPokemon={allPokemon}
         backgroundImage={backgroundImage}
         setBackgroundImage={setBackgroundImage}
       />
@@ -63,9 +66,9 @@ const App: React.FC = () => {
   );
 };
 
-const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[]; backgroundImage: string; setBackgroundImage: (image: string) => void }> = ({ filteredPokemon, backgroundImage, setBackgroundImage }) => {
+const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[]; allPokemon: { name: string; id: number }[]; backgroundImage: string; setBackgroundImage: (image: string) => void }> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage }) => {
   const location = useLocation();
-  const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/";
+  const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/" || location.pathname === "/type-chart";
   
   return (
     <div className="app-container">
@@ -78,7 +81,7 @@ const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[];
           <Route path="/" element={<Home />} />
           <Route path="/capture-chance" element={<CaptureChance filteredPokemon={filteredPokemon} />} />
           <Route path="/pokemon-search" element={<PokemonSearch />} />
-          <Route path="/type-chart" element={<TypeEffectiveness />} />
+          <Route path="/type-chart" element={<TypeChart allPokemon={allPokemon} />} />
         </Routes>
       </div>
       <Footer setBackgroundImage={setBackgroundImage} />

@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import "./CaptureChance.css"; // Import CSS
 import PokemonSelector from "./components/PokemonSelector/PokemonSelector";  // Import the PokemonSelector component
 import ImageAndLevel from "./components/ImageAndLevel/ImageAndLevel";  // Import the Level component
-import Status from "./components/Status/Status";  // Import the PokemonSelector component
+import Status from "./components/Status/Status";  // Import the Status component
 import HP from "./components/HP/HP";  // Import the HP component
 import PokeBall from "./components/PokeBall/PokeBall";  // Import the PokeBall component
-import CaptureCalc from "./components/CaptureCalc/CaptureCalc";  // Import the PokeBall component
+import CaptureCalc from "./components/CaptureCalc/CaptureCalc";  // Import the Capture Calc component
 
 interface CaptureChanceProps {
   filteredPokemon: { name: string; id: number }[];
