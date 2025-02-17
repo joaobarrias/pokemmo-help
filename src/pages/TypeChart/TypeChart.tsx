@@ -35,7 +35,7 @@ const TypeChart: React.FC<TypeChartProps> =  ({ allPokemon }) => {
       <div className="chart-body">
         {/* First Row: Attack/Defense & Pokémon Selection */}
         <div className="chart-main-container">
-          <AttackingEffectiveness selectedPokemon={selectedPokemon} />
+          <AttackingEffectiveness pokemonTypes={pokemonTypes} />
           <PokemonSelector selectedPokemon={selectedPokemon} allPokemon={allPokemon} setSelectedPokemon={setSelectedPokemon} setPokemonTypes={setPokemonTypes} pokemonTypes={pokemonTypes}/>
           <DefendingEffectiveness selectedPokemon={selectedPokemon} />
         </div>

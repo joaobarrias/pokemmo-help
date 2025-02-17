@@ -10,7 +10,6 @@
 .capture-calc-section {
     display: flex;
     flex-direction: column;
-    
     width: 100%;
     max-width: 380px;
     height: 180px;
@@ -114,6 +113,7 @@
     background: transparent;
     transform: translate(-23px);
     z-index: -1;
+    user-select: none;
 }
   
 .hp-bar-template-img {

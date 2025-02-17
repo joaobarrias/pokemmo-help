@@ -1,3 +1,4 @@
+// Component: PokemonSelector.tsx
 import React, { useState, useRef, useEffect } from "react";
 import "./PokemonSelector.css"; // Import CSS
 import pokemmoData from "../../../../data/pokemmo-data.json"; // Import all PokeMMO data
@@ -168,7 +169,14 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
 
     if (pokemonTypes.includes(type)) {
       // If the type is already selected, remove it
-      setPokemonTypes(pokemonTypes.filter((t) => t !== type));
+      const updatedTypes = pokemonTypes.filter((t) => t !== type);
+  
+      // If no types are selected, reset the pokemonTypes
+      if (updatedTypes.length === 0) {
+        setPokemonTypes([]); // Clear pokemonTypes array
+      } else {
+        setPokemonTypes(updatedTypes); // Update with remaining types
+      }
     } else if (pokemonTypes.length < 2) {
       // If less than two types are selected, just add the new type
       setPokemonTypes([...pokemonTypes, type]);
@@ -215,13 +223,11 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
 
       {/* Image Section (Remains Fixed) */}
       <div className="image-section">
-        {selectedPokemon.imageUrl ? (
-          <img
-            src={selectedPokemon.imageUrl}
-            alt={selectedPokemon.name}
-            className="selected-image"
-          />
-        ) : null}
+        <img
+          src={selectedPokemon.imageUrl || "/icons/pokemmo.png"}
+          alt={selectedPokemon.name || "No Pokémon Selected"}
+          className="selected-image"
+        />
       </div>
 
       {/* Type Selection Section */}
@@ -232,7 +238,6 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
             <div
               key={type}
               className={`type-image ${pokemonTypes.includes(type) ? "selected" : ""}`}
-              style={{ opacity: pokemonTypes.includes(type) ? 1 : 0.5 }}
               onClick={() => handleTypeClick(type)}
             >
               <img src={`/types/${type}.png`} alt={type} />

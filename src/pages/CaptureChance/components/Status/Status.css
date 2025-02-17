@@ -19,12 +19,15 @@
 
 .status-icon {
     z-index: 3;
-    transform: translate(-68px, -122px);
+    transform: translate(-68px, -125px);
+    width: 16px;
+    height: 16px;
 }
 
 .status-image{
-    width: 16px;
-    height: 16px;
+    width: 100%;
+    height: 100%;
+    user-select: none;
 }
 
 .status-section .react-select__option{
@@ -35,6 +38,7 @@
 
 .status-section .react-select__control{
     width: 130px !important;
+    user-select: none;
 }
 
 .status-section .react-select__menu{
@@ -62,7 +66,7 @@
     }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 406px) {
     .status-icon {
         transform: translate(27px, -281px);
     }
