@@ -5329,6 +5329,7 @@
     "weight": 202
   },
   "ho-oh": {
+    "formattedName": "Ho-Oh",
     "capture_rate": 0,
     "id": 250,
     "alpha": "no",
@@ -7501,6 +7502,7 @@
     "weight": 0.8
   },
   "castform-sunny": {
+    "formattedName": "Castform Sunny",
     "capture_rate": 0,
     "id": 10013,
     "alpha": "no",
@@ -7522,6 +7524,7 @@
     "weight": 0.8
   },
   "castform-rainy": {
+    "formattedName": "Castform Rainy",
     "capture_rate": 0,
     "id": 10014,
     "alpha": "no",
@@ -7543,6 +7546,7 @@
     "weight": 0.8
   },
   "castform-snowy": {
+    "formattedName": "Castform Snowy",
     "capture_rate": 0,
     "id": 10015,
     "alpha": "no",
@@ -8723,6 +8727,7 @@
     "weight": 6.5
   },
   "wormadam-sandy": {
+    "formattedName": "Wormadam Sandy",
     "capture_rate": 0,
     "id": 10004,
     "alpha": "no",
@@ -8745,6 +8750,7 @@
     "weight": 6.5
   },
   "wormadam-trash": {
+    "formattedName": "Wormadam Trash",
     "capture_rate": 0,
     "id": 10005,
     "alpha": "no",
@@ -10194,6 +10200,7 @@
     "weight": 0.3
   },
   "rotom-heat": {
+    "formattedName": "Rotom Heat",
     "capture_rate": 0,
     "id": 10008,
     "alpha": "no",
@@ -10216,6 +10223,7 @@
     "weight": 0.3
   },
   "rotom-wash": {
+    "formattedName": "Rotom Wash",
     "capture_rate": 0,
     "id": 10009,
     "alpha": "no",
@@ -10238,6 +10246,7 @@
     "weight": 0.3
   },
   "rotom-frost": {
+    "formattedName": "Rotom Frost",
     "capture_rate": 0,
     "id": 10010,
     "alpha": "no",
@@ -10260,6 +10269,7 @@
     "weight": 0.3
   },
   "rotom-fan": {
+    "formattedName": "Rotom Fan",
     "capture_rate": 0,
     "id": 10011,
     "alpha": "no",
@@ -10282,6 +10292,7 @@
     "weight": 0.3
   },
   "rotom-mow": {
+    "formattedName": "Rotom Mow",
     "capture_rate": 0,
     "id": 10012,
     "alpha": "no",
@@ -10368,6 +10379,7 @@
     "weight": 2.1
   },
   "shaymin-sky": {
+    "formattedName": "Shaymin Sky",
     "capture_rate": 0,
     "id": 10006,
     "alpha": "no",
@@ -11624,27 +11636,6 @@
     "sprites": {
       "default": "sprites/default/550.png",
       "icon": "sprites/icon/550.png"
-    },
-    "weight": 18
-  },
-  "basculin-blue-striped": {
-    "capture_rate": 0,
-    "id": 10016,
-    "alpha": "no",
-    "stats": {
-      "base_hp": 70,
-      "base_attack": 92,
-      "base_defense": 65,
-      "base_special_attack": 80,
-      "base_special_defense": 55,
-      "base_speed": 98
-    },
-    "types": [
-      "water"
-    ],
-    "sprites": {
-      "default": "sprites/default/10016.png",
-      "icon": "sprites/icon/10016.png"
     },
     "weight": 18
   },

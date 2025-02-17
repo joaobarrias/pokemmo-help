@@ -12,7 +12,7 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({
 
     return (
       <div className="attacking">
-        <h2>Attacking:</h2>
+        <h2>Attacking</h2>
         {/* Display effectiveness against other types */}
       </div>
     );

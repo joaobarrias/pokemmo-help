@@ -12,7 +12,7 @@ const DefendingEffectiveness : React.FC<DefendingEffectivenessProps> = ({
 
     return (
       <div className="defending">
-        <h2>Defending:</h2>
+        <h2>Defending</h2>
         {/* Show what types affect the selected Pokémon */}
       </div>
     );

@@ -9,31 +9,40 @@ import TypeChartGrid from "./components/TypeChartGrid/TypeChartGrid"; // Import 
 interface TypeChartProps {
   allPokemon: { name: string; id: number }[];
 }
-
+export interface PokemonState {
+  name: string;
+  id: number | null;
+  imageUrl: string | null;
+}
 
 const TypeChart: React.FC<TypeChartProps> =  ({ allPokemon }) => {
-  const [selectedPokemon, setSelectedPokemon] = useState<any>(null);
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonState>({
+      name: "Pikachu",
+      id: 25,
+      imageUrl: "sprites/default/25.png"
+    });
+  const [pokemonTypes, setPokemonTypes] = useState<string[]>(['electric']);
   const [isInverse, setIsInverse] = useState<boolean>(false);
   
   return (
-    <div className="page">
+    <div className="chart-page">
       {/* Header */}
       <div className="header">
         <h1>Type Chart Effectiveness</h1>
       </div>
 
       {/* Body */}
-      <div className="body">
+      <div className="chart-body">
         {/* First Row: Attack/Defense & Pokémon Selection */}
-        <div className="main-container">
+        <div className="chart-main-container">
           <AttackingEffectiveness selectedPokemon={selectedPokemon} />
-          <PokemonSelector allPokemon={allPokemon} setSelectedPokemon={setSelectedPokemon} />
+          <PokemonSelector selectedPokemon={selectedPokemon} allPokemon={allPokemon} setSelectedPokemon={setSelectedPokemon} setPokemonTypes={setPokemonTypes} pokemonTypes={pokemonTypes}/>
           <DefendingEffectiveness selectedPokemon={selectedPokemon} />
         </div>
 
         {/* Second Row: Type Chart with Inverse Toggle */}
-        <div className="second-container">
-          <button onClick={() => setIsInverse(!isInverse)}>Inverse Type</button>
+        <div className="chart-second-container">
+          <button onClick={() => setIsInverse(!isInverse)}>{isInverse ? "Inverse Typing" : "Normal Typing"}</button>
           <TypeChartGrid isInverse={isInverse} />
         </div>
       </div>
