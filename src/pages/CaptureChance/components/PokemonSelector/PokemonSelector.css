@@ -12,7 +12,7 @@
 
 .checkbox-label {
     font-size: 1rem;
-    color:  rgba(255, 255, 255, 0.9);
+    color:  rgba(255, 255, 255, 1);
     cursor: pointer;
     display: flex;
     align-items: center;

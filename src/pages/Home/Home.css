@@ -31,7 +31,7 @@
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 40px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 1);
 }
 
 .home-description {
@@ -80,7 +80,7 @@
 /* Feature Card Paragraphs */
 .feature-card p {
   font-size: 1rem;
-  color: #ddd;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 20px;
 }
 
@@ -109,7 +109,7 @@
                -2px 2px 2px rgba(0, 0, 0, 1);
   margin-top: 40px;
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 1);
 }
 
 .discord-link a {
