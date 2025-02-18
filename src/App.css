@@ -57,6 +57,12 @@ body {
   min-height: 100vh;
 }
 
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Style the entire react-select component */
 .react-select__control {
   background-color: #444c56 !important; 

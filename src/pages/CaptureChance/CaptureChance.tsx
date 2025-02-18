@@ -59,7 +59,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
   }, [pokemonState.id, pokemonState.catchRate, level]); // Dependencies
 
   return (
-    <div className="page">
+    <div className="capture-page">
       {/* Header */}
       <div className="header">
         <h1>Capture Chance Calculator</h1>

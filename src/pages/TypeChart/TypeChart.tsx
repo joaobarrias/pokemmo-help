@@ -68,9 +68,9 @@ const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
 
         {/* Second Row: Type Chart with Inverse Toggle */}
         <div className="chart-second-container">
-          <button onClick={() => setIsInverse(!isInverse)}>
-            {isInverse ? "Inverse Typing" : "Normal Typing"}
-          </button>
+        <button onClick={() => setIsInverse(!isInverse)}>
+          Flip Typing
+        </button>
           <TypeChartGrid isInverse={isInverse} />
         </div>
       </div>

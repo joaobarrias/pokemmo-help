@@ -1,4 +1,8 @@
 /* Capture Chance Page */
+.capture-page{
+    animation: fadeIn 0.5s ease-out;
+}
+
 .body {
     display: flex;
     flex-direction: column;

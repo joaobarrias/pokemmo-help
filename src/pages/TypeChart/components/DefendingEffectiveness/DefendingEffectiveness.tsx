@@ -1,4 +1,6 @@
+// Component: DefendingEffectiveness.tsx
 import React, { useEffect, useState } from "react";
+import "./DefendingEffectiveness.css"; // Import CSS
 import typeEffectivenessData from "../../../../data/type-defending-effectiveness.json"; // Import type-effectiveness data
 
 type DefendingEffectivenessProps = {
@@ -40,7 +42,6 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
       const typeEffectiveness = typeEffectivenessData[capitalizedType as keyof typeof typeEffectivenessData]; // Type assertion to get effectiveness
 
       if (typeEffectiveness) {
-        console.log(`Effectiveness for ${capitalizedType}:`, typeEffectiveness);
         // Iterate through all the target types for the current type
         Object.entries(typeEffectiveness).forEach(([targetType, effectiveness]) => {
           // Update the combined effectiveness for each target type

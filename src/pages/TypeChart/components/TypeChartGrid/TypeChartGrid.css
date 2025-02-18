@@ -1,0 +1,65 @@
+/* TypeChartGrid.css */
+.type-chart table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  user-select: none;
+}
+  
+/* Corner cell styling */
+.corner-header {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: none;
+  text-align: center;
+}
+
+/* Position the labels inside the corner cell */
+.corner-header .defender {
+  position: absolute;
+  top: 15px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.corner-header .attacker {
+  position: absolute;
+  bottom: 0px;
+  transform: translateX(-100%);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.type-chart th,
+.type-chart td {
+  padding: 2px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/* Removes border from the first row (header) */
+.type-chart thead th {
+  border: none;
+}
+
+/* Removes border from the first column (attacking type labels) */
+.type-chart tbody td:first-child {
+  border: none;
+}
+
+
+/* Specific background color for type effectiveness */
+.type-chart td[data-effectiveness="2"] {
+  background-color: rgb(22, 161, 33); /* Green for 2x */
+}
+
+.type-chart td[data-effectiveness="0.5"] {
+  background-color: rgb(150, 29, 29); /* Red for 0.5x */
+}
+
+.type-chart td[data-effectiveness="0"] {
+  background-color: rgb(71, 71, 71); /* Gray for 0x */
+}
+  
