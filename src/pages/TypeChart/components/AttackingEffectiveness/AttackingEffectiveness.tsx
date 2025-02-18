@@ -49,8 +49,8 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
     <div className="attacking">
       <div className="attacking-columns">
         {Object.entries(typeEffectiveness).map(([type, effectivenessGroups]) => (
-          <div key={type} className="attacking-column">
-            <h3>{type} Moves</h3>
+          <div key={type} className="attacking-column" style={{ maxWidth: pokemonTypes.length === 1 ? '210px' : '170px' }}>
+            <h3>{type} Moves do</h3>
             {Object.entries(effectivenessGroups).map(([effectiveness, types]) => (
               types.length > 0 && (
                 <div key={effectiveness} className="attacking-category">
@@ -58,7 +58,7 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
                   <ul>
                     {types.map((targetType) => (
                       <li key={targetType}>
-                        <img src={`types/${targetType.toLowerCase()}.png`} alt={targetType} />
+                        <img src={`types/icons/${targetType.toLowerCase()}.png`} alt={targetType} />
                       </li>
                     ))}
                   </ul>

@@ -45,7 +45,7 @@
   padding: 10px;
   text-align: center;
   max-width: 400px;
-  height: 450px;
+  height: 470px;
 }
 
 /* Toggle Container */
@@ -95,7 +95,6 @@
 /* Active */
 .toggle-text.active {
   filter: brightness(100%);
-  font-weight: bold;
 }
 
 /* Inactive */

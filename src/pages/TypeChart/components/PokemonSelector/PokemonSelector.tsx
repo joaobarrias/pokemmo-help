@@ -120,20 +120,20 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         return;
       }
       else{
-        fetchPokemonData("Pikachu");
+        fetchPokemonData("Gyarados");
         isFetchingDataRef.current = false
       }
     }
   };
 
   const handleInputBlur = () => {
-    // Only reset to Pikachu if the user has not written a valid suggestion
+    // Only reset to Gyarados if the user has not written a valid suggestion
     if (selectedPokemon.name.trim() && !suggestions.length) {
       const isValidPokemon = allPokemon.some(
       (pokemon) => pokemon.name.toLowerCase() === selectedPokemon.name.trim().toLowerCase()
       );
       if (!isValidPokemon) {
-        fetchPokemonData("Pikachu");
+        fetchPokemonData("Gyarados");
         isFetchingDataRef.current = false
       }
     }
@@ -240,7 +240,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
               className={`type-image ${pokemonTypes.includes(type) ? "selected" : ""}`}
               onClick={() => handleTypeClick(type)}
             >
-              <img src={`/types/${type}.png`} alt={type} />
+              <img src={`/types/icons/${type}.png`} alt={type} />
             </div>
           ))}
         </div>

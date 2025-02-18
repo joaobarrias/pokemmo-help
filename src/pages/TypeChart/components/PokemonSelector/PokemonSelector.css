@@ -95,10 +95,12 @@
 
 .type-images {
   margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
   user-select: none;
+  flex-wrap: wrap;
 }
 
 .type-image {

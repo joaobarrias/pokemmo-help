@@ -101,7 +101,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
                 <ul>
                   {types.map((type) => (
                     <li key={type}>
-                      <img src={`/types/${type.toLowerCase()}.png`} alt={type} />
+                      <img src={`/types/icons/${type.toLowerCase()}.png`} alt={type} />
                     </li>
                   ))}
                 </ul>

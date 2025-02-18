@@ -18,11 +18,11 @@ export interface PokemonState {
 
 const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonState>({
-    name: "Pikachu",
-    id: 25,
-    imageUrl: "sprites/default/25.png",
+    name: "Gyarados",
+    id: 130,
+    imageUrl: "sprites/default/130.png",
   });
-  const [pokemonTypes, setPokemonTypes] = useState<string[]>(["electric"]);
+  const [pokemonTypes, setPokemonTypes] = useState<string[]>(["water", "flying"]);
   const [isInverse, setIsInverse] = useState<boolean>(false);
   const [showAttacking, setShowAttacking] = useState<boolean>(false);
 

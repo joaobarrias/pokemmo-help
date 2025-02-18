@@ -8,9 +8,6 @@
     max-width: 210px;
     padding: 5px;
     margin-top: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .defending-column.empty {

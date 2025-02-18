@@ -62,7 +62,7 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
         {types.map((type, index) => (
           <img
             key={index}
-            src={`/types/${type}.png`}
+            src={`/types/icons/${type}.png`}
             alt={type}
             className="type-icon"
           />
