@@ -43,9 +43,14 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
         // Iterate through all the target types for the current type
         Object.entries(typeEffectiveness).forEach(([targetType, effectiveness]) => {
           // Update the combined effectiveness for each target type
-          if (allTargetTypes[targetType]) {
-            allTargetTypes[targetType] *= effectiveness; // Multiply the effectiveness
+          if (allTargetTypes[targetType] === 0) {
+            // If the current effectiveness is already 0x, keep it as 0x
+            allTargetTypes[targetType] = 0;
+          } else if (allTargetTypes[targetType]) {
+            // If it's non-zero, multiply the effectiveness
+            allTargetTypes[targetType] *= effectiveness;
           } else {
+            // If no value exists for this target type, set it to the current effectiveness (should not even make it here)
             allTargetTypes[targetType] = effectiveness;
           }
         });

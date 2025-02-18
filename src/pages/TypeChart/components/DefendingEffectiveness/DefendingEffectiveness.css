@@ -42,29 +42,35 @@
     list-style: none;
 }
 
+.defending-category li img {
+    width: 60px;
+    height: auto;
+    max-width: 100%;
+}
+
 /* 4x Damage */
 .defending-category h4[data-effectiveness="4x"] {
-    color: rgb(22, 253, 41);
+    color: rgb(9, 255, 0);
 }
 
 /* 2x Damage */
 .defending-category h4[data-effectiveness="2x"] {
-    color: rgb(67, 192, 77);
+    color: rgb(42, 196, 55);
 }
 
 /* 0.5x Damage */
 .defending-category h4[data-effectiveness="0.5x"] {
-    color: rgb(236, 26, 26);
+    color: rgb(212, 51, 51);
 }
 
 /* 0.25x Damage */
 .defending-category h4[data-effectiveness="0.25x"] {
-    color: rgb(216, 72, 72);
+    color: rgb(196, 69, 69);
 }
 
 /* 0x Damage */
 .defending-category h4[data-effectiveness="0x"] {
-    color: rgb(165, 165, 165);
+    color: rgb(179, 179, 179);
 }
 
 /* Type Icons */

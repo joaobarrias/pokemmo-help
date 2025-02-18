@@ -181,8 +181,8 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       // If less than two types are selected, just add the new type
       setPokemonTypes([...pokemonTypes, type]);
     } else {
-      // If two types are selected, replace the last selected type with the new type
-      setPokemonTypes([pokemonTypes[0], type]);
+      // If two types are selected, replace the first selected type with the new type
+      setPokemonTypes([pokemonTypes[1], type]);
     }
   };
   
