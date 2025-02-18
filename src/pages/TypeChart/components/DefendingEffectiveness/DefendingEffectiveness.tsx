@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import typeEffectivenessData from "../../../../data/type-defending-effectiveness.json"; // Import type-effectiveness data
 
 type DefendingEffectivenessProps = {
-  pokemonTypes: string[]; // Array of selected Pokemon types
+  pokemonTypes: string[];
+  isInverse: boolean;
 };
 
-const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemonTypes }) => {
+const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemonTypes, isInverse }) => {
   const [groupedEffectiveness, setGroupedEffectiveness] = useState<{
     [effectiveness: string]: string[];
   }>({
@@ -59,14 +60,26 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
       }
     });
 
-    // Group the target types based on their combined effectiveness
+    // Apply inverse effectiveness if isInverse is true
     Object.entries(allTargetTypes).forEach(([targetType, combinedEffectiveness]) => {
-      if (combinedEffectiveness >= 4) effectivenessGrouped["4x"].push(targetType);
-      else if (combinedEffectiveness === 2) effectivenessGrouped["2x"].push(targetType);
-      else if (combinedEffectiveness === 1) effectivenessGrouped["1x"].push(targetType);
-      else if (combinedEffectiveness === 0.5) effectivenessGrouped["0.5x"].push(targetType);
-      else if (combinedEffectiveness === 0.25) effectivenessGrouped["0.25x"].push(targetType);
-      else if (combinedEffectiveness === 0) effectivenessGrouped["0x"].push(targetType);
+      let modifiedEffectiveness = combinedEffectiveness;
+
+      if (isInverse) {
+        if (combinedEffectiveness === 4) modifiedEffectiveness = 0.25;
+        else if (combinedEffectiveness === 2) modifiedEffectiveness = 0.5;
+        else if (combinedEffectiveness === 1) modifiedEffectiveness = 1; // Neutral stays the same
+        else if (combinedEffectiveness === 0.5) modifiedEffectiveness = 2;
+        else if (combinedEffectiveness === 0.25) modifiedEffectiveness = 4;
+        else if (combinedEffectiveness === 0) modifiedEffectiveness = 2; // Immunity becomes super effective
+      }
+
+      // Group types based on modified effectiveness
+      if (modifiedEffectiveness === 4) effectivenessGrouped["4x"].push(targetType);
+      else if (modifiedEffectiveness === 2) effectivenessGrouped["2x"].push(targetType);
+      else if (modifiedEffectiveness === 1) effectivenessGrouped["1x"].push(targetType);
+      else if (modifiedEffectiveness === 0.5) effectivenessGrouped["0.5x"].push(targetType);
+      else if (modifiedEffectiveness === 0.25) effectivenessGrouped["0.25x"].push(targetType);
+      else if (modifiedEffectiveness === 0) effectivenessGrouped["0x"].push(targetType);
     });
 
     return effectivenessGrouped;
@@ -86,7 +99,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
       const grouped = groupEffectiveness(pokemonTypes);
       setGroupedEffectiveness(grouped); // Update the state
     }
-  }, [pokemonTypes]);
+  }, [pokemonTypes, isInverse]); // Dependacies
 
   return (
     <div className="defending">

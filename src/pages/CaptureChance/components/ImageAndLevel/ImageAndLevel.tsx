@@ -49,8 +49,8 @@ const ImageAndLevel: React.FC<ImageAndLevelProps> = ({
         {isAlpha && <div className="alpha-background"></div>}
         {imageUrl  ? (
           <img
-            src={imageUrl }
-            alt={name}
+            src={imageUrl || "/icons/pokemmo.png"}
+            alt={name || "No Pokémon Selected"}
             className="pokemon-image"
           />
         ) : (

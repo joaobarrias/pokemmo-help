@@ -50,6 +50,7 @@
 
 /* Toggle Container */
 .toggle-container {
+  margin-top: -1px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -104,6 +105,7 @@
 
 /* Second Row */
 .chart-second-container {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;

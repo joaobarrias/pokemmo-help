@@ -58,9 +58,9 @@ const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
               <h2 className={`toggle-text ${showAttacking ? "inactive" : "active"}`}>Defending</h2>
             </div>
             {showAttacking ? (
-              <AttackingEffectiveness pokemonTypes={pokemonTypes} />
+              <AttackingEffectiveness isInverse={isInverse} pokemonTypes={pokemonTypes} />
             ) : (
-              <DefendingEffectiveness pokemonTypes={pokemonTypes} />
+              <DefendingEffectiveness isInverse={isInverse} pokemonTypes={pokemonTypes} />
             )}
           </div>
 

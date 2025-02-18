@@ -5,9 +5,10 @@ import typeEffectivenessData from "../../../../data/type-attacking-effectiveness
 
 type AttackingEffectivenessProps = {
   pokemonTypes: string[];
+  isInverse: boolean;
 };
 
-const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemonTypes }) => {
+const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemonTypes, isInverse }) => {
   const [typeEffectiveness, setTypeEffectiveness] = useState<{ 
     [key: string]: { [effectiveness: string]: string[] } } 
   >({});
@@ -35,15 +36,26 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
       newEffectiveness[capitalizedType] = { "2x": [], "1x": [], "0.5x": [], "0x": [] };
 
       Object.entries(effectiveness).forEach(([targetType, value]) => {
-        if (value === 2) newEffectiveness[capitalizedType]["2x"].push(targetType);
-        else if (value === 1) newEffectiveness[capitalizedType]["1x"].push(targetType);
-        else if (value === 0.5) newEffectiveness[capitalizedType]["0.5x"].push(targetType);
-        else if (value === 0) newEffectiveness[capitalizedType]["0x"].push(targetType);
+        let modifiedValue = value;
+
+        // Apply Inverse Effectiveness if isInverse is true
+        if (isInverse) {
+          if (value === 2) modifiedValue = 0.5;
+          else if (value === 0.5) modifiedValue = 2;
+          else if (value === 0) modifiedValue = 2; // Immunity becomes super effective
+          else if (value === 1) modifiedValue = 1; // Neutral stays the same
+        }
+
+        // Store in the correct category
+        if (modifiedValue === 2) newEffectiveness[capitalizedType]["2x"].push(targetType);
+        else if (modifiedValue === 1) newEffectiveness[capitalizedType]["1x"].push(targetType);
+        else if (modifiedValue === 0.5) newEffectiveness[capitalizedType]["0.5x"].push(targetType);
+        else if (modifiedValue === 0) newEffectiveness[capitalizedType]["0x"].push(targetType);
       });
     });
 
     setTypeEffectiveness(newEffectiveness);
-  }, [pokemonTypes]);
+  }, [pokemonTypes, isInverse]); // Dependacies
 
   return (
     <div className="attacking">

@@ -189,7 +189,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
 
   return (
     <div className="chart-pokemon-selector">
-      <h3>Select a Pokémon</h3>
+      <h2>Select a Pokémon</h2>
       
       {/* Wrapper for Input and Suggestion Box */}
       <div className="input-wrapper">
@@ -232,7 +232,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
 
       {/* Type Selection Section */}
       <div className="type-selection">
-      <h3>or choose Type(s)</h3>
+      <h2>or choose Type(s)</h2>
         <div className="type-images">
           {["normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel"].map((type) => (
             <div
