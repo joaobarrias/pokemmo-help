@@ -8,7 +8,7 @@ type AttackingEffectivenessProps = {
 };
 
 const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemonTypes }) => {
-  const [groupedEffectiveness, setGroupedEffectiveness] = useState<{ 
+  const [typeEffectiveness, setTypeEffectiveness] = useState<{ 
     [key: string]: { [effectiveness: string]: string[] } } 
   >({});
 
@@ -17,7 +17,7 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
 
   useEffect(() => {
     if (pokemonTypes.length === 0) {
-      setGroupedEffectiveness({}); // Reset if no types are selected
+      setTypeEffectiveness({}); // Reset if no types are selected
       return;
     }
 
@@ -42,20 +42,19 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
       });
     });
 
-    setGroupedEffectiveness(newEffectiveness);
+    setTypeEffectiveness(newEffectiveness);
   }, [pokemonTypes]);
 
   return (
     <div className="attacking">
-      <h2>Attacking</h2>
       <div className="attacking-columns">
-        {Object.entries(groupedEffectiveness).map(([type, effectivenessGroups]) => (
+        {Object.entries(typeEffectiveness).map(([type, effectivenessGroups]) => (
           <div key={type} className="attacking-column">
-            <h3>{type}</h3>
+            <h3>{type} Moves</h3>
             {Object.entries(effectivenessGroups).map(([effectiveness, types]) => (
               types.length > 0 && (
                 <div key={effectiveness} className="attacking-category">
-                  <h4>{effectiveness} Damage</h4>
+                  <h4 data-effectiveness={effectiveness}>{effectiveness} Damage</h4>
                   <ul>
                     {types.map((targetType) => (
                       <li key={targetType}>

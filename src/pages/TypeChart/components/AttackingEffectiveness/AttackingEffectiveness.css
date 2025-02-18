@@ -1,0 +1,69 @@
+/* AttackingEffectiveness.css */
+/* Flex container for both type columns */
+.attacking-columns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+}
+
+/* Individual Type Column */
+.attacking-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+    max-width: 150px;
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Damage Category */
+.attacking-category {
+    margin-top: 5px;
+    padding: 3px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+}
+
+/* Category Title */
+.attacking-category h4 {
+    font-size: 0.90rem;
+    margin-bottom: 2px;
+}
+
+/* Type List Layout */
+.attacking-category ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    padding: 0;
+    list-style: none;
+}
+
+/* 2x Damage - Green */
+.attacking-category h4[data-effectiveness="2x"] {
+    color: rgb(67, 192, 77);
+}
+
+/* 0.5x Damage - Red */
+.attacking-category h4[data-effectiveness="0.5x"] {
+    color: rgb(236, 26, 26);
+}
+
+/* 0x Damage - Black */
+.attacking-category h4[data-effectiveness="0x"] {
+    color: rgb(179, 179, 179);
+}
+
+/* Type Icons */
+.attacking-category li img {
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
