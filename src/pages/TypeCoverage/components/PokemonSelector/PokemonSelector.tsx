@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./PokemonSelector.css"; // Import CSS
 import pokemmoData from "../../../../data/pokemmo-data.json"; // Import all PokeMMO data
-import { PokemonState } from '../../TypeChart'; // Import current pokemon object
+import { PokemonState } from '../../TypeCoverage'; // Import current pokemon object
 
 type PokemonSelectorProps = {
   allPokemon: { name: string; id: number }[];
@@ -224,7 +224,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       {/* Image Section (Remains Fixed) */}
       <div className="image-section">
         <img
-          src={selectedPokemon.imageUrl || "/icons/pokemmo.png"}
+          src={selectedPokemon.imageUrl || "/sprites/substitute.png"}
           alt={selectedPokemon.name || "No Pokémon Selected"}
           className="selected-image"
         />

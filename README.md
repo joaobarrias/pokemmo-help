@@ -22,7 +22,7 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 ### **Coming Soon**
 
 - **Pokémon Search:** A tool that will allow users to filter Pokémon by **abilities, moves, base stats, egg groups, and types**.
-- **Type Chart:** A calculator to evaluate type effectiveness in battles, including an **inverse type mode**.
+- **Type Coverage:** A calculator to evaluate type effectiveness in battles, including an **inverse type mode**.
 
 ## ⚙️ How It Works
 
@@ -42,7 +42,7 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 ### **Coming Soon**
 
 - **Pokémon Search**: A powerful Pokémon lookup tool with detailed filters.
-- **Type Chart**: A dynamic type calculator with an optional **inverse type mode**.
+- **Type Coverage**: A dynamic type coverage damage calculator with an optional **inverse type mode**.
 
 ## 🧑‍💻 Tech Stack
 

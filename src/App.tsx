@@ -7,7 +7,7 @@ import Footer from "./components/Footer/Footer"; // Import Footer
 import Home from "./pages/Home/Home"; // Import Home page
 import CaptureChance from "./pages/CaptureChance/CaptureChance"; // Import Capture Chance page
 import PokemonSearch from "./pages/PokemonSearch/PokemonSearch"; // Import Pokemon Search page
-import TypeChart from "./pages/TypeChart/TypeChart"; // Import Type Effectiveness page
+import TypeCoverage from "./pages/TypeCoverage/TypeCoverage"; // Import Type Coverage page
 
 const App: React.FC = () => {
   const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
@@ -68,7 +68,7 @@ const App: React.FC = () => {
 
 const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[]; allPokemon: { name: string; id: number }[]; backgroundImage: string; setBackgroundImage: (image: string) => void }> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage }) => {
   const location = useLocation();
-  const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/" || location.pathname === "/type-chart";
+  const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/" || location.pathname === "/type-coverage";
   
   return (
     <div className="app-container">
@@ -81,7 +81,7 @@ const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[];
           <Route path="/" element={<Home />} />
           <Route path="/capture-chance" element={<CaptureChance filteredPokemon={filteredPokemon} />} />
           <Route path="/pokemon-search" element={<PokemonSearch />} />
-          <Route path="/type-chart" element={<TypeChart allPokemon={allPokemon} />} />
+          <Route path="/type-coverage" element={<TypeCoverage allPokemon={allPokemon} />} />
         </Routes>
       </div>
       <Footer setBackgroundImage={setBackgroundImage} />

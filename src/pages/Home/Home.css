@@ -88,7 +88,7 @@
   text-decoration: none;
   border-radius: 4px;
   border: 1px solid #6d6d6d;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease-in-out;
 }
 
 .feature-button:hover {

@@ -23,7 +23,7 @@
 /* Position the labels inside the corner cell */
 .corner-header .defender {
   position: absolute;
-  top: 15px;
+  top: 12px;
   transform: translateX(-50%);
   font-size: 12px;
   font-weight: bold;

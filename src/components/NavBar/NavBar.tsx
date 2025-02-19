@@ -79,8 +79,8 @@ const NavBar: React.FC = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/type-chart" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMenu}>
-            Type Chart
+          <NavLink to="/type-coverage" className={({ isActive }) => (isActive ? 'active' : '')} onClick={closeMenu}>
+            Type Coverage
           </NavLink>
         </li>
       </ul>

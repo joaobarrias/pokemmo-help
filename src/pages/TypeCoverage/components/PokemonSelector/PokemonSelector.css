@@ -66,8 +66,6 @@
 
 /* Image Section */
 .image-section {
-  height: 80px;
-  width: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,14 +76,8 @@
   user-select: none;
 }
 
-.selected-image{
-  height: 100%;
-  width: 100%;
-}
-
-.image-section img[src*="pokemmo.png"] {
-  width: 60%;
-  height: auto;
+.image-section img[src*="substitute.png"] {
+  transform: scaleX(-1);
 }
 
 /* Type Section */

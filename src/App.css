@@ -79,6 +79,10 @@ body {
   z-index: 4 !important;
 }
 
+.react-select__control:hover {
+  border: 1px solid #ccc !important;    
+}
+
 .react-select__control input {
   caret-color: transparent !important;
   color: #fff !important;

@@ -24,9 +24,9 @@ const Home: React.FC = () => {
         </div>
         
         <div className="feature-card">
-          <h2>⚔️ Type Chart</h2>
-          <p>Analyze battle effectiveness with a dynamic type calculator.</p>
-          <Link to="/type-chart" className="feature-button">Try Now</Link>
+          <h2>⚔️ Type Coverage</h2>
+          <p>Analyze battle effectiveness with a dynamic type damage calculator.</p>
+          <Link to="/type-coverage" className="feature-button">Try Now</Link>
         </div>
       </div>
       

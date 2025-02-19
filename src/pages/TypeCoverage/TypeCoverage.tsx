@@ -1,12 +1,12 @@
-// Page: TypeChart.tsx
+// Page: TypeCoverage.tsx
 import { useState } from "react";
-import "./TypeChart.css";
+import "./TypeCoverage.css";
 import AttackingEffectiveness from "./components/AttackingEffectiveness/AttackingEffectiveness";
 import PokemonSelector from "./components/PokemonSelector/PokemonSelector";
 import DefendingEffectiveness from "./components/DefendingEffectiveness/DefendingEffectiveness";
 import TypeChartGrid from "./components/TypeChartGrid/TypeChartGrid";
 
-interface TypeChartProps {
+interface TypeCoverageProps {
   allPokemon: { name: string; id: number }[];
 }
 
@@ -16,7 +16,7 @@ export interface PokemonState {
   imageUrl: string | null;
 }
 
-const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
+const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonState>({
     name: "Gyarados",
     id: 130,
@@ -30,11 +30,22 @@ const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
     <div className="chart-page">
       {/* Header */}
       <div className="header">
-        <h1>Type Chart Effectiveness</h1>
+      <h1>
+        <span key={isInverse ? "inverted" : "normal"} className={`fade-text ${isInverse ? "fade-in-inverted" : "fade-in-normal"}`}>
+          {isInverse ? "Inverted" : "Normal"}&nbsp;
+        </span>
+        Type Coverage Calculator
+        <button 
+          onClick={() => setIsInverse(!isInverse)}
+          className={`flip-button ${isInverse ? "inverted" : ""}`}
+          >
+            Flip <span className="flipped-text">Typing</span> <span className="rotate-arrow">↺</span>
+        </button>
+      </h1>
       </div>
 
       {/* Body */}
-      <div className="chart-body">
+      <div className={`chart-body ${isInverse ? "inverted" : ""}`}>
         {/* First Row: Pokemon Selector & Toggleable Attack/Defense */}
         <div className="chart-main-container">
           {/* Pokemon Selector */}
@@ -68,9 +79,6 @@ const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
 
         {/* Second Row: Type Chart with Inverse Toggle */}
         <div className="chart-second-container">
-        <button onClick={() => setIsInverse(!isInverse)}>
-          Flip Typing
-        </button>
           <TypeChartGrid isInverse={isInverse} />
         </div>
       </div>
@@ -78,4 +86,4 @@ const TypeChart: React.FC<TypeChartProps> = ({ allPokemon }) => {
   );
 };
 
-export default TypeChart;
+export default TypeCoverage;
