@@ -6,6 +6,11 @@
   user-select: none;
 }
   
+.type-chart table img{
+  width:49px;
+  height: auto;
+}
+
 /* Corner cell styling */
 .corner-header {
   position: relative;
@@ -52,14 +57,14 @@
 
 /* Specific background color for type effectiveness */
 .type-chart td[data-effectiveness="2"] {
-  background-color: rgb(22, 161, 33); /* Green for 2x */
+  background-color: rgb(0, 119, 10); /* Green for 2x */
 }
 
 .type-chart td[data-effectiveness="0.5"] {
-  background-color: rgb(150, 29, 29); /* Red for 0.5x */
+  background-color: rgb(139, 0, 0); /* Red for 0.5x */
 }
 
 .type-chart td[data-effectiveness="0"] {
-  background-color: rgb(71, 71, 71); /* Gray for 0x */
+  background-color: rgb(61, 61, 61); /* Gray for 0x */
 }
   

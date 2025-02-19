@@ -119,6 +119,11 @@
     color: #999;
 }
 
+.type-icon{
+  width:49px;
+  height:auto;
+}
+
 @media (max-width: 406px) {
   .level-and-image-section {
     margin-top: 30px;

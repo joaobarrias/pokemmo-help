@@ -57,7 +57,7 @@
 
 /* 0.5x Damage - Red */
 .attacking-category h4[data-effectiveness="0.5x"] {
-    color: rgb(212, 51, 51);
+    color: rgb(230, 33, 33);
 }
 
 /* 0x Damage - Black */

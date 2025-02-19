@@ -57,12 +57,12 @@
 
 /* 0.5x Damage */
 .defending-category h4[data-effectiveness="0.5x"] {
-    color: rgb(212, 51, 51);
+    color: rgb(230, 33, 33);
 }
 
 /* 0.25x Damage */
 .defending-category h4[data-effectiveness="0.25x"] {
-    color: rgb(196, 69, 69);
+    color: rgb(165, 38, 38);
 }
 
 /* 0x Damage */
