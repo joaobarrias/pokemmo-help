@@ -28,20 +28,20 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
 
   return (
     <div className="chart-page">
-      {/* Header */}
+      {/* Header with Inverse Toggle */}
       <div className="header">
       <h1>
         <span key={isInverse ? "inverted" : "normal"} className={`fade-text ${isInverse ? "fade-in-inverted" : "fade-in-normal"}`}>
           {isInverse ? "Inverted" : "Normal"}&nbsp;
         </span>
         Type Coverage Calculator
-        <button 
-          onClick={() => setIsInverse(!isInverse)}
-          className={`flip-button ${isInverse ? "inverted" : ""}`}
-          >
-            Flip <span className="flipped-text">Typing</span> <span className="rotate-arrow">↺</span>
-        </button>
       </h1>
+      <button 
+        onClick={() => setIsInverse(!isInverse)}
+        className={`flip-button ${isInverse ? "inverted" : ""}`}
+        >
+          Flip <span className="flipped-text">Typing</span> <span className="rotate-arrow">↺</span>
+        </button>
       </div>
 
       {/* Body */}
@@ -77,7 +77,7 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
 
         </div>
 
-        {/* Second Row: Type Chart with Inverse Toggle */}
+        {/* Second Row: Type Chart */}
         <div className="chart-second-container">
           <TypeChartGrid isInverse={isInverse} />
         </div>

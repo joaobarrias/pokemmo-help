@@ -5,46 +5,44 @@
   margin-top: 20px;
   user-select: none;
 }
-  
-.type-chart table img{
-  width:49px;
+
+.type-chart table img {
+  width: 54px;
   height: auto;
 }
 
 /* Corner cell styling */
 .corner-header {
   position: relative;
-  width: 50px;
-  height: 50px;
   border: none;
   text-align: center;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0, 1), -1px -1px 2px rgb(0, 0, 0, 1), 1px -1px 2px rgb(0, 0, 0, 1), -2px 2px 2px rgb(0, 0, 0, 1);
+  font-size: 12px;
+  font-weight: bold;
 }
 
 /* Position the labels inside the corner cell */
 .corner-header .defender {
   position: absolute;
-  top: 12px;
-  transform: translateX(-50%);
-  font-size: 12px;
-  font-weight: bold;
+  top: 5px;
+  transform: translateX(-45%);
 }
 
 .corner-header .attacker {
   position: absolute;
   bottom: 0px;
   transform: translateX(-100%);
-  font-size: 12px;
-  font-weight: bold;
 }
 
 .type-chart th,
 .type-chart td {
   padding: 2px;
-  border: 1px solid #ddd;
+  border: 1px solid #a0a0a0;
   text-align: center;
+  transition: border-color 0.3s;
 }
 
-/* Removes border from the first row (header) */
+/* Removes border from the first row (header - defending type labels) */
 .type-chart thead th {
   border: none;
 }
@@ -53,7 +51,6 @@
 .type-chart tbody td:first-child {
   border: none;
 }
-
 
 /* Specific background color for type effectiveness */
 .type-chart td[data-effectiveness="2"] {
@@ -67,4 +64,3 @@
 .type-chart td[data-effectiveness="0"] {
   background-color: rgb(61, 61, 61); /* Gray for 0x */
 }
-  

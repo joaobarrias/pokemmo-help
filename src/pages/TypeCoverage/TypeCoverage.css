@@ -1,4 +1,88 @@
-/* Type Chart Page */
+/* Type Coverage Page */
+.chart-page .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.chart-page .header h1 {
+  margin: 0;
+  white-space: nowrap;
+  min-width: 500px;
+}
+
+/* Inverse Toggle Button */
+.flip-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background-color: #444c56;
+  color: #fff;
+  border-radius: 4px;
+  margin-left:30px;
+  border: 1px solid #6d6d6d;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.flip-button:hover {
+  border: 1px solid #ccc;
+  background-color: #23262f;
+}
+
+/* Rotates the arrow */
+.rotate-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+
+.flip-button:active .rotate-arrow {
+  transform: rotate(-180deg);
+}
+
+.flip-button.inverted {
+  animation: shake 0.3s ease-in-out;
+  background-color: #be0d10;
+}
+
+.flip-button.inverted:hover {
+  background-color: #810e10;
+}
+
+.chart-body.inverted {
+  animation: pageShake 0.3s ease-in-out;
+}
+
+.flip-button.inverted .rotate-arrow {
+  transform: rotate(-180deg);
+  animation: rotateArrow 0.3s ease-in-out;
+}
+
+@keyframes rotateArrow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-180deg); }
+}
+
+/* Add a subtle shake on flip */
+@keyframes shake {
+  0%   { transform: rotate(0deg) translateX(0); }
+  25%  { transform: rotate(1deg) translateX(2px); }
+  50%  { transform: rotate(0deg) translateX(0); }
+  75%  { transform: rotate(-1deg) translateX(-2px); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
+@keyframes pageShake {
+  0% { transform: rotate(0deg) translateX(0); }
+  25% { transform: rotate(1deg) translateX(2px); }
+  50% { transform: rotate(0deg) translateX(0); }
+  75% { transform: rotate(-1deg) translateX(-2px); }
+  100% { transform: rotate(0deg) translateX(0); }
+}
+
 .chart-page {
   display: flex;
   flex-direction: column;
@@ -114,75 +198,6 @@
   width: 100%;
 }
 
-/* Inverse Toggle Button */
-.flip-button {
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  background-color: #444c56;
-  color: #fff;
-  border-radius: 4px;
-  margin-left:50px;
-  transform: translateY(-5px);
-  border: 1px solid #6d6d6d;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.flip-button:hover {
-  border: 1px solid #ccc;
-  background-color: #23262f;
-}
-
-/* Rotates the arrow */
-.rotate-arrow {
-  display: inline-block;
-  transition: transform 0.3s ease-in-out;
-}
-
-.flip-button:active .rotate-arrow {
-  transform: rotate(-180deg);
-}
-
-.flip-button.inverted {
-  animation: shake 0.3s ease-in-out;
-  background-color: #a00f11;
-}
-
-.flip-button.inverted:hover {
-  background-color: #ef1c1f;
-}
-
-.chart-body.inverted {
-  animation: pageShake 0.3s ease-in-out;
-}
-
-.flip-button.inverted .rotate-arrow {
-  transform: rotate(-180deg);
-  animation: rotateArrow 0.3s ease-in-out;
-}
-
-@keyframes rotateArrow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-180deg); }
-}
-
-/* Add a subtle shake on flip */
-@keyframes shake {
-  0%   { transform: translateY(-5px) rotate(0deg) translateX(0); }
-  25%  { transform: translateY(-5px) rotate(1deg) translateX(2px); }
-  50%  { transform: translateY(-5px) rotate(0deg) translateX(0); }
-  75%  { transform: translateY(-5px) rotate(-1deg) translateX(-2px); }
-  100% { transform: translateY(-5px) rotate(0deg) translateX(0); }
-}
-
-@keyframes pageShake {
-  0% { transform: rotate(0deg) translateX(0); }
-  25% { transform: rotate(1deg) translateX(2px); }
-  50% { transform: rotate(0deg) translateX(0); }
-  75% { transform: rotate(-1deg) translateX(-2px); }
-  100% { transform: rotate(0deg) translateX(0); }
-}
-
 /* Fade-in for Normal */
 @keyframes fadeInNormal {
   0% {
@@ -228,6 +243,6 @@
 /* Type Chart */
 .type-chart {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
