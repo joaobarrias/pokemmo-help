@@ -9,6 +9,7 @@
 .type-chart table img {
   width: 54px;
   height: auto;
+  transform: translateY(9%);
 }
 
 /* Corner cell styling */
@@ -24,13 +25,13 @@
 /* Position the labels inside the corner cell */
 .corner-header .defender {
   position: absolute;
-  top: 5px;
+  top: 9px;
   transform: translateX(-45%);
 }
 
 .corner-header .attacker {
   position: absolute;
-  bottom: 0px;
+  bottom: -1px;
   transform: translateX(-100%);
 }
 

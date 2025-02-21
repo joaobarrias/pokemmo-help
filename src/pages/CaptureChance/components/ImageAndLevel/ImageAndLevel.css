@@ -110,7 +110,7 @@
     text-align: center;
 }
   
-.level-input:focus {
+.level-input:hover, .level-input:focus {
     border-color: #ccc;
 }
   

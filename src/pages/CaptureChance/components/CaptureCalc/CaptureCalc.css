@@ -38,7 +38,7 @@
   outline: none;
 }
 
-.capture-calc-section input[type="text"]:focus {
+.capture-calc-section input[type="text"]:not([disabled]):hover, .capture-calc-section input[type="text"]:focus {
   border-color: #ccc;
 }
 

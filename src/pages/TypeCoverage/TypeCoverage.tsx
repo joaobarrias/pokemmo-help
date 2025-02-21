@@ -40,7 +40,7 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
         onClick={() => setIsInverse(!isInverse)}
         className={`flip-button ${isInverse ? "inverted" : ""}`}
         >
-          Flip <span className="flipped-text">Typing</span> <span className="rotate-arrow">↺</span>
+          {isInverse ? "Flip it Back " : "Flip Typing "}<span className="rotate-arrow">↺</span>
         </button>
       </div>
 

@@ -60,10 +60,9 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       if (!name.trim()) return; // Don't fetch if the name is empty
       try {
         isFetchingDataRef.current = true;
-        let pokemonName = name.toLowerCase().replace(' ', '-').replace('.', '');
+        let pokemonName = name.toLowerCase().replace(' ', '-');
         let catchRateToUse: number | null = null;
         let pokemon = (pokemmoData as any)[pokemonName];
-
         if (!pokemon) {
           throw new Error('Pokémon data not found');
         }
@@ -107,7 +106,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     };
     
     const handleCheckboxChange = () => {
-      const pokemonName = pokemonState.name.toLowerCase().replace(' ', '-').replace('.', '');
+      const pokemonName = pokemonState.name.toLowerCase().replace(' ', '-');
       const pokemon = (pokemmoData as any)[pokemonName];
       // Check if 'isAlpha' checkbox is being checker/unchecked
       if (pokemon.alpha == "yes"){
@@ -115,7 +114,6 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         setHasInteractedWithCheckbox(true);
       } 
     };
-
 
     const handleSuggestionClick = (name: string) => {
       setSuggestions([]); // Clear suggestions
@@ -133,21 +131,27 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         return;
       }
     
-      const formattedValue = rawValue.toLowerCase().trim().replace(/ /g, "-"); // Convert spaces for lookup
-    
-      // Find Pokémon whose name **contains** the input (for searching)
+      // Normalize input: Replace spaces with hyphens for consistency
+      const normalizedInput = rawValue.toLowerCase().replace(" ", "-");
+
+      // Filter Pokémon names based on the normalized input
       const matches = filteredPokemon
-        .filter((pokemon) => pokemon.name.toLowerCase().includes(rawValue.toLowerCase()))
+        .filter((pokemon) =>
+          pokemon.name.toLowerCase().replace(" ", "-").includes(normalizedInput)
+        )
         .map((pokemon) => pokemon.name);
-    
+
       // Find Pokémon whose name **starts** with the input (for auto-selection logic)
-      const prefixMatches = matches.filter((name) => name.toLowerCase().startsWith(rawValue.toLowerCase()));
-    
-      // Find an exact match using formattedValue
-      const exactMatch = filteredPokemon.find(
-        (pokemon) => pokemon.name.toLowerCase().replace(/ /g, "-") === formattedValue
+      const prefixMatches = matches.filter((name) =>
+        name.toLowerCase().replace(" ", "-").startsWith(normalizedInput)
       );
-    
+
+      // Find an exact match using normalized input
+      const exactMatch = filteredPokemon.find(
+        (pokemon) =>
+          pokemon.name.toLowerCase().replace(" ", "-") === normalizedInput
+      );
+
       if (exactMatch) {
         // If there's an exact match and only one prefix match (meaning we can auto-select)
         if (prefixMatches.length === 1) {
@@ -189,7 +193,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       // Only reset to Pikachu if the user has not written a valid suggestion
       if (pokemonState.name.trim() && !suggestions.length) {
         const isValidPokemon = filteredPokemon.some(
-        (pokemon) => pokemon.name.toLowerCase() === pokemonState.name.trim().toLowerCase()
+          (pokemon) => pokemon.name.toLowerCase() === pokemonState.name.trim().toLowerCase()
         );
         if (!isValidPokemon) {
           fetchPokemonData("Pikachu");
@@ -199,22 +203,43 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     };
 
     const highlightMatch = (name: string, match: string) => {
-      const index = name.toLowerCase().indexOf(match.toLowerCase());
-      if (index === -1) return name;
-  
-      const before = name.slice(0, index);
-      const bold = name.slice(index, index + match.length);
-      const after = name.slice(index + match.length);
-  
+      // Normalize both name and match (treat spaces & hyphens as the same)
+      const normalizedName = name.toLowerCase().replace(/[- ]/g, "-");
+      const normalizedMatch = match.toLowerCase().replace(/[- ]/g, "-");
+    
+      const index = normalizedName.indexOf(normalizedMatch);
+      if (index === -1) return name; // No match, return original name
+    
+      // Find the actual position in the original name
+      let matchStart = -1;
+    
+      for (let i = 0, j = 0; i < name.length; i++) {
+        if (name[i].match(/[- ]/)) continue; // Skip spaces and hyphens when matching
+    
+        if (j === index) {
+          matchStart = i;
+          break;
+        }
+    
+        j++;
+      }
+    
+      if (matchStart === -1) return name; // Fallback
+    
+      // Slice the original name at the found position
+      const before = name.slice(0, matchStart);
+      const bold = name.slice(matchStart, matchStart + match.length);
+      const after = name.slice(matchStart + match.length);
+    
       return (
-      <>
-        {before}
-        <span className="bold">{bold}</span>
-        {after}
-      </>
+        <>
+          {before}
+          <span className="bold">{bold}</span>
+          {after}
+        </>
       );
     };
-        
+    
   return (
     <div className="pokemon-section">
       {/* Alpha Checkbox */}

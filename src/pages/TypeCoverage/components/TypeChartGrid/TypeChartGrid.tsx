@@ -91,7 +91,7 @@ const TypeChartGrid: React.FC<TypeChartGridProps> = ({ isInverse }) => {
                   isHovered || isClicked
                     ? "brightness(100%)" // Hovered or clicked cells will always be 100%
                     : isTableHovered || clickedRow !== null // Keep 50% brightness if the table is hovered or there is a clicked cell
-                    ? "brightness(40%)"
+                    ? "brightness(45%)"
                     : "brightness(100%)"; // Otherwise, keep at full brightness
 
                 // Determine background color for empty cells (effectiveness === 1)

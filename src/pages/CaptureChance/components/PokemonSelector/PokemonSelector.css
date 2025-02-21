@@ -41,8 +41,8 @@
     margin: 0;
     transition: border-color 0.3s ease;
 }
-
-.pokemon-name:focus {
+  
+.pokemon-name:focus, .pokemon-name:hover {
     border: 1px solid #ccc;
 }
 

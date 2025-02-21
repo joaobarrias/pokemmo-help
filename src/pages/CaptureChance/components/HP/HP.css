@@ -7,17 +7,6 @@
     margin-left: 25px;
 }
   
-.capture-calc-section {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 380px;
-    height: 180px;
-    padding: 30px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-left: 25px;
-}
 .hp-label {
     font-size: 1.1rem;
     font-weight: 500;
@@ -62,7 +51,7 @@
     text-align: center;
 }
   
-.hp-toggle input[type="text"]:focus {
+.hp-toggle input[type="text"]:not([disabled]):hover, .hp-toggle input[type="text"]:focus {
     border-color: #ccc;
 }
   
