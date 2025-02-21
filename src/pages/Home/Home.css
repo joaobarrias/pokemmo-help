@@ -47,12 +47,14 @@
 .feature-card {
   background-color: #444c567e;
   border-radius: 8px;
-  padding: 25px;
+  padding: 25px 25px 60px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  min-height: 200px;
 }
 
 .feature-card:hover {
@@ -80,6 +82,9 @@
 
 /* Feature Button */
 .feature-button {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
   display: inline-block;
   background-color: #23262f;
   color: #fff;
@@ -93,7 +98,6 @@
 
 .feature-button:hover {
   background-color: #ef1c1f;
-  transform: translateY(-2px);
 }
 
 /* Discord Link */
@@ -132,12 +136,13 @@
     padding: 10px;
   }
   .feature-card {
-    padding: 15px;
+    padding: 15px 15px 50px;
   }
   .feature-button {
-    font-size: 1rem;
-    padding: 8px 16px;
     font-size: 0.9rem;
+    padding: 8px 16px;
+    bottom: 10px;
+    left: 10px;
   }
   .home-container h1 {
     font-size: 1.5rem;
@@ -145,9 +150,7 @@
   .home-container p {
     font-size: 0.9rem;
   }
-  .feature-card h2{
+  .feature-card h2 {
     font-size: 1.2rem;
-
   }
-  
 }

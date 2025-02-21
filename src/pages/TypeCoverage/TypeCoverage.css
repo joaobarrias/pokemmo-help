@@ -120,7 +120,7 @@
 }
 
 /* Individual Div Styling */
-.pokemon-selector,
+.chart-pokemon-selector,
 .attack-defense-container {
   display: flex;
   flex-direction: column;
@@ -131,6 +131,10 @@
   text-align: center;
   max-width: 400px;
   height: 470px;
+}
+
+.attack-defense-container{
+  margin-top: 10px;
 }
 
 /* Toggle Container */
@@ -190,7 +194,6 @@
 
 /* Second Row */
 .chart-second-container {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -231,18 +234,140 @@
 }
 
 .fade-in-normal {
-  animation: fadeInNormal 0.3s ease-in-out;
+  animation: fadeInNormal 0.2s ease-in-out;
 }
 
 .fade-in-inverted {
-  animation: flipDropIn 0.5s ease-in-out;
+  animation: flipDropIn 0.6s ease-in-out;
   display: inline-block;
   transform-origin: bottom;
 }
 
 /* Type Chart */
 .type-chart {
+  margin-top: 10px;
   position: relative;
   margin-bottom: 50px;
 }
+  
+.toggle-content {
+  position: relative;
+  width: 100%;
+}
 
+.toggle-option {
+  transition: opacity 0.2s ease-in-out;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle-option.visible {
+  opacity: 1;
+}
+
+.toggle-option.hidden {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .chart-page .header h1 {
+    min-width: 0;
+  }
+  .chart-pokemon-selector,
+  .attack-defense-container {
+    height: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .type-chart {
+    margin-top: 0px;
+  }
+  
+  .attack-defense-container{
+    margin-top: 0px;
+  }
+  
+  .chart-page .header {
+    max-width: 700px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .chart-page .header h1 {
+    min-width: 0;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  .chart-page h2{
+    font-size: 1.3rem;
+  }
+
+  .chart-page h3{
+    font-size: 1.1rem;
+  }
+
+  .flip-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    margin-left: 0;
+  }
+
+  .chart-body {
+    max-width: 700px;
+    gap: 15px;
+    padding: 0 10px;
+  }
+
+  .chart-main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .chart-pokemon-selector,
+  .attack-defense-container {
+    width: 100%;
+    max-width: 90%;
+    height: auto;
+    padding: 8px;
+  }
+
+  .toggle-switch {
+    width: 50px;
+    height: 25px;
+  }
+
+  .slider {
+    width: 50%;
+  }
+}
+
+@media (max-width: 370px) {
+  .chart-page .header h1 {
+    font-size: 1.35rem;
+  }
+  .chart-page h2{
+    font-size: 1.2rem;
+  }
+
+  .chart-page h3{
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .chart-page .header h1 {
+    font-size: 1.25rem;
+  }
+
+}

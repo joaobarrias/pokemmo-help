@@ -119,13 +119,13 @@
 
 @media (max-width: 830px) {
     .hp-bar-container {
-      left: -40px
+      left: -30px
     }
 }
 
 @media (max-width: 818px) {
     .hp-bar-container {
-      left: 0px
+      left: 5px;
     }
 }
 

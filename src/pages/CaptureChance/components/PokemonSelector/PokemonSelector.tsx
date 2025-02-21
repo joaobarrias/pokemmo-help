@@ -193,7 +193,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       // Only reset to Pikachu if the user has not written a valid suggestion
       if (pokemonState.name.trim() && !suggestions.length) {
         const isValidPokemon = filteredPokemon.some(
-          (pokemon) => pokemon.name.toLowerCase() === pokemonState.name.trim().toLowerCase()
+          (pokemon) => pokemon.name.trim().toLowerCase().replace(" ", "-") === pokemonState.name.trim().toLowerCase().replace(" ", "-")
         );
         if (!isValidPokemon) {
           fetchPokemonData("Pikachu");

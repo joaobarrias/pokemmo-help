@@ -49,7 +49,7 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
         {/* First Row: Pokemon Selector & Toggleable Attack/Defense */}
         <div className="chart-main-container">
           {/* Pokemon Selector */}
-          <div className="pokemon-selector">
+          <div className="chart-pokemon-selector">
             <PokemonSelector
               selectedPokemon={selectedPokemon}
               allPokemon={allPokemon}
@@ -68,13 +68,16 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
               </div>
               <h2 className={`toggle-text ${showAttacking ? "inactive" : "active"}`}>Defending</h2>
             </div>
-            {showAttacking ? (
-              <AttackingEffectiveness isInverse={isInverse} pokemonTypes={pokemonTypes} />
-            ) : (
-              <DefendingEffectiveness isInverse={isInverse} pokemonTypes={pokemonTypes} />
-            )}
+            <div className="toggle-content">
+              <div className={`toggle-option ${showAttacking ? "visible" : "hidden"}`}>
+                <AttackingEffectiveness isInverse={isInverse} pokemonTypes={pokemonTypes} />
+              </div>
+              <div className={`toggle-option ${showAttacking ? "hidden" : "visible"}`}>
+                <DefendingEffectiveness isInverse={isInverse} pokemonTypes={pokemonTypes} />
+              </div>
+            </div>
           </div>
-
+          
         </div>
 
         {/* Second Row: Type Chart */}

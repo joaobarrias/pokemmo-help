@@ -108,7 +108,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
         {Object.values(groupedEffectiveness).some(types => types.length > 0) && <h3>Takes Damage from</h3>}
           {Object.entries(groupedEffectiveness).map(([effectiveness, types]) =>
             types.length > 0 ? (
-              <div key={effectiveness} className="defending-category">
+              <div key={effectiveness} className={`defending-category ${isInverse ? "defending-inverse" : ""}`}>
                 <h4 data-effectiveness={effectiveness}>
                   {effectiveness} Damage
                 </h4>

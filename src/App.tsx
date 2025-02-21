@@ -1,3 +1,4 @@
+// Main: App.tsx
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css"; // Import CSS
@@ -72,11 +73,11 @@ const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[];
   
   return (
     <div className="app-container">
+      {isCaptureChancePage && (
+        <div className="fixed-background" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+      )}
       <NavBar />
-      <div
-        className={`content ${isCaptureChancePage ? "content-with-bg" : ""}`}
-        style={isCaptureChancePage ? { backgroundImage: `url(${backgroundImage})` } : {}}
-      >
+      <div className={`content ${isCaptureChancePage ? "content-with-bg" : ""}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/capture-chance" element={<CaptureChance filteredPokemon={filteredPokemon} />} />

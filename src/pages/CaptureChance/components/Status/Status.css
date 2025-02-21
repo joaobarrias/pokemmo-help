@@ -67,7 +67,10 @@
 }
 
 @media (max-width: 406px) {
+    .status-label {
+        margin-top: 15px;
+    }
     .status-icon {
-        transform: translate(27px, -281px);
+        transform: translate(27px, -296px);
     }
 }

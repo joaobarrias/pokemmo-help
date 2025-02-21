@@ -19,9 +19,13 @@
 .defending-category {
     margin-top: 5px;
     padding: 3px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgb(138, 138, 138);
     width: 100%;
 }
+/*
+.defending-inverse{
+    border-top: 1px solid rgba(190, 13, 16, 1);
+}*/
 
 /* Category Title */
 .defending-category h4 {

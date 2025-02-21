@@ -127,7 +127,7 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
       }
       else{
         fetchPokemonData("Gyarados");
-        isFetchingDataRef.current = false
+        isFetchingDataRef.current = false;
       }
     }
   };
@@ -136,11 +136,11 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
     // Only reset to Gyarados if the user has not written a valid suggestion
     if (selectedPokemon.name.trim() && !suggestions.length) {
       const isValidPokemon = allPokemon.some(
-      (pokemon) => pokemon.name.toLowerCase() === selectedPokemon.name.trim().toLowerCase()
+      (pokemon) => pokemon.name.trim().toLowerCase().replace(" ", "-") === selectedPokemon.name.trim().toLowerCase().replace(" ", "-")
       );
       if (!isValidPokemon) {
         fetchPokemonData("Gyarados");
-        isFetchingDataRef.current = false
+        isFetchingDataRef.current = false;
       }
     }
   };
@@ -248,13 +248,18 @@ const PokemonSelector: React.FC<PokemonSelectorProps> = ({
         )}
       </div>
 
-      {/* Image Section (Remains Fixed) */}
+      {/* Image Section */}
       <div className="image-section">
-        <img
-          src={selectedPokemon.imageUrl || "/sprites/substitute.png"}
-          alt={selectedPokemon.name || "No Pokémon Selected"}
-          className="selected-image"
-        />
+        {selectedPokemon.imageUrl ? (
+          <img
+            key={selectedPokemon.imageUrl}
+            src={selectedPokemon.imageUrl}
+            alt={selectedPokemon.name}
+            className="selected-image"
+          />
+        ) : (
+          <div className="substitute-placeholder" />
+        )}
       </div>
 
       {/* Type Selection Section */}

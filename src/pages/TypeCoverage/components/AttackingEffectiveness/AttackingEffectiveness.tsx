@@ -65,7 +65,7 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
             <h3>{type} Moves do</h3>
             {Object.entries(effectivenessGroups).map(([effectiveness, types]) => (
               types.length > 0 && (
-                <div key={effectiveness} className="attacking-category">
+                <div key={effectiveness} className={`attacking-category ${isInverse ? "attacking-inverse" : ""}`}>
                   <h4 data-effectiveness={effectiveness}>{effectiveness} Damage</h4>
                   <ul>
                     {types.map((targetType) => (

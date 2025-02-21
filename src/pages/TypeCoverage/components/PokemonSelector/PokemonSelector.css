@@ -50,6 +50,7 @@
   max-height: 250px;
   overflow-y: auto;
   list-style: none;
+  user-select: none;
 }
 
 .chart-suggestion-box li {
@@ -74,6 +75,28 @@
   border: 1px solid #6d6d6d;
   background-color: rgba(255, 255, 255, 0.3);
   user-select: none;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+.selected-image {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.selected-image[src] {
+  opacity: 0;
+  animation: fadeInImage 0.3s ease-in-out forwards;
+}
+
+.substitute-placeholder {
+  width: 100%;
+  height: 100%;
+  background-image: url('/sprites/substitute.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* Type Section */

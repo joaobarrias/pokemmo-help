@@ -100,9 +100,3 @@
     margin-top:25px;
   }
 }
-
-@media (max-width:300px) {
-  .capture-calc-section {
-    margin-top:50px;
-  }
-}

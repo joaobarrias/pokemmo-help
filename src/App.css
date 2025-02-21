@@ -24,19 +24,25 @@
   position: relative; 
 }
 
+.fixed-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  z-index: -1;
+}
+
+/* Ensure content stays above the background */
 .content {
+  position: relative;
+  z-index: 1;
   flex: 1;
   width: 100%;
   overflow: hidden !important;
 }
-
-.content-with-bg {
-  background-image: url('background-images/pikachu.jpg');
-  background-attachment: fixed;
-  background-size: cover; 
-  background-position: center center; 
-}
-
   
 html, body {
   margin: 0;
@@ -48,7 +54,7 @@ html, body {
 
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: #2c2f38; /* Set to transparent so the background image from .app-container shows */
+  background-color: #2c2f38;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -65,6 +71,15 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Style the entire react-select component */
@@ -153,8 +168,5 @@ body {
   margin-left: 6px;
 }
 
-@media (max-width: 768px) {
-  .content-with-bg {
-    background-attachment: scroll;
-  }
-}
+
+

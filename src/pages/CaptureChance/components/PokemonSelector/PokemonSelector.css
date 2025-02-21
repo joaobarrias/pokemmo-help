@@ -65,6 +65,7 @@
     max-height: 250px;
     overflow-y: auto;
     list-style: none;
+    user-select: none;
 }
 
 .suggestion-box li {

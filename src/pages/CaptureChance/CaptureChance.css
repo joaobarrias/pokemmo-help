@@ -84,7 +84,7 @@
     .hp-section{
         max-width: 300px;
     }
-    .header h1 {
-        font-size: 1.7rem;
+    .capture-page .header h1 {
+        font-size: 1.5rem;
     }
 }
