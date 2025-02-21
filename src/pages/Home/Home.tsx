@@ -30,10 +30,11 @@ const Home: React.FC = () => {
         </div>
       </div>
       
-      <p className="discord-link">
-        Join our <a href="https://discord.com/invite/syryMAF4Kr" target="_blank" rel="noopener noreferrer">Discord</a> for updates and community contributions!
+      <div className="discord-link">
+        <p>Join our <a href="https://discord.com/invite/syryMAF4Kr" target="_blank" rel="noopener noreferrer">Discord</a> for updates and community contributions!</p>
         <p>Since this is a new project, bugs are to be expected. Please report them in our discord. Thanks!</p>
-      </p>
+      </div>
+
     </div>
   );
 };
