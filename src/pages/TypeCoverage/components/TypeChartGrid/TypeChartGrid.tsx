@@ -36,8 +36,6 @@ const TypeChartGrid: React.FC<TypeChartGridProps> = ({ isInverse }) => {
 
   const { width, height } = useWindowSize();
   const hideX = width <= 800 || (height <= 900 && width <= 2000);
-  const isMobile = width <= 1110 || (height <= 900 && width <= 2000);
-  const iconFolder = isMobile ? "icons" : "chart-icons";
 
   const handleCellClick = (rowIndex: number, colIndex: number) => {
     if (clickedRow === rowIndex && clickedCol === colIndex) {
@@ -75,7 +73,7 @@ const TypeChartGrid: React.FC<TypeChartGridProps> = ({ isInverse }) => {
             {types.map((type) => (
               <th key={type} onMouseEnter={handleTableMouseLeave}>
                 <img
-                  src={`/types/${iconFolder}/${type.toLowerCase()}.png`}
+                  src={`/types/icons/${type.toLowerCase()}.png`}
                   alt={type}
                   className="header-icon"
                 />
@@ -88,7 +86,7 @@ const TypeChartGrid: React.FC<TypeChartGridProps> = ({ isInverse }) => {
             <tr key={attackingType}>
               <td onMouseEnter={handleTableMouseLeave}>
                 <img
-                  src={`/types/${iconFolder}/${attackingType.toLowerCase()}.png`}
+                  src={`/types/icons/${attackingType.toLowerCase()}.png`}
                   alt={attackingType}
                   className="row-header-icon"
                 />
@@ -133,10 +131,10 @@ const TypeChartGrid: React.FC<TypeChartGridProps> = ({ isInverse }) => {
 
                   const borderColor =
                   isHovered || isClicked || isInHoveredRange || isInClickedRange
-                    ? "inset 0 0 0 0.4px #dddddd6e" // Default for hovered/clicked
+                    ? "inset 0 0 0 0.3px #7e7e7e" // Default for hovered/clicked
                     : (isContentHovered || clickedRow !== null) && !isHovered && !isClicked
-                    ? "inset 0 0 0 0.4px #dddddd" // Darker for dimmed cells
-                    : "inset 0 0 0 0.4px #dddddd6e"; // Default when inactive
+                    ? "inset 0 0 0 0.4px #ffffff" // Darker for dimmed cells
+                    : "inset 0 0 0 0.3px #7e7e7e"; // Default when inactive
 
                 const handleMouseEnter = () => {
                   setIsContentHovered(true);

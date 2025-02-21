@@ -5,7 +5,7 @@
     align-items: center;
     text-align: center;
     flex: 1;
-    max-width: 210px;
+    max-width: 230px;
     padding: 5px;
     margin-top: 10px;
 }
@@ -44,7 +44,7 @@
 }
 
 .defending-category li img {
-    width: 62px;
+    width: 69px;
     height: auto;
     max-width: 100%;
 }
