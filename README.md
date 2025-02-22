@@ -16,13 +16,23 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 - Dynamically updates a **health bar** matching the in-game design based on user input.
 - Provides a **Poké Ball selector** with built-in conditions (e.g., fishing checks, type-based multipliers).
 - The capture chance updates **dynamically in real time**, ensuring a smooth user experience without the need for manual refreshes
-- **Theme selector** for background customization, allowing users to submit custom themes via Discord.
-- **Language selection** (Currently only English, with more planned in the future).
+
+### **Type Coverage**
+
+- Input a Pokémon name just like in the Capture Chance page, but with a larger selection of Pokémon. Once selected, it grabs their types and displays them beneath the Pokémon image in a type selector menu.
+- Users can manually change the types to match a different Pokémon or even one that doesn't exist.
+- Users can view the attacking and defending type coverage damage:
+  - **Attacking Component**: Shows how a selected type (e.g., Water) interacts with other types when used as an attack.
+  - **Defending Component**: Shows how other types' moves affect the selected type(s) when defending.
+- Supports **dual typing**, where both types are combined and the defending coverage is calculated accordingly.
+- A **type chart** is displayed with the first row showing defender types and the first column showing attacker types, with the corresponding damage rate for each interaction.
+- **Hover and Click Interactions**: Hover over or click any table cell to highlight the row and column.
+- **Flip Typing Button**: This button inverts type damage coverage, flipping the attack and defense interactions.
+- The type coverage flip is also reflected in the attacking and defending components and the type chart.
 
 ### **Coming Soon**
 
 - **Pokémon Search:** A tool that will allow users to filter Pokémon by **abilities, moves, base stats, egg groups, and types**.
-- **Type Coverage:** A calculator to evaluate type effectiveness in battles, including an **inverse type mode**.
 
 ## ⚙️ How It Works
 
@@ -37,12 +47,22 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 7. A **Poké Ball selector** determines the ball's capture multiplier, considering conditions like fishing or Pokémon type.
 8. The capture chance is calculated using Pokémon's **total HP, current HP, catch rate, status multiplier, and ball multiplier**.
 9. **Live updates** ensure the capture chance adjusts immediately upon any user input change.
-10. A **theme selector** allows users to pick from different background images, with community submissions accepted via Discord.
+10. A **how it works** section to explain how the calculations are done.
+
+### **Type Coverage**
+
+1. Users can input a Pokémon's name, and the app will provide suggestions.
+2. Alternatively, users can click on type images from a type menu (up to 2 types). When a Pokémon is selected, the corresponding types are highlighted in the menu.
+3. Users can also manually change the types in the menu to any desired combination, whether it's an existing Pokémon or a custom combination.
+4. The attacking and defending type coverage damage calculations are displayed dynamically based on the selected types.
+5. The type damage rates are shown in both the attacking and defending components, with the type chart also displaying the interactions.
+6. Hover and click interactions allow users to highlight specific cells for quick reference.
+7. The **Flip Typing Button** inverts type interactions (e.g., Water -> Fire becomes Fire -> Water).
+8. Dual typing is supported, and both types are factored into the damage calculations.
 
 ### **Coming Soon**
 
 - **Pokémon Search**: A powerful Pokémon lookup tool with detailed filters.
-- **Type Coverage**: A dynamic type coverage damage calculator with an optional **inverse type mode**.
 
 ## 🧑‍💻 Tech Stack
 
@@ -84,6 +104,7 @@ To get started with this project, follow the steps below:
 
 - **Theme Selector:** Users can select different background images.
 - **Custom Submissions:** Users can submit their own background images via our **Discord server**.
+- **Language selection** (Currently only English, with more planned in the future).
 
 ## 📢 Community & Support
 
