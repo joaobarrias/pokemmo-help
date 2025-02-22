@@ -14,7 +14,7 @@
     margin-bottom: 0 !important;
 }
   
-.body label, .body p{
+.body label, .body p, .body .how-it-works, .body .how-it-works button{
     text-shadow: 2px 2px 2px rgb(0, 0, 0, 1), -1px -1px 2px rgb(0, 0, 0, 1), 1px -1px 2px rgb(0, 0, 0, 1), -2px 2px 2px rgb(0, 0, 0, 1);
 }
 
@@ -42,6 +42,156 @@
     padding: 20px;
 }
   
+/* Formula Section */
+.third-container{
+    margin-bottom: 20px;
+}
+.how-it-works {
+    text-align: center;
+}
+.how-it-works h2{
+    margin-bottom: 10px;
+}
+.how-it-works button {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    background-color: #6d6d6d;
+    color: #fff;
+    border: 1px solid #444c56;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin: 10px 0;
+  }
+  
+  /* Hover Effect */
+  .how-it-works button:hover {
+    background-color: #444c56;
+    border-color: #23262f;
+  }
+.intro-text {
+    max-width: 700px;
+    margin: 0 auto;
+}
+/* Smooth transition for formulas-container */
+.formulas-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+}
+
+.formulas-container.open {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+/* Adjust sup vertical alignment */
+.formula sup {
+    font-size: 0.7em;
+    vertical-align: super;
+    position: relative;
+    top: -0.5em;
+}
+
+/* Reduce space between formula sections */
+.formula-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Center formulas and paragraph */
+.formulas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.formula-section {
+    text-align: center;
+}
+
+.formula-section {
+    margin: 15px 0;
+}
+
+.formula-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.formula {
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Parentheses */
+.parentheses {
+    font-size: 1.5em;
+    line-height: 1;
+    margin: 0 2px;
+}
+
+/* Fractions */
+.fraction {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 0 5px;
+}
+
+.numerator,
+.denominator {
+    display: block;
+    padding: 2px 0;
+}
+
+.numerator {
+    border-bottom: 1px solid;
+}
+
+.denominator {
+    font-size: 0.9em;
+}
+
+/* Nested Square Roots */
+.nested-sqrt {
+    border-top: 1px solid;
+    padding-top: 2px;
+}
+
+/* Notes */
+.note {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Conditional for Y Formula */
+.conditional {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.case {
+    display: block;
+    text-align: center;
+}
+
 @media (max-width: 920px) {
     .capture-calc-container {
         display: grid;
@@ -87,4 +237,20 @@
     .capture-page .header h1 {
         font-size: 1.5rem;
     }
+    .formula-section h3 {
+        font-size: 1rem;
+      }
+      
+      .formula {
+        font-size: 0.9rem;
+      }
+      
+      .parentheses {
+        font-size: 1.3em;
+      }
+      .how-it-works button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
 }
+

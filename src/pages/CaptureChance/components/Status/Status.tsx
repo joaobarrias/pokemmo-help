@@ -61,6 +61,7 @@ const Status: React.FC<StatusProps> = ({ selectedStatus, setSelectedStatus }) =>
             src={selectedStatus.icon}
             alt={`${selectedStatus} icon`}
             className="status-image"
+            key={selectedStatus.icon}
           />
         )}
       </div>

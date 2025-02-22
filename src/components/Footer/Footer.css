@@ -179,3 +179,10 @@
     font-weight: 700;
   }
 }
+
+@media (max-width: 319px) {
+  .submit-art {
+    font-size: 0.7rem;
+    transform: translate(5%,100%);
+  }
+}

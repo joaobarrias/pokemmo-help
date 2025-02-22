@@ -69,15 +69,23 @@ const App: React.FC = () => {
 
 const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[]; allPokemon: { name: string; id: number }[]; backgroundImage: string; setBackgroundImage: (image: string) => void }> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage }) => {
   const location = useLocation();
-  const isCaptureChancePage = location.pathname === "/capture-chance" || location.pathname === "/" || location.pathname === "/type-coverage";
+  const isValidPage = location.pathname === "/capture-chance" || location.pathname === "/" || location.pathname === "/type-coverage";
   
+  useEffect(() => {
+    if (isValidPage) {
+      document.body.style.backgroundImage = `url(${backgroundImage})`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center center';
+      document.body.style.backgroundAttachment = 'fixed';
+    } else {
+      document.body.style.backgroundImage = 'none';
+    }
+  }, [backgroundImage, isValidPage]);
+
   return (
     <div className="app-container">
-      {isCaptureChancePage && (
-        <div className="fixed-background" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-      )}
       <NavBar />
-      <div className={`content ${isCaptureChancePage ? "content-with-bg" : ""}`}>
+      <div className={`content ${isValidPage ? "content-with-bg" : ""}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/capture-chance" element={<CaptureChance filteredPokemon={filteredPokemon} />} />
