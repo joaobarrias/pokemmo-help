@@ -26,21 +26,9 @@ export default defineConfig({
         background_color: '#2c2f38',
         theme_color: '#23262f',
         icons: [
-          {
-            src: "icons/logo-192",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "icons/logo",
-            sizes: "320x320",
-            type: "image/png",
-          },
-          {
-            src: "icons/logo-512",
-            sizes: "512x512",
-            type: "image/png",
-          },
+          { src: "icons/logo192.png", sizes: "192x192", type: "image/png" },
+          { src: "icons/logo.png", sizes: "320x320", type: "image/png" },
+          { src: "icons/logo512.png", sizes: "512x512", type: "image/png" },
         ],
       },
       workbox: {

@@ -73,7 +73,7 @@ const App: React.FC = () => {
   if (isSplashVisible && isPWA) {
     return (
       <div className="splash-screen">
-        <img src="icons/logo-512.png" alt="PokeMMO Help Logo" className="splash-logo" width="200" height="200"/>
+        <img src="icons/logo512.png" alt="PokeMMO Help Logo" className="splash-logo" width="200" height="200"/>
         <h1 className="splash-title">
         <span className="poke">Poke</span>
         <span className="mmo">MMO</span>
