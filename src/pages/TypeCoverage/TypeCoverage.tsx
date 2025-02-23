@@ -34,7 +34,7 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
         <span key={isInverse ? "inverted" : "normal"} className={`fade-text ${isInverse ? "fade-in-inverted" : "fade-in-normal"}`}>
           {isInverse ? "Inverted" : "Normal"}&nbsp;
         </span>
-        Type Coverage Calculator
+        Type Coverage
       </h1>
       <button 
         onClick={() => setIsInverse(!isInverse)}

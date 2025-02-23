@@ -371,3 +371,22 @@
   }
 
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .flip-button:hover {
+    background-color: #444c56;
+    border: 1px solid #6d6d6d;
+  }
+  .flip-button.inverted:hover {
+    background-color: #be0d10;
+    border: 1px solid #6d6d6d;
+  }
+  .flip-button:active {
+    background-color: #23262f;
+    border: 1px solid #ccc;
+  }
+  .flip-button.inverted:active {
+    background-color: #810e10;
+    border: 1px solid #ccc;
+  }
+}

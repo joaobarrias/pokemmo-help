@@ -38,8 +38,7 @@
   margin-right: 10px;
   transition: transform 0.5s ease-in-out;
 }
-.logo:hover img,
-.logo:focus img {
+.logo:hover img{
   transform: rotate(360deg);
 }
 
@@ -202,5 +201,23 @@
   .logo img {
     height: 30px;
     width: auto;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .logo:hover {
+    transform: none;
+  }
+  .logo:hover img {
+    transform: none;
+  }
+  .logo:active {
+    transform: scale(1.05);
+  }
+  .logo:active img {
+    transform: rotate(360deg);
+  }
+  .logo img {
+    transform: none;
   }
 }
