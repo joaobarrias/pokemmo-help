@@ -13,23 +13,29 @@ import TypeCoverage from "./pages/TypeCoverage/TypeCoverage"; // Import Type Cov
 const App: React.FC = () => {
   const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<{ name: string; id: number }[]>([]);
+  const [isSplashVisible, setIsSplashVisible] = useState(false);
+  const [isPWA, setIsPWA] = useState(false);
 
   // Load the theme from localStorage or set a default theme
   const [backgroundImage, setBackgroundImage] = useState(() => {
-    const savedTheme = localStorage.getItem('backgroundImage');
+    const savedTheme = localStorage.getItem("backgroundImage");
     return savedTheme || "background-images/Darkrai.jpg"; // Default to Darkrai if no saved theme
   });
 
   useEffect(() => {
+    // Detect if running as a PWA
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches || (window.navigator as any).standalone;
+    setIsPWA(isStandalone);
+
     const loadPokemonData = () => {
       try {
-        // Extract Pokémon names and IDs from JSON
         const pokemonList = Object.entries(pokemmoData).map(([name, data]: [string, any]) => {
-          // Check if formattedName exists in the data
-          const pokemonName = data.formattedName ? data.formattedName : name.charAt(0).toUpperCase() + name.slice(1); // Use formattedName if available, otherwise apply default name formatting
-  
+          const pokemonName = data.formattedName
+            ? data.formattedName
+            : name.charAt(0).toUpperCase() + name.slice(1);
+
           return {
-            name: pokemonName, // Assign formattedName or original name
+            name: pokemonName,
             id: data.id,
             originalName: name,
           };
@@ -37,7 +43,7 @@ const App: React.FC = () => {
 
         setAllPokemon(pokemonList);
         const filtered = pokemonList
-          .filter(pokemon => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0)
+          .filter((pokemon) => (pokemmoData as any)[pokemon.originalName.toLowerCase()].capture_rate !== 0)
           .map(({ name, id }) => ({ name, id }));
 
         setFilteredPokemon(filtered);
@@ -46,6 +52,15 @@ const App: React.FC = () => {
       }
     };
     loadPokemonData();
+
+    // Show splash screen only if PWA
+    if (isStandalone) {
+      setIsSplashVisible(true);
+      const splashTimer = setTimeout(() => {
+        setIsSplashVisible(false);
+      }, 2000); // 2 seconds for mobile PWA
+      return () => clearTimeout(splashTimer);
+    }
   }, []);
 
   // Save the selected theme to localStorage whenever it changes
@@ -54,6 +69,19 @@ const App: React.FC = () => {
       localStorage.setItem("backgroundImage", backgroundImage);
     }
   }, [backgroundImage]);
+
+  if (isSplashVisible && isPWA) {
+    return (
+      <div className="splash-screen">
+        <img src="icons/logo-512.png" alt="PokeMMO Help Logo" className="splash-logo" width="200" height="200"/>
+        <h1 className="splash-title">
+        <span className="poke">Poke</span>
+        <span className="mmo">MMO</span>
+        <span className="help">Help</span>
+      </h1>
+      </div>
+    );
+  }
 
   return (
     <Router>
@@ -67,18 +95,23 @@ const App: React.FC = () => {
   );
 };
 
-const AppWithRouter: React.FC<{ filteredPokemon: { name: string; id: number }[]; allPokemon: { name: string; id: number }[]; backgroundImage: string; setBackgroundImage: (image: string) => void }> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage }) => {
+const AppWithRouter: React.FC<{
+  filteredPokemon: { name: string; id: number }[];
+  allPokemon: { name: string; id: number }[];
+  backgroundImage: string;
+  setBackgroundImage: (image: string) => void;
+}> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage }) => {
   const location = useLocation();
   const isValidPage = location.pathname === "/capture-chance" || location.pathname === "/" || location.pathname === "/type-coverage";
-  
+
   useEffect(() => {
     if (isValidPage) {
       document.body.style.backgroundImage = `url(${backgroundImage})`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center center';
-      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundPosition = "center center";
+      document.body.style.backgroundAttachment = "fixed";
     } else {
-      document.body.style.backgroundImage = 'none';
+      document.body.style.backgroundImage = "none";
     }
   }, [backgroundImage, isValidPage]);
 

@@ -157,5 +157,37 @@ body {
   margin-left: 6px;
 }
 
+.splash-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
 
+.splash-title {
+  display: flex;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
 
+.splash-title .poke {
+  color: #fff;
+}
+
+.splash-title .mmo {
+  color: #ef1c1f;
+}
+
+.splash-title .help {
+  color: #fff;
+  margin-left: 10px;
+}
+
+.splash-title .poke,
+.splash-title .mmo,
+.splash-title .help {
+  font-family: "Orbitron", sans-serif;
+}

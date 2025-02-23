@@ -60,7 +60,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className="navbar">
       <NavLink to="/" className="logo" onClick={(e) => e.currentTarget.blur()}>
-        <img src="/icons/icon5.png" alt="Logo" />
+        <img src="/icons/logo.png" alt="Logo" />
         <span className="poke">Poke</span>
         <span className="mmo">MMO</span>
         <span className="help">Help</span>
