@@ -9,7 +9,7 @@ export default defineConfig({
     {
       name: 'disable-csp-for-dev',
       configureServer(server) {
-        server.middlewares.use((req, res, next) => {
+        server.middlewares.use((_req, res, next) => {
           res.removeHeader('Content-Security-Policy');
           next();
         });
