@@ -44,7 +44,6 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
               <option value="background-images/PokemonGo.jpg">Pokemon GO</option>
               <option value="background-images/OldChateau.jpg">Old Chateau</option>
               <option value="background-images/Darkrai.jpg">Darkrai</option>
-              <option value="background-images/Contest.jpg">Contest</option>
               <option value="background-images/Chandelure.jpg">Chandelure</option>
               <option value="background-images/Halloween.jpg">Halloween</option>
               <option value="background-images/Kyogre.jpg">Kyogre</option>

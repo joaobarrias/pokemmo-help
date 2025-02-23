@@ -53,7 +53,7 @@
 }
 
 .chart-body.inverted {
-  animation: pageShake 0.3s ease-in-out;
+  animation: shake 0.3s ease-in-out;
 }
 
 .flip-button.inverted .rotate-arrow {
@@ -72,14 +72,6 @@
   25%  { transform: rotate(1deg) translateX(2px); }
   50%  { transform: rotate(0deg) translateX(0); }
   75%  { transform: rotate(-1deg) translateX(-2px); }
-  100% { transform: rotate(0deg) translateX(0); }
-}
-
-@keyframes pageShake {
-  0% { transform: rotate(0deg) translateX(0); }
-  25% { transform: rotate(1deg) translateX(2px); }
-  50% { transform: rotate(0deg) translateX(0); }
-  75% { transform: rotate(-1deg) translateX(-2px); }
   100% { transform: rotate(0deg) translateX(0); }
 }
 
@@ -372,6 +364,7 @@
 
 }
 
+/* Touch devices: Disable animations and hover effects */
 @media (hover: none) and (pointer: coarse) {
   .flip-button:hover {
     background-color: #444c56;
@@ -388,5 +381,11 @@
   .flip-button.inverted:active {
     background-color: #810e10;
     border: 1px solid #ccc;
+  }
+  .flip-button.inverted {
+    animation: none; /* Remove shake on touch devices: was crashing the app in some devices*/
+  }
+  .chart-body.inverted {
+    animation: none;
   }
 }

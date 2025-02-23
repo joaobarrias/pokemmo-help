@@ -214,6 +214,29 @@
     .capture-chance {
         grid-column: 1;
     }
+    .formula-row {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .formula-section {
+        margin: 5px 0;
+        width: 100%;
+      }
+    
+      .formula {
+        padding: 0px;
+        font-size: 0.9rem;
+      }
+    
+      .formula-section h3 {
+        font-size: 1rem;
+      }
+    
+      .parentheses {
+        font-size: 1.3em;
+      }
 }
 
 @media (max-width: 600px) {
@@ -237,20 +260,57 @@
     .capture-page .header h1 {
         font-size: 1.5rem;
     }
-    .formula-section h3 {
-        font-size: 1rem;
-      }
-      
-      .formula {
-        font-size: 0.9rem;
-      }
-      
-      .parentheses {
-        font-size: 1.3em;
-      }
-      .how-it-works button {
+    .how-it-works button {
         padding: 6px 12px;
         font-size: 0.9rem;
       }
+    .formula-section h3 {
+        font-size: 0.9rem;
+    }
+    
+    .formula {
+        font-size: 0.85rem;
+    }
+    
+    .parentheses {
+        font-size: 1.2em;
+    }
+    .how-it-works button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    .note {
+        font-size: 0.8rem;
+    }
 }
 
+
+@media (max-width: 480px) {
+    .formula {
+      font-size: 0.75rem;
+    }
+  
+    .formula-section h3 {
+      font-size: 0.85rem;
+    }
+  
+    .parentheses {
+      font-size: 1.1em;
+    }
+    .note {
+        font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .formula {
+      font-size: 0.65rem;
+    }
+  
+    .parentheses {
+      font-size: 0.9em;
+    }
+    .note {
+        font-size: 0.6rem;
+    }
+  }
