@@ -25,7 +25,13 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
-    const isStandalone = window.matchMedia("(display-mode: standalone)").matches || (window.navigator as any).standalone;
+    // Enhanced PWA detection
+    const ua = navigator.userAgent;
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches || 
+                        (window.navigator as any).standalone || 
+                        window.location.href.startsWith("app://") || 
+                        ua.includes("WebView") || // Samsung/Huawei WebView check
+                        (ua.includes("SamsungBrowser") && document.fullscreenElement !== null); // Samsung PWA
     setIsPWA(isStandalone);
 
     // Detect touch device
@@ -86,6 +92,12 @@ const App: React.FC = () => {
   }, [backgroundImage]);
 
   const handleAddToHomeScreen = () => {
+    const ua = navigator.userAgent;
+    const isOpera = ua.includes("OPR") || ua.includes("Opera");
+    const isSafari = ua.includes("Safari") && !ua.includes("Chrome");
+    const isFirefox = ua.includes("Firefox") && !ua.includes("Seamonkey");
+    const isSamsung = ua.includes("SamsungBrowser");
+
     if (installPromptEvent) {
       (installPromptEvent as any).prompt();
       (installPromptEvent as any).userChoice.then((choiceResult: any) => {
@@ -97,8 +109,17 @@ const App: React.FC = () => {
         setInstallPromptEvent(null);
         setShowInstallPrompt(false);
       });
+    } else if (isOpera || isFirefox) {
+      alert('Tap the menu (three dots) and select "Add to Home screen".');
+      setShowInstallPrompt(false);
+    } else if (isSafari) {
+      alert('Tap the Share icon (square with up arrow) below, then "Add to Home Screen".');
+      setShowInstallPrompt(false);
+    } else if (isSamsung) {
+      alert('Tap the menu (three dots/lines) and select "Add page to Home screen".');
+      setShowInstallPrompt(false);
     } else {
-      alert('To add to home screen, tap the "Share" icon and select "Add to Home Screen".');
+      alert('To add to home screen, use the browser menu.');
       setShowInstallPrompt(false);
     }
   };
