@@ -49,13 +49,13 @@
 .how-it-works {
     text-align: center;
 }
-.how-it-works h2{
+.how-it-works h3{
     margin-bottom: 10px;
 }
 .how-it-works button {
     display: inline-block;
     padding: 8px 16px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: inherit;
     cursor: pointer;
     background-color: #6d6d6d;
@@ -74,6 +74,7 @@
 .intro-text {
     max-width: 700px;
     margin: 0 auto;
+    font-size: 0.9rem;
 }
 /* Smooth transition for formulas-container */
 .formulas-container {
@@ -90,7 +91,7 @@
 
 /* Adjust sup vertical alignment */
 .formula sup {
-    font-size: 0.7em;
+    font-size: 0.8em;
     vertical-align: super;
     position: relative;
     top: -0.5em;
@@ -120,8 +121,7 @@
     margin: 15px 0;
 }
 
-.formula-section h3 {
-    font-size: 1.2rem;
+.formula-section h4 {
     margin-bottom: 10px;
     text-align: center;
 }
@@ -129,7 +129,7 @@
 .formula {
     padding: 10px;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -175,7 +175,7 @@
 
 /* Notes */
 .note {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-align: center;
     margin-top: 5px;
     font-style: italic;
@@ -227,11 +227,11 @@
     
       .formula {
         padding: 0px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
     
-      .formula-section h3 {
-        font-size: 1rem;
+      .formula-section h4 {
+        font-size: 0.95rem;
       }
     
       .parentheses {
@@ -262,14 +262,14 @@
     }
     .how-it-works button {
         padding: 6px 12px;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
-    .formula-section h3 {
-        font-size: 0.9rem;
+    .formula-section h4 {
+        font-size: 0.85rem;
     }
     
     .formula {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
     
     .parentheses {
@@ -277,21 +277,24 @@
     }
     .how-it-works button {
         padding: 6px 12px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     .note {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 }
 
 
 @media (max-width: 480px) {
+    .intro-text {
+        font-size: 0.8rem;
+    }
     .formula {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
     }
   
-    .formula-section h3 {
-      font-size: 0.85rem;
+    .formula-section h4 {
+      font-size: 0.8rem;
     }
   
     .parentheses {

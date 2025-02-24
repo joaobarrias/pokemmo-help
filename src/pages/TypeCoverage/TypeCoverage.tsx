@@ -27,7 +27,7 @@ const TypeCoverage: React.FC<TypeCoverageProps> = ({ allPokemon }) => {
   const [showAttacking, setShowAttacking] = useState<boolean>(false);
 
   return (
-    <div className="chart-page">
+    <div className={`chart-page ${isInverse ? "inverted" : ""}`}>
       {/* Header with Inverse Toggle */}
       <div className="header">
       <h1>

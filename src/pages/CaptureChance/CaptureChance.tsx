@@ -112,7 +112,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
         <div className="third-container">
           
           <div className="how-it-works">
-            <h2>How It Works</h2>
+            <h3>How It Works</h3>
             <button onClick={() => setIsSpoilerOpen(!isSpoilerOpen)}>
               {isSpoilerOpen ? "Hide Formulas" : "Show Formulas"}
             </button>
@@ -122,7 +122,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
               </p>
               <div className="formula-row">
                 <div className="formula-section">
-                  <h3>Total HP</h3>
+                  <h4>Total HP</h4>
                   <p className="formula">
                     Total HP = ⌊ <span className="parentheses">(</span>
                     <span className="fraction">
@@ -134,7 +134,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
                   <p className="note">Uses 15.5 as the average IV (0-31).</p>
                 </div>
                 <div className="formula-section">
-                  <h3>Capture Chance</h3>
+                  <h4>Capture Chance</h4>
                   <p className="formula">
                     X = <span className="parentheses">(</span>
                     <span className="fraction">

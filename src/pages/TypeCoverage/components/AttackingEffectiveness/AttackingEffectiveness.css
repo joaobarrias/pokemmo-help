@@ -73,3 +73,18 @@
 .attacking-category li img {
     filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
 }
+
+@media (max-width: 400px) {
+    /* When there are two types  */
+    .attacking-columns:has(>.attacking-column:nth-child(2)) .attacking-category li img {
+      width: 50px; 
+    }
+  
+    /* Adjust column width for readability */
+    .attacking-columns:has(>.attacking-column:nth-child(2)) .attacking-column {
+      max-width: 140px; /
+    }
+    .attacking-columns:has(>.attacking-column:nth-child(2)) .attacking-column h3{
+        font-size: 0.9rem;
+    }
+  }

@@ -26,14 +26,15 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Enhanced PWA detection
-    const ua = navigator.userAgent;
+    const ua = navigator.userAgent.toLowerCase(); // Lowercase for consistency
     const isStandalone = window.matchMedia("(display-mode: standalone)").matches || 
                         (window.navigator as any).standalone || 
                         window.location.href.startsWith("app://") || 
-                        ua.includes("WebView") || // Samsung/Huawei WebView check
-                        (ua.includes("SamsungBrowser") && document.fullscreenElement !== null); // Samsung PWA
+                        window.location.href.startsWith("hwapp://") || // Huawei PWA protocol
+                        ua.includes("huawei") || // Huawei browser UA
+                        ua.includes("webview") || // Broader WebView check
+                        (ua.includes("samsungbrowser") && document.fullscreenElement !== null);
     setIsPWA(isStandalone);
-
     // Detect touch device
     const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
