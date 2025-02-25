@@ -3204,6 +3204,7 @@
   },
   "mewtwo": {
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 150,
     "alpha": "no",
     "stats": {
@@ -3225,6 +3226,7 @@
   },
   "mew": {
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 151,
     "alpha": "no",
     "stats": {
@@ -5331,6 +5333,7 @@
   "ho-oh": {
     "formattedName": "Ho-Oh",
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 250,
     "alpha": "no",
     "stats": {
@@ -8103,6 +8106,7 @@
   },
   "rayquaza": {
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 384,
     "alpha": "no",
     "stats": {
@@ -10403,6 +10407,7 @@
   },
   "arceus": {
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 493,
     "alpha": "no",
     "stats": {
@@ -10424,6 +10429,7 @@
   },
   "victini": {
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 494,
     "alpha": "no",
     "stats": {
@@ -13512,6 +13518,7 @@
   },
   "keldeo": {
     "capture_rate": 0,
+    "unique_legendary": true,
     "id": 647,
     "alpha": "no",
     "stats": {

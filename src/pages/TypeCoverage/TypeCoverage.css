@@ -395,7 +395,7 @@
     animation: none;
   }
   .chart-page.inverted {
-    background-color: rgba(116, 9, 11, 0.2);
+    background-color: rgba(116, 9, 11, 0.3);
     transition: background-color 0.3s ease;
   }
 }
