@@ -14,6 +14,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
   }>({
     "4x": [],
     "2x": [],
+    "1x": [],
     "0.5x": [],
     "0.25x": [],
     "0x": [],
@@ -27,6 +28,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
     const effectivenessGrouped: { [key: string]: string[] } = {
       "4x": [],
       "2x": [],
+      "1x": [],
       "0.5x": [],
       "0.25x": [],
       "0x": [],
@@ -50,7 +52,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
             // If it's non-zero, multiply the effectiveness
             allTargetTypes[targetType] *= effectiveness;
           } else {
-            // If no value exists for this target type, set it to the current effectiveness
+            // If no value exists for this target type, set it to the current effectiveness (should not even make it here)
             allTargetTypes[targetType] = effectiveness;
           }
         });
@@ -72,9 +74,10 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
         else if (combinedEffectiveness === 0) modifiedEffectiveness = 2; // Immunity becomes super effective
       }
 
-      // Group types based on modified effectiveness, skipping 1x
+      // Group types based on modified effectiveness
       if (modifiedEffectiveness === 4) effectivenessGrouped["4x"].push(targetType);
       else if (modifiedEffectiveness === 2) effectivenessGrouped["2x"].push(targetType);
+      else if (modifiedEffectiveness === 1) effectivenessGrouped["1x"].push(targetType);
       else if (modifiedEffectiveness === 0.5) effectivenessGrouped["0.5x"].push(targetType);
       else if (modifiedEffectiveness === 0.25) effectivenessGrouped["0.25x"].push(targetType);
       else if (modifiedEffectiveness === 0) effectivenessGrouped["0x"].push(targetType);
@@ -88,6 +91,7 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
       setGroupedEffectiveness({
         "4x": [],
         "2x": [],
+        "1x": [],
         "0.5x": [],
         "0.25x": [],
         "0x": [],
@@ -96,29 +100,29 @@ const DefendingEffectiveness: React.FC<DefendingEffectivenessProps> = ({ pokemon
       const grouped = groupEffectiveness(pokemonTypes);
       setGroupedEffectiveness(grouped); // Update the state
     }
-  }, [pokemonTypes, isInverse]); // Dependencies
+  }, [pokemonTypes, isInverse]); // Dependacies
 
   return (
     <div className="defending">
-      <div className={`defending-column ${Object.values(groupedEffectiveness).every(types => types.length === 0) ? 'empty' : ''}`}>
+        <div className={`defending-column ${Object.values(groupedEffectiveness).every(types => types.length === 0) ? 'empty' : ''}`}>
         {Object.values(groupedEffectiveness).some(types => types.length > 0) && <h3>Takes Damage from</h3>}
-        {Object.entries(groupedEffectiveness).map(([effectiveness, types]) =>
-          types.length > 0 ? (
-            <div key={effectiveness} className={`defending-category ${isInverse ? "defending-inverse" : ""}`}>
-              <h4 data-effectiveness={effectiveness}>
-                {effectiveness} Damage
-              </h4>
-              <ul>
-                {types.map((type) => (
-                  <li key={type}>
-                    <img src={`/types/icons/${type.toLowerCase()}.png`} alt={type} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null
-        )}
-      </div>
+          {Object.entries(groupedEffectiveness).map(([effectiveness, types]) =>
+            types.length > 0 ? (
+              <div key={effectiveness} className={`defending-category ${isInverse ? "defending-inverse" : ""}`}>
+                <h4 data-effectiveness={effectiveness}>
+                  {effectiveness} Damage
+                </h4>
+                <ul>
+                  {types.map((type) => (
+                    <li key={type}>
+                      <img src={`/types/icons/${type.toLowerCase()}.png`} alt={type} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null
+          )}
+        </div>
     </div>
   );
 };

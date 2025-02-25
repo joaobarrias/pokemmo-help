@@ -18,9 +18,6 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['/**/*.png', '**/*.svg'],
-      devOptions: {
-        enabled: true,
-      },
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',

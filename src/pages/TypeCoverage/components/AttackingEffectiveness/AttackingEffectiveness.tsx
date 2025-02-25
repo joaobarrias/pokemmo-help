@@ -10,8 +10,8 @@ type AttackingEffectivenessProps = {
 
 const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemonTypes, isInverse }) => {
   const [typeEffectiveness, setTypeEffectiveness] = useState<{ 
-    [key: string]: { [effectiveness: string]: string[] } 
-  }>({});
+    [key: string]: { [effectiveness: string]: string[] } } 
+  >({});
 
   // Capitalize first letter of the type (to match JSON keys)
   const capitalizeType = (type: string) => type.charAt(0).toUpperCase() + type.slice(1);
@@ -33,8 +33,7 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
         return;
       }
 
-      // Omit 1x
-      newEffectiveness[capitalizedType] = { "2x": [], "0.5x": [], "0x": [] };
+      newEffectiveness[capitalizedType] = { "2x": [], "1x": [], "0.5x": [], "0x": [] };
 
       Object.entries(effectiveness).forEach(([targetType, value]) => {
         let modifiedValue = value;
@@ -47,15 +46,16 @@ const AttackingEffectiveness: React.FC<AttackingEffectivenessProps> = ({ pokemon
           else if (value === 1) modifiedValue = 1; // Neutral stays the same
         }
 
-        // Store in the correct category, skipping 1x
+        // Store in the correct category
         if (modifiedValue === 2) newEffectiveness[capitalizedType]["2x"].push(targetType);
+        else if (modifiedValue === 1) newEffectiveness[capitalizedType]["1x"].push(targetType);
         else if (modifiedValue === 0.5) newEffectiveness[capitalizedType]["0.5x"].push(targetType);
         else if (modifiedValue === 0) newEffectiveness[capitalizedType]["0x"].push(targetType);
       });
     });
 
     setTypeEffectiveness(newEffectiveness);
-  }, [pokemonTypes, isInverse]); // Dependencies
+  }, [pokemonTypes, isInverse]); // Dependacies
 
   return (
     <div className="attacking">
