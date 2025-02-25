@@ -9,7 +9,7 @@
 }
 
 .chart-page.inverted {
-  background-color: rgba(116, 9, 11, 0.1); /* Faint red tint */
+  background-color: rgba(116, 9, 11, 0.1);
   transition: background-color 0.3s ease;
 }
 
@@ -393,5 +393,9 @@
   }
   .chart-body.inverted {
     animation: none;
+  }
+  .chart-page.inverted {
+    background-color: rgba(116, 9, 11, 0.2);
+    transition: background-color 0.3s ease;
   }
 }
