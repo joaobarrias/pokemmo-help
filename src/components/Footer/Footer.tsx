@@ -7,7 +7,7 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
-  const [selectedTheme, setSelectedTheme] = useState("background-images/Darkrai.jpg"); // Default to Darkrai
+  const [selectedTheme, setSelectedTheme] = useState("background-images/Kyogre.jpg"); // Default to Kyogre
 
   useEffect(() => {
     // Retrieve the stored background image from localStorage (if any)

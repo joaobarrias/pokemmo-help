@@ -1,0 +1,53 @@
+/* Moves.css */
+.moves-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .move-input-wrapper {
+    position: relative;
+  }
+  
+  .move-input {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #6d6d6d;
+    background-color: #444c56;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .move-input:hover,
+  .move-input:focus {
+    border-color: #ccc;
+  }
+  
+  .move-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-width: 200px;
+    background-color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    z-index: 10;
+  }
+  
+  .move-suggestions li {
+    padding: 8px;
+    cursor: pointer;
+    text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+  }
+  
+  .move-suggestions li:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }

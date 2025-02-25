@@ -1,0 +1,40 @@
+/* BaseStats.css */
+.base-stats-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .stat-row label {
+    width: 80px;
+    color: #fff;
+    text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+  }
+  
+  .stat-condition {
+    width: 100px;
+  }
+  
+  .stat-input {
+    width: 60px;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #6d6d6d;
+    background-color: #444c56;
+    color: #fff;
+    outline: none;
+    text-align: center;
+  }

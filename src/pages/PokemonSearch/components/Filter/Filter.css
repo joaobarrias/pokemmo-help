@@ -1,0 +1,80 @@
+/* Filter.css */
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: #ef1c1f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #c5171a;
+  }
+  
+  .reset-button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    background-color: #6d6d6d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reset-button:hover {
+    background-color: #444c56;
+  }
+  
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #444c56;
+    color: #fff;
+  }
+  
+  .results-table th,
+  .results-table td {
+    padding: 10px;
+    border: 1px solid #6d6d6d;
+    text-align: center;
+  }
+  
+  .results-table th {
+    background-color: #23262f;
+    cursor: pointer;
+  }
+  
+  .results-table th:hover {
+    background-color: #ef1c1f;
+  }
+  
+  .results-table .type-icon {
+    width: 40px;
+    height: auto;
+    margin: 0 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .results-table {
+      font-size: 0.9rem;
+    }
+    .results-table .type-icon {
+      width: 30px;
+    }
+  }

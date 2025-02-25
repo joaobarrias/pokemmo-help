@@ -1,0 +1,33 @@
+/* PokemonSearch.css */
+.pokemon-search-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .pokemon-search-page .header h1 {
+    margin-bottom: 20px;
+  }
+  
+  .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  @media (max-width: 768px) {
+    .search-container {
+      padding: 10px;
+    }
+  }
