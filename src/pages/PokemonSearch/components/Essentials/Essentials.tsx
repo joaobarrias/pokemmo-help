@@ -14,14 +14,24 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
   const [suggestions, setSuggestions] = useState<string[] | null>(null);
   const suggestionRef = useRef<HTMLUListElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [displayAbility, setDisplayAbility] = useState<string | null>(null);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const formatAbilityName = (ability: string) =>
+    ability
+      .split(/[- ]/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+
+  const unformatAbilityName = (ability: string) => ability.toLowerCase().replace(" ", "-");
+
   const handleInputChange = (value: string) => {
-    setAbility(value);
+    setAbility(value ? unformatAbilityName(value) : null);
+    setDisplayAbility(value ? formatAbilityName(value) : null);
     if (value.trim().length < 1) {
       setSuggestions(null);
       return;
@@ -30,14 +40,23 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
     const normalizedInput = value.toLowerCase().replace(" ", "-");
     const matches = Object.keys(abilitiesData)
       .filter((ability) => ability.toLowerCase().includes(normalizedInput))
+      .map(formatAbilityName)
       .slice(0, 10);
     setSuggestions(matches);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setAbility(suggestion);
+    setAbility(unformatAbilityName(suggestion));
+    setDisplayAbility(suggestion);
     setSuggestions(null);
     inputRef.current?.blur();
+  };
+
+  const handleBlur = () => {
+    if (ability && !Object.keys(abilitiesData).includes(ability)) {
+      setAbility(null);
+      setDisplayAbility(null);
+    }
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -59,8 +78,9 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
           <input
             ref={inputRef}
             type="text"
-            value={ability || ""}
+            value={displayAbility || ""}
             onChange={(e) => handleInputChange(e.target.value)}
+            onBlur={handleBlur}
             placeholder="Enter ability"
             className="ability-input"
           />

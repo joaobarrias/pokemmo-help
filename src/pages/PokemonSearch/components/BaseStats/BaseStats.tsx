@@ -20,6 +20,7 @@ interface BaseStatsProps {
   setStatsFilters: React.Dispatch<React.SetStateAction<BaseStatsProps["statsFilters"]>>;
 }
 
+const statLabels = ["HP :", "Attack :", "Defense :", "Special Attack :", "Special Defense :", "Speed :"] as const;
 const statKeys = ["hp", "attack", "defense", "specialAttack", "specialDefense", "speed"] as const;
 const conditionOptions = [
   { value: "More than", label: "More than" },
@@ -31,17 +32,28 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
   const handleStatChange = (stat: keyof typeof statsFilters, field: "condition" | "value", value: any) => {
     setStatsFilters((prev) => ({
       ...prev,
-      [stat]: { ...prev[stat], [field]: field === "value" ? parseInt(value) || null : value },
+      [stat]: { ...prev[stat], [field]: field === "value" ? value : value },
     }));
+  };
+
+  const handleInputChange = (stat: keyof typeof statsFilters, value: string) => {
+    if (value === "") {
+      handleStatChange(stat, "value", null);
+    } else if (/^\d*$/.test(value)) { // Only digits, no decimals
+      const numValue = parseInt(value);
+      if (numValue >= 0 && numValue <= 300) {
+        handleStatChange(stat, "value", numValue);
+      }
+    }
   };
 
   return (
     <div className="base-stats-section">
       <h2>Base Stats</h2>
       <div className="stats-grid">
-        {statKeys.map((stat) => (
+        {statKeys.map((stat, index) => (
           <div key={stat} className="stat-row">
-            <label>{stat.charAt(0).toUpperCase() + stat.slice(1).replace("special", "Sp.")}</label>
+            <label>{statLabels[index]}</label>
             <Select
               value={conditionOptions.find((opt) => opt.value === statsFilters[stat].condition)}
               onChange={(opt) => handleStatChange(stat, "condition", opt!.value)}
@@ -51,12 +63,11 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
               isSearchable={false}
             />
             <input
-              type="number"
-              min="0"
-              max="300"
-              value={statsFilters[stat].value || ""}
-              onChange={(e) => handleStatChange(stat, "value", e.target.value)}
+              type="text"
+              value={statsFilters[stat].value ?? ""}
+              onChange={(e) => handleInputChange(stat, e.target.value)}
               className="stat-input"
+              id={`stat-${stat}`}
             />
           </div>
         ))}

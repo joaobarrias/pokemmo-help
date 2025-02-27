@@ -12,16 +12,28 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
   const [suggestions, setSuggestions] = useState<(string[] | null)[]>([null, null, null, null]);
   const suggestionRefs = useRef<(HTMLUListElement | null)[]>([null, null, null, null]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null]);
+  const [displayMoves, setDisplayMoves] = useState<(string | null)[]>([null, null, null, null]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const formatMoveName = (move: string) =>
+    move
+      .split(/[- ]/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+
+  const unformatMoveName = (move: string) => move.toLowerCase().replace(" ", "-");
+
   const handleInputChange = (index: number, value: string) => {
     const newMoves = [...moves];
-    newMoves[index] = value;
+    const newDisplayMoves = [...displayMoves];
+    newMoves[index] = value ? unformatMoveName(value) : null;
+    newDisplayMoves[index] = value ? formatMoveName(value) : null;
     setMoves(newMoves);
+    setDisplayMoves(newDisplayMoves);
 
     if (value.trim().length < 1) {
       setSuggestions((prev) => prev.map((s, i) => (i === index ? null : s)));
@@ -31,16 +43,32 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
     const normalizedInput = value.toLowerCase().replace(" ", "-");
     const matches = Object.keys(movesData)
       .filter((move) => move.toLowerCase().includes(normalizedInput))
-      .slice(0, 10); // Limit to 10 suggestions
+      .map(formatMoveName)
+      .slice(0, 10);
     setSuggestions((prev) => prev.map((s, i) => (i === index ? matches : s)));
   };
 
   const handleSuggestionClick = (index: number, move: string) => {
     const newMoves = [...moves];
-    newMoves[index] = move;
+    const newDisplayMoves = [...displayMoves];
+    newMoves[index] = unformatMoveName(move);
+    newDisplayMoves[index] = move;
     setMoves(newMoves);
+    setDisplayMoves(newDisplayMoves);
     setSuggestions((prev) => prev.map((s, i) => (i === index ? null : s)));
     inputRefs.current[index]?.blur();
+  };
+
+  const handleBlur = (index: number) => {
+    const move = moves[index];
+    if (move && !Object.keys(movesData).includes(move)) {
+      const newMoves = [...moves];
+      const newDisplayMoves = [...displayMoves];
+      newMoves[index] = null;
+      newDisplayMoves[index] = null;
+      setMoves(newMoves);
+      setDisplayMoves(newDisplayMoves);
+    }
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -57,7 +85,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
   };
 
   const getMoveColor = (move: string) => {
-    const type = movesData[move as keyof typeof movesData]?.type;
+    const type = movesData[unformatMoveName(move) as keyof typeof movesData]?.type;
     return {
       normal: "#A8A878", fire: "#F08030", water: "#6890F0", grass: "#78C850",
       electric: "#F8D030", ice: "#98D8D8", fighting: "#C03028", poison: "#A040A0",
@@ -70,13 +98,14 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
   return (
     <div className="moves-section">
       <h2>Moves</h2>
-      {moves.map((move, index) => (
+      {moves.map((_, index) => (
         <div key={index} className="move-input-wrapper">
           <input
             ref={(el) => (inputRefs.current[index] = el)}
             type="text"
-            value={move || ""}
+            value={displayMoves[index] || ""}
             onChange={(e) => handleInputChange(index, e.target.value)}
+            onBlur={() => handleBlur(index)}
             placeholder={`Enter move ${index + 1}`}
             className="move-input"
           />

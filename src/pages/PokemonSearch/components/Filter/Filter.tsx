@@ -4,7 +4,6 @@ import "./Filter.css";
 import movesData from "../../../../data/moves-data.json";
 import abilitiesData from "../../../../data/abilities-data.json";
 
-// Type assertions with index signatures to avoid detailed interfaces
 const typedMovesData = movesData as { [key: string]: { type: string; learned_by_pokemon?: { id: number }[] } };
 const typedAbilitiesData = abilitiesData as { [key: string]: { pokemon_with_ability: { id: number }[] } };
 
@@ -24,7 +23,7 @@ interface FilterProps {
   };
   setFilteredPokemon: React.Dispatch<React.SetStateAction<any[]>>;
   filteredPokemon: any[];
-  pokemonData: { [key: string]: any }; // Minimal index signature for pokemonData
+  pokemonData: { [key: string]: any };
   resetFilters: () => void;
 }
 
@@ -50,7 +49,6 @@ const Filter: React.FC<FilterProps> = ({
       .filter(([_, data]) => !data.unique_legendary)
       .map(([name, data]) => ({ name, ...data }));
 
-    // Filter by moves
     const validMoves = moves.filter((m) => m) as string[];
     if (validMoves.length > 0) {
       filtered = filtered.filter((pokemon) =>
@@ -60,19 +58,16 @@ const Filter: React.FC<FilterProps> = ({
       );
     }
 
-    // Filter by ability
     if (ability) {
       filtered = filtered.filter((pokemon) =>
         typedAbilitiesData[ability]?.pokemon_with_ability?.some((p) => p.id === pokemon.id)
       );
     }
 
-    // Filter by alpha
     if (isAlpha) {
       filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
     }
 
-    // Filter by types
     if (selectedTypes.length > 0) {
       filtered = filtered.filter((pokemon) => {
         const pokemonTypes = pokemon?.types || [];
@@ -90,7 +85,6 @@ const Filter: React.FC<FilterProps> = ({
       });
     }
 
-    // Filter by stats
     filtered = filtered.filter((pokemon) =>
       statKeys.every((stat) => {
         const filter = statsFilters[stat];
@@ -118,22 +112,27 @@ const Filter: React.FC<FilterProps> = ({
     if (direction) {
       setFilteredPokemon((prev) =>
         [...prev].sort((a, b) => {
-          const aValue = key === "name" ? a.name : a.stats?.[`base_${key}`];
-          const bValue = key === "name" ? b.name : b.stats?.[`base_${key}`];
+          const aValue = key === "name" ? a.name : key === "id" ? a.id : a.stats?.[`base_${key}`];
+          const bValue = key === "name" ? b.name : key === "id" ? b.id : b.stats?.[`base_${key}`];
           if (direction === "asc") return aValue > bValue ? 1 : -1;
           return aValue < bValue ? 1 : -1;
         })
       );
     } else {
-      filterPokemon(); // Reset to original filtered order
+      filterPokemon();
     }
   };
 
-  // Get abilities for a Pokémon based on its ID
+  const formatAbilityName = (ability: string) =>
+    ability
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
   const getAbilities = (pokemonId: number) => {
     const abilities = Object.entries(typedAbilitiesData)
       .filter(([_, data]) => data?.pokemon_with_ability?.some((p) => p.id === pokemonId))
-      .map(([abilityName]) => abilityName);
+      .map(([abilityName]) => formatAbilityName(abilityName));
     return abilities.length > 0 ? abilities.join("\n") : "N/A";
   };
 
@@ -147,22 +146,22 @@ const Filter: React.FC<FilterProps> = ({
         <table className="results-table">
           <thead>
             <tr>
-              <th onClick={() => handleSort("id")}>ID</th>
-              <th onClick={() => handleSort("name")}>Name</th>
+              <th className={sortConfig.key === "id" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("id")}>Icon</th>
+              <th className={sortConfig.key === "name" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("name")}>Name</th>
               <th>Type(s)</th>
               <th>Abilitie(s)</th>
-              <th onClick={() => handleSort("hp")}>HP</th>
-              <th onClick={() => handleSort("attack")}>Attack</th>
-              <th onClick={() => handleSort("defense")}>Defense</th>
-              <th onClick={() => handleSort("specialAttack")}>Sp. Attack</th>
-              <th onClick={() => handleSort("specialDefense")}>Sp. Defense</th>
-              <th onClick={() => handleSort("speed")}>Speed</th>
+              <th className={sortConfig.key === "hp" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("hp")}>HP</th>
+              <th className={sortConfig.key === "attack" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("attack")}>Atk</th>
+              <th className={sortConfig.key === "defense" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("defense")}>Def</th>
+              <th className={sortConfig.key === "specialAttack" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("specialAttack")}>Sp Atk</th>
+              <th className={sortConfig.key === "specialDefense" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("specialDefense")}>Sp Def</th>
+              <th className={sortConfig.key === "speed" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("speed")}>Speed</th>
             </tr>
           </thead>
           <tbody>
             {filteredPokemon.map((pokemon) => (
               <tr key={pokemon.id}>
-                <td>{pokemon.id}</td>
+                <td><img src={`/sprites/icon/${pokemon.id}.png`} alt={pokemon.name} className="pokemon-icon" /></td>
                 <td>{pokemon.formattedName || pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).replace("-", " ")}</td>
                 <td>
                   {pokemon.types?.map((type: string) => (

@@ -48,27 +48,37 @@ const PokemonSearch: React.FC = () => {
       </div>
       <div className="body">
         <div className="search-container">
-          <Moves moves={moves} setMoves={setMoves} />
-          <Essentials ability={ability} setAbility={setAbility} isAlpha={isAlpha} setIsAlpha={setIsAlpha} />
-          <Types
-            selectedTypes={selectedTypes}
-            setSelectedTypes={setSelectedTypes}
-            typeCondition={typeCondition}
-            setTypeCondition={setTypeCondition}
-          />
-          <BaseStats statsFilters={statsFilters} setStatsFilters={setStatsFilters} />
-          <Filter
-            moves={moves}
-            ability={ability}
-            isAlpha={isAlpha}
-            selectedTypes={selectedTypes}
-            typeCondition={typeCondition}
-            statsFilters={statsFilters}
-            setFilteredPokemon={setFilteredPokemon}
-            filteredPokemon={filteredPokemon}
-            pokemonData={pokemmoData as { [key: string]: any }} // Type assertion here
-            resetFilters={resetFilters}
-          />
+          <div className="first-row-search">
+            <div className="moves-essentials">
+              <Moves moves={moves} setMoves={setMoves} />
+              <Essentials ability={ability} setAbility={setAbility} isAlpha={isAlpha} setIsAlpha={setIsAlpha} />
+            </div>
+            <div className="base-stats">
+              <BaseStats statsFilters={statsFilters} setStatsFilters={setStatsFilters} />
+            </div>
+          </div>
+          <div className="second-row-search">
+            <Types
+              selectedTypes={selectedTypes}
+              setSelectedTypes={setSelectedTypes}
+              typeCondition={typeCondition}
+              setTypeCondition={setTypeCondition}
+            />
+          </div>
+          <div className="third-row-search">
+            <Filter
+              moves={moves}
+              ability={ability}
+              isAlpha={isAlpha}
+              selectedTypes={selectedTypes}
+              typeCondition={typeCondition}
+              statsFilters={statsFilters}
+              setFilteredPokemon={setFilteredPokemon}
+              filteredPokemon={filteredPokemon}
+              pokemonData={pokemmoData as { [key: string]: any }}
+              resetFilters={resetFilters}
+            />
+          </div>
         </div>
       </div>
     </div>

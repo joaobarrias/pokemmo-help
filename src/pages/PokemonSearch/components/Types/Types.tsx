@@ -44,11 +44,17 @@ const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCond
       <div className="type-images">
         {typeList.map((type) => (
           <div key={type} className="type-item">
-            <img src={`/types/icons/${type}.png`} alt={type} className="type-icon" />
+            <img
+              src={`/types/icons/${type}.png`}
+              alt={type}
+              className="type-icon"
+              onClick={() => handleTypeToggle(type)}
+            />
             <input
               type="checkbox"
               checked={selectedTypes.includes(type)}
               onChange={() => handleTypeToggle(type)}
+              className="type-checkbox"
             />
           </div>
         ))}

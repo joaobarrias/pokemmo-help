@@ -1,36 +1,63 @@
 /* Types.css */
 .types-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .type-condition {
-    width: 200px;
-  }
-  
-  .type-condition-select {
-    margin-bottom: 10px;
-  }
-  
-  .type-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .type-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .type-icon {
-    width: 50px;
-    height: auto;
-  }
-  
-  .type-item input {
-    cursor: pointer;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center; /* Center content */
+}
+
+.types-section h2 {
+  text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+}
+
+.type-condition {
+  width: 260px;
+  display: flex;
+  justify-content: center; /* Center select */
+}
+
+.type-condition-select {
+  margin-bottom: 10px;
+}
+
+.type-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.type-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.type-icon {
+  width: 60px;
+  height: auto;
+}
+
+.type-checkbox {
+  cursor: pointer;
+  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  margin-top: -1px;
+  accent-color: #fff;
+}
+
+.type-condition-select .react-select__control {
+  width: 260px !important;
+  font-size: 0.9rem;
+}
+
+.type-condition-select .react-select__menu {
+  width: 260px !important;
+}
+
+.type-condition-select .react-select__option {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}

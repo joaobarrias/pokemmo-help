@@ -1,40 +1,65 @@
 /* BaseStats.css */
 .base-stats-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  
-  .stat-row {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .stat-row label {
-    width: 80px;
-    color: #fff;
-    text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
-  }
-  
-  .stat-condition {
-    width: 100px;
-  }
-  
-  .stat-input {
-    width: 60px;
-    padding: 5px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #6d6d6d;
-    background-color: #444c56;
-    color: #fff;
-    outline: none;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.base-stats-section h2 {
+  text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-row label {
+  width: 140px;
+  color: #fff;
+  text-align: right;
+  text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+}
+
+.stat-condition {
+  width: 110px !important;
+}
+
+.stat-condition .react-select__control {
+  width: 124px !important;
+  font-size: 0.9rem;
+}
+
+.stat-condition .react-select__menu {
+  width: 124px !important;
+}
+
+.stat-condition .react-select__option {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
+
+.stat-condition .react-select__indicator-separator {
+  display: none;
+}
+
+
+.stat-input {
+  width: 60px;
+  padding: 10px; /* Increased from 5px to match Moves/Essentials */
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #6d6d6d;
+  background-color: #444c56;
+  color: #fff;
+  outline: none;
+  text-align: center;
+}

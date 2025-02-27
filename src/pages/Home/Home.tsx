@@ -19,8 +19,9 @@ const Home: React.FC = () => {
         </div>
         
         <div className="feature-card">
-          <h2>🔍 Pokémon Search (Coming Soon)</h2>
+          <h2>🔍 Pokémon Search</h2>
           <p>Find Pokémon by abilities, moves, stats, egg groups, and more.</p>
+          <Link to="/pokemon-search" className="feature-button">Try Now</Link>
         </div>
         
         <div className="feature-card">
