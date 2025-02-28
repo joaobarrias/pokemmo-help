@@ -18,8 +18,8 @@ const PokemonSearch: React.FC = () => {
     hp: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
     attack: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
     defense: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
-    specialAttack: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
-    specialDefense: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
+    special_attack: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
+    special_defense: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
     speed: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
   });
   const [filteredPokemon, setFilteredPokemon] = useState<any[]>([]);
@@ -37,8 +37,8 @@ const PokemonSearch: React.FC = () => {
       hp: { condition: "More than", value: null },
       attack: { condition: "More than", value: null },
       defense: { condition: "More than", value: null },
-      specialAttack: { condition: "More than", value: null },
-      specialDefense: { condition: "More than", value: null },
+      special_attack: { condition: "More than", value: null },
+      special_defense: { condition: "More than", value: null },
       speed: { condition: "More than", value: null },
     });
     setFilteredPokemon([]);

@@ -7507,7 +7507,7 @@
   "castform-sunny": {
     "formattedName": "Castform Sunny",
     "capture_rate": 0,
-    "id": 10013,
+    "id": 351.1,
     "alpha": "no",
     "stats": {
       "base_hp": 70,
@@ -7521,15 +7521,15 @@
       "fire"
     ],
     "sprites": {
-      "default": "sprites/default/10013.png",
-      "icon": "sprites/icon/10013.png"
+      "default": "sprites/default/351.1.png",
+      "icon": "sprites/icon/351.1.png"
     },
     "weight": 0.8
   },
   "castform-rainy": {
     "formattedName": "Castform Rainy",
     "capture_rate": 0,
-    "id": 10014,
+    "id": 351.2,
     "alpha": "no",
     "stats": {
       "base_hp": 70,
@@ -7543,15 +7543,15 @@
       "water"
     ],
     "sprites": {
-      "default": "sprites/default/10014.png",
-      "icon": "sprites/icon/10014.png"
+      "default": "sprites/default/351.2.png",
+      "icon": "sprites/icon/351.2.png"
     },
     "weight": 0.8
   },
   "castform-snowy": {
     "formattedName": "Castform Snowy",
     "capture_rate": 0,
-    "id": 10015,
+    "id": 351.3,
     "alpha": "no",
     "stats": {
       "base_hp": 70,
@@ -7565,8 +7565,8 @@
       "ice"
     ],
     "sprites": {
-      "default": "sprites/default/10015.png",
-      "icon": "sprites/icon/10015.png"
+      "default": "sprites/default/351.3.png",
+      "icon": "sprites/icon/351.3.png"
     },
     "weight": 0.8
   },
@@ -8733,7 +8733,7 @@
   "wormadam-sandy": {
     "formattedName": "Wormadam Sandy",
     "capture_rate": 0,
-    "id": 10004,
+    "id": 413.1,
     "alpha": "no",
     "stats": {
       "base_hp": 60,
@@ -8748,15 +8748,15 @@
       "ground"
     ],
     "sprites": {
-      "default": "sprites/default/10004.png",
-      "icon": "sprites/icon/10004.png"
+      "default": "sprites/default/413.1.png",
+      "icon": "sprites/icon/413.1.png"
     },
     "weight": 6.5
   },
   "wormadam-trash": {
     "formattedName": "Wormadam Trash",
     "capture_rate": 0,
-    "id": 10005,
+    "id": 413.2,
     "alpha": "no",
     "stats": {
       "base_hp": 60,
@@ -8771,8 +8771,8 @@
       "steel"
     ],
     "sprites": {
-      "default": "sprites/default/10005.png",
-      "icon": "sprites/icon/10005.png"
+      "default": "sprites/default/413.2.png",
+      "icon": "sprites/icon/413.2.png"
     },
     "weight": 6.5
   },
@@ -10206,7 +10206,7 @@
   "rotom-heat": {
     "formattedName": "Rotom Heat",
     "capture_rate": 0,
-    "id": 10008,
+    "id": 479.1,
     "alpha": "no",
     "stats": {
       "base_hp": 50,
@@ -10221,15 +10221,15 @@
       "fire"
     ],
     "sprites": {
-      "default": "sprites/default/10008.png",
-      "icon": "sprites/icon/10008.png"
+      "default": "sprites/default/479.1.png",
+      "icon": "sprites/icon/479.1.png"
     },
     "weight": 0.3
   },
   "rotom-wash": {
     "formattedName": "Rotom Wash",
     "capture_rate": 0,
-    "id": 10009,
+    "id": 479.2,
     "alpha": "no",
     "stats": {
       "base_hp": 50,
@@ -10244,15 +10244,15 @@
       "water"
     ],
     "sprites": {
-      "default": "sprites/default/10009.png",
-      "icon": "sprites/icon/10009.png"
+      "default": "sprites/default/479.2.png",
+      "icon": "sprites/icon/479.2.png"
     },
     "weight": 0.3
   },
   "rotom-frost": {
     "formattedName": "Rotom Frost",
     "capture_rate": 0,
-    "id": 10010,
+    "id": 479.3,
     "alpha": "no",
     "stats": {
       "base_hp": 50,
@@ -10267,15 +10267,15 @@
       "ice"
     ],
     "sprites": {
-      "default": "sprites/default/10010.png",
-      "icon": "sprites/icon/10010.png"
+      "default": "sprites/default/479.3.png",
+      "icon": "sprites/icon/479.3.png"
     },
     "weight": 0.3
   },
   "rotom-fan": {
     "formattedName": "Rotom Fan",
     "capture_rate": 0,
-    "id": 10011,
+    "id": 479.4,
     "alpha": "no",
     "stats": {
       "base_hp": 50,
@@ -10290,15 +10290,15 @@
       "flying"
     ],
     "sprites": {
-      "default": "sprites/default/10011.png",
-      "icon": "sprites/icon/10011.png"
+      "default": "sprites/default/479.4.png",
+      "icon": "sprites/icon/479.4.png"
     },
     "weight": 0.3
   },
   "rotom-mow": {
     "formattedName": "Rotom Mow",
     "capture_rate": 0,
-    "id": 10012,
+    "id": 479.5,
     "alpha": "no",
     "stats": {
       "base_hp": 50,
@@ -10313,8 +10313,8 @@
       "grass"
     ],
     "sprites": {
-      "default": "sprites/default/10012.png",
-      "icon": "sprites/icon/10012.png"
+      "default": "sprites/default/479.5.png",
+      "icon": "sprites/icon/479.5.png"
     },
     "weight": 0.3
   },
@@ -10385,7 +10385,7 @@
   "shaymin-sky": {
     "formattedName": "Shaymin Sky",
     "capture_rate": 0,
-    "id": 10006,
+    "id": 492.1,
     "alpha": "no",
     "stats": {
       "base_hp": 100,
@@ -10400,8 +10400,8 @@
       "flying"
     ],
     "sprites": {
-      "default": "sprites/default/10006.png",
-      "icon": "sprites/icon/10006.png"
+      "default": "sprites/default/492.1.png",
+      "icon": "sprites/icon/492.1.png"
     },
     "weight": 5.2
   },

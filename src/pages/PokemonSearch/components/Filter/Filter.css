@@ -74,6 +74,7 @@
   width: 55px;
   height: auto;
   margin: 0 2px;
+  cursor: default;
 }
 
 .results-table th:nth-child(1),

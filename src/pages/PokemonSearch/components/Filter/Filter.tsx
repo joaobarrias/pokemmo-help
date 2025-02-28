@@ -17,8 +17,8 @@ interface FilterProps {
     hp: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
     attack: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
     defense: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
-    specialAttack: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
-    specialDefense: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
+    special_attack: { condition: "More than" | "Equal to" | "Less than"; value: number | null }; // Renamed
+    special_defense: { condition: "More than" | "Equal to" | "Less than"; value: number | null }; // Renamed
     speed: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
   };
   setFilteredPokemon: React.Dispatch<React.SetStateAction<any[]>>;
@@ -153,7 +153,7 @@ const Filter: React.FC<FilterProps> = ({
               essentialsComponent?.resetAbilityInput?.();
             };
             resetFilters(resetMovesInputs, resetAbilityInput);
-            setHasSearched(false); // Reset search state
+            setHasSearched(false);
           }}
           className="reset-button"
         >
@@ -173,8 +173,8 @@ const Filter: React.FC<FilterProps> = ({
               <th className={sortConfig.key === "hp" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("hp")}>HP</th>
               <th className={sortConfig.key === "attack" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("attack")}>Atk</th>
               <th className={sortConfig.key === "defense" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("defense")}>Def</th>
-              <th className={sortConfig.key === "specialAttack" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("specialAttack")}>Sp Atk</th>
-              <th className={sortConfig.key === "specialDefense" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("specialDefense")}>Sp Def</th>
+              <th className={sortConfig.key === "special_attack" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("special_attack")}>Sp Atk</th>
+              <th className={sortConfig.key === "special_defense" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("special_defense")}>Sp Def</th>
               <th className={sortConfig.key === "speed" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("speed")}>Speed</th>
             </tr>
           </thead>
@@ -204,6 +204,6 @@ const Filter: React.FC<FilterProps> = ({
   );
 };
 
-const statKeys = ["hp", "attack", "defense", "specialAttack", "specialDefense", "speed"] as const;
+const statKeys = ["hp", "attack", "defense", "special_attack", "special_defense", "speed"] as const;
 
 export default Filter;

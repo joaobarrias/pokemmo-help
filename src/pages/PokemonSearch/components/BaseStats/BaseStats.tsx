@@ -13,15 +13,15 @@ interface BaseStatsProps {
     hp: StatFilter;
     attack: StatFilter;
     defense: StatFilter;
-    specialAttack: StatFilter;
-    specialDefense: StatFilter;
+    special_attack: StatFilter;
+    special_defense: StatFilter;
     speed: StatFilter;
   };
   setStatsFilters: React.Dispatch<React.SetStateAction<BaseStatsProps["statsFilters"]>>;
 }
 
 const statLabels = ["HP :", "Attack :", "Defense :", "Special Attack :", "Special Defense :", "Speed :"] as const;
-const statKeys = ["hp", "attack", "defense", "specialAttack", "specialDefense", "speed"] as const;
+const statKeys = ["hp", "attack", "defense", "special_attack", "special_defense", "speed"] as const;
 const conditionOptions = [
   { value: "More than", label: "More than" },
   { value: "Equal to", label: "Equal to" },
