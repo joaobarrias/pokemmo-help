@@ -28,13 +28,23 @@ const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCond
     { value: "Only", label: "Only these types" },
   ];
 
+  const handleSelectChange = (selectedOption: { value: string; label: string } | null) => {
+    if (selectedOption) {
+      setTypeCondition(selectedOption.value as "At least one" | "Exactly" | "Only");
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement) {
+        activeElement.blur();
+      }
+    }
+  };
+
   return (
     <div className="types-section">
       <h2>Types</h2>
       <div className="type-condition">
         <Select
           value={conditionOptions.find((opt) => opt.value === typeCondition)}
-          onChange={(opt) => setTypeCondition(opt!.value as "At least one" | "Exactly" | "Only")}
+          onChange={handleSelectChange}
           options={conditionOptions}
           className="type-condition-select"
           classNamePrefix="react-select"

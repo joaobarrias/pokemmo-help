@@ -24,7 +24,7 @@ interface FilterProps {
   setFilteredPokemon: React.Dispatch<React.SetStateAction<any[]>>;
   filteredPokemon: any[];
   pokemonData: { [key: string]: any };
-  resetFilters: () => void;
+  resetFilters: (resetMovesInputs: () => void, resetAbilityInput: () => void) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -43,6 +43,7 @@ const Filter: React.FC<FilterProps> = ({
     key: "",
     direction: null,
   });
+  const [hasSearched, setHasSearched] = useState(false);
 
   const filterPokemon = () => {
     let filtered = Object.entries(pokemonData)
@@ -98,6 +99,7 @@ const Filter: React.FC<FilterProps> = ({
     );
 
     setFilteredPokemon(filtered);
+    setHasSearched(true);
   };
 
   const handleSort = (key: string) => {
@@ -140,9 +142,27 @@ const Filter: React.FC<FilterProps> = ({
     <div className="filter-section">
       <div className="button-container">
         <button onClick={filterPokemon} className="search-button">Search</button>
-        <button onClick={resetFilters} className="reset-button">Reset</button>
+        <button
+          onClick={() => {
+            const resetMovesInputs = () => {
+              const movesComponent = document.querySelector(".moves-section") as any;
+              movesComponent?.resetMovesInputs?.();
+            };
+            const resetAbilityInput = () => {
+              const essentialsComponent = document.querySelector(".essentials-section") as any;
+              essentialsComponent?.resetAbilityInput?.();
+            };
+            resetFilters(resetMovesInputs, resetAbilityInput);
+            setHasSearched(false); // Reset search state
+          }}
+          className="reset-button"
+        >
+          Reset
+        </button>
       </div>
-      {filteredPokemon.length > 0 && (
+      {hasSearched && filteredPokemon.length === 0 ? (
+        <p className="no-results">No results found</p>
+      ) : filteredPokemon.length > 0 ? (
         <table className="results-table">
           <thead>
             <tr>
@@ -179,7 +199,7 @@ const Filter: React.FC<FilterProps> = ({
             ))}
           </tbody>
         </table>
-      )}
+      ) : null}
     </div>
   );
 };

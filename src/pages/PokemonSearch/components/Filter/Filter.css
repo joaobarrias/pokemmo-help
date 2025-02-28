@@ -46,7 +46,6 @@
   border-collapse: collapse;
   background-color: #444c56;
   color: #fff;
-  margin-bottom: 10px;
 }
 
 .results-table th,
@@ -59,8 +58,7 @@
 .results-table th {
   background-color: #23262f;
   cursor: pointer;
-  position: relative; /* For arrow positioning */
-  padding-right: 20px; /* Space for arrow */
+  user-select: none;
 }
 
 .results-table th:hover {
@@ -109,21 +107,24 @@
 
 /* Sorting indicators */
 .results-table th.sort-asc::after {
-  content: "↑";
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
+  content: " ↑"; /* Space before arrow */
   font-size: 0.8rem;
 }
 
 .results-table th.sort-desc::after {
-  content: "↓";
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
+  content: " ↓"; /* Space before arrow */
   font-size: 0.8rem;
+}
+
+.no-results {
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  padding: 7px;
+  margin-top: 10px;
+  border: 1px solid #6d6d6d;
+  background-color: #444c56;
+  text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
 }
 
 @media (max-width: 768px) {

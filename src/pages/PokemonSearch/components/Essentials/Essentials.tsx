@@ -8,9 +8,10 @@ interface EssentialsProps {
   setAbility: React.Dispatch<React.SetStateAction<string | null>>;
   isAlpha: boolean;
   setIsAlpha: React.Dispatch<React.SetStateAction<boolean>>;
+  setResetAbilityCallback: React.Dispatch<React.SetStateAction<(() => void) | null>>;
 }
 
-const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, setIsAlpha }) => {
+const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, setIsAlpha, setResetAbilityCallback }) => {
   const [suggestions, setSuggestions] = useState<string[] | null>(null);
   const suggestionRef = useRef<HTMLUListElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -59,6 +60,14 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
     }
   };
 
+  useEffect(() => {
+    setResetAbilityCallback(() => resetAbilityInput); // Pass reset function to parent
+  }, []);
+  
+  const resetAbilityInput = () => {
+    setDisplayAbility(null);
+  };
+
   const handleClickOutside = (e: MouseEvent) => {
     if (
       suggestionRef.current &&
@@ -72,7 +81,7 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
 
   return (
     <div className="essentials-section">
-      <h2>Essentials</h2>
+      <h2>Ability & Alpha</h2>
       <div className="essentials-row">
         <div className="ability-input-wrapper">
           <input
@@ -83,6 +92,7 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
             onBlur={handleBlur}
             placeholder="Enter ability"
             className="ability-input"
+            onFocus={(e) => e.target.select()}
           />
           {suggestions && (
             <ul ref={suggestionRef} className="ability-suggestions">

@@ -24,6 +24,9 @@ const PokemonSearch: React.FC = () => {
   });
   const [filteredPokemon, setFilteredPokemon] = useState<any[]>([]);
 
+  const [resetMovesCallback, setResetMovesCallback] = useState<(() => void) | null>(null);
+  const [resetAbilityCallback, setResetAbilityCallback] = useState<(() => void) | null>(null);
+  
   const resetFilters = () => {
     setMoves([null, null, null, null]);
     setAbility(null);
@@ -39,6 +42,8 @@ const PokemonSearch: React.FC = () => {
       speed: { condition: "More than", value: null },
     });
     setFilteredPokemon([]);
+    resetMovesCallback?.();
+    resetAbilityCallback?.();
   };
 
   return (
@@ -46,12 +51,18 @@ const PokemonSearch: React.FC = () => {
       <div className="header">
         <h1>Pokémon Search</h1>
       </div>
-      <div className="body">
+      <div className="search-body">
         <div className="search-container">
           <div className="first-row-search">
             <div className="moves-essentials">
-              <Moves moves={moves} setMoves={setMoves} />
-              <Essentials ability={ability} setAbility={setAbility} isAlpha={isAlpha} setIsAlpha={setIsAlpha} />
+            <Moves moves={moves} setMoves={setMoves} setResetMovesCallback={setResetMovesCallback} />
+            <Essentials
+                ability={ability}
+                setAbility={setAbility}
+                isAlpha={isAlpha}
+                setIsAlpha={setIsAlpha}
+                setResetAbilityCallback={setResetAbilityCallback}
+              />
             </div>
             <div className="base-stats">
               <BaseStats statsFilters={statsFilters} setStatsFilters={setStatsFilters} />

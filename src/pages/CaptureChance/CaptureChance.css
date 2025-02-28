@@ -3,7 +3,7 @@
     animation: fadeIn 0.5s ease-out;
 }
 
-.body {
+.capture-page-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,7 +14,7 @@
     margin-bottom: 0 !important;
 }
   
-.body label, .body p, .body .how-it-works, .body .how-it-works button{
+.capture-page-body label, .capture-page-body p, .capture-page-body .how-it-works, .capture-page-body .how-it-works button{
     text-shadow: 2px 2px 2px rgb(0, 0, 0, 1), -1px -1px 2px rgb(0, 0, 0, 1), 1px -1px 2px rgb(0, 0, 0, 1), -2px 2px 2px rgb(0, 0, 0, 1);
 }
 

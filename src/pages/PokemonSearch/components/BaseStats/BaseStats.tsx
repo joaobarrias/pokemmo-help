@@ -47,6 +47,16 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
     }
   };
 
+  const handleSelectChange = (stat: keyof typeof statsFilters) => (selectedOption: { value: string; label: string } | null) => {
+    if (selectedOption) {
+      handleStatChange(stat, "condition", selectedOption.value);
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement) {
+        activeElement.blur(); // Blur to reset border
+      }
+    }
+  };
+
   return (
     <div className="base-stats-section">
       <h2>Base Stats</h2>
@@ -56,11 +66,12 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
             <label>{statLabels[index]}</label>
             <Select
               value={conditionOptions.find((opt) => opt.value === statsFilters[stat].condition)}
-              onChange={(opt) => handleStatChange(stat, "condition", opt!.value)}
+              onChange={handleSelectChange(stat)}
               options={conditionOptions}
               className="stat-condition"
               classNamePrefix="react-select"
               isSearchable={false}
+              menuShouldScrollIntoView={false}
             />
             <input
               type="text"
@@ -68,6 +79,7 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
               onChange={(e) => handleInputChange(stat, e.target.value)}
               className="stat-input"
               id={`stat-${stat}`}
+              onFocus={(e) => e.target.select()}
             />
           </div>
         ))}

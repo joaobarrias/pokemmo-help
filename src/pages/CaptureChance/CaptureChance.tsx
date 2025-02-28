@@ -66,7 +66,7 @@ const CaptureChance: React.FC<CaptureChanceProps> = ({ filteredPokemon }) => {
       </div>
   
       {/* Body */}
-      <div className="body">
+      <div className="capture-page-body">
         {/* Main Container for Pokemon Input, Pokémon Image/Level, Status Condition and HP Section */}
         <div className="main-container">
 

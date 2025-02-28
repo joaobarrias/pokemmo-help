@@ -6,9 +6,10 @@ import movesData from "../../../../data/moves-data.json";
 interface MovesProps {
   moves: (string | null)[];
   setMoves: React.Dispatch<React.SetStateAction<(string | null)[]>>;
+  setResetMovesCallback: React.Dispatch<React.SetStateAction<(() => void) | null>>;
 }
 
-const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
+const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback }) => {
   const [suggestions, setSuggestions] = useState<(string[] | null)[]>([null, null, null, null]);
   const suggestionRefs = useRef<(HTMLUListElement | null)[]>([null, null, null, null]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null]);
@@ -93,6 +94,14 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
       rock: "#B8A038", ghost: "#705898", dragon: "#7038F8", dark: "#705848",
       steel: "#B8B8D0",
     }[type] || "#FFFFFF";
+  }; 
+
+  useEffect(() => {
+    setResetMovesCallback(() => resetMovesInputs); // Pass reset function to parent
+  }, []);
+  
+  const resetMovesInputs = () => {
+    setDisplayMoves([null, null, null, null]);
   };
 
   return (
@@ -108,6 +117,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves }) => {
             onBlur={() => handleBlur(index)}
             placeholder={`Enter move ${index + 1}`}
             className="move-input"
+            onFocus={(e) => e.target.select()}
           />
           {suggestions[index] && (
             <ul ref={(el) => (suggestionRefs.current[index] = el)} className="move-suggestions">
