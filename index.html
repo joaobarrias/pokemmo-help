@@ -22,6 +22,19 @@
           },
         });
       } catch {}
+      // Unregister old SW and register new
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          registrations.forEach(reg => {
+            reg.unregister();
+            console.log('Unregistered old SW:', reg);
+          });
+          // Register new SW after clearing old ones
+          navigator.serviceWorker.register('/sw-v2.js', { scope: '/' })
+            .then(reg => console.log('New SW registered:', reg))
+            .catch(err => console.error('SW registration failed:', err));
+        });
+      }
     </script>
   </body>
 </html>
