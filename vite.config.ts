@@ -18,7 +18,8 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate', // Auto-update service worker
-      includeAssets: ['/**/*.png', '**/*.jpg'], // Include PNG and JPG in build
+      // Remove precache of all images
+      includeAssets: [], // Only include assets explicitly imported (none here)
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -33,15 +34,17 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Precache compiled JS (from TSX), CSS, and HTML
+        // Precache only compiled JS (from TSX), CSS, and HTML
         globPatterns: ['**/*.{js,css,html}'],
+        // Explicitly avoid precaching images
+        globIgnores: ['**/*.{png,jpg,jpeg}'],
         // Runtime caching for requested images
         runtimeCaching: [
           {
-            urlPattern: /\.(?:png|jpg)$/, // Match PNG and JPG files
+            urlPattern: /\.(?:png|jpg|jpeg)$/, // Match PNG and JPG/JPEG
             handler: 'CacheFirst', // Cache images when requested
             options: {
-              cacheName: 'pokemon-images', // Separate cache for images
+              cacheName: 'pokemon-images',
               expiration: {
                 maxAgeSeconds: 31536000, // Cache for 1 year
                 maxEntries: 1000, // Cap at 1,000 images
