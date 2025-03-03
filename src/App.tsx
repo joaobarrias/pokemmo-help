@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
   const [backgroundImage, setBackgroundImage] = useState(() => {
     const savedTheme = localStorage.getItem("backgroundImage");
-    return savedTheme || "background-images/Kyogre.jpg";
+    return savedTheme || "background-images/Darkrai.jpg";
   });
 
   useEffect(() => {

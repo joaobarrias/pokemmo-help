@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     {
+      // Disable CSP in dev for easier debugging
       name: 'disable-csp-for-dev',
       configureServer(server) {
         server.middlewares.use((_req, res, next) => {
@@ -16,8 +17,8 @@ export default defineConfig({
       },
     },
     VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['/**/*.png', '**/*.svg'],
+      registerType: 'autoUpdate', // Auto-update service worker
+      includeAssets: ['/**/*.png', '**/*.jpg'], // Include PNG and JPG in build
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -32,16 +33,31 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,png,svg}'],
+        // Precache compiled JS (from TSX), CSS, and HTML
+        globPatterns: ['**/*.{js,css,html}'],
+        // Runtime caching for requested images
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:png|jpg)$/, // Match PNG and JPG files
+            handler: 'CacheFirst', // Cache images when requested
+            options: {
+              cacheName: 'pokemon-images', // Separate cache for images
+              expiration: {
+                maxAgeSeconds: 31536000, // Cache for 1 year
+                maxEntries: 1000, // Cap at 1,000 images
+              },
+            },
+          },
+        ],
       },
     }),
   ],
   build: {
-    sourcemap: true,
+    sourcemap: true, // Generate source maps
   },
   server: {
     hmr: {
-      clientPort: 5173,
+      clientPort: 5173, // HMR port for dev
       protocol: 'ws',
     },
   },
