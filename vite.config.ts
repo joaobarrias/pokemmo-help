@@ -18,6 +18,7 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate', // Auto-update service worker
+      filename: 'sw-v2.js',
       // Remove precache of all images
       includeAssets: [], // Only include assets explicitly imported (none here)
       manifest: {

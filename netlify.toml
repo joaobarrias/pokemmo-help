@@ -23,11 +23,11 @@
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:5173;"  # CSP for security
 
 [[headers]]
-  for = "/sw.js"  # Service worker file
+  for = "/sw-v2.js"
   [headers.values]
-    Cache-Control = "public, max-age=604800"  # Cache for 1 week
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
-  for = "/registersw.js"  # Service worker registration file
+  for = "/registersw.js"
   [headers.values]
-    Cache-Control = "public, max-age=604800"  # Cache for 1 week
+    Cache-Control = "public, max-age=0, must-revalidate"
