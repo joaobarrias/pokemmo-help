@@ -46,7 +46,7 @@ export default defineConfig({
           },
         ],
       },
-      // No inline injection—handled in index.html
+      // Disable auto-injection—handled in index.html
       injectRegister: null,
     }),
   ],

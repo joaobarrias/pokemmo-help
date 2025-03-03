@@ -1,6 +1,28 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Unregister old SW as first action -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          registrations.forEach(function(reg) {
+            reg.unregister().then(function() {
+              console.log('Unregistered old SW:', reg.active ? reg.active.scriptURL : 'unknown');
+            });
+          });
+          // Register new SW after unregistering
+          navigator.serviceWorker.register('/sw-v2.js', { scope: '/' })
+            .then(function(reg) {
+              console.log('New SW registered:', reg.active ? reg.active.scriptURL : 'pending');
+            })
+            .catch(function(err) {
+              console.error('SW registration failed:', err);
+            });
+        }).catch(function(err) {
+          console.error('Error getting registrations:', err);
+        });
+      }
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/icons/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
@@ -22,19 +44,6 @@
           },
         });
       } catch {}
-      // Unregister old SW and register new
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(registrations => {
-          registrations.forEach(reg => {
-            reg.unregister();
-            console.log('Unregistered old SW:', reg);
-          });
-          // Register new SW after clearing old ones
-          navigator.serviceWorker.register('/sw-v2.js', { scope: '/' })
-            .then(reg => console.log('New SW registered:', reg))
-            .catch(err => console.error('SW registration failed:', err));
-        });
-      }
     </script>
   </body>
 </html>
