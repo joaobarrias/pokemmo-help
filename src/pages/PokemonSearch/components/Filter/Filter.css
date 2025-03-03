@@ -89,12 +89,12 @@
 
 .results-table th:nth-child(3),
 .results-table td:nth-child(3) {
-  width: 120px;
+  width: 100px;
 }
 
 .results-table th:nth-child(4),
 .results-table td:nth-child(4) {
-  width: 100px;
+  width: 120px;
 }
 
 .results-table td:nth-child(4) {
@@ -108,12 +108,12 @@
 
 /* Sorting indicators */
 .results-table th.sort-asc::after {
-  content: " ↑"; /* Space before arrow */
+  content: " ↑";
   font-size: 0.8rem;
 }
 
 .results-table th.sort-desc::after {
-  content: " ↓"; /* Space before arrow */
+  content: " ↓";
   font-size: 0.8rem;
 }
 
@@ -136,10 +136,303 @@
     width: 30px;
   }
   .results-table .type-icon {
-    width: 45px;
+    width: 50px;
+  }
+  .results-table th:nth-child(1),
+  .results-table td:nth-child(1) {
+    width: 30px;
+  }
+  .results-table th:nth-child(2),
+  .results-table td:nth-child(2) {
+    width: 80px;
+  }
+  .results-table th:nth-child(3),
+  .results-table td:nth-child(3) {
+    width: 80px;
   }
   .results-table th:nth-child(n+5),
   .results-table td:nth-child(n+5) {
-    width: 50px;
+    width: 10px;
+  }
+
+  /* Replace "Speed" with "Spd" */
+  .results-table th:nth-child(10) {
+    font-size: 0; /* Hide original text */
+  }
+  .results-table th:nth-child(10)::before {
+    content: "Spd"; /* Insert Spd */
+    font-size: 1rem; /* Match other headers font size */
+  }
+  .results-table th,
+  .results-table td {
+    padding: 7px;
+  }
+}
+
+@media (max-width: 580px) {
+  .filter-section {
+    gap: 15px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .results-table {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 6px;
+  }
+
+  .results-table th {
+    font-size: 0.75rem;
+  }
+
+  .results-table .pokemon-icon {
+    width: 30px;
+  }
+
+  .results-table .type-icon {
+    width: 45px;
+    margin: 0 1px;
+  }
+
+  /* Adjust column widths */
+  .results-table th:nth-child(1),
+  .results-table td:nth-child(1) {
+    width: 25px; /* Icon */
+  }
+
+  .results-table th:nth-child(2),
+  .results-table td:nth-child(2) {
+    width: 60px; /* Name */
+  }
+
+  .results-table th:nth-child(3),
+  .results-table td:nth-child(3) {
+    width: 40px; /* Type(s) */
+  }
+
+  .results-table th:nth-child(4),
+  .results-table td:nth-child(4) {
+    width: 100px; /* Abilitie(s) */
+  }
+
+  .results-table td:nth-child(4) {
+    font-size: 0.65rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .results-table th:nth-child(5),
+  .results-table td:nth-child(5) {
+    width: 25px; /* HP */
+  }
+
+  .results-table th:nth-child(6),
+  .results-table td:nth-child(6) {
+    width: 25px; /* Atk */
+  }
+
+  .results-table th:nth-child(7),
+  .results-table td:nth-child(7) {
+    width: 25px; /* Def */
+  }
+
+  .results-table th:nth-child(8),
+  .results-table td:nth-child(8) {
+    width: 25px; /* Sp Atk */
+  }
+
+  .results-table th:nth-child(9),
+  .results-table td:nth-child(9) {
+    width: 25px; /* Sp Def */
+  }
+
+  .results-table th:nth-child(10),
+  .results-table td:nth-child(10) {
+    width: 25px; /* Speed */
+  }
+
+  .results-table th:nth-child(10)::before {
+    font-size: 0.75rem;
+  }
+
+  .results-table th.sort-asc::after,
+  .results-table th.sort-desc::after {
+    font-size: 0.7rem;
+  }
+
+  .no-results {
+    font-size: 1rem;
+    padding: 5px;
+    margin-top: 5px;
+  }
+}
+
+
+@media (max-width: 495px) {
+  .results-table {
+    font-size: 0.7rem;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 4px;
+  }
+
+  .results-table th {
+    font-size: 0.7rem;
+  }
+  .results-table th:nth-child(10)::before {
+    font-size: 0.7rem;
+  }
+  .results-table th.sort-asc::after,
+  .results-table th.sort-desc::after {
+    font-size: 0.7rem;
+  }
+
+  .results-table .type-icon {
+    width: 43px;
+    margin: 0 1px;
+  }
+
+  .results-table th:nth-child(1),
+  .results-table td:nth-child(1) {
+    width: 0px;
+  }
+
+  .results-table th:nth-child(2),
+  .results-table td:nth-child(2) {
+    width: 0px; 
+  }
+
+  .results-table th:nth-child(3),
+  .results-table td:nth-child(3) {
+    width: 0px;
+  }
+
+  .results-table td:nth-child(4) {
+    font-size: 0.6rem;
+  }
+
+  .results-table th:nth-child(5),
+  .results-table td:nth-child(5) {
+    width: 0px;
+  }
+
+  .results-table th:nth-child(6),
+  .results-table td:nth-child(6) {
+    width: 0px;
+  }
+
+  .results-table th:nth-child(7),
+  .results-table td:nth-child(7) {
+    width: 0px;
+  }
+
+  .results-table th:nth-child(8),
+  .results-table td:nth-child(8) {
+    width: 0px;
+  }
+
+  .results-table th:nth-child(9),
+  .results-table td:nth-child(9) {
+    width: 0px;
+  }
+
+  .results-table th:nth-child(10),
+  .results-table td:nth-child(10) {
+    width: 0px;
+  }
+}
+
+@media (max-width: 425px) {
+  .results-table {
+    font-size: 0.6rem;
+  }
+  .results-table .pokemon-icon {
+    width: 25px;
+  }
+  .results-table th,
+  .results-table td {
+    padding: 2px;
+  }
+
+  .results-table th {
+    font-size: 0.6rem;
+  }
+
+  .results-table th:nth-child(10)::before {
+    font-size: 0.6rem;
+  }
+
+  .results-table th.sort-asc::after,
+  .results-table th.sort-desc::after {
+    font-size: 0.6rem;
+  }
+
+  .results-table .type-icon {
+    width: 45px;
+    margin: 0 0px;
+  }
+  .results-table td:nth-child(4) {
+    font-size: 0.55rem;
+  }
+
+}
+
+@media (max-width: 350px) {
+  .results-table {
+    font-size: 0.55rem;
+  }
+
+  .results-table th {
+    font-size: 0.55rem;
+  }
+  .results-table th:nth-child(10)::before {
+    font-size: 0.55rem; 
+  }
+  .results-table th.sort-asc::after,
+  .results-table th.sort-desc::after {
+    font-size: 0.55rem;
+  }
+
+  .results-table .type-icon {
+    width: 40px;
+  }
+  .results-table th:nth-child(4),
+  .results-table td:nth-child(4) {
+    width: 80px;
+  }
+
+}
+
+@media (max-width: 333px) {
+  .results-table th,
+  .results-table td {
+    padding: 1px;
+  }
+  .results-table td:nth-child(4) {
+    font-size: 0.5rem;
+  }
+
+}
+
+@media (max-width: 310px) {
+  .results-table th,
+  .results-table td {
+    padding: 0.5px;
+  }
+
+  .results-table td:nth-child(4) {
+    font-size: 0.48rem;
   }
 }

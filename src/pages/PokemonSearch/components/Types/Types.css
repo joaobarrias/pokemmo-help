@@ -70,3 +70,14 @@
 .type-condition-select .react-select__single-value {
   transform: translateY(0px) !important;
 }
+
+@media (max-width: 768px) {
+  .types-section {
+    margin-top: -10px;
+  }
+}
+@media (max-width: 480px) {
+  .types-section {
+    margin-top: 0px;
+  } 
+}

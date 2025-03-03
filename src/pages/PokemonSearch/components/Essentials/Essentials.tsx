@@ -1,8 +1,9 @@
 // Component: Essentials.tsx
 import React, { useState, useRef, useEffect } from "react";
-import "./Essentials.css";
-import abilitiesData from "../../../../data/abilities-data.json";
+import "./Essentials.css"; // CSS
+import abilitiesData from "../../../../data/abilities-data.json"; // JSON data for ability details
 
+// Props interface for ability, alpha, and reset callback
 interface EssentialsProps {
   ability: string | null;
   setAbility: React.Dispatch<React.SetStateAction<string | null>>;
@@ -17,35 +18,40 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [displayAbility, setDisplayAbility] = useState<string | null>(null);
 
+  // Add/remove click outside listener for closing suggestions
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Formats ability names (e.g., "water-absorb" to "Water Absorb")
   const formatAbilityName = (ability: string) =>
     ability
       .split(/[- ]/)
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(" ");
 
+  // Unformats ability names (e.g., "Water Absorb" to "water-absorb")
   const unformatAbilityName = (ability: string) => ability.toLowerCase().replace(" ", "-");
 
+  // Updates ability and suggestions on input change
   const handleInputChange = (value: string) => {
     setAbility(value ? unformatAbilityName(value) : null);
     setDisplayAbility(value ? formatAbilityName(value) : null);
     if (value.trim().length < 1) {
-      setSuggestions(null);
+      setSuggestions(null); // Clear suggestions if empty
       return;
     }
 
+    // Generate up to 10 matching ability suggestions
     const normalizedInput = value.toLowerCase().replace(" ", "-");
     const matches = Object.keys(abilitiesData)
       .filter((ability) => ability.toLowerCase().includes(normalizedInput))
-      .map(formatAbilityName)
-      .slice(0, 10);
+      .map(formatAbilityName);
     setSuggestions(matches);
   };
 
+  // Sets ability on suggestion click and closes dropdown
   const handleSuggestionClick = (suggestion: string) => {
     setAbility(unformatAbilityName(suggestion));
     setDisplayAbility(suggestion);
@@ -53,6 +59,7 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
     inputRef.current?.blur();
   };
 
+  // Clears invalid ability on blur
   const handleBlur = () => {
     if (ability && !Object.keys(abilitiesData).includes(ability)) {
       setAbility(null);
@@ -60,14 +67,17 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
     }
   };
 
+  // Registers reset callback with parent on mount
   useEffect(() => {
-    setResetAbilityCallback(() => resetAbilityInput); // Pass reset function to parent
+    setResetAbilityCallback(() => resetAbilityInput);
   }, []);
-  
+
+  // Clears displayed ability for reset functionality
   const resetAbilityInput = () => {
     setDisplayAbility(null);
   };
 
+  // Closes suggestions if clicking outside input or dropdown
   const handleClickOutside = (e: MouseEvent) => {
     if (
       suggestionRef.current &&
@@ -83,6 +93,7 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
     <div className="essentials-section">
       <h2>Ability & Alpha</h2>
       <div className="essentials-row">
+        {/* Ability input with suggestions */}
         <div className="ability-input-wrapper">
           <input
             ref={inputRef}
@@ -92,7 +103,7 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
             onBlur={handleBlur}
             placeholder="Enter ability"
             className="ability-input"
-            onFocus={(e) => e.target.select()}
+            onFocus={(e) => e.target.select()} // Selects text on focus
           />
           {suggestions && (
             <ul ref={suggestionRef} className="ability-suggestions">
@@ -104,6 +115,7 @@ const Essentials: React.FC<EssentialsProps> = ({ ability, setAbility, isAlpha, s
             </ul>
           )}
         </div>
+        {/* Alpha checkbox */}
         <label className="alpha-label">
           <input
             type="checkbox"

@@ -1,8 +1,9 @@
 // Component: Moves.tsx
 import React, { useState, useRef, useEffect } from "react";
-import "./Moves.css";
-import movesData from "../../../../data/moves-data.json";
+import "./Moves.css"; // CSS
+import movesData from "../../../../data/moves-data.json"; // JSON data for move details
 
+// Props interface for move selection and reset callback
 interface MovesProps {
   moves: (string | null)[];
   setMoves: React.Dispatch<React.SetStateAction<(string | null)[]>>;
@@ -15,19 +16,23 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
   const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null]);
   const [displayMoves, setDisplayMoves] = useState<(string | null)[]>([null, null, null, null]);
 
+  // Add/remove click outside listener for closing suggestions
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Formats move names (e.g., "tackle" to "Tackle")
   const formatMoveName = (move: string) =>
     move
       .split(/[- ]/)
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(" ");
 
+  // Unformats move names (e.g., "Tackle" to "tackle")
   const unformatMoveName = (move: string) => move.toLowerCase().replace(" ", "-");
 
+  // Updates moves and suggestions on input change
   const handleInputChange = (index: number, value: string) => {
     const newMoves = [...moves];
     const newDisplayMoves = [...displayMoves];
@@ -37,10 +42,11 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
     setDisplayMoves(newDisplayMoves);
 
     if (value.trim().length < 1) {
-      setSuggestions((prev) => prev.map((s, i) => (i === index ? null : s)));
+      setSuggestions((prev) => prev.map((s, i) => (i === index ? null : s))); // Clear suggestions if empty
       return;
     }
 
+    // Generate up to 10 matching move suggestions
     const normalizedInput = value.toLowerCase().replace(" ", "-");
     const matches = Object.keys(movesData)
       .filter((move) => move.toLowerCase().includes(normalizedInput))
@@ -49,6 +55,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
     setSuggestions((prev) => prev.map((s, i) => (i === index ? matches : s)));
   };
 
+  // Sets move on suggestion click and closes dropdown
   const handleSuggestionClick = (index: number, move: string) => {
     const newMoves = [...moves];
     const newDisplayMoves = [...displayMoves];
@@ -60,6 +67,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
     inputRefs.current[index]?.blur();
   };
 
+  // Clears invalid moves on blur
   const handleBlur = (index: number) => {
     const move = moves[index];
     if (move && !Object.keys(movesData).includes(move)) {
@@ -72,6 +80,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
     }
   };
 
+  // Closes suggestions if clicking outside input or dropdown
   const handleClickOutside = (e: MouseEvent) => {
     suggestionRefs.current.forEach((ref, index) => {
       if (
@@ -85,6 +94,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
     });
   };
 
+  // Returns move type color for suggestion styling
   const getMoveColor = (move: string) => {
     const type = movesData[unformatMoveName(move) as keyof typeof movesData]?.type;
     return {
@@ -94,12 +104,14 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
       rock: "#B8A038", ghost: "#705898", dragon: "#7038F8", dark: "#705848",
       steel: "#B8B8D0",
     }[type] || "#FFFFFF";
-  }; 
+  };
 
+  // Registers reset callback with parent on mount
   useEffect(() => {
-    setResetMovesCallback(() => resetMovesInputs); // Pass reset function to parent
+    setResetMovesCallback(() => resetMovesInputs);
   }, []);
-  
+
+  // Clears displayed moves for reset functionality
   const resetMovesInputs = () => {
     setDisplayMoves([null, null, null, null]);
   };
@@ -117,7 +129,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
             onBlur={() => handleBlur(index)}
             placeholder={`Enter move ${index + 1}`}
             className="move-input"
-            onFocus={(e) => e.target.select()}
+            onFocus={(e) => e.target.select()} // Selects text on focus
           />
           {suggestions[index] && (
             <ul ref={(el) => (suggestionRefs.current[index] = el)} className="move-suggestions">

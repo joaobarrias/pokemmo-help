@@ -1,12 +1,14 @@
 // Component: Filter.tsx
 import React, { useState } from "react";
-import "./Filter.css";
-import movesData from "../../../../data/moves-data.json";
-import abilitiesData from "../../../../data/abilities-data.json";
+import "./Filter.css"; // CSS 
+import movesData from "../../../../data/moves-data.json"; // JSON data for move details
+import abilitiesData from "../../../../data/abilities-data.json"; // JSON data for ability details
 
+// Type assertions for JSON data to ensure correct property access
 const typedMovesData = movesData as { [key: string]: { type: string; learned_by_pokemon?: { id: number }[] } };
 const typedAbilitiesData = abilitiesData as { [key: string]: { pokemon_with_ability: { id: number }[] } };
 
+// Props interface defining filter criteria and state setters
 interface FilterProps {
   moves: (string | null)[];
   ability: string | null;
@@ -17,14 +19,14 @@ interface FilterProps {
     hp: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
     attack: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
     defense: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
-    special_attack: { condition: "More than" | "Equal to" | "Less than"; value: number | null }; // Renamed
-    special_defense: { condition: "More than" | "Equal to" | "Less than"; value: number | null }; // Renamed
+    special_attack: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
+    special_defense: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
     speed: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
   };
   setFilteredPokemon: React.Dispatch<React.SetStateAction<any[]>>;
   filteredPokemon: any[];
   pokemonData: { [key: string]: any };
-  resetFilters: (resetMovesInputs: () => void, resetAbilityInput: () => void) => void;
+  resetFilters: (resetMovesInputs: () => void, resetAbilityInput: () => void) => void; // Callback to reset all filters
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -39,17 +41,22 @@ const Filter: React.FC<FilterProps> = ({
   pokemonData,
   resetFilters,
 }) => {
+  // State for sorting configuration (column key and direction)
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: "asc" | "desc" | null }>({
     key: "",
     direction: null,
   });
+  // State to track if a search has been performed
   const [hasSearched, setHasSearched] = useState(false);
 
+  // Filters Pokémon based on moves, ability, alpha status, types, and stats
   const filterPokemon = () => {
+    // Start with all non-unique legendary Pokémon from the dataset
     let filtered = Object.entries(pokemonData)
       .filter(([_, data]) => !data.unique_legendary)
       .map(([name, data]) => ({ name, ...data }));
 
+    // Filter by valid moves (non-null)
     const validMoves = moves.filter((m) => m) as string[];
     if (validMoves.length > 0) {
       filtered = filtered.filter((pokemon) =>
@@ -59,16 +66,19 @@ const Filter: React.FC<FilterProps> = ({
       );
     }
 
+    // Filter by selected ability
     if (ability) {
       filtered = filtered.filter((pokemon) =>
         typedAbilitiesData[ability]?.pokemon_with_ability?.some((p) => p.id === pokemon.id)
       );
     }
 
+    // Filter by Alpha status
     if (isAlpha) {
       filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
     }
 
+    // Filter by selected types based on type condition
     if (selectedTypes.length > 0) {
       filtered = filtered.filter((pokemon) => {
         const pokemonTypes = pokemon?.types || [];
@@ -86,10 +96,11 @@ const Filter: React.FC<FilterProps> = ({
       });
     }
 
+    // Filter by stat conditions
     filtered = filtered.filter((pokemon) =>
       statKeys.every((stat) => {
         const filter = statsFilters[stat];
-        if (!filter.value) return true;
+        if (!filter.value) return true; // Skip if no value set
         const statValue = pokemon?.stats?.[`base_${stat}`];
         if (filter.condition === "More than") return statValue > filter.value;
         if (filter.condition === "Equal to") return statValue === filter.value;
@@ -98,10 +109,12 @@ const Filter: React.FC<FilterProps> = ({
       })
     );
 
+    // Update filtered Pokémon list and mark search as completed
     setFilteredPokemon(filtered);
     setHasSearched(true);
   };
 
+  // Handles sorting of table columns (asc, desc, or reset)
   const handleSort = (key: string) => {
     let direction: "asc" | "desc" | null = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -109,9 +122,10 @@ const Filter: React.FC<FilterProps> = ({
     } else if (sortConfig.key === key && sortConfig.direction === "desc") {
       direction = null;
     }
-    setSortConfig({ key, direction });
+    setSortConfig({ key, direction }); // Update sorting state
 
     if (direction) {
+      // Sort filtered Pokémon by selected column
       setFilteredPokemon((prev) =>
         [...prev].sort((a, b) => {
           const aValue = key === "name" ? a.name : key === "id" ? a.id : a.stats?.[`base_${key}`];
@@ -121,29 +135,33 @@ const Filter: React.FC<FilterProps> = ({
         })
       );
     } else {
-      filterPokemon();
+      filterPokemon(); // Reset to original filtered order
     }
   };
 
+  // Formats ability names (e.g., "water-absorb" to "Water Absorb")
   const formatAbilityName = (ability: string) =>
     ability
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
+  // Retrieves formatted list of abilities for a given Pokémon ID
   const getAbilities = (pokemonId: number) => {
     const abilities = Object.entries(typedAbilitiesData)
       .filter(([_, data]) => data?.pokemon_with_ability?.some((p) => p.id === pokemonId))
       .map(([abilityName]) => formatAbilityName(abilityName));
-    return abilities.length > 0 ? abilities.join("\n") : "N/A";
+    return abilities.length > 0 ? abilities.join("\n") : "N/A"; // Join with newlines or return N/A
   };
 
   return (
     <div className="filter-section">
+      {/* Search and reset buttons */}
       <div className="button-container">
         <button onClick={filterPokemon} className="search-button">Search</button>
         <button
           onClick={() => {
+            // Reset callbacks for Moves and Essentials inputs
             const resetMovesInputs = () => {
               const movesComponent = document.querySelector(".moves-section") as any;
               movesComponent?.resetMovesInputs?.();
@@ -153,17 +171,19 @@ const Filter: React.FC<FilterProps> = ({
               essentialsComponent?.resetAbilityInput?.();
             };
             resetFilters(resetMovesInputs, resetAbilityInput);
-            setHasSearched(false);
+            setHasSearched(false); // Clear search state
           }}
           className="reset-button"
         >
           Reset
         </button>
       </div>
+      {/* Conditional rendering: no results message or table */}
       {hasSearched && filteredPokemon.length === 0 ? (
         <p className="no-results">No results found</p>
       ) : filteredPokemon.length > 0 ? (
         <table className="results-table">
+          {/* Table header with sortable columns */}
           <thead>
             <tr>
               <th className={sortConfig.key === "id" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("id")}>Icon</th>
@@ -178,6 +198,7 @@ const Filter: React.FC<FilterProps> = ({
               <th className={sortConfig.key === "speed" ? `sort-${sortConfig.direction}` : ""} onClick={() => handleSort("speed")}>Speed</th>
             </tr>
           </thead>
+          {/* Table body with filtered Pokémon data */}
           <tbody>
             {filteredPokemon.map((pokemon) => (
               <tr key={pokemon.id}>
@@ -204,6 +225,7 @@ const Filter: React.FC<FilterProps> = ({
   );
 };
 
+// Constant array of stat keys for filtering and sorting
 const statKeys = ["hp", "attack", "defense", "special_attack", "special_defense", "speed"] as const;
 
 export default Filter;

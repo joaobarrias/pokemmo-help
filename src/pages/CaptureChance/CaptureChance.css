@@ -309,7 +309,9 @@
     .formula {
       font-size: 0.65rem;
     }
-  
+    .capture-page .header h1 {
+        font-size: 1.4rem;
+    }
     .parentheses {
       font-size: 0.9em;
     }

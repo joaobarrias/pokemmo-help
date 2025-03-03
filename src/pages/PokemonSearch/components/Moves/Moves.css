@@ -2,7 +2,7 @@
 .moves-section {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content */
+  align-items: center;
   gap: 10px;
 }
 
@@ -13,7 +13,7 @@
 .move-input-wrapper {
   position: relative;
   display: flex;
-  justify-content: center; /* Center input horizontally */
+  justify-content: center;
 }
 
 .move-input {

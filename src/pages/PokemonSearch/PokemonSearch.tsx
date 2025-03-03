@@ -1,19 +1,25 @@
 // Page: PokemonSearch.tsx
 import React, { useState } from "react";
-import "./PokemonSearch.css";
-import Moves from "./components/Moves/Moves";
-import Essentials from "./components/Essentials/Essentials";
-import Types from "./components/Types/Types";
-import BaseStats from "./components/BaseStats/BaseStats";
-import Filter from "./components/Filter/Filter";
-import pokemmoData from "./../../data/pokemmo-data.json";
+import "./PokemonSearch.css"; // CSS for page layout
+import Moves from "./components/Moves/Moves"; // Moves input component
+import Essentials from "./components/Essentials/Essentials"; // Ability and alpha component
+import Types from "./components/Types/Types"; // Type selection component
+import BaseStats from "./components/BaseStats/BaseStats"; // Stat filters component
+import Filter from "./components/Filter/Filter"; // Results table component
+import pokemmoData from "./../../data/pokemmo-data.json"; // JSON data for Pokémon
 
 const PokemonSearch: React.FC = () => {
+  // State for selected moves (up to 4)
   const [moves, setMoves] = useState<(string | null)[]>([null, null, null, null]);
+  // State for selected ability
   const [ability, setAbility] = useState<string | null>(null);
+  // State for alpha filter toggle
   const [isAlpha, setIsAlpha] = useState(false);
+  // State for selected types
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  // State for type condition mode
   const [typeCondition, setTypeCondition] = useState<"At least one" | "Exactly" | "Only">("At least one");
+  // State for stat filters
   const [statsFilters, setStatsFilters] = useState({
     hp: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
     attack: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
@@ -22,11 +28,14 @@ const PokemonSearch: React.FC = () => {
     special_defense: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
     speed: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
   });
+  // State for filtered Pokémon list
   const [filteredPokemon, setFilteredPokemon] = useState<any[]>([]);
 
+  // State for reset callbacks from Moves and Essentials
   const [resetMovesCallback, setResetMovesCallback] = useState<(() => void) | null>(null);
   const [resetAbilityCallback, setResetAbilityCallback] = useState<(() => void) | null>(null);
-  
+
+  // Resets all filters and input displays
   const resetFilters = () => {
     setMoves([null, null, null, null]);
     setAbility(null);
@@ -42,21 +51,24 @@ const PokemonSearch: React.FC = () => {
       speed: { condition: "More than", value: null },
     });
     setFilteredPokemon([]);
-    resetMovesCallback?.();
-    resetAbilityCallback?.();
+    resetMovesCallback?.(); // Reset Moves inputs
+    resetAbilityCallback?.(); // Reset Essentials input
   };
 
   return (
     <div className="pokemon-search-page">
+      {/* Page header */}
       <div className="header">
         <h1>Pokémon Search</h1>
       </div>
+      {/* Main content */}
       <div className="search-body">
         <div className="search-container">
+          {/* First row: Moves, Essentials, Base Stats */}
           <div className="first-row-search">
             <div className="moves-essentials">
-            <Moves moves={moves} setMoves={setMoves} setResetMovesCallback={setResetMovesCallback} />
-            <Essentials
+              <Moves moves={moves} setMoves={setMoves} setResetMovesCallback={setResetMovesCallback} />
+              <Essentials
                 ability={ability}
                 setAbility={setAbility}
                 isAlpha={isAlpha}
@@ -68,6 +80,7 @@ const PokemonSearch: React.FC = () => {
               <BaseStats statsFilters={statsFilters} setStatsFilters={setStatsFilters} />
             </div>
           </div>
+          {/* Second row: Types */}
           <div className="second-row-search">
             <Types
               selectedTypes={selectedTypes}
@@ -76,6 +89,7 @@ const PokemonSearch: React.FC = () => {
               setTypeCondition={setTypeCondition}
             />
           </div>
+          {/* Third row: Filter table */}
           <div className="third-row-search">
             <Filter
               moves={moves}

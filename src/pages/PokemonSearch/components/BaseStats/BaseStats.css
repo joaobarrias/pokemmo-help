@@ -76,3 +76,29 @@
 }
 
 
+@media (max-width: 768px) {
+  .base-stats-section{
+    margin-top:10px
+  }
+  .stats-grid {
+    margin-right: 90px;
+  }
+}
+
+@media (max-width: 400px) {
+  .stats-grid {
+    margin-right: 70px;
+  }
+}
+
+@media (max-width: 330px) {
+  .stats-grid {
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 305px) {
+  .stats-grid {
+    margin-right: 40px;
+  }
+}

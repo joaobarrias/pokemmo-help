@@ -1,13 +1,15 @@
 // Component: BaseStats.tsx
 import React from "react";
-import "./BaseStats.css";
-import Select from "react-select";
+import "./BaseStats.css"; // CSS
+import Select from "react-select"; // Dropdown component for conditions
 
+// Interface for individual stat filter
 interface StatFilter {
   condition: "More than" | "Equal to" | "Less than";
   value: number | null;
 }
 
+// Props interface for stats filters and setter
 interface BaseStatsProps {
   statsFilters: {
     hp: StatFilter;
@@ -29,6 +31,7 @@ const conditionOptions = [
 ];
 
 const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) => {
+  // Updates stat filter condition or value
   const handleStatChange = (stat: keyof typeof statsFilters, field: "condition" | "value", value: any) => {
     setStatsFilters((prev) => ({
       ...prev,
@@ -36,9 +39,10 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
     }));
   };
 
+  // Handles input change, enforces 0-300 range
   const handleInputChange = (stat: keyof typeof statsFilters, value: string) => {
     if (value === "") {
-      handleStatChange(stat, "value", null);
+      handleStatChange(stat, "value", null); // Clear value if empty
     } else if (/^\d*$/.test(value)) { // Only digits, no decimals
       const numValue = parseInt(value);
       if (numValue >= 0 && numValue <= 300) {
@@ -47,6 +51,7 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
     }
   };
 
+  // Handles condition dropdown change and blurs focus
   const handleSelectChange = (stat: keyof typeof statsFilters) => (selectedOption: { value: string; label: string } | null) => {
     if (selectedOption) {
       handleStatChange(stat, "condition", selectedOption.value);
@@ -64,6 +69,7 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
         {statKeys.map((stat, index) => (
           <div key={stat} className="stat-row">
             <label>{statLabels[index]}</label>
+            {/* Condition dropdown */}
             <Select
               value={conditionOptions.find((opt) => opt.value === statsFilters[stat].condition)}
               onChange={handleSelectChange(stat)}
@@ -73,13 +79,14 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
               isSearchable={false}
               menuShouldScrollIntoView={false}
             />
+            {/* Stat value input */}
             <input
               type="text"
               value={statsFilters[stat].value ?? ""}
               onChange={(e) => handleInputChange(stat, e.target.value)}
               className="stat-input"
               id={`stat-${stat}`}
-              onFocus={(e) => e.target.select()}
+              onFocus={(e) => e.target.select()} // Selects text on focus
             />
           </div>
         ))}

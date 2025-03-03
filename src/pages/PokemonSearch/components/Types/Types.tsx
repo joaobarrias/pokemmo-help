@@ -1,8 +1,9 @@
 // Component: Types.tsx
 import React from "react";
-import "./Types.css";
-import Select from "react-select";
+import "./Types.css"; // CSS
+import Select from "react-select"; // Dropdown component for conditions
 
+// Props interface for type selection and condition
 interface TypesProps {
   selectedTypes: string[];
   setSelectedTypes: React.Dispatch<React.SetStateAction<string[]>>;
@@ -16,24 +17,27 @@ const typeList = [
 ];
 
 const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCondition, setTypeCondition }) => {
+  // Toggles type selection in/out of selectedTypes array
   const handleTypeToggle = (type: string) => {
     setSelectedTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
     );
   };
 
+  // Options for type condition dropdown
   const conditionOptions = [
     { value: "At least one", label: "At least one of these types" },
     { value: "Exactly", label: "Exactly these types" },
     { value: "Only", label: "Only these types" },
   ];
 
+  // Updates type condition and blurs focus
   const handleSelectChange = (selectedOption: { value: string; label: string } | null) => {
     if (selectedOption) {
       setTypeCondition(selectedOption.value as "At least one" | "Exactly" | "Only");
       const activeElement = document.activeElement as HTMLElement;
       if (activeElement) {
-        activeElement.blur();
+        activeElement.blur(); // Blur to reset border
       }
     }
   };
@@ -41,6 +45,7 @@ const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCond
   return (
     <div className="types-section">
       <h2>Types</h2>
+      {/* Type condition dropdown */}
       <div className="type-condition">
         <Select
           value={conditionOptions.find((opt) => opt.value === typeCondition)}
@@ -51,6 +56,7 @@ const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCond
           isSearchable={false}
         />
       </div>
+      {/* Type selection grid */}
       <div className="type-images">
         {typeList.map((type) => (
           <div key={type} className="type-item">
@@ -58,12 +64,12 @@ const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCond
               src={`/types/icons/${type}.png`}
               alt={type}
               className="type-icon"
-              onClick={() => handleTypeToggle(type)}
+              onClick={() => handleTypeToggle(type)} // Toggle type on image click
             />
             <input
               type="checkbox"
               checked={selectedTypes.includes(type)}
-              onChange={() => handleTypeToggle(type)}
+              onChange={() => handleTypeToggle(type)} // Toggle type on checkbox change
               className="type-checkbox"
             />
           </div>
