@@ -31,3 +31,8 @@
   for = "/registersw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw-clear.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
