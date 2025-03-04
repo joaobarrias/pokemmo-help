@@ -18,7 +18,7 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw-v2.js', // Service worker file
+      filename: 'new-sw/sw-v2.js', // New service worker path
       includeAssets: [], // No precached assets
       manifest: {
         name: 'PokeMMO Help',
@@ -47,8 +47,7 @@ export default defineConfig({
           },
         ],
       },
-      // Inline custom registration to unregister old SW and register new
-      injectRegister: 'inline',
+      injectRegister: null, // We'll handle registration manually
     }),
   ],
   build: { sourcemap: true },
