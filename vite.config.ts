@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     {
+      // Disable CSP in dev for easier debugging
       name: 'disable-csp-for-dev',
       configureServer(server) {
         server.middlewares.use((_req, res, next) => {
@@ -17,8 +18,8 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw-v2.js',
-      includeAssets: [],
+      filename: 'sw-v2.js', // Service worker file
+      includeAssets: [], // No precached assets
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -46,8 +47,8 @@ export default defineConfig({
           },
         ],
       },
-      // Disable auto-injection—handled in index.html
-      injectRegister: null,
+      // Inline custom registration to unregister old SW and register new
+      injectRegister: 'inline',
     }),
   ],
   build: { sourcemap: true },
