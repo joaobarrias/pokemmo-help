@@ -82,7 +82,7 @@
   
     /* Adjust column width for readability */
     .attacking-columns:has(>.attacking-column:nth-child(2)) .attacking-column {
-      max-width: 140px; /
+      max-width: 140px;
     }
     .attacking-columns:has(>.attacking-column:nth-child(2)) .attacking-column h3{
         font-size: 0.9rem;

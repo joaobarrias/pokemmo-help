@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [
     react(),
     {
-      // Disable CSP in dev for easier debugging
       name: 'disable-csp-for-dev',
       configureServer(server) {
         server.middlewares.use((_req, res, next) => {
@@ -18,8 +17,8 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'new-sw/sw-v2.js', // New service worker path
-      includeAssets: [], // No precached assets
+      filename: 'sw-v2.js',
+      includeAssets: [],
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -28,9 +27,9 @@ export default defineConfig({
         background_color: '#2c2f38',
         theme_color: '#23262f',
         icons: [
-          { src: "icons/logo192.png", sizes: "192x192", type: "image/png" },
-          { src: "icons/logo.png", sizes: "320x320", type: "image/png" },
-          { src: "icons/logo512.png", sizes: "512x512", type: "image/png" },
+          { src: "/icons/logo192.png", sizes: "192x192", type: "image/png" },
+          { src: "/icons/logo.png", sizes: "320x320", type: "image/png" },
+          { src: "/icons/logo512.png", sizes: "512x512", type: "image/png" },
         ],
       },
       workbox: {
@@ -47,7 +46,7 @@ export default defineConfig({
           },
         ],
       },
-      injectRegister: null, // We'll handle registration manually
+      injectRegister: 'inline',
     }),
   ],
   build: { sourcemap: true },
