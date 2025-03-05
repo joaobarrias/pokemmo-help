@@ -33,7 +33,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html}'], // Precache only JS/CSS/HTML
+        globPatterns: [],
         runtimeCaching: [
           {
             urlPattern: /\.(?:png|jpg|jpeg)$/, // Cache images on demand

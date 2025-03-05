@@ -21,6 +21,7 @@
   for = "/*"  # All files
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:5173;"  # CSP for security
+    Cache-Control = "no-store"
 
 [[headers]]
   for = "/sw-v2.js"
