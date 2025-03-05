@@ -9,11 +9,31 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
     <meta name="description" content="PokeMMO Help: Tools for PokeMMO.">
     <title>PokeMMO Help</title>
-    <!-- Cache-busting query param to force fresh fetch -->
-    <script type="module" src="/src/main.tsx?v=3"></script>
+    <!-- Run unregister synchronously in head to block rendering -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        console.log('Starting service worker cleanup...');
+        var registrations = navigator.serviceWorker.getRegistrations();
+        if (registrations.length > 0) {
+          registrations.forEach(function(registration) {
+            console.log('Found SW:', registration.active?.scriptURL);
+            registration.unregister();
+            console.log('Unregistered:', registration.scope);
+          });
+          var cacheKeys = caches.keys();
+          cacheKeys.forEach(function(key) {
+            caches.delete(key);
+            console.log('Deleted cache:', key);
+          });
+        } else {
+          console.log('No service workers to unregister');
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/src/main.tsx?v=3"></script>
     <script>
       try {
         console.info = new Proxy(console.info, {
@@ -24,32 +44,22 @@
         });
       } catch {}
     </script>
-    <!-- Enhanced script to unregister old service workers and log status -->
+    <!-- Async cleanup with reload as fallback -->
     <script>
       if ('serviceWorker' in navigator) {
-        console.log('Checking for existing service workers...');
         navigator.serviceWorker.getRegistrations().then((registrations) => {
-          if (registrations.length === 0) {
-            console.log('No service workers found to unregister');
-          } else {
-            console.log(`Found ${registrations.length} service worker(s)`);
-            registrations.forEach((registration) => {
-              console.log('Unregistering:', registration.scope, 'Active script:', registration.active?.scriptURL);
-              registration.unregister().then(() => {
-                console.log('Unregistered:', registration.scope);
-                return caches.keys().then((keys) => {
-                  console.log('Found caches:', keys);
-                  return Promise.all(keys.map((key) => caches.delete(key).then(() => console.log('Deleted cache:', key))));
-                }).then(() => {
-                  console.log('All caches cleared, reloading...');
-                  window.location.reload(true); // Hard reload to fetch sw-v3.js
-                });
+          registrations.forEach((registration) => {
+            registration.unregister().then(() => {
+              console.log('Async unregistered:', registration.scope);
+              return caches.keys().then((keys) => {
+                return Promise.all(keys.map((key) => caches.delete(key).then(() => console.log('Async deleted cache:', key))));
               });
             });
-          }
-        }).catch((err) => console.error('Unregister failed:', err));
-      } else {
-        console.log('Service workers not supported in this browser');
+          });
+        }).then(() => {
+          console.log('All done, reloading...');
+          window.location.reload(true);
+        }).catch((err) => console.error('Async unregister failed:', err));
       }
     </script>
   </body>

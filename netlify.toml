@@ -8,12 +8,12 @@
 # Redirects for SPA routing
 [[redirects]]
   from = "/*"                # Match all paths
-  to = "/index.html"         # Serve index.html for client-side routing
+  to = "/index.html?v=3"     # Serve index.html with cache-busting param
   status = 200               # Use 200 status (rewrite, not redirect)
 
 # Headers for static assets and security
 [[headers]]
-  for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files (fixed syntax)
+  for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files
   [headers.values]
     Cache-Control = "public, max-age=31536000"  # 1 year
 
