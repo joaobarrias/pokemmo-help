@@ -8,7 +8,7 @@
 # Redirects for SPA routing
 [[redirects]]
   from = "/*"                # Match all paths
-  to = "/index.html?v=4"         # Serve index.html for client-side routing
+  to = "/index.html"         # Serve index.html for client-side routing
   status = 200               # Use 200 status (rewrite, not redirect)
 
 # Headers for static assets and security
@@ -24,6 +24,6 @@
     Cache-Control = "no-store"
 
 [[headers]]
-  for = "/sw-v3.js"
+  for = "/sw-v2.js"
   [headers.values]
     Cache-Control = "no-store"  # No caching at all
