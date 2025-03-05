@@ -193,7 +193,7 @@
   }
 
   .results-table th {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .results-table .pokemon-icon {
@@ -279,7 +279,7 @@
 }
 
 
-@media (max-width: 495px) {
+@media (max-width: 505px) {
   .results-table {
     font-size: 0.7rem;
   }
@@ -387,14 +387,9 @@
   .results-table td:nth-child(4) {
     font-size: 0.55rem;
   }
-
 }
 
-@media (max-width: 350px) {
-  .results-table {
-    font-size: 0.55rem;
-  }
-
+@media (max-width: 351px) {
   .results-table th {
     font-size: 0.55rem;
   }
@@ -405,13 +400,19 @@
   .results-table th.sort-desc::after {
     font-size: 0.55rem;
   }
-
   .results-table .type-icon {
     width: 40px;
   }
   .results-table th:nth-child(4),
   .results-table td:nth-child(4) {
-    width: 80px;
+    width: 100px;
+  }
+
+}
+@media (max-width: 340px) {
+
+  .results-table td:nth-child(4) {
+    font-size: 0.47rem;
   }
 
 }
@@ -422,7 +423,7 @@
     padding: 1px;
   }
   .results-table td:nth-child(4) {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
   }
 
 }
@@ -434,6 +435,6 @@
   }
 
   .results-table td:nth-child(4) {
-    font-size: 0.48rem;
+    font-size: 0.45rem;
   }
 }
