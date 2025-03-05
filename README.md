@@ -17,6 +17,14 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 - Provides a **Poké Ball selector** with built-in conditions (e.g., fishing checks, type-based multipliers).
 - The capture chance updates **dynamically in real time**, ensuring a smooth user experience without the need for manual refreshes
 
+### **Pokémon Search** 
+
+- Add up to 4 **moves** with **live search** and color-coded suggestions by type.
+- Filter **base stats** (HP, Attack, Defense, Sp. Atk, Sp. Def, Speed) with "More than," "Equal to," or "Less than" conditions (0-300).
+- Search by **ability** via text input and toggle **Alpha** variants with a checkbox.
+- Select **types** with a visual picker and "At least one," "Exactly," or "Only" options.
+- Generate a sortable **table** of matches—icons, names, abilities, types, and stats—with a reset button.
+
 ### **Type Coverage**
 
 - Input a Pokémon name just like in the Capture Chance page, but with a larger selection of Pokémon. Once selected, it grabs their types and displays them beneath the Pokémon image in a type selector menu.
@@ -29,10 +37,6 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 - **Hover and Click Interactions**: Hover over or click any table cell to highlight the row and column.
 - **Flip Typing Button**: This button inverts type damage coverage, flipping the attack and defense interactions.
 - The type coverage flip is also reflected in the attacking and defending components and the type chart.
-
-### **Coming Soon**
-
-- **Pokémon Search:** A tool that will allow users to filter Pokémon by **abilities, moves, base stats, egg groups, and types**.
 
 ## ⚙️ How It Works
 
@@ -49,6 +53,15 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 9. **Live updates** ensure the capture chance adjusts immediately upon any user input change.
 10. A **how it works** section to explain how the calculations are done.
 
+### **Pokémon Search**
+
+1. Users input up to 4 **moves** via a **live search box** with color-coded suggestions based on move type (e.g., "High Jump Kick").
+2. Users filter **base stats** (HP, Attack, Defense, Sp. Atk, Sp. Def, Speed) by selecting "More than," "Equal to," or "Less than" and entering values (0-300) in a dropdown-input combo.
+3. An **ability** is entered through a text input (e.g., "Levitate"), and an **Alpha checkbox** toggles inclusion of **Alpha** variants.
+4. Users selects **types** from a visual picker, choosing "At least one," "Exactly," or "Only" to filter results.
+5. Clicking "Search" fetches data from **local JSON files** and displays a **table** of matching Pokémon, including icons, names, abilities, types, and stats.
+6. The **table** supports **sorting** by clicking column headers (ID, name, stats) for ascending or descending order, with a reset button to clear all inputs and results.
+
 ### **Type Coverage**
 
 1. Users can input a Pokémon's name, and the app will provide suggestions.
@@ -59,10 +72,6 @@ Welcome to **PokeMMO Help**! 🎮✨ This project provides essential tools for P
 6. Hover and click interactions allow users to highlight specific cells for quick reference.
 7. The **Flip Typing Button** inverts type interactions (e.g., Water -> Fire becomes Fire -> Water).
 8. Dual typing is supported, and both types are factored into the damage calculations.
-
-### **Coming Soon**
-
-- **Pokémon Search**: A powerful Pokémon lookup tool with detailed filters.
 
 ## 🧑‍💻 Tech Stack
 
