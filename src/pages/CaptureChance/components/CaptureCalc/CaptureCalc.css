@@ -58,6 +58,7 @@
   appearance: none;
   -webkit-appearance: none;
   position: relative;
+  transition: border-color 0.3s ease;
 }
 
 /* Custom checkmark for visibility */
@@ -74,6 +75,10 @@
   color: #fff;
   font-size: 14px;
   font-weight: bold;
+}
+
+.capture-calc-section .input-field input[type="checkbox"]:hover {
+  border: 1px solid #ccc;
 }
 
 .capture-calc-section .capture-chance {

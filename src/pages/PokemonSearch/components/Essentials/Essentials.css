@@ -90,6 +90,7 @@
   background-color: #444c56;
   appearance: none;
   -webkit-appearance: none;
+  transition: border-color 0.3s ease;
 }
 
 /* Custom checkmark */
@@ -103,6 +104,10 @@
   color: #fff;
   font-size: 14px;
   font-weight: bold;
+}
+
+.alpha-label input:hover {
+  border: 1px solid #ccc;
 }
 
 @media (max-width: 768px) {
