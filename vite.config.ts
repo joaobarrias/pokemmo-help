@@ -17,7 +17,7 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw-v2.js',
+      filename: 'sw-v3.js',
       includeAssets: [],
       manifest: {
         name: 'PokeMMO Help',
@@ -44,8 +44,9 @@ export default defineConfig({
             },
           },
         ],
+        cleanupOutdatedCaches: true, // Clear old caches on activation
       },
-      injectRegister: 'inline', // Inline registration
+      injectRegister: 'inline',
     }),
   ],
   build: { sourcemap: true },
