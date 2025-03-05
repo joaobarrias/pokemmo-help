@@ -25,4 +25,4 @@
 [[headers]]
   for = "/sw-v2.js"
   [headers.values]
-    Cache-Control = "public, max-age=86400"  # 1 day
+    Cache-Control = "no-store"  # No caching at all
