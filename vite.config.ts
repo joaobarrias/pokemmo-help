@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -16,7 +17,7 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw-v2.js', // Changed from sw.js
+      filename: 'sw-v2.js',
       includeAssets: [],
       manifest: {
         name: 'PokeMMO Help',

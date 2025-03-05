@@ -1,4 +1,3 @@
-// Component: Essentials.tsx
 import React, { useState, useRef, useEffect } from "react";
 import "./Essentials.css"; // CSS
 import abilitiesData from "../../../../data/abilities-data.json"; // JSON data for ability details

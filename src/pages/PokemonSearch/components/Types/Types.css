@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  max-width: 800px;
+  max-width: 600px;
 }
 
 .types-section h2 {
@@ -15,10 +15,6 @@
   width: 260px;
   display: flex;
   justify-content: center;
-}
-
-.type-condition-select {
-  margin-bottom: 10px;
 }
 
 .type-images {
@@ -34,21 +30,35 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  padding: 5px;
+  padding: 8px;
+  background-color: #4646469f;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  user-select: none;
 }
 
-.type-icon {
+.type-item:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+.type-item.selected {
+  background-color: #ffffffd3; 
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+}
+
+.type-icon-grid {
   width: 65px;
   height: auto;
-  cursor: pointer;
+  filter: brightness(65%);
+  transition: filter 0.2s ease;
+  pointer-events: none;
 }
 
-.type-checkbox {
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-  margin-top: -1px;
-  accent-color: #fff;
+.type-item.selected .type-icon-grid {
+  filter: brightness(100%);
 }
 
 .type-condition-select .react-select__control {
@@ -72,12 +82,20 @@
 }
 
 @media (max-width: 768px) {
+  .type-icon-grid {
+    width: 60px;
+  }
+  
   .types-section {
     margin-top: -10px;
   }
 }
+
 @media (max-width: 480px) {
+  .type-condition-select .react-select__control {
+    font-size: 0.85rem;
+  }
   .types-section {
     margin-top: 0px;
-  } 
+  }
 }

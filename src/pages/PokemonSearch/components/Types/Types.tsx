@@ -1,7 +1,6 @@
-// Component: Types.tsx
 import React from "react";
 import "./Types.css"; // CSS
-import Select from "react-select"; // Dropdown component for conditions
+import Select from "react-select";
 
 // Props interface for type selection and condition
 interface TypesProps {
@@ -59,18 +58,15 @@ const Types: React.FC<TypesProps> = ({ selectedTypes, setSelectedTypes, typeCond
       {/* Type selection grid */}
       <div className="type-images">
         {typeList.map((type) => (
-          <div key={type} className="type-item">
+          <div
+            key={type}
+            className={`type-item ${selectedTypes.includes(type) ? "selected" : ""}`}
+            onClick={() => handleTypeToggle(type)}
+          >
             <img
               src={`/types/icons/${type}.png`}
               alt={type}
-              className="type-icon"
-              onClick={() => handleTypeToggle(type)} // Toggle type on image click
-            />
-            <input
-              type="checkbox"
-              checked={selectedTypes.includes(type)}
-              onChange={() => handleTypeToggle(type)} // Toggle type on checkbox change
-              className="type-checkbox"
+              className="type-icon-grid"
             />
           </div>
         ))}

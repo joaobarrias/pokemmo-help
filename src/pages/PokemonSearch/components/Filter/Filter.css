@@ -16,14 +16,14 @@
   font-size: 1.1rem;
   background-color: #ef1c1f;
   color: #fff;
-  border: none;
+  border: 1px solid #b1b1b1;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-  background-color: #c5171a;
+  background-color: #b41315;
 }
 
 .reset-button {
@@ -31,7 +31,7 @@
   font-size: 0.9rem;
   background-color: #6d6d6d;
   color: #fff;
-  border: none;
+  border: 1px solid #b1b1b1;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -46,12 +46,13 @@
   border-collapse: collapse;
   background-color: #444c56;
   color: #fff;
+  margin-top: 10px;
 }
 
 .results-table th,
 .results-table td {
   padding: 8px;
-  border: 1px solid #6d6d6d;
+  border: 1px solid #808080;
   text-align: center;
 }
 
@@ -123,7 +124,7 @@
   text-align: center;
   padding: 7px;
   margin-top: 10px;
-  border: 1px solid #6d6d6d;
+  border: 1px solid #808080;
   background-color: #444c56;
   text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
 }

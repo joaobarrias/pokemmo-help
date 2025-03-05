@@ -49,70 +49,71 @@ const Filter: React.FC<FilterProps> = ({
   // State to track if a search has been performed
   const [hasSearched, setHasSearched] = useState(false);
 
-  // Filters Pokémon based on moves, ability, alpha status, types, and stats
-  const filterPokemon = () => {
-    // Start with all non-unique legendary Pokémon from the dataset
-    let filtered = Object.entries(pokemonData)
-      .filter(([_, data]) => !data.unique_legendary)
-      .map(([name, data]) => ({ name, ...data }));
-
-    // Filter by valid moves (non-null)
-    const validMoves = moves.filter((m) => m) as string[];
-    if (validMoves.length > 0) {
+    // Filters Pokémon based on moves, ability, alpha status, types, and stats
+    const filterPokemon = () => {
+      setSortConfig({ key: "", direction: null }); // Reset sorting on search
+      // Start with all non-unique legendary Pokémon from the dataset
+      let filtered = Object.entries(pokemonData)
+        .filter(([_, data]) => !data.unique_legendary)
+        .map(([name, data]) => ({ name, ...data }));
+  
+      // Filter by valid moves (non-null)
+      const validMoves = moves.filter((m) => m) as string[];
+      if (validMoves.length > 0) {
+        filtered = filtered.filter((pokemon) =>
+          validMoves.every((move) =>
+            typedMovesData[move]?.learned_by_pokemon?.some((p) => p.id === pokemon.id)
+          )
+        );
+      }
+  
+      // Filter by selected ability
+      if (ability) {
+        filtered = filtered.filter((pokemon) =>
+          typedAbilitiesData[ability]?.pokemon_with_ability?.some((p) => p.id === pokemon.id)
+        );
+      }
+  
+      // Filter by Alpha status
+      if (isAlpha) {
+        filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
+      }
+  
+      // Filter by selected types based on type condition
+      if (selectedTypes.length > 0) {
+        filtered = filtered.filter((pokemon) => {
+          const pokemonTypes = pokemon?.types || [];
+          if (typeCondition === "At least one") {
+            return selectedTypes.some((type) => pokemonTypes.includes(type));
+          } else if (typeCondition === "Exactly") {
+            return (
+              selectedTypes.length === pokemonTypes.length &&
+              selectedTypes.every((type) => pokemonTypes.includes(type))
+            );
+          } else if (typeCondition === "Only") {
+            return pokemonTypes.every((type: string) => selectedTypes.includes(type));
+          }
+          return true;
+        });
+      }
+  
+      // Filter by stat conditions
       filtered = filtered.filter((pokemon) =>
-        validMoves.every((move) =>
-          typedMovesData[move]?.learned_by_pokemon?.some((p) => p.id === pokemon.id)
-        )
+        statKeys.every((stat) => {
+          const filter = statsFilters[stat];
+          if (!filter.value) return true; // Skip if no value set
+          const statValue = pokemon?.stats?.[`base_${stat}`];
+          if (filter.condition === "More than") return statValue > filter.value;
+          if (filter.condition === "Equal to") return statValue === filter.value;
+          if (filter.condition === "Less than") return statValue < filter.value;
+          return true;
+        })
       );
-    }
-
-    // Filter by selected ability
-    if (ability) {
-      filtered = filtered.filter((pokemon) =>
-        typedAbilitiesData[ability]?.pokemon_with_ability?.some((p) => p.id === pokemon.id)
-      );
-    }
-
-    // Filter by Alpha status
-    if (isAlpha) {
-      filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
-    }
-
-    // Filter by selected types based on type condition
-    if (selectedTypes.length > 0) {
-      filtered = filtered.filter((pokemon) => {
-        const pokemonTypes = pokemon?.types || [];
-        if (typeCondition === "At least one") {
-          return selectedTypes.some((type) => pokemonTypes.includes(type));
-        } else if (typeCondition === "Exactly") {
-          return (
-            selectedTypes.length === pokemonTypes.length &&
-            selectedTypes.every((type) => pokemonTypes.includes(type))
-          );
-        } else if (typeCondition === "Only") {
-          return pokemonTypes.every((type: string) => selectedTypes.includes(type));
-        }
-        return true;
-      });
-    }
-
-    // Filter by stat conditions
-    filtered = filtered.filter((pokemon) =>
-      statKeys.every((stat) => {
-        const filter = statsFilters[stat];
-        if (!filter.value) return true; // Skip if no value set
-        const statValue = pokemon?.stats?.[`base_${stat}`];
-        if (filter.condition === "More than") return statValue > filter.value;
-        if (filter.condition === "Equal to") return statValue === filter.value;
-        if (filter.condition === "Less than") return statValue < filter.value;
-        return true;
-      })
-    );
-
-    // Update filtered Pokémon list and mark search as completed
-    setFilteredPokemon(filtered);
-    setHasSearched(true);
-  };
+  
+      // Update filtered Pokémon list and mark search as completed
+      setFilteredPokemon(filtered);
+      setHasSearched(true);
+    };
 
   // Handles sorting of table columns (asc, desc, or reset)
   const handleSort = (key: string) => {
@@ -172,6 +173,7 @@ const Filter: React.FC<FilterProps> = ({
             };
             resetFilters(resetMovesInputs, resetAbilityInput);
             setHasSearched(false); // Clear search state
+            setSortConfig({ key: "", direction: null }); // Reset sorting on reset
           }}
           className="reset-button"
         >
