@@ -30,7 +30,7 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
       .join(" ");
 
   // Unformats move names (e.g., "Tackle" to "tackle")
-  const unformatMoveName = (move: string) => move.toLowerCase().replace(" ", "-");
+  const unformatMoveName = (move: string) => move.toLowerCase().replace(/\s+/g, "-");
 
   // Updates moves and suggestions on input change
   const handleInputChange = (index: number, value: string) => {
