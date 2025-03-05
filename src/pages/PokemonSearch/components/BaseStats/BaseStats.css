@@ -13,7 +13,7 @@
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 7px;
   margin-right: 130px;
 }
 
@@ -30,13 +30,39 @@
   text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
 }
 
+.stat-control {
+  display: flex;
+  align-items: center;
+  background-color: #444c56;
+  border: 1px solid #6d6d6d;
+  border-radius: 4px;
+  height : 42px;
+  transition: border-color 0.3s ease;
+}
+
+.stat-control:hover,
+.stat-control:focus-within {
+  border-color: #ccc;
+}
+
 .stat-condition {
   width: 110px !important;
+  flex: 1;
+  border: none; 
 }
 
 .stat-condition .react-select__control {
   width: 124px !important;
   font-size: 0.9rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #fff;
+  border-radius: 4px 0 0 4px;
+}
+
+.stat-condition .react-select__control:hover {
+  border: 1px solid #6d6d6d !important; 
 }
 
 .stat-condition .react-select__menu {
@@ -59,20 +85,21 @@
 
 .stat-input {
   width: 60px;
-  padding: 10px;
+  padding: 10px 0;
   font-size: 1rem;
-  border-radius: 8px;
   border: 1px solid #6d6d6d;
   background-color: #444c56;
   color: #fff;
   outline: none;
   text-align: center;
   transition: border-color 0.3s ease;
+  border-radius: 0 4px 4px 0;
+  margin-left: 10px;
 }
 
 .stat-input:hover,
 .stat-input:focus {
-  border-color: #ccc;
+  outline: none;
 }
 
 
@@ -94,7 +121,13 @@
   }
 }
 
-@media (max-width: 330px) {
+@media (max-width: 350px) {
+  .stats-grid {
+    margin-right: 70px;
+  }
+}
+
+@media (max-width: 325px) {
   .stats-grid {
     margin-right: 50px;
   }

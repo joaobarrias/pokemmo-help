@@ -69,25 +69,25 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
         {statKeys.map((stat, index) => (
           <div key={stat} className="stat-row">
             <label>{statLabels[index]}</label>
-            {/* Condition dropdown */}
-            <Select
-              value={conditionOptions.find((opt) => opt.value === statsFilters[stat].condition)}
-              onChange={handleSelectChange(stat)}
-              options={conditionOptions}
-              className="stat-condition"
-              classNamePrefix="react-select"
-              isSearchable={false}
-              menuShouldScrollIntoView={false}
-            />
-            {/* Stat value input */}
-            <input
-              type="text"
-              value={statsFilters[stat].value ?? ""}
-              onChange={(e) => handleInputChange(stat, e.target.value)}
-              className="stat-input"
-              id={`stat-${stat}`}
-              onFocus={(e) => e.target.select()} // Selects text on focus
-            />
+            <div className="stat-control">
+              <Select
+                value={conditionOptions.find((opt) => opt.value === statsFilters[stat].condition)}
+                onChange={handleSelectChange(stat)}
+                options={conditionOptions}
+                className="stat-condition"
+                classNamePrefix="react-select"
+                isSearchable={false}
+                menuShouldScrollIntoView={false}
+              />
+              <input
+                type="text"
+                value={statsFilters[stat].value ?? ""}
+                onChange={(e) => handleInputChange(stat, e.target.value)}
+                className="stat-input"
+                id={`stat-${stat}`}
+                onFocus={(e) => e.target.select()}
+              />
+            </div>
           </div>
         ))}
       </div>
