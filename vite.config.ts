@@ -18,7 +18,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       filename: 'sw-v2.js',
-      includeAssets: [],
+      includeAssets: ['index.html'], // Precache index.html
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -44,6 +44,7 @@ export default defineConfig({
             },
           },
         ],
+        navigateFallback: '/index.html', // Handle SPA routing
       },
       injectRegister: 'inline',
     }),
