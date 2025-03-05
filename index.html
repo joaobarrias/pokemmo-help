@@ -9,31 +9,10 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
     <meta name="description" content="PokeMMO Help: Tools for PokeMMO.">
     <title>PokeMMO Help</title>
-    <!-- Run unregister synchronously in head to block rendering -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        console.log('Starting service worker cleanup...');
-        var registrations = navigator.serviceWorker.getRegistrations();
-        if (registrations.length > 0) {
-          registrations.forEach(function(registration) {
-            console.log('Found SW:', registration.active?.scriptURL);
-            registration.unregister();
-            console.log('Unregistered:', registration.scope);
-          });
-          var cacheKeys = caches.keys();
-          cacheKeys.forEach(function(key) {
-            caches.delete(key);
-            console.log('Deleted cache:', key);
-          });
-        } else {
-          console.log('No service workers to unregister');
-        }
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx?v=3"></script>
+    <script type="module" src="/src/main.tsx"></script>
     <script>
       try {
         console.info = new Proxy(console.info, {
@@ -43,24 +22,6 @@
           },
         });
       } catch {}
-    </script>
-    <!-- Async cleanup with reload as fallback -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then((registrations) => {
-          registrations.forEach((registration) => {
-            registration.unregister().then(() => {
-              console.log('Async unregistered:', registration.scope);
-              return caches.keys().then((keys) => {
-                return Promise.all(keys.map((key) => caches.delete(key).then(() => console.log('Async deleted cache:', key))));
-              });
-            });
-          });
-        }).then(() => {
-          console.log('All done, reloading...');
-          window.location.reload(true);
-        }).catch((err) => console.error('Async unregister failed:', err));
-      }
     </script>
   </body>
 </html>
