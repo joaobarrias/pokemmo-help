@@ -9,10 +9,11 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
     <meta name="description" content="PokeMMO Help: Tools for PokeMMO.">
     <title>PokeMMO Help</title>
+    <!-- Cache-busting query param to force fresh fetch -->
+    <script type="module" src="/src/main.tsx?v=3"></script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
     <script>
       try {
         console.info = new Proxy(console.info, {
@@ -22,6 +23,34 @@
           },
         });
       } catch {}
+    </script>
+    <!-- Enhanced script to unregister old service workers and log status -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        console.log('Checking for existing service workers...');
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          if (registrations.length === 0) {
+            console.log('No service workers found to unregister');
+          } else {
+            console.log(`Found ${registrations.length} service worker(s)`);
+            registrations.forEach((registration) => {
+              console.log('Unregistering:', registration.scope, 'Active script:', registration.active?.scriptURL);
+              registration.unregister().then(() => {
+                console.log('Unregistered:', registration.scope);
+                return caches.keys().then((keys) => {
+                  console.log('Found caches:', keys);
+                  return Promise.all(keys.map((key) => caches.delete(key).then(() => console.log('Deleted cache:', key))));
+                }).then(() => {
+                  console.log('All caches cleared, reloading...');
+                  window.location.reload(true); // Hard reload to fetch sw-v3.js
+                });
+              });
+            });
+          }
+        }).catch((err) => console.error('Unregister failed:', err));
+      } else {
+        console.log('Service workers not supported in this browser');
+      }
     </script>
   </body>
 </html>

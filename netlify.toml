@@ -13,16 +13,17 @@
 
 # Headers for static assets and security
 [[headers]]
-  for = "/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files
+  for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files (fixed syntax)
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"  # Cache images for 1 year
+    Cache-Control = "public, max-age=31536000"  # 1 year
 
 [[headers]]
   for = "/*"  # All files
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:5173;"  # CSP for security
+    Cache-Control = "no-store"  # Force fresh fetch for HTML
 
 [[headers]]
-  for = "/sw-v2.js"
+  for = "/sw-v3.js"  # Already updated to sw-v3.js
   [headers.values]
     Cache-Control = "no-store"  # No caching at all
