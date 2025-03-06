@@ -19,9 +19,14 @@
     Cache-Control = "no-store"
 
 [[headers]]
+  for = "/assets/*.js"  # JS files with bundled JSON
+  [headers.values]
+    Cache-Control = "public, max-age=604800"  # 1 week
+
+[[headers]]
   for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files
   [headers.values]
-    Cache-Control = "public, max-age=31536000"  # 1 year
+    Cache-Control = "public, max-age=2592000"  # 1 month (30 days)
 
 [[headers]]
   for = "/sw-v2.js"
