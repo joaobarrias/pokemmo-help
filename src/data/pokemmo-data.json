@@ -11624,7 +11624,8 @@
     },
     "weight": 16.3
   },
-  "basculin": {
+  "basculin-red": {
+    "formattedName": "Basculin Red",
     "capture_rate": 25,
     "id": 550,
     "alpha": "no",
@@ -11642,6 +11643,28 @@
     "sprites": {
       "default": "sprites/default/550.png",
       "icon": "sprites/icon/550.png"
+    },
+    "weight": 18
+  },
+  "basculin-blue": {
+    "formattedName": "Basculin Blue",
+    "capture_rate": 25,
+    "id": 550.1,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 70,
+      "base_attack": 92,
+      "base_defense": 65,
+      "base_special_attack": 80,
+      "base_special_defense": 55,
+      "base_speed": 98
+    },
+    "types": [
+      "water"
+    ],
+    "sprites": {
+      "default": "sprites/default/550.1.png",
+      "icon": "sprites/icon/550.1.png"
     },
     "weight": 18
   },
