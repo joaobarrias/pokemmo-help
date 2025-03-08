@@ -87,9 +87,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (backgroundImage !== "background-images/Pikachu.jpg") {
-      localStorage.setItem("backgroundImage", backgroundImage);
-    }
+    localStorage.setItem("backgroundImage", backgroundImage);
   }, [backgroundImage]);
 
   const handleAddToHomeScreen = () => {
