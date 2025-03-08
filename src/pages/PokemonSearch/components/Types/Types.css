@@ -31,9 +31,9 @@
   align-items: center;
   gap: 5px;
   padding: 8px;
-  background-color: #4646469f;
+  background-color: #3f3f3fc9;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
   user-select: none;
@@ -45,14 +45,14 @@
 }
 
 .type-item.selected {
-  background-color: #ffffffd3; 
+  background-color: #c9c9c9; 
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
 }
 
 .type-icon-grid {
   width: 65px;
   height: auto;
-  filter: brightness(65%);
+  filter: brightness(70%);
   transition: filter 0.2s ease;
   pointer-events: none;
 }

@@ -79,6 +79,7 @@ const BaseStats: React.FC<BaseStatsProps> = ({ statsFilters, setStatsFilters }) 
                 isSearchable={false}
                 menuShouldScrollIntoView={false}
               />
+              <span className="separator">|</span>
               <input
                 type="text"
                 value={statsFilters[stat].value ?? ""}
