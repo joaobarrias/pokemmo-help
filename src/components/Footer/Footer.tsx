@@ -40,15 +40,17 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
           <div className="theme-selector">
             <label htmlFor="theme">Theme:</label>
             <select id="theme" value={selectedTheme} onChange={handleThemeChange}>
-              <option value="background-images/Pikachu.jpg">Pikachu</option>
-              <option value="background-images/PokemonGo.jpg">Pokemon GO</option>
-              <option value="background-images/OldChateau.jpg">Old Chateau</option>
-              <option value="background-images/Darkrai.jpg">Darkrai</option>
-              <option value="background-images/Chandelure.jpg">Chandelure</option>
-              <option value="background-images/Halloween.jpg">Halloween</option>
-              <option value="background-images/Kyogre.jpg">Kyogre</option>
-              <option value="background-images/BlackRayquaza.jpg">Black Rayquaza</option>
-              <option value="background-images/Banette.jpg">Banette</option>
+              <option value="background-images/pikachu.jpg">Pikachu</option>
+              <option value="background-images/pokemon-go.jpg">Pokemon GO</option>
+              <option value="background-images/old-chateau.jpg">Old Chateau</option>
+              <option value="background-images/darkrai.jpg">Darkrai</option>
+              <option value="background-images/chandelure.jpg">Chandelure</option>
+              <option value="background-images/halloween.jpg">Halloween</option>
+              <option value="background-images/kyogre.jpg">Kyogre</option>
+              <option value="background-images/regice.jpg">Regice</option>
+              <option value="background-images/black-rayquaza.jpg">Rayquaza</option>
+              <option value="background-images/cofagrigus.jpg">Cofagrigus</option>
+              <option value="background-images/banette.jpg">Banette</option>
               <option value="/">No Theme</option>
             </select>
           </div>
