@@ -5,8 +5,8 @@ import movesData from "../../../../data/moves-data.json"; // JSON data for move 
 import abilitiesData from "../../../../data/abilities-data.json"; // JSON data for ability details
 
 // Type assertions for JSON data to ensure correct property access
-const typedMovesData = movesData as { [key: string]: { type: string; learned_by_pokemon?: { id: number }[] } };
-const typedAbilitiesData = abilitiesData as { [key: string]: { pokemon_with_ability: { id: number }[] } };
+const typedMovesData = movesData as { [key: string]: { type: string; learned_by_pokemon?: number[] } };
+const typedAbilitiesData = abilitiesData as { [key: string]: { pokemon_with_ability: number[] } };
 
 // Props interface defining filter criteria and state setters
 interface FilterProps {
@@ -49,71 +49,71 @@ const Filter: React.FC<FilterProps> = ({
   // State to track if a search has been performed
   const [hasSearched, setHasSearched] = useState(false);
 
-    // Filters Pokémon based on moves, ability, alpha status, types, and stats
-    const filterPokemon = () => {
-      setSortConfig({ key: "", direction: null }); // Reset sorting on search
-      // Start with all non-unique legendary Pokémon from the dataset
-      let filtered = Object.entries(pokemonData)
-        .filter(([_, data]) => !data.unique_legendary)
-        .map(([name, data]) => ({ name, ...data }));
-  
-      // Filter by valid moves (non-null)
-      const validMoves = moves.filter((m) => m) as string[];
-      if (validMoves.length > 0) {
-        filtered = filtered.filter((pokemon) =>
-          validMoves.every((move) =>
-            typedMovesData[move]?.learned_by_pokemon?.some((p) => p.id === pokemon.id)
-          )
-        );
-      }
-  
-      // Filter by selected ability
-      if (ability) {
-        filtered = filtered.filter((pokemon) =>
-          typedAbilitiesData[ability]?.pokemon_with_ability?.some((p) => p.id === pokemon.id)
-        );
-      }
-  
-      // Filter by Alpha status
-      if (isAlpha) {
-        filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
-      }
-  
-      // Filter by selected types based on type condition
-      if (selectedTypes.length > 0) {
-        filtered = filtered.filter((pokemon) => {
-          const pokemonTypes = pokemon?.types || [];
-          if (typeCondition === "At least one") {
-            return selectedTypes.some((type) => pokemonTypes.includes(type));
-          } else if (typeCondition === "Exactly") {
-            return (
-              selectedTypes.length === pokemonTypes.length &&
-              selectedTypes.every((type) => pokemonTypes.includes(type))
-            );
-          } else if (typeCondition === "Only") {
-            return pokemonTypes.every((type: string) => selectedTypes.includes(type));
-          }
-          return true;
-        });
-      }
-  
-      // Filter by stat conditions
+  // Filters Pokémon based on moves, ability, alpha status, types, and stats
+  const filterPokemon = () => {
+    setSortConfig({ key: "", direction: null }); // Reset sorting on search
+    // Start with all non-unique legendary Pokémon from the dataset
+    let filtered = Object.entries(pokemonData)
+      .filter(([_, data]) => !data.unique_legendary)
+      .map(([name, data]) => ({ name, ...data }));
+
+    // Filter by valid moves (non-null)
+    const validMoves = moves.filter((m) => m) as string[];
+    if (validMoves.length > 0) {
       filtered = filtered.filter((pokemon) =>
-        statKeys.every((stat) => {
-          const filter = statsFilters[stat];
-          if (!filter.value) return true; // Skip if no value set
-          const statValue = pokemon?.stats?.[`base_${stat}`];
-          if (filter.condition === "More than") return statValue > filter.value;
-          if (filter.condition === "Equal to") return statValue === filter.value;
-          if (filter.condition === "Less than") return statValue < filter.value;
-          return true;
-        })
+        validMoves.every((move) =>
+          typedMovesData[move]?.learned_by_pokemon?.includes(pokemon.id)
+        )
       );
-  
-      // Update filtered Pokémon list and mark search as completed
-      setFilteredPokemon(filtered);
-      setHasSearched(true);
-    };
+    }
+
+    // Filter by selected ability
+    if (ability) {
+      filtered = filtered.filter((pokemon) =>
+        typedAbilitiesData[ability]?.pokemon_with_ability?.includes(pokemon.id)
+      );
+    }
+
+    // Filter by Alpha status
+    if (isAlpha) {
+      filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
+    }
+
+    // Filter by selected types based on type condition
+    if (selectedTypes.length > 0) {
+      filtered = filtered.filter((pokemon) => {
+        const pokemonTypes = pokemon?.types || [];
+        if (typeCondition === "At least one") {
+          return selectedTypes.some((type) => pokemonTypes.includes(type));
+        } else if (typeCondition === "Exactly") {
+          return (
+            selectedTypes.length === pokemonTypes.length &&
+            selectedTypes.every((type) => pokemonTypes.includes(type))
+          );
+        } else if (typeCondition === "Only") {
+          return pokemonTypes.every((type: string) => selectedTypes.includes(type));
+        }
+        return true;
+      });
+    }
+
+    // Filter by stat conditions
+    filtered = filtered.filter((pokemon) =>
+      statKeys.every((stat) => {
+        const filter = statsFilters[stat];
+        if (!filter.value) return true; // Skip if no value set
+        const statValue = pokemon?.stats?.[`base_${stat}`];
+        if (filter.condition === "More than") return statValue > filter.value;
+        if (filter.condition === "Equal to") return statValue === filter.value;
+        if (filter.condition === "Less than") return statValue < filter.value;
+        return true;
+      })
+    );
+
+    // Update filtered Pokémon list and mark search as completed
+    setFilteredPokemon(filtered);
+    setHasSearched(true);
+  };
 
   // Handles sorting of table columns (asc, desc, or reset)
   const handleSort = (key: string) => {
@@ -150,7 +150,7 @@ const Filter: React.FC<FilterProps> = ({
   // Retrieves formatted list of abilities for a given Pokémon ID
   const getAbilities = (pokemonId: number) => {
     const abilities = Object.entries(typedAbilitiesData)
-      .filter(([_, data]) => data?.pokemon_with_ability?.some((p) => p.id === pokemonId))
+      .filter(([_, data]) => data?.pokemon_with_ability?.includes(pokemonId))
       .map(([abilityName]) => formatAbilityName(abilityName));
     return abilities.length > 0 ? abilities.join("\n") : "N/A"; // Join with newlines or return N/A
   };
@@ -162,16 +162,7 @@ const Filter: React.FC<FilterProps> = ({
         <button onClick={filterPokemon} className="search-button">Search</button>
         <button
           onClick={() => {
-            // Reset callbacks for Moves and Essentials inputs
-            const resetMovesInputs = () => {
-              const movesComponent = document.querySelector(".moves-section") as any;
-              movesComponent?.resetMovesInputs?.();
-            };
-            const resetAbilityInput = () => {
-              const essentialsComponent = document.querySelector(".essentials-section") as any;
-              essentialsComponent?.resetAbilityInput?.();
-            };
-            resetFilters(resetMovesInputs, resetAbilityInput);
+            resetFilters(() => {}, () => {});
             setHasSearched(false); // Clear search state
             setSortConfig({ key: "", direction: null }); // Reset sorting on reset
           }}
