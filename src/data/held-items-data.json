@@ -1,0 +1,1011 @@
+{
+  "silverpowder": {
+    "held_by": [
+      12,
+      49,
+      267,
+      269,
+      284,
+      414,
+      637,
+      413,
+      413.1,
+      413.2
+    ]
+  },
+  "poison-barb": {
+    "held_by": [
+      15,
+      24,
+      72,
+      73,
+      211,
+      315,
+      331,
+      332,
+      406,
+      407,
+      416,
+      451,
+      452,
+      543,
+      544,
+      545
+    ]
+  },
+  "chilan-berry": {
+    "held_by": [
+      19,
+      20
+    ]
+  },
+  "oran-berry": {
+    "held_by": [
+      20,
+      25,
+      26,
+      39,
+      161,
+      162,
+      172,
+      174,
+      213,
+      216,
+      217,
+      263,
+      264,
+      316,
+      317,
+      400,
+      511,
+      512,
+      513,
+      514,
+      515,
+      516,
+      531
+    ]
+  },
+  "sharp-beak": {
+    "held_by": [
+      21,
+      22,
+      84,
+      85,
+      227
+    ]
+  },
+  "shed-shell": {
+    "held_by": [
+      24,
+      49,
+      267,
+      269,
+      336,
+      559,
+      560
+    ]
+  },
+  "light-ball": {
+    "held_by": [
+      25
+    ]
+  },
+  "grip-claw": {
+    "held_by": [
+      27,
+      28,
+      215,
+      461
+    ]
+  },
+  "quick-claw": {
+    "held_by": [
+      27,
+      28,
+      52,
+      53,
+      215,
+      335,
+      461
+    ]
+  },
+  "soft-sand": {
+    "held_by": [
+      28,
+      50,
+      51,
+      290,
+      328,
+      618
+    ]
+  },
+  "moon-stone": {
+    "held_by": [
+      35,
+      36,
+      39,
+      173,
+      337
+    ]
+  },
+  "comet-shard": {
+    "held_by": [
+      35,
+      36,
+      173,
+      337,
+      338
+    ]
+  },
+  "charcoal": {
+    "held_by": [
+      37,
+      38,
+      324
+    ]
+  },
+  "rawst-berry": {
+    "held_by": [
+      37,
+      38,
+      58,
+      59,
+      126,
+      240,
+      322,
+      323,
+      467,
+      554,
+      555
+    ]
+  },
+  "absorb-bulb": {
+    "held_by": [
+      43,
+      44,
+      45,
+      182,
+      315,
+      407,
+      546,
+      547,
+      548,
+      549
+    ]
+  },
+  "tinymushroom": {
+    "held_by": [
+      46,
+      47,
+      285,
+      286,
+      590,
+      591
+    ]
+  },
+  "big-mushroom": {
+    "held_by": [
+      46,
+      47,
+      285,
+      286,
+      591
+    ]
+  },
+  "energy-root": {
+    "held_by": [
+      50,
+      51,
+      529,
+      530
+    ]
+  },
+  "amulet-coin": {
+    "held_by": [
+      52
+    ]
+  },
+  "payapa-berry": {
+    "held_by": [
+      56,
+      57
+    ]
+  },
+  "king's-rock": {
+    "held_by": [
+      61,
+      62,
+      79,
+      80,
+      186,
+      199,
+      297
+    ]
+  },
+  "twistedspoon": {
+    "held_by": [
+      63,
+      64,
+      65
+    ]
+  },
+  "focus-band": {
+    "held_by": [
+      66,
+      67,
+      68
+    ]
+  },
+  "big-root": {
+    "held_by": [
+      69,
+      70,
+      71,
+      345,
+      346
+    ]
+  },
+  "everstone": {
+    "held_by": [
+      74,
+      75,
+      76,
+      524,
+      525,
+      526
+    ]
+  },
+  "hard-stone": {
+    "held_by": [
+      74,
+      75,
+      76,
+      95,
+      222,
+      299,
+      304,
+      305,
+      306,
+      476,
+      524,
+      525,
+      526,
+      557,
+      558
+    ]
+  },
+  "shuca-berry": {
+    "held_by": [
+      77,
+      78
+    ]
+  },
+  "lagging-tail": {
+    "held_by": [
+      79,
+      80,
+      95,
+      108,
+      208,
+      463
+    ]
+  },
+  "metal-coat": {
+    "held_by": [
+      81,
+      82,
+      95,
+      208,
+      227,
+      374,
+      375,
+      376,
+      436,
+      437,
+      462
+    ]
+  },
+  "magnet": {
+    "held_by": [
+      81,
+      82,
+      299,
+      462,
+      476
+    ]
+  },
+  "stick": {
+    "held_by": [
+      83
+    ]
+  },
+  "aspear-berry": {
+    "held_by": [
+      86,
+      87,
+      124,
+      220,
+      221,
+      238,
+      473,
+      613,
+      614
+    ]
+  },
+  "nevermeltice": {
+    "held_by": [
+      87,
+      221,
+      362,
+      459,
+      460,
+      473,
+      582,
+      583,
+      584,
+      615
+    ]
+  },
+  "nugget": {
+    "held_by": [
+      88,
+      89,
+      568,
+      569
+    ]
+  },
+  "black-sludge": {
+    "held_by": [
+      88,
+      89,
+      453,
+      454,
+      568,
+      569
+    ]
+  },
+  "toxic-orb": {
+    "held_by": [
+      89
+    ]
+  },
+  "pearl": {
+    "held_by": [
+      90,
+      91,
+      366
+    ]
+  },
+  "big-pearl": {
+    "held_by": [
+      90,
+      91,
+      316,
+      317
+    ]
+  },
+  "spell-tag": {
+    "held_by": [
+      93,
+      94,
+      200,
+      353,
+      354,
+      355,
+      356,
+      429,
+      477,
+      562,
+      563
+    ]
+  },
+  "thick-club": {
+    "held_by": [
+      104,
+      105
+    ]
+  },
+  "rare-bone": {
+    "held_by": [
+      104,
+      105,
+      557,
+      558
+    ]
+  },
+  "smoke-ball": {
+    "held_by": [
+      109,
+      110,
+      442
+    ]
+  },
+  "protector": {
+    "held_by": [
+      111,
+      112,
+      464
+    ]
+  },
+  "lucky-egg": {
+    "held_by": [
+      113,
+      242,
+      440
+    ]
+  },
+  "oval-stone": {
+    "held_by": [
+      113,
+      242,
+      440
+    ]
+  },
+  "lucky-punch": {
+    "held_by": [
+      113
+    ]
+  },
+  "dragon-scale": {
+    "held_by": [
+      116,
+      117,
+      147,
+      148,
+      149,
+      230,
+      371,
+      372,
+      373
+    ]
+  },
+  "mystic-water": {
+    "held_by": [
+      118,
+      119,
+      131,
+      351,
+      351.1,
+      351.2,
+      351.3
+    ]
+  },
+  "stardust": {
+    "held_by": [
+      120,
+      121,
+      337,
+      338
+    ]
+  },
+  "star-piece": {
+    "held_by": [
+      120,
+      121
+    ]
+  },
+  "electirizer": {
+    "held_by": [
+      125,
+      239,
+      466
+    ]
+  },
+  "magmarizer": {
+    "held_by": [
+      126,
+      240,
+      467
+    ]
+  },
+  "quick-powder": {
+    "held_by": [
+      132
+    ]
+  },
+  "metal-powder": {
+    "held_by": [
+      132
+    ]
+  },
+  "leftovers": {
+    "held_by": [
+      143,
+      446
+    ]
+  },
+  "chesto-berry": {
+    "held_by": [
+      143,
+      293,
+      294,
+      295,
+      327,
+      572,
+      573
+    ]
+  },
+  "dragon-fang": {
+    "held_by": [
+      148,
+      149,
+      371,
+      372,
+      373,
+      621
+    ]
+  },
+  "yellow-shard": {
+    "held_by": [
+      170,
+      171
+    ]
+  },
+  "deepseascale": {
+    "held_by": [
+      170,
+      171,
+      368,
+      369
+    ]
+  },
+  "shiny-stone": {
+    "held_by": [
+      175,
+      176,
+      315,
+      406,
+      407,
+      572
+    ]
+  },
+  "sun-stone": {
+    "held_by": [
+      191,
+      338
+    ]
+  },
+  "coba-berry": {
+    "held_by": [
+      191,
+      192
+    ]
+  },
+  "wide-lens": {
+    "held_by": [
+      193,
+      302,
+      469
+    ]
+  },
+  "dusk-stone": {
+    "held_by": [
+      198,
+      200,
+      607,
+      608
+    ]
+  },
+  "persim-berry": {
+    "held_by": [
+      203,
+      325,
+      326,
+      336,
+      535,
+      536,
+      537,
+      574,
+      575,
+      576,
+      577,
+      578,
+      579
+    ]
+  },
+  "razor-fang": {
+    "held_by": [
+      207,
+      336,
+      472
+    ]
+  },
+  "berry-juice": {
+    "held_by": [
+      213
+    ]
+  },
+  "razor-claw": {
+    "held_by": [
+      215,
+      335,
+      461
+    ]
+  },
+  "red-shard": {
+    "held_by": [
+      222
+    ]
+  },
+  "passho-berry": {
+    "held_by": [
+      231,
+      232,
+      513,
+      514
+    ]
+  },
+  "up-grade": {
+    "held_by": [
+      233
+    ]
+  },
+  "moomoo-milk": {
+    "held_by": [
+      241
+    ]
+  },
+  "smooth-rock": {
+    "held_by": [
+      246,
+      247,
+      248,
+      449,
+      450
+    ]
+  },
+  "pecha-berry": {
+    "held_by": [
+      261,
+      262,
+      265,
+      300,
+      301,
+      427,
+      428,
+      434,
+      435,
+      535,
+      536,
+      537,
+      543,
+      544,
+      545
+    ]
+  },
+  "potion": {
+    "held_by": [
+      263,
+      264
+    ]
+  },
+  "super-potion": {
+    "held_by": [
+      263,
+      264
+    ]
+  },
+  "brightpowder": {
+    "held_by": [
+      265,
+      313,
+      314
+    ]
+  },
+  "mental-herb": {
+    "held_by": [
+      270,
+      271,
+      272,
+      540,
+      541,
+      542
+    ]
+  },
+  "power-herb": {
+    "held_by": [
+      273,
+      274,
+      275
+    ]
+  },
+  "charti-berry": {
+    "held_by": [
+      276,
+      277
+    ]
+  },
+  "pretty-wing": {
+    "held_by": [
+      278,
+      279
+    ]
+  },
+  "damp-rock": {
+    "held_by": [
+      278,
+      279
+    ]
+  },
+  "lucky-egg-(small)": {
+    "held_by": [
+      279
+    ]
+  },
+  "dawn-stone": {
+    "held_by": [
+      280,
+      281,
+      361
+    ]
+  },
+  "destiny-knot": {
+    "held_by": [
+      280,
+      281,
+      282,
+      475
+    ]
+  },
+  "honey": {
+    "held_by": [
+      283,
+      415
+    ]
+  },
+  "kebia-berry": {
+    "held_by": [
+      285,
+      286
+    ]
+  },
+  "balmmushroom": {
+    "held_by": [
+      285,
+      286,
+      591
+    ]
+  },
+  "black-belt": {
+    "held_by": [
+      296,
+      538,
+      539
+    ]
+  },
+  "float-stone": {
+    "held_by": [
+      299,
+      476,
+      575,
+      576
+    ]
+  },
+  "iron-ball": {
+    "held_by": [
+      303
+    ]
+  },
+  "occa-berry": {
+    "held_by": [
+      303,
+      511,
+      512
+    ]
+  },
+  "cell-battery": {
+    "held_by": [
+      311,
+      312
+    ]
+  },
+  "deepseatooth": {
+    "held_by": [
+      318,
+      319,
+      367,
+      550,
+      550.1
+    ]
+  },
+  "heat-rock": {
+    "held_by": [
+      324
+    ]
+  },
+  "tanga-berry": {
+    "held_by": [
+      325,
+      326
+    ]
+  },
+  "sticky-barb": {
+    "held_by": [
+      331,
+      332,
+      597,
+      598
+    ]
+  },
+  "light-clay": {
+    "held_by": [
+      343,
+      344,
+      622,
+      623
+    ]
+  },
+  "reaper-cloth": {
+    "held_by": [
+      355,
+      356,
+      477
+    ]
+  },
+  "kasib-berry": {
+    "held_by": [
+      355,
+      356,
+      477
+    ]
+  },
+  "cleanse-tag": {
+    "held_by": [
+      358,
+      433
+    ]
+  },
+  "soothe-bell": {
+    "held_by": [
+      358,
+      433
+    ]
+  },
+  "colbur-berry": {
+    "held_by": [
+      358,
+      433
+    ]
+  },
+  "life-orb": {
+    "held_by": [
+      359
+    ]
+  },
+  "babiri-berry": {
+    "held_by": [
+      361,
+      362,
+      478
+    ]
+  },
+  "blue-shard": {
+    "held_by": [
+      366,
+      367,
+      368
+    ]
+  },
+  "green-shard": {
+    "held_by": [
+      369
+    ]
+  },
+  "heart-scale": {
+    "held_by": [
+      370
+    ]
+  },
+  "yache-berry": {
+    "held_by": [
+      396,
+      397,
+      398
+    ]
+  },
+  "metronome": {
+    "held_by": [
+      401,
+      402,
+      441
+    ]
+  },
+  "wacan-berry": {
+    "held_by": [
+      418,
+      419
+    ]
+  },
+  "miracle-seed": {
+    "held_by": [
+      420,
+      421,
+      556
+    ]
+  },
+  "air-balloon": {
+    "held_by": [
+      426
+    ]
+  },
+  "chople-berry": {
+    "held_by": [
+      427,
+      428
+    ]
+  },
+  "cheri-berry": {
+    "held_by": [
+      431,
+      432,
+      522,
+      523,
+      587
+    ]
+  },
+  "haban-berry": {
+    "held_by": [
+      443,
+      444,
+      445
+    ]
+  },
+  "rindo-berry": {
+    "held_by": [
+      456,
+      457,
+      515,
+      516
+    ]
+  },
+  "icy-rock": {
+    "held_by": [
+      459,
+      460,
+      582,
+      583,
+      584
+    ]
+  },
+  "dubious-disc": {
+    "held_by": [
+      474
+    ]
+  },
+  "lum-berry": {
+    "held_by": [
+      492,
+      492.1
+    ]
+  },
+  "expert-belt": {
+    "held_by": [
+      538,
+      539
+    ]
+  },
+  "blackglasses": {
+    "held_by": [
+      551,
+      552,
+      553
+    ]
+  },
+  "silk-scarf": {
+    "held_by": [
+      568,
+      569
+    ]
+  },
+  "big-nugget": {
+    "held_by": [
+      569
+    ]
+  },
+  "flame-orb": {
+    "held_by": [
+      631
+    ]
+  }
+}
