@@ -9,23 +9,23 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) => {
-  const [selectedTheme, setSelectedTheme] = useState("background-images/darkrai.jpg"); // Default to Darkrai
+  const [selectedTheme, setSelectedTheme] = useState("background-images/v2-darkrai.jpg"); // Default to Darkrai
   // State for brightness slider, defaults to 0.8 (Darkrai’s default)
   const [brightness, setLocalBrightness] = useState(0.8);
 
   // Default brightness values for each theme
   const defaultBrightness: { [key: string]: number } = {
-    "background-images/pikachu.jpg": 0.5,
-    "background-images/pokemon-go.jpg": 0.3,
-    "background-images/old-chateau.jpg": 0.4,
-    "background-images/darkrai.jpg": 0.3,
-    "background-images/chandelure.jpg": 0.4,
-    "background-images/halloween.jpg": 0.3,
-    "background-images/kyogre.jpg": 0.4,
-    "background-images/regice.jpg": 0.25,
-    "background-images/black-rayquaza.jpg": 0.25,
-    "background-images/cofagrigus.jpg": 0.15,
-    "background-images/banette.jpg": 0.25,
+    "background-images/v2-pikachu.jpg": 0.5,
+    "background-images/v2-pokemon-go.jpg": 0.3,
+    "background-images/v2-old-chateau.jpg": 0.4,
+    "background-images/v2-darkrai.jpg": 0.3,
+    "background-images/v2-chandelure.jpg": 0.4,
+    "background-images/v2-halloween.jpg": 0.3,
+    "background-images/v2-kyogre.jpg": 0.4,
+    "background-images/v2-regice.jpg": 0.25,
+    "background-images/v2-black-rayquaza.jpg": 0.25,
+    "background-images/v2-cofagrigus.jpg": 0.15,
+    "background-images/v2-banette.jpg": 0.25,
     "/": 1.0, // No Theme
   };
 
@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
     }
     // Retrieve stored brightness or use default for the theme
     const savedBrightness = localStorage.getItem("brightness");
-    const initialBrightness = savedBrightness ? parseFloat(savedBrightness) : defaultBrightness[savedTheme || "background-images/darkrai.jpg"];
+    const initialBrightness = savedBrightness ? parseFloat(savedBrightness) : defaultBrightness[savedTheme || "background-images/v2-darkrai.jpg"];
     setLocalBrightness(initialBrightness);
     setBrightness(initialBrightness);
   }, [setBackgroundImage, setBrightness]);
@@ -79,17 +79,17 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
           <div className="theme-selector">
             <label htmlFor="theme">Theme:</label>
             <select id="theme" value={selectedTheme} onChange={handleThemeChange}>
-              <option value="background-images/pikachu.jpg">Pikachu</option>
-              <option value="background-images/pokemon-go.jpg">Pokemon GO</option>
-              <option value="background-images/old-chateau.jpg">Old Chateau</option>
-              <option value="background-images/darkrai.jpg">Darkrai</option>
-              <option value="background-images/chandelure.jpg">Chandelure</option>
-              <option value="background-images/halloween.jpg">Halloween</option>
-              <option value="background-images/kyogre.jpg">Kyogre</option>
-              <option value="background-images/regice.jpg">Regice</option>
-              <option value="background-images/black-rayquaza.jpg">Rayquaza</option>
-              <option value="background-images/cofagrigus.jpg">Cofagrigus</option>
-              <option value="background-images/banette.jpg">Banette</option>
+              <option value="background-images/v2-pikachu.jpg">Pikachu</option>
+              <option value="background-images/v2-pokemon-go.jpg">Pokemon GO</option>
+              <option value="background-images/v2-old-chateau.jpg">Old Chateau</option>
+              <option value="background-images/v2-darkrai.jpg">Darkrai</option>
+              <option value="background-images/v2-chandelure.jpg">Chandelure</option>
+              <option value="background-images/v2-halloween.jpg">Halloween</option>
+              <option value="background-images/v2-kyogre.jpg">Kyogre</option>
+              <option value="background-images/v2-regice.jpg">Regice</option>
+              <option value="background-images/v2-black-rayquaza.jpg">Rayquaza</option>
+              <option value="background-images/v2-cofagrigus.jpg">Cofagrigus</option>
+              <option value="background-images/v2-banette.jpg">Banette</option>
               <option value="/">No Theme</option>
             </select>
           </div>

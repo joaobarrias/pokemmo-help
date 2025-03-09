@@ -19,7 +19,7 @@ const App: React.FC = () => {
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(() => {
-    return localStorage.getItem("backgroundImage") || "background-images/darkrai.jpg";
+    return localStorage.getItem("backgroundImage") || "background-images/v2-darkrai.jpg";
   });
   const [brightness, setBrightness] = useState(() => {
     return parseFloat(localStorage.getItem("brightness") || "0.8");
