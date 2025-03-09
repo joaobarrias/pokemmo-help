@@ -59,7 +59,7 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-  margin-left: -35px;
+  margin-left: -25px;
 }
 
 .footer-menu li {
@@ -106,26 +106,61 @@
   outline: none;
 }
 
-.footer-bottom-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 10px auto;
-  padding: 0 20px;
-}
-
 .theme-submit-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 5px;
+  position: relative;
+}
+
+/* Brightness Slider Styles */
+.brightness-slider {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brightness-slider label {
+  font-size: 0.8rem;
+}
+
+.brightness-slider input[type="range"] {
+  width: 100px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #6d6d6d;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.brightness-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #ef1c1f;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.brightness-slider input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #ef1c1f;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .submit-art {
   position: absolute;
-  transform: translate(-2%,100%);
+  top: 26px;
+  left: -4px;
   font-size: 0.8rem;
   font-weight: normal;
   color: #fff;
@@ -133,6 +168,7 @@
   padding: 5px 10px;
   border-radius: 5px;
   border-left: 3px solid #ef1c1f;
+  white-space: nowrap;
 }
 
 .footer-bottom {
@@ -150,6 +186,12 @@
   margin-top: 10px;
 }
 
+@media (max-width:1000px) {
+  .footer-bottom {
+    margin-top: 25px;
+  }
+}
+
 @media (max-width: 810px) {
   .footer-row {
     flex-direction: column;
@@ -158,11 +200,18 @@
     gap: 10px;
   }
   .footer-menu {
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 5px;
   }
-  .theme-submit-container {
-    margin-top: 10px;
+
+  .brightness-slider {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 25px;
+  }
+  .footer-bottom {
+    margin-top: 0px;
   }
 }
 
@@ -170,6 +219,12 @@
   .footer-logo {
     font-size: 1.1rem;
     font-weight: 700;
+  }
+}
+
+@media (max-width: 374px) {
+  .footer-menu a {
+    font-size: 0.8rem;
   }
 }
 
@@ -183,6 +238,5 @@
 @media (max-width: 319px) {
   .submit-art {
     font-size: 0.7rem;
-    transform: translate(5%,100%);
   }
 }

@@ -18,10 +18,11 @@ const App: React.FC = () => {
   const [installPromptEvent, setInstallPromptEvent] = useState<Event | null>(null);
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-
   const [backgroundImage, setBackgroundImage] = useState(() => {
-    const savedTheme = localStorage.getItem("backgroundImage");
-    return savedTheme || "background-images/darkrai.jpg";
+    return localStorage.getItem("backgroundImage") || "background-images/darkrai.jpg";
+  });
+  const [brightness, setBrightness] = useState(() => {
+    return parseFloat(localStorage.getItem("brightness") || "0.8");
   });
 
   useEffect(() => {
@@ -151,6 +152,8 @@ const App: React.FC = () => {
         allPokemon={allPokemon}
         backgroundImage={backgroundImage}
         setBackgroundImage={setBackgroundImage}
+        brightness={brightness}
+        setBrightness={setBrightness}
         showInstallPrompt={showInstallPrompt}
         handleAddToHomeScreen={handleAddToHomeScreen}
         dismissInstallPrompt={dismissInstallPrompt}
@@ -165,14 +168,19 @@ const AppWithRouter: React.FC<{
   allPokemon: { name: string; id: number }[];
   backgroundImage: string;
   setBackgroundImage: (image: string) => void;
+  brightness: number;
+  setBrightness: (value: number) => void;
   showInstallPrompt: boolean;
   handleAddToHomeScreen: () => void;
   dismissInstallPrompt: () => void;
   isExiting: boolean;
-}> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage, showInstallPrompt, handleAddToHomeScreen, dismissInstallPrompt, isExiting }) => {
+}> = ({ filteredPokemon, allPokemon, backgroundImage, setBackgroundImage, brightness, setBrightness, showInstallPrompt, handleAddToHomeScreen, dismissInstallPrompt, isExiting }) => {
   return (
     <div className="app-container">
-      <div className="background-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+      <div
+        className="background-fixed"
+        style={{ backgroundImage: `url(${backgroundImage})`, filter: `brightness(${brightness})` }} // Apply brightness
+      ></div>
       <NavBar />
       <div className="content">
         <Routes>
@@ -182,7 +190,7 @@ const AppWithRouter: React.FC<{
           <Route path="/type-coverage" element={<TypeCoverage allPokemon={allPokemon} />} />
         </Routes>
       </div>
-      <Footer setBackgroundImage={setBackgroundImage} />
+      <Footer setBackgroundImage={setBackgroundImage} setBrightness={setBrightness} />
       {showInstallPrompt && (
         <div className={`install-prompt ${isExiting ? 'exiting' : ''}`}>
           <button className="add-button" onClick={handleAddToHomeScreen}>Add</button>

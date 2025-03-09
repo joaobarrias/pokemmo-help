@@ -1,13 +1,33 @@
+// Footer.tsx
 import { FaDiscord, FaGithub } from "react-icons/fa"; // Import icons
 import React, { useEffect, useState } from "react";
 import "./Footer.css"; // Import CSS
 
 interface FooterProps {
   setBackgroundImage: (image: string) => void;
+  setBrightness: (value: number) => void; // New prop for brightness control
 }
 
-const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
+const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) => {
   const [selectedTheme, setSelectedTheme] = useState("background-images/darkrai.jpg"); // Default to Darkrai
+  // State for brightness slider, defaults to 0.8 (Darkrai’s default)
+  const [brightness, setLocalBrightness] = useState(0.8);
+
+  // Default brightness values for each theme
+  const defaultBrightness: { [key: string]: number } = {
+    "background-images/pikachu.jpg": 0.5,
+    "background-images/pokemon-go.jpg": 0.3,
+    "background-images/old-chateau.jpg": 0.4,
+    "background-images/darkrai.jpg": 0.3,
+    "background-images/chandelure.jpg": 0.4,
+    "background-images/halloween.jpg": 0.3,
+    "background-images/kyogre.jpg": 0.4,
+    "background-images/regice.jpg": 0.25,
+    "background-images/black-rayquaza.jpg": 0.25,
+    "background-images/cofagrigus.jpg": 0.15,
+    "background-images/banette.jpg": 0.25,
+    "/": 1.0, // No Theme
+  };
 
   useEffect(() => {
     // Retrieve the stored background image from localStorage (if any)
@@ -16,15 +36,34 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
       setBackgroundImage(savedTheme); // Set background image
       setSelectedTheme(savedTheme); // Set selected option in the dropdown
     }
-  }, [setBackgroundImage]);
+    // Retrieve stored brightness or use default for the theme
+    const savedBrightness = localStorage.getItem("brightness");
+    const initialBrightness = savedBrightness ? parseFloat(savedBrightness) : defaultBrightness[savedTheme || "background-images/darkrai.jpg"];
+    setLocalBrightness(initialBrightness);
+    setBrightness(initialBrightness);
+  }, [setBackgroundImage, setBrightness]);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTheme = event.target.value;
     setBackgroundImage(selectedTheme); // Update the background
     setSelectedTheme(selectedTheme); // Update the dropdown selection
 
-    // Store the selected theme in localStorage
+    // Set default brightness for the selected theme
+    const newBrightness = defaultBrightness[selectedTheme];
+    setLocalBrightness(newBrightness);
+    setBrightness(newBrightness);
+
+    // Store the selected theme and brightness in localStorage
     localStorage.setItem('backgroundImage', selectedTheme);
+    localStorage.setItem("brightness", newBrightness.toString());
+  };
+
+  // Handle brightness slider changes
+  const handleBrightnessChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newBrightness = parseFloat(event.target.value);
+    setLocalBrightness(newBrightness);
+    setBrightness(newBrightness);
+    localStorage.setItem("brightness", newBrightness.toString());
   };
 
   return (
@@ -55,6 +94,19 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
             </select>
           </div>
           <p className="submit-art">🎨 Submit your art on Discord</p>
+          {/* Brightness Slider */}
+          <div className="brightness-slider">
+            <label htmlFor="brightness">Brightness:</label>
+            <input
+              type="range"
+              id="brightness"
+              min="0"
+              max="1"
+              step="0.01"
+              value={brightness}
+              onChange={handleBrightnessChange}
+            />
+          </div>
         </div>
 
         {/* Footer Menu */}
@@ -79,7 +131,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage }) => {
 
       {/* Footer Bottom */}
       <div className="footer-bottom">
-        <p>&copy; 2025 PokeMMO Help. All Rights Reserved.</p>
+        <p>© 2025 PokeMMO Help. All Rights Reserved.</p>
         <p className="footer-disclaimer">Disclaimer: This is a fan-made website for PokeMMO and is not affiliated with, endorsed, or sponsored by PokeMMO. 
           All Pokémon-related assets and trademarks belong to Nintendo, Game Freak, and The Pokémon Company. 
           This project is ongoing, and I welcome feedback and feature suggestions!</p>
