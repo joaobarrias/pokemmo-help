@@ -274,7 +274,7 @@
   .egg-group-section {
     flex-direction: column;
     align-items: center;
-    border: solid 1px #8f8f8f4d;
+    border: solid 1px #5c5c5cc5;
     border-radius: 8px;
     width: 160px;
     padding: 10px;

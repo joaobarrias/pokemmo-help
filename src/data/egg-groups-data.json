@@ -774,7 +774,8 @@
   "egg_group_13": {
     "name": "ditto",
     "pokemon_species": [
-      132
+      132,
+      321
     ]
   },
   "egg_group_14": {
