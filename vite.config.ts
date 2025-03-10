@@ -6,20 +6,15 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     react(),
-    {
-      name: 'disable-csp-for-dev',
-      configureServer(server) {
-        server.middlewares.use((_req, res, next) => {
-          res.removeHeader('Content-Security-Policy');
-          next();
-        });
-      },
-    },
     VitePWA({
       registerType: 'autoUpdate',
-      srcDir: 'src', 
+      srcDir: 'src',
       filename: 'sw-v2.js',
-      includeAssets: ['index.html'],
+      workbox: {
+        globPatterns: ['**/*.{html,js,css}'],
+        globDirectory: 'dist',
+        navigateFallback: '/index.html',
+      },
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -33,17 +28,6 @@ export default defineConfig({
           { src: 'icons/logo512.png', sizes: '512x512', type: 'image/png' },
         ],
       },
-      workbox: {
-        globPatterns: ['index.html', '**/*.{html}'], // Precache HTML only (JS/CSS handled in sw-v2.js)
-        globDirectory: 'dist',
-        cleanupOutdatedCaches: true,
-        navigateFallback: '/index.html',
-      },
-      injectRegister: 'inline',
     }),
   ],
-  build: { sourcemap: true },
-  server: {
-    hmr: { clientPort: 5173, protocol: 'ws' },
-  },
 });

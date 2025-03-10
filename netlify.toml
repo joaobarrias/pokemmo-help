@@ -1,34 +1,24 @@
 # netlify.toml
-
-# Build settings
 [build]
-  command = "npm run build"  # Build command for Vite
-  publish = "dist"           # Output directory for Vite
+  command = "npm run build"
+  publish = "dist"
 
-# Redirects for SPA routing
 [[redirects]]
-  from = "/*"                # Match all paths
-  to = "/index.html"         # Serve index.html for client-side routing
-  status = 200               # Use 200 status (rewrite, not redirect)
-
-# Headers for static assets and security
-[[headers]]
-  for = "/*"  # All files
-  [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:5173;"
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
-  for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files
+  for = "/assets/**/*.(js|css)"
   [headers.values]
-    Cache-Control = "public, max-age=2592000"  # 1 month (30 days)
+    Cache-Control = "public, max-age=604800"  # 1 week
 
-# JS/CSS: Cache for 1 week
 [[headers]]
-  for = "/assets/**/*.(js|css)"   # JS and CSS files
+  for = "/assets/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"
   [headers.values]
-    Cache-Control = "public, max-age=604800"   # 1 week (7 days)
+    Cache-Control = "public, max-age=2592000"  # 1 month
 
 [[headers]]
   for = "/sw-v2.js"
   [headers.values]
-    Cache-Control = "no-store"  # No caching for service worker
+    Cache-Control = "no-store"
