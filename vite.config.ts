@@ -17,7 +17,8 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw-v2.js',
+      srcDir: 'src', // Point to the directory with sw-v2.js
+      filename: 'sw-v2.js', // Use the custom service worker
       includeAssets: ['index.html'], // Precache index.html
       manifest: {
         name: 'PokeMMO Help',
@@ -33,25 +34,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/index.html'], // Explicitly precache index.html
-        runtimeCaching: [
-          {
-            urlPattern: /\.(?:png|jpg|jpeg)$/, // Cache images on demand
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'pokemon-images',
-              expiration: { maxAgeSeconds: 2592000 }, // 1 month
-            }
-          },
-          {
-            urlPattern: /^https:\/\/pokemmo\.help\/assets\/.*\.js$/, // JS with JSON
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'json-data',
-              expiration: { maxAgeSeconds: 604800 }, // 1 week
-            },
-          },
-        ],
+        globPatterns: ['**/index.html'], // Precache index.html
         navigateFallback: '/index.html', // Handle SPA routing
       },
       injectRegister: 'inline',

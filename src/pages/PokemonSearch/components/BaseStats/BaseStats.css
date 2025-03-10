@@ -43,7 +43,7 @@
 
 .stat-condition::after {
   content: "|";
-  color: #ffffff;
+  color: #d6d6d6;
   font-size: 2rem;
   position: absolute;
   right: -20px;
