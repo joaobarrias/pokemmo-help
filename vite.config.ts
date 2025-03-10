@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -16,8 +17,8 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw.js',
-      includeAssets: [],
+      filename: 'sw-v2.js',
+      includeAssets: ['index.html'], // Precache index.html
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -32,8 +33,26 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/index.html'],
-        navigateFallback: '/index.html',
+        globPatterns: ['**/index.html'], // Explicitly precache index.html
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:png|jpg|jpeg)$/, // Cache images on demand
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'pokemon-images',
+              expiration: { maxAgeSeconds: 2592000 }, // 1 month
+            }
+          },
+          {
+            urlPattern: /^https:\/\/pokemmo\.help\/assets\/.*\.js$/, // JS with JSON
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'json-data',
+              expiration: { maxAgeSeconds: 604800 }, // 1 week
+            },
+          },
+        ],
+        navigateFallback: '/index.html', // Handle SPA routing
       },
       injectRegister: 'inline',
     }),

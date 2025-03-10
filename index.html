@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -23,32 +23,18 @@
         });
       } catch {}
     </script>
-    <!-- Register sw.js without looping -->
+    <!-- Clear only old sw.js -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.getRegistrations().then(registrations => {
-            const swJsActive = registrations.some(reg => reg.active?.scriptURL.includes('sw.js'));
-            const oldRegistrations = registrations.filter(reg => !reg.active?.scriptURL.includes('sw.js'));
-
-            if (oldRegistrations.length > 0) {
-              // Unregister old SWs (e.g., sw-v2.js) and clear caches once
-              Promise.all(oldRegistrations.map(reg => reg.unregister()))
-                .then(() => caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))))
-                .then(() => {
-                  if (!swJsActive) {
-                    navigator.serviceWorker.register('/sw.js')
-                      .then(reg => console.log('Service Worker Registered:', reg))
-                      .catch(err => console.error('Registration Failed:', err));
-                  }
-                });
-            } else if (!swJsActive) {
-              // No sw.js active, register it
-              navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('Service Worker Registered:', reg))
-                .catch(err => console.error('Registration Failed:', err));
-            }
-          });
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          const oldRegistrations = registrations.filter(reg => reg.active?.scriptURL.includes('sw.js') && !reg.active?.scriptURL.includes('sw-v2.js'));
+          if (oldRegistrations.length > 0) {
+            Promise.all(oldRegistrations.map(reg => reg.unregister()))
+              .then(() => {
+                caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key))))
+                  .then(() => window.location.reload(true));
+              });
+          }
         });
       }
     </script>
