@@ -1,4 +1,3 @@
-// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -6,19 +5,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     react(),
-    {
-      name: 'disable-csp-for-dev',
-      configureServer(server) {
-        server.middlewares.use((_req, res, next) => {
-          res.removeHeader('Content-Security-Policy');
-          next();
-        });
-      },
-    },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw-v2.js',
-      includeAssets: ['index.html'], // Precache index.html
+      filename: 'sw.js', // Register service worker as sw.js
+      includeAssets: ['index.html', 'assets/**/*'], // Cache the HTML and assets
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -33,27 +23,37 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Precache build assets (JS, CSS, HTML, etc.)
-        globPatterns: ['**/*.{js,css,html}'], 
-        cleanupOutdatedCaches: true,
+        globPatterns: ['**/*.{html,js,css,png,jpg,jpeg,svg}'], // Cache HTML, JS, CSS, and images
         runtimeCaching: [
           {
-            // Cache images on demand
-            urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+            urlPattern: /\.js$/, // Cache JS files on demand
             handler: 'CacheFirst',
             options: {
-              cacheName: 'pokemon-images',
-              expiration: { maxAgeSeconds: 2592000 }, // 1 month
+              cacheName: 'js-cache',
+              expiration: { maxAgeSeconds: 0 }, // Don't keep in cache after changes
+            },
+          },
+          {
+            urlPattern: /\.(?:png|jpg|jpeg|svg)$/, // Cache images
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+              expiration: { maxAgeSeconds: 2592000 }, // Cache for 30 days
             },
           },
         ],
-        navigateFallback: '/index.html',
+        navigateFallback: '/index.html', // Handle SPA routing
       },
-      injectRegister: 'inline',
+      injectRegister: 'inline', // Inline service worker registration
     }),
   ],
-  build: { sourcemap: true },
+  build: {
+    sourcemap: true,
+  },
   server: {
-    hmr: { clientPort: 5173, protocol: 'ws' },
+    hmr: {
+      clientPort: 5173,
+      protocol: 'ws',
+    },
   },
 });
