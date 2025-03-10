@@ -36,11 +36,11 @@ export default defineConfig({
         globPatterns: ['**/index.html'], // Precache index.html
         runtimeCaching: [
           {
-            urlPattern: /\.(?:png|jpg|jpeg)$/, // Cache images on demand
+            urlPattern: /\.(?:png|jpg|jpeg|gif|webp|svg|ico)$/, // Cache images on demand
             handler: 'CacheFirst',
             options: {
               cacheName: 'pokemon-images',
-              expiration: { maxAgeSeconds: 2592000 }, // 1 month
+              expiration: { maxAgeSeconds: 2592000 }, // Cache images for 1 month
             },
           },
           {
@@ -48,10 +48,11 @@ export default defineConfig({
             handler: 'StaleWhileRevalidate', // Serve cached, update in background
             options: {
               cacheName: 'assets',
-              expiration: { maxEntries: 50 }, // Limit cache size
+              expiration: { maxEntries: 50, maxAgeSeconds: 604800}, // Limit cache size and cache JS/CSS for 1 week
             },
           },
         ],
+        cleanupOutdatedCaches: true,
         navigateFallback: '/index.html', // Handle SPA routing
       },
       injectRegister: 'inline',
