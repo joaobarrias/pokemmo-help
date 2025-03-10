@@ -22,6 +22,12 @@
   [headers.values]
     Cache-Control = "public, max-age=2592000"  # 1 month (30 days)
 
+# JS/CSS: Cache for 1 week
+[[headers]]
+  for = "/assets/**/*.(js|css)"   # JS and CSS files
+  [headers.values]
+    Cache-Control = "public, max-age=604800"   # 1 week (7 days)
+
 [[headers]]
   for = "/sw-v2.js"
   [headers.values]

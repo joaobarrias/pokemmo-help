@@ -17,8 +17,9 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
+      srcDir: 'src', 
       filename: 'sw-v2.js',
-      includeAssets: ['index.html'], // Precache index.html
+      includeAssets: ['index.html'],
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -33,27 +34,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{html,js,css}'], // Precache HTML, JS, and CSS files
-        runtimeCaching: [
-          {
-            urlPattern: /\.(?:png|jpg|jpeg|gif|webp|svg|ico)$/, // Cache images on demand
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'pokemon-images',
-              expiration: { maxAgeSeconds: 2592000 }, // Cache images for 1 month
-            },
-          },
-          {
-            urlPattern: /^https:\/\/pokemmo\.help\/assets\/.*\.(js|css)$/, // JS and CSS files
-            handler: 'StaleWhileRevalidate', // Serve cached, update in background
-            options: {
-              cacheName: 'assets',
-              expiration: { maxEntries: 50, maxAgeSeconds: 604800}, // Limit cache size and cache JS/CSS for 1 week
-            },
-          },
-        ],
+        globPatterns: ['**/*.{html}'], // Precache HTML only (JS/CSS handled in sw-v2.js)
         cleanupOutdatedCaches: true,
-        navigateFallback: '/index.html', // Handle SPA routing
+        navigateFallback: '/index.html',
       },
       injectRegister: 'inline',
     }),
