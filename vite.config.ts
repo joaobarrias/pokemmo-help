@@ -1,4 +1,3 @@
-// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -17,9 +16,12 @@ export default defineConfig({
     },
     VitePWA({
       registerType: 'autoUpdate',
-      srcDir: 'src', // Point to the directory with sw-v2.js
-      filename: 'sw-v2.js', // Use the custom service worker
-      includeAssets: ['index.html'], // Precache index.html
+      filename: 'sw.js', // Served from public/
+      devOptions: {
+        enabled: true, // Enable SW in dev mode
+        type: 'classic', // Use classic SW (not module)
+      },
+      includeAssets: [], // Don’t precache index.html
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -34,8 +36,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/index.html'], // Precache index.html
-        navigateFallback: '/index.html', // Handle SPA routing
+        globPatterns: ['**/index.html'],
+        navigateFallback: '/index.html',
       },
       injectRegister: 'inline',
     }),
