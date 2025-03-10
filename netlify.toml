@@ -18,11 +18,6 @@
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:5173;"
 
 [[headers]]
-  for = "/assets/*.(js|css)"  # JS and CSS files
-  [headers.values]
-    Cache-Control = "public, max-age=604800, immutable"  # 1 week, immutable since hashes change
-
-[[headers]]
   for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files
   [headers.values]
     Cache-Control = "public, max-age=2592000"  # 1 month (30 days)
