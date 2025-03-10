@@ -67,11 +67,14 @@
     .status-icon {
         transform: translate(135px, -295px);
     }
+    .status-label {
+        margin-top: -10px;
+    }
 }
 
 @media (max-width: 406px) {
     .status-label {
-        margin-top: 15px;
+        margin-top: 10px;
     }
     .status-icon {
         transform: translate(27px, -296px);

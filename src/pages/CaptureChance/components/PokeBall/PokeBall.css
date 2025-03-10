@@ -60,6 +60,7 @@
         width: 100%;
         max-width: 600px;
         margin-left: 0px;
+        margin-top: -10px;
     }
     .pokeball-label {
         text-align: center;
@@ -68,6 +69,13 @@
 
 @media (max-width: 600px) {
     .pokeball-section {
-        max-width: 400px;
+        max-width: 350px;
+    }   
+}
+
+@media (max-width: 450px) {
+    
+    .pokeball-description {
+        font-size: 0.7rem;
     }   
 }

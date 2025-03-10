@@ -127,6 +127,9 @@
     .hp-bar-container {
       left: 5px;
     }
+    .hp-section  {
+        margin-top: -10px;
+    }
 }
 
 @media (max-width: 590px) {

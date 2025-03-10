@@ -243,6 +243,12 @@
       }
 }
 
+@media (max-width:818px) {
+    .third-container{
+      margin-top: -10px;
+    }
+ }
+
 @media (max-width: 600px) {
     .capture-calc-container {
         display: flex;
