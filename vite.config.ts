@@ -34,7 +34,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{html}'], // Precache HTML only (JS/CSS handled in sw-v2.js)
+        globPatterns: ['index.html', '**/*.{html}'], // Precache HTML only (JS/CSS handled in sw-v2.js)
+        globDirectory: 'dist',
         cleanupOutdatedCaches: true,
         navigateFallback: '/index.html',
       },
