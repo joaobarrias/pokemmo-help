@@ -119,33 +119,35 @@ const Moves: React.FC<MovesProps> = ({ moves, setMoves, setResetMovesCallback })
   return (
     <div className="moves-section">
       <h2>Moves</h2>
-      {moves.map((_, index) => (
-        <div key={index} className="move-input-wrapper">
-          <input
-            ref={(el) => (inputRefs.current[index] = el)}
-            type="text"
-            value={displayMoves[index] || ""}
-            onChange={(e) => handleInputChange(index, e.target.value)}
-            onBlur={() => handleBlur(index)}
-            placeholder={`Enter move ${index + 1}`}
-            className="move-input"
-            onFocus={(e) => e.target.select()} // Selects text on focus
-          />
-          {suggestions[index] && (
-            <ul ref={(el) => (suggestionRefs.current[index] = el)} className="move-suggestions">
-              {suggestions[index]!.map((suggestion) => (
-                <li
-                  key={suggestion}
-                  onClick={() => handleSuggestionClick(index, suggestion)}
-                  style={{ color: getMoveColor(suggestion) }}
-                >
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+      <div className="moves-grid">
+        {moves.map((_, index) => (
+          <div key={index} className="move-input-wrapper">
+            <input
+              ref={(el) => (inputRefs.current[index] = el)}
+              type="text"
+              value={displayMoves[index] || ""}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              onBlur={() => handleBlur(index)}
+              placeholder={`Enter move ${index + 1}`}
+              className="move-input"
+              onFocus={(e) => e.target.select()} // Selects text on focus
+            />
+            {suggestions[index] && (
+              <ul ref={(el) => (suggestionRefs.current[index] = el)} className="move-suggestions">
+                {suggestions[index]!.map((suggestion) => (
+                  <li
+                    key={suggestion}
+                    onClick={() => handleSuggestionClick(index, suggestion)}
+                    style={{ color: getMoveColor(suggestion) }}
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

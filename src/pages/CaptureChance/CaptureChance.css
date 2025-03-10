@@ -294,32 +294,38 @@
         font-size: 0.8rem;
     }
     .formula {
-      font-size: 0.7rem;
+        font-size: 0.7rem;
     }
-  
+
     .formula-section h4 {
-      font-size: 0.8rem;
+        font-size: 0.8rem;
     }
-  
+
     .parentheses {
-      font-size: 1.1em;
+        font-size: 1.1em;
     }
     .note {
         font-size: 0.7rem;
     }
+}
+
+@media (max-width: 406px) {
+    .capture-page .header h1{
+        margin-bottom:-30px;
+    }
   }
 
-  @media (max-width: 350px) {
+@media (max-width: 350px) {
     .formula {
-      font-size: 0.65rem;
+        font-size: 0.65rem;
     }
     .capture-page .header h1 {
         font-size: 1.4rem;
     }
     .parentheses {
-      font-size: 0.9em;
+        font-size: 0.9em;
     }
     .note {
         font-size: 0.6rem;
     }
-  }
+}

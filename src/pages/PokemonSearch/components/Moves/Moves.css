@@ -10,6 +10,15 @@
   text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
 }
 
+.moves-grid {
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+  width: 100%;
+  max-width: 440px;
+}
+
 .move-input-wrapper {
   position: relative;
   display: flex;
@@ -34,7 +43,7 @@
   border-color: #ccc;
 }
 
-.move-input::placeholder{
+.move-input::placeholder {
   color: #c9c9c9c5;
 }
 
@@ -61,4 +70,14 @@
 
 .move-suggestions li:hover {
   background-color: rgba(0, 123, 255, 0.1);
+}
+
+@media (max-width: 750px) {
+  .moves-grid {
+    grid-template-columns: 1fr; /* Stack vertically on smaller screens */
+    max-width: 200px;
+  }
+  .moves-section{
+    margin-bottom: 20px;
+  }
 }

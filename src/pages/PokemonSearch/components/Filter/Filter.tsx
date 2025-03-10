@@ -3,18 +3,25 @@ import React, { useState } from "react";
 import "./Filter.css"; // CSS 
 import movesData from "../../../../data/moves-data.json"; // JSON data for move details
 import abilitiesData from "../../../../data/abilities-data.json"; // JSON data for ability details
+import heldItemsData from "../../../../data/held-items-data.json"; // JSON data for held items
+import eggGroupsData from "../../../../data/egg-groups-data.json"; // JSON data for egg groups
 
 // Type assertions for JSON data to ensure correct property access
 const typedMovesData = movesData as { [key: string]: { type: string; learned_by_pokemon?: number[] } };
 const typedAbilitiesData = abilitiesData as { [key: string]: { pokemon_with_ability: number[] } };
+const typedHeldItemsData = heldItemsData as { [key: string]: { held_by: number[] } };
+const typedEggGroupsData = eggGroupsData as { [key: string]: { name: string; pokemon_species: number[] } };
 
 // Props interface defining filter criteria and state setters
 interface FilterProps {
   moves: (string | null)[];
   ability: string | null;
+  heldItem: string | null;
   isAlpha: boolean;
   selectedTypes: string[];
   typeCondition: "At least one" | "Exactly" | "Only";
+  eggGroupCondition: "Any of" | "Both of";
+  eggGroups: (string | null)[];
   statsFilters: {
     hp: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
     attack: { condition: "More than" | "Equal to" | "Less than"; value: number | null };
@@ -26,15 +33,18 @@ interface FilterProps {
   setFilteredPokemon: React.Dispatch<React.SetStateAction<any[]>>;
   filteredPokemon: any[];
   pokemonData: { [key: string]: any };
-  resetFilters: (resetMovesInputs: () => void, resetAbilityInput: () => void) => void; // Callback to reset all filters
+  resetFilters: () => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
   moves,
   ability,
+  heldItem,
   isAlpha,
   selectedTypes,
   typeCondition,
+  eggGroupCondition,
+  eggGroups,
   statsFilters,
   setFilteredPokemon,
   filteredPokemon,
@@ -49,7 +59,7 @@ const Filter: React.FC<FilterProps> = ({
   // State to track if a search has been performed
   const [hasSearched, setHasSearched] = useState(false);
 
-  // Filters Pokémon based on moves, ability, alpha status, types, and stats
+  // Filters Pokémon based on moves, ability, held item, alpha status, types, egg groups, and stats
   const filterPokemon = () => {
     setSortConfig({ key: "", direction: null }); // Reset sorting on search
     // Start with all non-unique legendary Pokémon from the dataset
@@ -74,6 +84,13 @@ const Filter: React.FC<FilterProps> = ({
       );
     }
 
+    // Filter by selected held item
+    if (heldItem) {
+      filtered = filtered.filter((pokemon) =>
+        typedHeldItemsData[heldItem]?.held_by?.includes(pokemon.id)
+      );
+    }
+
     // Filter by Alpha status
     if (isAlpha) {
       filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
@@ -92,6 +109,22 @@ const Filter: React.FC<FilterProps> = ({
           );
         } else if (typeCondition === "Only") {
           return pokemonTypes.every((type: string) => selectedTypes.includes(type));
+        }
+        return true;
+      });
+    }
+
+    // Filter by egg groups based on condition
+    const validEggGroups = eggGroups.filter((g) => g) as string[];
+    if (validEggGroups.length > 0) {
+      filtered = filtered.filter((pokemon) => {
+        const pokemonEggGroups = Object.values(typedEggGroupsData)
+          .filter((group) => group.pokemon_species.includes(pokemon.id))
+          .map((group) => group.name);
+        if (eggGroupCondition === "Any of") {
+          return validEggGroups.some((group) => pokemonEggGroups.includes(group));
+        } else if (eggGroupCondition === "Both of") {
+          return validEggGroups.every((group) => pokemonEggGroups.includes(group));
         }
         return true;
       });
@@ -155,6 +188,14 @@ const Filter: React.FC<FilterProps> = ({
     return abilities.length > 0 ? abilities.join("\n") : "N/A"; // Join with newlines or return N/A
   };
 
+  // Retrieves formatted list of egg groups for a given Pokémon ID
+  const getEggGroups = (pokemonId: number) => {
+    const eggGroups = Object.values(typedEggGroupsData)
+      .filter((group) => group.pokemon_species.includes(pokemonId))
+      .map((group) => formatAbilityName(group.name));
+    return eggGroups.length > 0 ? eggGroups.join(" | ") : "N/A";
+  };
+
   return (
     <div className="filter-section">
       {/* Search and reset buttons */}
@@ -162,7 +203,7 @@ const Filter: React.FC<FilterProps> = ({
         <button onClick={filterPokemon} className="search-button">Search</button>
         <button
           onClick={() => {
-            resetFilters(() => {}, () => {});
+            resetFilters();
             setHasSearched(false); // Clear search state
             setSortConfig({ key: "", direction: null }); // Reset sorting on reset
           }}
@@ -196,7 +237,14 @@ const Filter: React.FC<FilterProps> = ({
             {filteredPokemon.map((pokemon) => (
               <tr key={pokemon.id}>
                 <td><img src={`/sprites/icon/${pokemon.id}.png`} alt={pokemon.name} className="pokemon-icon" /></td>
-                <td>{pokemon.formattedName || pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).replace("-", " ")}</td>
+                <td>
+                  <div className="name-egg-group">
+                    <span className="pokemon-table-name">
+                      {pokemon.formattedName || pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1).replace("-", " ")}
+                    </span>
+                    <span className="egg-group">{getEggGroups(pokemon.id)}</span>
+                  </div>
+                </td>
                 <td>
                   {pokemon.types?.map((type: string) => (
                     <img key={type} src={`/types/icons/${type}.png`} alt={type} className="type-icon" />

@@ -13,12 +13,18 @@ const PokemonSearch: React.FC = () => {
   const [moves, setMoves] = useState<(string | null)[]>([null, null, null, null]);
   // State for selected ability
   const [ability, setAbility] = useState<string | null>(null);
+  // State for selected held item
+  const [heldItem, setHeldItem] = useState<string | null>(null);
   // State for alpha filter toggle
   const [isAlpha, setIsAlpha] = useState(false);
   // State for selected types
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   // State for type condition mode
   const [typeCondition, setTypeCondition] = useState<"At least one" | "Exactly" | "Only">("At least one");
+  // State for egg group condition ("Any of" or "Both of")
+  const [eggGroupCondition, setEggGroupCondition] = useState<"Any of" | "Both of">("Any of");
+  // State for selected egg groups (up to 2)
+  const [eggGroups, setEggGroups] = useState<(string | null)[]>([null, null]);
   // State for stat filters
   const [statsFilters, setStatsFilters] = useState({
     hp: { condition: "More than" as "More than" | "Equal to" | "Less than", value: null as number | null },
@@ -34,14 +40,18 @@ const PokemonSearch: React.FC = () => {
   // State for reset callbacks from Moves and Essentials
   const [resetMovesCallback, setResetMovesCallback] = useState<(() => void) | null>(null);
   const [resetAbilityCallback, setResetAbilityCallback] = useState<(() => void) | null>(null);
+  const [resetHeldItemCallback, setResetHeldItemCallback] = useState<(() => void) | null>(null);
+  const [resetEggGroupsCallback, setResetEggGroupsCallback] = useState<(() => void) | null>(null);
 
   // Resets all filters and input displays
   const resetFilters = () => {
-    setMoves([null, null, null, null]);
-    setAbility(null);
-    setIsAlpha(false);
-    setSelectedTypes([]);
-    setTypeCondition("At least one");
+    setMoves([null, null, null, null]); // Reset Moves inputs
+    setAbility(null); // Reset Ability input
+    setHeldItem(null); // Reset Held Item input
+    setIsAlpha(false); // Reset Alpha state
+    setSelectedTypes([]); // Reset types
+    setTypeCondition("At least one"); // Reset types condition
+    setEggGroupCondition("Any of"); // Reset egg group condition
     setStatsFilters({
       hp: { condition: "More than", value: null },
       attack: { condition: "More than", value: null },
@@ -49,10 +59,12 @@ const PokemonSearch: React.FC = () => {
       special_attack: { condition: "More than", value: null },
       special_defense: { condition: "More than", value: null },
       speed: { condition: "More than", value: null },
-    });
+    }); // Reset Base Stats inputs
     setFilteredPokemon([]);
     resetMovesCallback?.(); // Reset Moves inputs
-    resetAbilityCallback?.(); // Reset Essentials input
+    resetAbilityCallback?.(); // Reset Essentials ability input
+    resetHeldItemCallback?.(); // Reset Essentials held item input
+    resetEggGroupsCallback?.(); // Reset Essentials egg group inputs
   };
 
   return (
@@ -71,9 +83,17 @@ const PokemonSearch: React.FC = () => {
               <Essentials
                 ability={ability}
                 setAbility={setAbility}
+                heldItem={heldItem}
+                setHeldItem={setHeldItem}
                 isAlpha={isAlpha}
                 setIsAlpha={setIsAlpha}
+                eggGroupCondition={eggGroupCondition}
+                setEggGroupCondition={setEggGroupCondition}
+                eggGroups={eggGroups}
+                setEggGroups={setEggGroups}
                 setResetAbilityCallback={setResetAbilityCallback}
+                setResetHeldItemCallback={setResetHeldItemCallback}
+                setResetEggGroupsCallback={setResetEggGroupsCallback}
               />
             </div>
             <div className="base-stats">
@@ -94,9 +114,12 @@ const PokemonSearch: React.FC = () => {
             <Filter
               moves={moves}
               ability={ability}
+              heldItem={heldItem}
               isAlpha={isAlpha}
               selectedTypes={selectedTypes}
               typeCondition={typeCondition}
+              eggGroupCondition={eggGroupCondition}
+              eggGroups={eggGroups}
               statsFilters={statsFilters}
               setFilteredPokemon={setFilteredPokemon}
               filteredPokemon={filteredPokemon}

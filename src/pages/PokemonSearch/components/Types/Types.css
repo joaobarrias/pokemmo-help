@@ -81,13 +81,12 @@
   transform: translateY(0px) !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 750px) {
   .type-icon-grid {
     width: 60px;
   }
-  
   .types-section {
-    margin-top: -10px;
+    margin-bottom: 20px;
   }
 }
 

@@ -1,3 +1,4 @@
+// Component: Types.tsx
 import React from "react";
 import "./Types.css"; // CSS
 import Select from "react-select";

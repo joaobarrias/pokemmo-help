@@ -3,27 +3,50 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center;
   margin-top: 20px;
+  width: 100%;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .essentials-section h2 {
   text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+  text-align: center;
+}
+
+.essentials-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: flex-start;
+  width: 100%;
+  margin-left: 9px;
 }
 
 .essentials-row {
+  width: 100%;
+}
+
+.ability-alpha-row {
   display: flex;
   align-items: center;
   gap: 20px;
-  justify-content: center;
-  margin-left: 87px;
+  justify-content: flex-start;
 }
 
-.ability-input-wrapper {
+.held-item-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.ability-input-wrapper,
+.held-item-input-wrapper {
   position: relative;
 }
 
-.ability-input {
+.ability-input,
+.held-item-input {
   width: 200px;
   padding: 10px;
   font-size: 1rem;
@@ -36,15 +59,19 @@
 }
 
 .ability-input:hover,
-.ability-input:focus {
+.ability-input:focus,
+.held-item-input:hover,
+.held-item-input:focus {
   border-color: #ccc;
 }
 
-.ability-input::placeholder{
+.ability-input::placeholder,
+.held-item-input::placeholder {
   color: #c9c9c9c5;
 }
 
-.ability-suggestions {
+.ability-suggestions,
+.held-item-suggestions {
   position: absolute;
   top: 100%;
   left: 0;
@@ -58,13 +85,15 @@
   z-index: 10;
 }
 
-.ability-suggestions li {
+.ability-suggestions li,
+.held-item-suggestions li {
   padding: 10px;
   cursor: pointer;
   text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
 }
 
-.ability-suggestions li:hover {
+.ability-suggestions li:hover,
+.held-item-suggestions li:hover {
   background-color: rgba(0, 123, 255, 0.1);
 }
 
@@ -93,7 +122,6 @@
   transition: border-color 0.3s ease;
 }
 
-/* Custom checkmark */
 .alpha-label input:checked::before {
   content: "\2713";
   display: block;
@@ -110,11 +138,160 @@
   border: 1px solid #ccc;
 }
 
-@media (max-width: 768px) {
-  .essentials-row {
+.egg-group-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  margin-left: -85px;
+  justify-content: flex-start;
+}
+
+.egg-group-label {
+  color: #fff;
+  font-size: 1rem;
+  text-shadow: 2px 2px 2px #000, -1px -1px 2px #000, 1px -1px 2px #000, -2px 2px 2px #000;
+  white-space: nowrap;
+  width: 80px;
+}
+
+.egg-group-selects {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.egg-group-condition-select .react-select__control {
+  width: 95px !important;
+  font-size: 0.9rem;
+  background: #444c56;
+  border: 1px solid #6d6d6d;
+  border-radius: 8px;
+  color: #fff;
+  min-height: 28px;
+}
+
+.egg-group-selects .react-select__indicator-separator {
+  display: none;
+}
+
+.egg-group-select .react-select__control {
+  width: 135px !important;
+  font-size: 0.9rem;
+  background: #444c56;
+  border: 1px solid #6d6d6d;
+  border-radius: 8px;
+  color: #fff;
+  min-height: 28px;
+}
+
+.egg-group-condition-select .react-select__menu,
+.egg-group-select .react-select__menu {
+  top: calc(80%) !important;
+  background: #333;
+  border: 1px solid #ccc;
+}
+
+.egg-group-condition-select .react-select__menu {
+  width: 95px !important;
+}
+
+.egg-group-select .react-select__menu {
+  width: 135px !important;
+}
+
+.egg-group-condition-select .react-select__option,
+.egg-group-select .react-select__option {
+  padding: 6px 10px !important;
+  font-size: 0.9rem;
+  min-height: 28px;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.egg-group-condition-select .react-select__option:hover,
+.egg-group-select .react-select__option:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.egg-group-condition-select .react-select__single-value,
+.egg-group-select .react-select__single-value {
+  color: #fff;
+  transform: translateY(0px) !important;
+  padding: 0 8px 0 0;
+  max-width: none;
+  width: calc(100% - 20px);
+  overflow: visible;
+  text-overflow: unset;
+  white-space: nowrap;
+}
+
+.egg-group-condition-select .react-select__value-container,
+.egg-group-select .react-select__value-container {
+  padding: 2px 8px 2px 6px;
+}
+
+@media (max-width: 1441px) {
+  .essentials-content {
     margin-left: 0px;
   }
-  .essentials-section {
-    margin-top: 30px;
+}
+
+@media (max-width: 850px) {
+  .egg-group-section {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .egg-group-label {
+    margin-bottom: 5px;
+  }
+  .ability-alpha-row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (max-width: 750px) {
+  .essentials-section{
+    margin-bottom: 20px;
+  }
+  .alpha-label input {
+    width: 20px;
+    height: 20px;
+  }
+  .alpha-label{
+    font-size: 1rem !important;
+  }
+  .alpha-label input:checked::before {
+    font-size: 16px;
+  }
+  .essentials-content {
+    align-self: center;
+    margin-left: 0;
+  }
+  .egg-group-section {
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px #acacac88;
+    border-radius: 8px;
+    width: 180px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  .egg-group-selects {
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .ability-alpha-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .held-item-row {
+    justify-content: center;
   }
 }

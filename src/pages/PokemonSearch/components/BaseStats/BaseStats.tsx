@@ -22,7 +22,7 @@ interface BaseStatsProps {
   setStatsFilters: React.Dispatch<React.SetStateAction<BaseStatsProps["statsFilters"]>>;
 }
 
-const statLabels = ["HP :", "Attack :", "Defense :", "Special Attack :", "Special Defense :", "Speed :"] as const;
+const statLabels = ["HP", "Attack", "Defense", "Special Attack", "Special Defense", "Speed"] as const;
 const statKeys = ["hp", "attack", "defense", "special_attack", "special_defense", "speed"] as const;
 const conditionOptions = [
   { value: "More than", label: "More than" },
