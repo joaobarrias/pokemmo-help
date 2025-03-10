@@ -33,26 +33,21 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/index.html'], // Explicitly precache index.html
+        // Precache build assets (JS, CSS, HTML, etc.)
+        globPatterns: ['**/*.{js,css,html}'], 
+        cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
-            urlPattern: /\.(?:png|jpg|jpeg)$/, // Cache images on demand
+            // Cache images on demand
+            urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'pokemon-images',
               expiration: { maxAgeSeconds: 2592000 }, // 1 month
-            }
-          },
-          {
-            urlPattern: /^https:\/\/pokemmo\.help\/assets\/.*\.js$/, // JS with JSON
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'json-data',
-              expiration: { maxAgeSeconds: 604800 }, // 1 week
             },
           },
         ],
-        navigateFallback: '/index.html', // Handle SPA routing
+        navigateFallback: '/index.html',
       },
       injectRegister: 'inline',
     }),
