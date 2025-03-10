@@ -48,7 +48,7 @@ export default defineConfig({
             handler: 'StaleWhileRevalidate', // Serve cached, update in background
             options: {
               cacheName: 'assets',
-              expiration: { maxEntries: 2 }, // Limit cache size
+              expiration: { maxEntries: 50 }, // Limit cache size
             },
           },
         ],
