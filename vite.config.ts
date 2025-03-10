@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -8,20 +9,23 @@ export default defineConfig({
     {
       name: 'disable-csp-for-dev',
       configureServer(server) {
-        server.middlewares.use((_req, res, next) => {
+        server.middlewares.use((req, res, next) => {
           res.removeHeader('Content-Security-Policy');
+          if (req.url === '/sw.js') {
+            res.setHeader('Content-Type', 'application/javascript');
+          }
           next();
         });
       },
     },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw.js', // Served from public/
+      filename: 'sw.js',
       devOptions: {
-        enabled: true, // Enable SW in dev mode
-        type: 'classic', // Use classic SW (not module)
+        enabled: true,
+        type: 'classic',
       },
-      includeAssets: [], // Don’t precache index.html
+      includeAssets: [],
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',

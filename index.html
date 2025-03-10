@@ -23,25 +23,32 @@
         });
       } catch {}
     </script>
-    <!-- Clear old service workers and caches, register sw.js -->
+    <!-- Register sw.js without looping -->
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(registrations => {
-          const oldRegistrations = registrations.filter(reg => !reg.active?.scriptURL.includes('sw.js'));
-          if (oldRegistrations.length > 0) {
-            Promise.all(oldRegistrations.map(reg => reg.unregister()))
-              .then(() => {
-                caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key))))
-                  .then(() => {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.getRegistrations().then(registrations => {
+            const swJsActive = registrations.some(reg => reg.active?.scriptURL.includes('sw.js'));
+            const oldRegistrations = registrations.filter(reg => !reg.active?.scriptURL.includes('sw.js'));
+
+            if (oldRegistrations.length > 0) {
+              // Unregister old SWs (e.g., sw-v2.js) and clear caches once
+              Promise.all(oldRegistrations.map(reg => reg.unregister()))
+                .then(() => caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))))
+                .then(() => {
+                  if (!swJsActive) {
                     navigator.serviceWorker.register('/sw.js')
-                      .then(() => window.location.reload(true))
-                      .catch(err => console.error('Registration failed:', err));
-                  });
-              });
-          } else if (!registrations.some(reg => reg.active?.scriptURL.includes('sw.js'))) {
-            navigator.serviceWorker.register('/sw.js')
-              .catch(err => console.error('Registration failed:', err));
-          }
+                      .then(reg => console.log('Service Worker Registered:', reg))
+                      .catch(err => console.error('Registration Failed:', err));
+                  }
+                });
+            } else if (!swJsActive) {
+              // No sw.js active, register it
+              navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('Service Worker Registered:', reg))
+                .catch(err => console.error('Registration Failed:', err));
+            }
+          });
         });
       }
     </script>
