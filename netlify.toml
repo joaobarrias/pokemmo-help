@@ -1,4 +1,4 @@
-# Netlify configuration file
+# netlify.toml
 
 # Build settings
 [build]
@@ -16,6 +16,12 @@
   for = "/*"  # All files
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:5173;"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/assets/*.(js|css)"  # JS and CSS files
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"  # 1 week, immutable since hashes change
 
 [[headers]]
   for = "/**/*.(jpg|jpeg|png|gif|webp|svg|ico)"  # Image files
@@ -25,4 +31,4 @@
 [[headers]]
   for = "/sw-v2.js"
   [headers.values]
-    Cache-Control = "no-store"  # No caching at all
+    Cache-Control = "no-store"  # No caching for service worker

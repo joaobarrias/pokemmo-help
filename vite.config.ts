@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -5,10 +6,19 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     react(),
+    {
+      name: 'disable-csp-for-dev',
+      configureServer(server) {
+        server.middlewares.use((_req, res, next) => {
+          res.removeHeader('Content-Security-Policy');
+          next();
+        });
+      },
+    },
     VitePWA({
       registerType: 'autoUpdate',
-      filename: 'sw.js', // Register service worker as sw.js
-      includeAssets: ['index.html', 'assets/**/*'], // Cache the HTML and assets
+      filename: 'sw-v2.js',
+      includeAssets: ['index.html'], // Precache index.html
       manifest: {
         name: 'PokeMMO Help',
         short_name: 'PokeMMO Help',
@@ -17,43 +27,38 @@ export default defineConfig({
         background_color: '#2c2f38',
         theme_color: '#23262f',
         icons: [
-          { src: "icons/logo192.png", sizes: "192x192", type: "image/png" },
-          { src: "icons/logo.png", sizes: "320x320", type: "image/png" },
-          { src: "icons/logo512.png", sizes: "512x512", type: "image/png" },
+          { src: 'icons/logo192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icons/logo.png', sizes: '320x320', type: 'image/png' },
+          { src: 'icons/logo512.png', sizes: '512x512', type: 'image/png' },
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{html,js,css,png,jpg,jpeg,svg}'], // Cache HTML, JS, CSS, and images
+        globPatterns: ['**/index.html'], // Precache index.html
         runtimeCaching: [
           {
-            urlPattern: /\.js$/, // Cache JS files on demand
+            urlPattern: /\.(?:png|jpg|jpeg)$/, // Cache images on demand
             handler: 'CacheFirst',
             options: {
-              cacheName: 'js-cache',
-              expiration: { maxAgeSeconds: 0 }, // Don't keep in cache after changes
+              cacheName: 'pokemon-images',
+              expiration: { maxAgeSeconds: 2592000 }, // 1 month
             },
           },
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg)$/, // Cache images
-            handler: 'CacheFirst',
+            urlPattern: /^https:\/\/pokemmo\.help\/assets\/.*\.(js|css)$/, // JS and CSS files
+            handler: 'StaleWhileRevalidate', // Serve cached, update in background
             options: {
-              cacheName: 'image-cache',
-              expiration: { maxAgeSeconds: 2592000 }, // Cache for 30 days
+              cacheName: 'assets',
+              expiration: { maxEntries: 2 }, // Limit cache size
             },
           },
         ],
         navigateFallback: '/index.html', // Handle SPA routing
       },
-      injectRegister: 'inline', // Inline service worker registration
+      injectRegister: 'inline',
     }),
   ],
-  build: {
-    sourcemap: true,
-  },
+  build: { sourcemap: true },
   server: {
-    hmr: {
-      clientPort: 5173,
-      protocol: 'ws',
-    },
+    hmr: { clientPort: 5173, protocol: 'ws' },
   },
 });
