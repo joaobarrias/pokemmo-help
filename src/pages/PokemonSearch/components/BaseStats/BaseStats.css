@@ -12,9 +12,10 @@
 }
 
 .stats-grid {
+  margin-top: 5px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 9.5px;
+  gap: 8.5px;
 }
 
 .stat-row {

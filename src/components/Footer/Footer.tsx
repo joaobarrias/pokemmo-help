@@ -20,12 +20,14 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
     "background-images/v3-old-chateau.jpg": 0.4,
     "background-images/v3-darkrai.jpg": 0.3,
     "background-images/v3-chandelure.jpg": 0.4,
-    "background-images/v3-halloween.jpg": 0.3,
     "background-images/v3-kyogre.jpg": 0.4,
     "background-images/v3-regice.jpg": 0.25,
     "background-images/v3-black-rayquaza.jpg": 0.25,
     "background-images/v3-cofagrigus.jpg": 0.15,
     "background-images/v3-banette.jpg": 0.25,
+    "background-images/eeveelutions.jpg": 0.17,
+    "background-images/eevee.png": 0.23,
+    "background-images/eevee-v2.jpg": 0.23,
     "/": 1.0, // No Theme
   };
 
@@ -84,12 +86,14 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
               <option value="background-images/v3-old-chateau.jpg">Old Chateau</option>
               <option value="background-images/v3-darkrai.jpg">Darkrai</option>
               <option value="background-images/v3-chandelure.jpg">Chandelure</option>
-              <option value="background-images/v3-halloween.jpg">Halloween</option>
               <option value="background-images/v3-kyogre.jpg">Kyogre</option>
               <option value="background-images/v3-regice.jpg">Regice</option>
               <option value="background-images/v3-black-rayquaza.jpg">Rayquaza</option>
               <option value="background-images/v3-cofagrigus.jpg">Cofagrigus</option>
               <option value="background-images/v3-banette.jpg">Banette</option>
+              <option value="background-images/eeveelutions.jpg">Eeveelutions</option>
+              <option value="background-images/eevee.png">Eevee</option>
+              <option value="background-images/eevee-v2.jpg">Eevee (2)</option>
               <option value="/">No Theme</option>
             </select>
           </div>

@@ -71,11 +71,7 @@
     .pokeball-section {
         max-width: 350px;
     }   
-}
-
-@media (max-width: 450px) {
-    
     .pokeball-description {
         font-size: 0.7rem;
-    }   
+    } 
 }
