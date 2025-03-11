@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
 
   // Default brightness values for each theme
   const defaultBrightness: { [key: string]: number } = {
-    "background-images/v3-pikachu.jpg": 0.5,
+    "background-images/v4-pikachu.png": 0.5,
     "background-images/v3-pokemon-go.jpg": 0.3,
     "background-images/v3-old-chateau.jpg": 0.4,
     "background-images/v3-darkrai.jpg": 0.3,
@@ -81,7 +81,7 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
           <div className="theme-selector">
             <label htmlFor="theme">Theme:</label>
             <select id="theme" value={selectedTheme} onChange={handleThemeChange}>
-              <option value="background-images/v3-pikachu.jpg">Pikachu</option>
+              <option value="background-images/v4-pikachu.png">Pikachu</option>
               <option value="background-images/v3-pokemon-go.jpg">Pokemon GO</option>
               <option value="background-images/v3-old-chateau.jpg">Old Chateau</option>
               <option value="background-images/v3-darkrai.jpg">Darkrai</option>
