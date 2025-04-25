@@ -17,7 +17,7 @@ interface FilterProps {
   moves: (string | null)[];
   ability: string | null;
   heldItem: string | null;
-  isAlpha: boolean;
+  alphaFilter: boolean | null;
   selectedTypes: string[];
   typeCondition: "At least one" | "Exactly" | "Only";
   eggGroupCondition: "Any of" | "Both of";
@@ -40,7 +40,7 @@ const Filter: React.FC<FilterProps> = ({
   moves,
   ability,
   heldItem,
-  isAlpha,
+  alphaFilter,
   selectedTypes,
   typeCondition,
   eggGroupCondition,
@@ -92,8 +92,10 @@ const Filter: React.FC<FilterProps> = ({
     }
 
     // Filter by Alpha status
-    if (isAlpha) {
-      filtered = filtered.filter((pokemon) => pokemon?.alpha === "yes");
+    if (alphaFilter !== null) {
+      filtered = filtered.filter((pokemon) =>
+        alphaFilter ? pokemon?.alpha === "yes" : pokemon?.alpha !== "yes"
+      );
     }
 
     // Filter by selected types based on type condition

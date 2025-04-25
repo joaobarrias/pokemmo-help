@@ -16,7 +16,7 @@ const PokemonSearch: React.FC = () => {
   // State for selected held item
   const [heldItem, setHeldItem] = useState<string | null>(null);
   // State for alpha filter toggle
-  const [isAlpha, setIsAlpha] = useState(false);
+  const [alphaFilter, setAlphaFilter] = useState<boolean | null>(null);
   // State for selected types
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   // State for type condition mode
@@ -48,7 +48,7 @@ const PokemonSearch: React.FC = () => {
     setMoves([null, null, null, null]); // Reset Moves inputs
     setAbility(null); // Reset Ability input
     setHeldItem(null); // Reset Held Item input
-    setIsAlpha(false); // Reset Alpha state
+    setAlphaFilter(null); // Reset Alpha state
     setSelectedTypes([]); // Reset types
     setTypeCondition("At least one"); // Reset types condition
     setEggGroupCondition("Any of"); // Reset egg group condition
@@ -85,8 +85,8 @@ const PokemonSearch: React.FC = () => {
                 setAbility={setAbility}
                 heldItem={heldItem}
                 setHeldItem={setHeldItem}
-                isAlpha={isAlpha}
-                setIsAlpha={setIsAlpha}
+                alphaFilter={alphaFilter}
+                setAlphaFilter={setAlphaFilter}
                 eggGroupCondition={eggGroupCondition}
                 setEggGroupCondition={setEggGroupCondition}
                 eggGroups={eggGroups}
@@ -115,7 +115,7 @@ const PokemonSearch: React.FC = () => {
               moves={moves}
               ability={ability}
               heldItem={heldItem}
-              isAlpha={isAlpha}
+              alphaFilter={alphaFilter}
               selectedTypes={selectedTypes}
               typeCondition={typeCondition}
               eggGroupCondition={eggGroupCondition}

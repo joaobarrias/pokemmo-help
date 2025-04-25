@@ -12,8 +12,8 @@ interface EssentialsProps {
   setAbility: React.Dispatch<React.SetStateAction<string | null>>;
   heldItem: string | null;
   setHeldItem: React.Dispatch<React.SetStateAction<string | null>>;
-  isAlpha: boolean;
-  setIsAlpha: React.Dispatch<React.SetStateAction<boolean>>;
+  alphaFilter: boolean | null;
+  setAlphaFilter: React.Dispatch<React.SetStateAction<boolean | null>>;
   eggGroupCondition: "Any of" | "Both of";
   setEggGroupCondition: React.Dispatch<React.SetStateAction<"Any of" | "Both of">>;
   eggGroups: (string | null)[];
@@ -28,8 +28,8 @@ const Essentials: React.FC<EssentialsProps> = ({
   setAbility,
   heldItem,
   setHeldItem,
-  isAlpha,
-  setIsAlpha,
+  alphaFilter,
+  setAlphaFilter,
   eggGroupCondition,
   setEggGroupCondition,
   eggGroups,
@@ -204,6 +204,17 @@ const Essentials: React.FC<EssentialsProps> = ({
       if (activeElement) activeElement.blur(); // Blur to reset border
   };
 
+  // Cycle through alpha states: null -> true -> false -> null
+  const handleAlphaClick = () => {
+    if (alphaFilter === null) {
+      setAlphaFilter(true); // Include Alphas
+    } else if (alphaFilter === true) {
+      setAlphaFilter(false); // Exclude Alphas
+    } else {
+      setAlphaFilter(null); // No filter
+    }
+  };
+
   return (
     <div className="essentials-section">
       <h2>Essentials</h2>
@@ -264,10 +275,11 @@ const Essentials: React.FC<EssentialsProps> = ({
             )}
           </div>
           <label className="alpha-label">
-            <input
+          <input
               type="checkbox"
-              checked={isAlpha}
-              onChange={() => setIsAlpha(!isAlpha)}
+              checked={alphaFilter !== null}
+              className={alphaFilter === false ? "alpha-exclude" : ""}
+              onChange={handleAlphaClick}
             />
             Alpha
           </label>
