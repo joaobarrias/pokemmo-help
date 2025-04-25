@@ -3202,28 +3202,6 @@
     },
     "weight": 210
   },
-  "mewtwo": {
-    "capture_rate": 0,
-    "unique_legendary": true,
-    "id": 150,
-    "alpha": "no",
-    "stats": {
-      "base_hp": 106,
-      "base_attack": 110,
-      "base_defense": 90,
-      "base_special_attack": 154,
-      "base_special_defense": 90,
-      "base_speed": 130
-    },
-    "types": [
-      "psychic"
-    ],
-    "sprites": {
-      "default": "sprites/default/150.png",
-      "icon": "sprites/icon/150.png"
-    },
-    "weight": 122
-  },
   "mew": {
     "capture_rate": 0,
     "unique_legendary": true,
@@ -3245,6 +3223,28 @@
       "icon": "sprites/icon/151.png"
     },
     "weight": 4
+  },
+  "mewtwo": {
+    "capture_rate": 0,
+    "unique_legendary": true,
+    "id": 150,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 106,
+      "base_attack": 110,
+      "base_defense": 90,
+      "base_special_attack": 154,
+      "base_special_defense": 90,
+      "base_speed": 130
+    },
+    "types": [
+      "psychic"
+    ],
+    "sprites": {
+      "default": "sprites/default/150.png",
+      "icon": "sprites/icon/150.png"
+    },
+    "weight": 122
   },
   "chikorita": {
     "capture_rate": 45,
@@ -3744,7 +3744,7 @@
   "togepi": {
     "capture_rate": 190,
     "id": 175,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 35,
       "base_attack": 20,
@@ -3766,7 +3766,7 @@
   "togetic": {
     "capture_rate": 75,
     "id": 176,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 55,
       "base_attack": 40,
@@ -7700,7 +7700,7 @@
   "chimecho": {
     "capture_rate": 45,
     "id": 358,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 75,
       "base_attack": 50,
@@ -7721,7 +7721,7 @@
   "absol": {
     "capture_rate": 30,
     "id": 359,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 65,
       "base_attack": 130,
@@ -9186,7 +9186,7 @@
   "chingling": {
     "capture_rate": 120,
     "id": 433,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 45,
       "base_attack": 30,
@@ -9945,7 +9945,7 @@
   "togekiss": {
     "capture_rate": 30,
     "id": 468,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 85,
       "base_attack": 50,
@@ -12399,7 +12399,7 @@
   "deerling": {
     "capture_rate": 190,
     "id": 585,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 60,
       "base_attack": 60,
@@ -12421,7 +12421,7 @@
   "sawsbuck": {
     "capture_rate": 75,
     "id": 586,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 80,
       "base_attack": 100,
@@ -12617,7 +12617,7 @@
   "joltik": {
     "capture_rate": 190,
     "id": 595,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 50,
       "base_attack": 47,
@@ -12639,7 +12639,7 @@
   "galvantula": {
     "capture_rate": 75,
     "id": 596,
-    "alpha": "no",
+    "alpha": "yes",
     "stats": {
       "base_hp": 70,
       "base_attack": 77,

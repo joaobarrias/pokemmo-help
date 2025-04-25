@@ -4,35 +4,10 @@
     "description": "Always 1x",
     "imagePath": "./pokeballs/poke-ball.png"
   },
-  "Great Ball": {
-    "multiplier": 1.5,
-    "description": "Always 1.5x",
-    "imagePath": "./pokeballs/great-ball.png"
-  },
-  "Ultra Ball": {
-    "multiplier": 2,
-    "description": "Always 2x",
-    "imagePath": "./pokeballs/ultra-ball.png"
-  },
-  "Master Ball": {
-    "multiplier": 255,
-    "description": "Guaranteed catch",
-    "imagePath": "./pokeballs/master-ball.png"
-  },
-  "Safari Ball": {
-    "multiplier": 1.5,
-    "description": "Always 1.5x",
-    "imagePath": "./pokeballs/safari-ball.png"
-  },
-  "Net Ball": {
-    "multiplier": "pokemonTypes => pokemonTypes.includes('water') || pokemonTypes.includes('bug') ? 3.5 : 1",
-    "description": "3.5x if used on a Water- or Bug-type Pokémon, 1x otherwise",
-    "imagePath": "./pokeballs/net-ball.png"
-  },
-  "Nest Ball": {
-    "multiplier": "level => Math.max(1, Math.min(4, (7 - (0.2 * (level - 1)))))",
-    "description": "The catch rate decreases as the target Pokémon's level increases, from 4x at level 1 to 1x at level 31 and beyond",
-    "imagePath": "./pokeballs/nest-ball.png"
+  "Quick Ball": {
+    "multiplier": "isFirstTurn => isFirstTurn ? 5 : 1",
+    "description": "5x if used on the first turn of a battle, 1x otherwise",
+    "imagePath": "./pokeballs/quick-ball.png"
   },
   "Repeat Ball": {
     "multiplier": "caughtCount => Math.min(2.5, 1 + 0.1 * caughtCount)",
@@ -43,6 +18,31 @@
     "multiplier": "turns => Math.min(4, 1 + 0.3 * turns - 0.3)",
     "description": "(1 + (turn count * 0.30))x maximum 4x at 11 turns, minimum 1.0x on first turn",
     "imagePath": "./pokeballs/timer-ball.png"
+  },
+  "Dusk Ball": {
+    "multiplier": "isCaveOrNight => (isCaveOrNight) ? 2.5 : 1",
+    "description": "2.5x if used in a cave or at night, 1x otherwise",
+    "imagePath": "./pokeballs/dusk-ball.png"
+  },
+  "Great Ball": {
+    "multiplier": 1.5,
+    "description": "Always 1.5x",
+    "imagePath": "./pokeballs/great-ball.png"
+  },
+  "Ultra Ball": {
+    "multiplier": 2,
+    "description": "Always 2x",
+    "imagePath": "./pokeballs/ultra-ball.png"
+  },
+  "Net Ball": {
+    "multiplier": "pokemonTypes => pokemonTypes.includes('water') || pokemonTypes.includes('bug') ? 3.5 : 1",
+    "description": "3.5x if used on a Water- or Bug-type Pokémon, 1x otherwise",
+    "imagePath": "./pokeballs/net-ball.png"
+  },
+  "Nest Ball": {
+    "multiplier": "level => Math.max(1, Math.min(4, (7 - (0.2 * (level - 1)))))",
+    "description": "The catch rate decreases as the target Pokémon's level increases, from 4x at level 1 to 1x at level 31 and beyond",
+    "imagePath": "./pokeballs/nest-ball.png"
   },
   "Luxury Ball": {
     "multiplier": 1,
@@ -59,20 +59,10 @@
     "description": "3.5x if used on a water-dwelling Pokémon, 1x otherwise",
     "imagePath": "./pokeballs/dive-ball.png"
   },
-  "Dusk Ball": {
-    "multiplier": "isCaveOrNight => (isCaveOrNight) ? 2.5 : 1",
-    "description": "2.5x if used in a cave or at night, 1x otherwise",
-    "imagePath": "./pokeballs/dusk-ball.png"
-  },
   "Heal Ball": {
     "multiplier": 1.25,
     "description": "1.25x Fully restores a caught Pokémon's HP, PP, and status",
     "imagePath": "./pokeballs/heal-ball.png"
-  },
-  "Quick Ball": {
-    "multiplier": "isFirstTurn => isFirstTurn ? 5 : 1",
-    "description": "5x if used on the first turn of a battle, 1x otherwise",
-    "imagePath": "./pokeballs/quick-ball.png"
   },
   "Cherish Ball": {
     "multiplier": 2,
@@ -118,5 +108,15 @@
     "multiplier": "isMoonStoneEvolution => isMoonStoneEvolution ? 4 : 1",
     "description": "4x if used on Pokémon that evolves using a Moon Stone, 1x otherwise",
     "imagePath": "./pokeballs/moon-ball.png"
+  },
+  "Safari Ball": {
+    "multiplier": 1.5,
+    "description": "Always 1.5x",
+    "imagePath": "./pokeballs/safari-ball.png"
+  },
+  "Master Ball": {
+    "multiplier": 255,
+    "description": "Guaranteed catch",
+    "imagePath": "./pokeballs/master-ball.png"
   }
 }

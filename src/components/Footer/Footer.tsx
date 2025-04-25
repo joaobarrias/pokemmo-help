@@ -25,9 +25,9 @@ const Footer: React.FC<FooterProps> = ({ setBackgroundImage, setBrightness }) =>
     "background-images/v3-black-rayquaza.jpg": 0.25,
     "background-images/v3-cofagrigus.jpg": 0.15,
     "background-images/v3-banette.jpg": 0.25,
-    "background-images/eeveelutions.jpg": 0.17,
-    "background-images/eevee.png": 0.23,
-    "background-images/eevee-v2.jpg": 0.23,
+    "background-images/eeveelutions.jpg": 0.15,
+    "background-images/eevee.png": 0.2,
+    "background-images/eevee-v2.jpg": 0.2,
     "/": 1.0, // No Theme
   };
 
