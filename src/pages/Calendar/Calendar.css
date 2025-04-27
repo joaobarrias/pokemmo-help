@@ -1,0 +1,170 @@
+/* Calendar.css */
+/* Styles the main container for the calendar page */
+.calendar-container {
+  margin: 40px auto 40px;
+  max-width: 1400px;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Styles the page title */
+.calendar-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+  margin-bottom: 20px;
+}
+
+/* Styles the description paragraph */
+.calendar-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+/* Styles the grid layout for monthly cards */
+.calendar-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 40px 0;
+}
+
+/* Styles individual monthly cards */
+.calendar-card {
+  background-color: #444c567e;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s ease;
+  text-align: center;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-height: 190px;
+}
+
+/* Adds hover effect to monthly cards */
+.calendar-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Styles the month name in each card */
+.calendar-card h2 {
+  font-size: 1.6rem;
+  color: #ef1c1f;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+/* Styles the list of Pokémon within each card */
+.calendar-pokemon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Styles individual Pokémon items (image and name) */
+.calendar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Styles Pokémon sprite images */
+.calendar-image {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Adds zoom effect to Pokémon images on hover */
+.calendar-image:hover {
+  transform: scale(1.2);
+}
+
+/* Styles Pokémon names */
+.calendar-name {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive styles for tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Adjusts title font size */
+  .calendar-container h1 {
+    font-size: 2rem;
+  }
+  /* Adjusts description font size */
+  .calendar-description {
+    font-size: 1rem;
+  }
+  /* Adjusts grid column width and gap */
+  .calendar-list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+  }
+  /* Adjusts card padding and height */
+  .calendar-card {
+    padding: 10px;
+    max-height: 180px;
+  }
+  /* Adjusts image size */
+  .calendar-image {
+    width: 55px;
+  }
+  /* Adjusts name font size */
+  .calendar-name {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive styles for mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Adjusts container margins and padding */
+  .calendar-container {
+    margin: 30px auto 20px;
+    padding: 10px;
+  }
+  /* Adjusts grid column width and gap */
+  .calendar-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 6px;
+  }
+  /* Adjusts card padding and height */
+  .calendar-card {
+    padding: 10px;
+    max-height: 170px;
+  }
+  /* Adjusts title font size */
+  .calendar-container h1 {
+    font-size: 1.5rem;
+  }
+  /* Adjusts month name font size */
+  .calendar-card h2 {
+    font-size: 1.2rem;
+  }
+  /* Adjusts image size */
+  .calendar-image {
+    width: 50px;
+  }
+  /* Adjusts name font size */
+  .calendar-name {
+    font-size: 0.9rem;
+  }
+}

@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home"; // Import Home page
 import CaptureChance from "./pages/CaptureChance/CaptureChance"; // Import Capture Chance page
 import PokemonSearch from "./pages/PokemonSearch/PokemonSearch"; // Import Pokemon Search page
 import TypeCoverage from "./pages/TypeCoverage/TypeCoverage"; // Import Type Coverage page
+import Calendar from "./pages/Calendar/Calendar"; // Import Calendar page
 
 const App: React.FC = () => {
   const [allPokemon, setAllPokemon] = useState<{ name: string; id: number }[]>([]);
@@ -184,10 +185,11 @@ const AppWithRouter: React.FC<{
       <NavBar />
       <div className="content">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home allPokemon={allPokemon}/>} />
           <Route path="/capture-chance" element={<CaptureChance filteredPokemon={filteredPokemon} />} />
           <Route path="/pokemon-search" element={<PokemonSearch />} />
           <Route path="/type-coverage" element={<TypeCoverage allPokemon={allPokemon} />} />
+          <Route path="/calendar" element={<Calendar allPokemon={allPokemon}/>} />
         </Routes>
       </div>
       <Footer setBackgroundImage={setBackgroundImage} setBrightness={setBrightness} />

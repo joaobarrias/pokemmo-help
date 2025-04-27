@@ -1,6 +1,7 @@
-/* Home Page */
+/* Home.css */
+/* Styles the main container for the home page */
 .home-container {
-  margin: 90px auto 40px;  
+  margin: 40px auto 40px;
   max-width: 1200px;
   padding: 20px;
   text-align: center;
@@ -8,7 +9,7 @@
   animation: fadeIn 0.5s ease-out;
 }
 
-/* Home Page Header */
+/* Styles the page title */
 .home-container h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -20,7 +21,7 @@
   margin-bottom: 20px;
 }
 
-/* Intro Paragraph */
+/* Styles general paragraphs */
 .home-container p {
   font-size: 1.2rem;
   line-height: 1.6;
@@ -28,6 +29,7 @@
   color: rgba(255, 255, 255, 1);
 }
 
+/* Styles the description paragraph */
 .home-description {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
                -1px -1px 2px rgba(0, 0, 0, 1),
@@ -35,7 +37,7 @@
                -2px 2px 2px rgba(0, 0, 0, 1);
 }
 
-/* Feature List Grid */
+/* Styles the grid layout for feature cards */
 .feature-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -43,7 +45,7 @@
   margin: 40px 0;
 }
 
-/* Feature Cards: Dark background with a subtle border */
+/* Styles individual feature cards */
 .feature-card {
   background-color: #444c567e;
   border-radius: 8px;
@@ -57,12 +59,13 @@
   min-height: 200px;
 }
 
+/* Adds hover effect to feature cards */
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
 }
 
-/* Feature Card Headings */
+/* Styles feature card headings */
 .feature-card h2 {
   font-size: 1.6rem;
   color: #ef1c1f;
@@ -73,14 +76,14 @@
                -2px 2px 2px rgba(0, 0, 0, 1);
 }
 
-/* Feature Card Paragraphs */
+/* Styles feature card paragraphs */
 .feature-card p {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 20px;
 }
 
-/* Feature Button */
+/* Styles the feature card buttons */
 .feature-button {
   position: absolute;
   bottom: 15px;
@@ -96,11 +99,12 @@
   transition: background-color 0.3s ease, border-color 0.3s ease-in-out;
 }
 
+/* Adds hover effect to feature buttons */
 .feature-button:hover {
   background-color: #ef1c1f;
 }
 
-/* Discord Link */
+/* Styles the Discord link section */
 .discord-link {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
                -1px -1px 2px rgba(0, 0, 0, 1),
@@ -111,46 +115,454 @@
   color: rgba(255, 255, 255, 1);
 }
 
+/* Styles the Discord link anchor */
 .discord-link a {
   color: #ef1c1f;
   text-decoration: none;
   font-weight: bold;
 }
 
-/* Responsive Adjustments */
+/* Styles the events section */
+.events-section {
+  margin: 40px 0;
+  text-align: left;
+}
+
+/* Styles the events section heading */
+.events-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Styles the grid layout for PvP and Catch event sections */
+.events-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Styles individual event sections (PvP and Catch) */
+.event-section {
+  background-color: #444c567e;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Adds hover effect to event sections */
+.event-section:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Styles event section headings */
+.event-section h3 {
+  font-size: 1.6rem;
+  color: #ef1c1f;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+/* Styles the list of events */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Styles individual event items */
+.event-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Styles event titles (links) */
+.event-title {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: normal;
+  display: inline-block;
+  position: relative;
+}
+
+/* Styles the animated underline for event titles */
+.event-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: width 0.3s ease-in-out;
+}
+
+/* Expands the underline on hover */
+.event-title:hover::after {
+  width: 100%;
+}
+
+/* Removes default underline on hover */
+.event-title:hover {
+  text-decoration: none;
+}
+
+/* Ensures underline shows on mobile tap */
+.event-title:active::after {
+  width: 100%;
+}
+
+/* Styles the container for event tags */
+.event-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Styles individual event tags */
+.event-tag {
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+}
+
+/* Styles tags labeled "Today" */
+.event-tag.tag-today {
+  background-color: #218838;
+  border-color: #1a692c;
+}
+
+/* Styles tags labeled "Tomorrow" */
+.event-tag.tag-tomorrow {
+  background-color: #b98202;
+  border-color: #a17701;
+}
+
+/* Styles the legendaries section */
+.legendaries-section {
+  margin: 40px 0;
+  text-align: center;
+}
+
+/* Styles the legendaries section heading */
+.legendaries-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+  margin-bottom: 20px;
+}
+
+/* Styles the card for current legendary Pokémon */
+.legendaries-card {
+  background-color: #444c567e;
+  border-radius: 8px;
+  padding: 15px 15px 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  max-width: 300px;
+  margin: 0 auto;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Adds hover effect to the legendaries card */
+.legendaries-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Styles the legendaries card heading */
+.legendaries-card h3 {
+  font-size: 1.2rem;
+  color: #ef1c1f;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 1),
+               -1px -1px 2px rgba(0, 0, 0, 1),
+               1px -1px 2px rgba(0, 0, 0, 1),
+               -2px 2px 2px rgba(0, 0, 0, 1);
+  margin-bottom: 10px;
+}
+
+/* Styles the list of legendary Pokémon */
+.legendaries-list {
+  display: grid;
+  justify-content: center;
+  gap: 0px;
+  margin-bottom: 30px;
+}
+
+/* Styles individual legendary Pokémon items */
+.legendary-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Styles legendary Pokémon images */
+.legendary-image {
+  width: 60px;
+  height: auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Adds zoom effect to legendary images on hover */
+.legendary-image:hover {
+  transform: scale(1.2);
+}
+
+/* Styles legendary Pokémon names */
+.legendary-name {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Styles the button linking to the calendar page */
+.legendaries-button {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  background-color: #23262f;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid #6d6d6d;
+  transition: background-color 0.3s ease, border-color 0.3s ease-in-out;
+}
+
+/* Adds hover effect to the calendar button */
+.legendaries-button:hover {
+  background-color: #ef1c1f;
+}
+
+/* Styles the error message for failed event fetching */
+.error-message {
+  font-size: 1rem;
+  color: #ff3535;
+  text-align: center;
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Styles the retry button for event fetching */
+.retry-button {
+  background-color: #ef1c1f;
+  color: #fff;
+  border: 1px solid #b1b1b1;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Adds hover effect to the retry button */
+.retry-button:hover {
+  background-color: #b41315;
+}
+
+/* Styles the loading message for events */
+.loading-message {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Styles the loading spinner */
+.spinner {
+  border: 2px solid #ef1c1f;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+}
+
+/* Defines the spinning animation for the loader */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive styles for tablets (max-width: 768px) */
 @media (max-width: 768px) {
+  /* Adjusts title font size */
   .home-container h1 {
     font-size: 2rem;
   }
+  /* Adjusts paragraph font size */
   .home-container p {
     font-size: 1rem;
   }
+  /* Switches feature list to single column */
   .feature-list {
     grid-template-columns: 1fr;
   }
+  /* Switches events container to single column */
+  .events-container {
+    grid-template-columns: 1fr;
+  }
+  /* Adjusts section heading font sizes */
+  .events-section h2,
+  .legendaries-section h2 {
+    font-size: 1.6rem;
+  }
+  /* Adjusts event section heading font size */
+  .event-section h3 {
+    font-size: 1.4rem;
+  }
+  /* Adjusts event title font size */
+  .event-title {
+    font-size: 0.9rem;
+  }
+  /* Adjusts event title underline spacing */
+  .event-title::after {
+    bottom: -1px;
+    height: 1.5px;
+  }
+  /* Adjusts event list spacing */
+  .event-list {
+    gap: 18px;
+  }
+  /* Adjusts event tag font size and padding */
+  .event-tag {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+  /* Adjusts legendaries card padding and width */
+  .legendaries-card {
+    padding: 12px 12px 35px;
+    max-width: 280px;
+  }
+  /* Adjusts legendary image size */
+  .legendary-image {
+    width: 50px;
+  }
+  /* Adjusts legendary name font size */
+  .legendary-name {
+    font-size: 1rem;
+  }
 }
 
+/* Responsive styles for mobile devices (max-width: 480px) */
 @media (max-width: 480px) {
+  /* Adjusts container margins and padding */
   .home-container {
-    margin: 30px auto 20px;  
+    margin: 30px auto 20px;
     padding: 10px;
   }
+  /* Adjusts feature card padding */
   .feature-card {
     padding: 15px 15px 50px;
   }
+  /* Adjusts feature button size and position */
   .feature-button {
     font-size: 0.9rem;
     padding: 8px 16px;
     bottom: 10px;
     left: 10px;
   }
+  /* Adjusts title font size */
   .home-container h1 {
     font-size: 1.5rem;
   }
+  /* Adjusts paragraph font size */
   .home-container p {
     font-size: 0.9rem;
   }
+  /* Adjusts feature card heading font size */
   .feature-card h2 {
     font-size: 1.2rem;
+  }
+  /* Adjusts section heading font sizes */
+  .events-section h2,
+  .legendaries-section h2 {
+    font-size: 1.4rem;
+  }
+  /* Adjusts event section padding */
+  .event-section {
+    padding: 15px;
+  }
+  /* Adjusts event section heading font size */
+  .event-section h3 {
+    font-size: 1.2rem;
+  }
+  /* Adjusts event list spacing */
+  .event-list {
+    gap: 16px;
+  }
+  /* Adjusts event item layout */
+  .event-item {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  /* Adjusts event title font size */
+  .event-title {
+    font-size: 0.8rem;
+  }
+  /* Adjusts event title underline spacing */
+  .event-title::after {
+    bottom: -1px;
+    height: 1px;
+  }
+  /* Adjusts event tags spacing */
+  .event-tags {
+    gap: 8px;
+  }
+  /* Adjusts event tag font size and padding */
+  .event-tag {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+  /* Adjusts legendaries card padding and width */
+  .legendaries-card {
+    padding: 10px 10px 30px;
+    max-width: 260px;
+  }
+  /* Adjusts legendary image size */
+  .legendary-image {
+    width: 45px;
+  }
+  /* Adjusts legendary name font size */
+  .legendary-name {
+    font-size: 0.9rem;
+  }
+  /* Adjusts calendar button size */
+  .legendaries-button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
   }
 }
