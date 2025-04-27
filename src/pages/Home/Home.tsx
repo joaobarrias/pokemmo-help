@@ -48,12 +48,19 @@ const Home: React.FC<HomeProps> = ({ allPokemon }) => {
   // Fetches events from a Netlify function and updates state
   const fetchEvents = async () => {
     try {
-      const response = await fetch("/.netlify/functions/fetch-events");
+      const now = new Date();
+      // Construct local date in YYYY-MM-DD format
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+      const day = String(now.getDate()).padStart(2, '0');
+      const dateString = `${year}-${month}-${day}`; // e.g., "2025-04-28"
+      const response = await fetch(`/.netlify/functions/fetch-events?date=${dateString}`);
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
       const data = await response.json();
       setEvents(data);
       setEventsError(null);
     } catch (error) {
+      console.error("Fetch events error:", error);
       setEventsError("Unable to load events. Please try again.");
     }
   };
