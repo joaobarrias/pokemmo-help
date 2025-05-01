@@ -1,8 +1,9 @@
+// fetch-events.js
 // Import the rss-parser library to parse the PokeMMO events RSS feed
-const Parser = require("rss-parser");
+import Parser from "rss-parser";
 
 // Define the Netlify function handler, which processes incoming requests
-exports.handler = async function (event, context) {
+export async function handler(event, context) {
   try {
     // Initialize the RSS parser with custom fields to extract additional metadata from feed items
     const parser = new Parser({
@@ -63,7 +64,7 @@ exports.handler = async function (event, context) {
         return null;
       }
 
-      // Get the current month and year from today's date
+      // Get the current day, month and year from today's date
       const currentMonth = today.getMonth();
       const currentYear = today.getFullYear();
 
@@ -71,7 +72,9 @@ exports.handler = async function (event, context) {
       // This handles cases like January events in December (e.g., on Dec 30th, Jan 5th is next year)
       let year = currentYear;
       if (monthIndex < currentMonth) {
-        year += 1;
+        if (currentMonth > 10 && monthIndex <= 1) {
+          year += 1; // Handle December to January/February transition
+        }
       }
 
       // Create a Date object for the event
