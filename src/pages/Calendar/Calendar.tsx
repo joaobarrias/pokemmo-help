@@ -28,6 +28,9 @@ const Calendar: React.FC<CalendarProps> = ({ allPokemon }) => {
     legendaries: roamingLegendaries[index % 3],
   }));
 
+  // Get the current month index (0 = January, 11 = December)
+  const currentMonthIndex = new Date().getMonth();
+
   // Retrieves the image URL for a Pokémon based on its name, using the allPokemon prop
   const getPokemonImageUrl = (name: string): string | null => {
     const pokemon = allPokemon.find(
@@ -53,7 +56,10 @@ const Calendar: React.FC<CalendarProps> = ({ allPokemon }) => {
       {/* Grid of monthly cards displaying legendary Pokémon */}
       <div className="calendar-list">
         {schedule.map((entry, index) => (
-          <div key={index} className="calendar-card">
+          <div
+            key={index}
+            className={`calendar-card ${index === currentMonthIndex ? "current-month" : ""}`}
+          >
             {/* Month name as card header */}
             <h2>{entry.month}</h2>
             {/* List of legendary Pokémon for the month */}

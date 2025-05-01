@@ -54,6 +54,13 @@
   max-height: 190px;
 }
 
+/* Highlights the current month's card */
+.current-month {
+  background-color: #7b818a9d;
+  border: 1px solid #ef1c1f;
+  box-shadow: 0 4px 20px rgba(239, 28, 31, 0.5);
+}
+
 /* Adds hover effect to monthly cards */
 .calendar-card:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
