@@ -1203,6 +1203,7 @@
   "steadfast": {
     "pokemon_with_ability": [
       236,
+      237,
       447,
       448,
       475
@@ -1254,6 +1255,7 @@
   },
   "unburden": {
     "pokemon_with_ability": [
+      106,
       252,
       253,
       254,
