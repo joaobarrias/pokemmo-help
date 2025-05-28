@@ -8104,6 +8104,118 @@
     },
     "weight": 550
   },
+  "regirock": {
+    "capture_rate": 0,
+    "unique_legendary": true,
+    "id": 377,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 80,
+      "base_attack": 100,
+      "base_defense": 200,
+      "base_special_attack": 50,
+      "base_special_defense": 100,
+      "base_speed": 50
+    },
+    "types": [
+      "rock"
+    ],
+    "sprites": {
+      "default": "sprites/default/377.png",
+      "icon": "sprites/icon/377.png"
+    },
+    "weight": 230
+  },
+  "regice": {
+    "capture_rate": 0,
+    "unique_legendary": true,
+    "id": 378,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 80,
+      "base_attack": 50,
+      "base_defense": 100,
+      "base_special_attack": 100,
+      "base_special_defense": 200,
+      "base_speed": 50
+    },
+    "types": [
+      "ice"
+    ],
+    "sprites": {
+      "default": "sprites/default/378.png",
+      "icon": "sprites/icon/378.png"
+    },
+    "weight": 175
+  },
+  "registeel": {
+    "capture_rate": 0,
+    "unique_legendary": true,
+    "id": 379,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 80,
+      "base_attack": 75,
+      "base_defense": 150,
+      "base_special_attack": 75,
+      "base_special_defense": 150,
+      "base_speed": 50
+    },
+    "types": [
+      "steel"
+    ],
+    "sprites": {
+      "default": "sprites/default/379.png",
+      "icon": "sprites/icon/379.png"
+    },
+    "weight": 205
+  },
+  "latias": {
+    "capture_rate": 0,
+    "unique_legendary": true,
+    "id": 380,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 80,
+      "base_attack": 80,
+      "base_defense": 90,
+      "base_special_attack": 110,
+      "base_special_defense": 130,
+      "base_speed": 110
+    },
+    "types": [
+      "dragon",
+      "psychic"
+    ],
+    "sprites": {
+      "default": "sprites/default/380.png",
+      "icon": "sprites/icon/380.png"
+    },
+    "weight": 40
+  },
+  "latios": {
+    "capture_rate": 0,
+    "unique_legendary": true,
+    "id": 381,
+    "alpha": "no",
+    "stats": {
+      "base_hp": 80,
+      "base_attack": 90,
+      "base_defense": 80,
+      "base_special_attack": 130,
+      "base_special_defense": 110,
+      "base_speed": 110
+    },
+    "types": [
+      "dragon",
+      "psychic"
+    ],
+    "sprites": {
+      "default": "sprites/default/381.png",
+      "icon": "sprites/icon/381.png"
+    },
+    "weight": 60
+  },
   "rayquaza": {
     "capture_rate": 0,
     "unique_legendary": true,
